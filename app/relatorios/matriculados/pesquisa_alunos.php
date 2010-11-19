@@ -15,7 +15,7 @@ $busca   = new search('search','codigo_curso','searchlist', 'form1', '../curso_l
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Lista alunos matriculados</title>
     <link href="../../../public/styles/formularios.css" rel="stylesheet" type="text/css" />
     <script src="pesquisa_alunos.js" language="javascript" type="text/javascript"></script>

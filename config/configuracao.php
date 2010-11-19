@@ -8,10 +8,10 @@ date_default_timezone_set('America/Sao_Paulo');
 /**
  * Banco de dados
  */
-$host     = '192.168.0.234';
-$database = 'sistema_academico_dev';
-$user     = 'usrsa';
-$password = 'TuiML9lnEjaAoNzKwt6Y';
+$host     = '127.0.0.1';
+$database = 'academico_campuscar';
+$user     = 'academico_user';
+$password = 'u0sodQFhArqOELlBNKxJ';
 $port     = 5432;
 
 /**
@@ -29,18 +29,18 @@ $param_conn['port']     = $port;
 $param_conn_aluno['host']     = $param_conn['host'];
 $param_conn_aluno['database'] = $param_conn['database'];
 $param_conn_aluno['user']     = 'aluno';
-$param_conn_aluno['password'] = '@1srv27';
+$param_conn_aluno['password'] = 'eokQdfaBO9M8CY6snUzy';
 $param_conn_aluno['port']     = $port;
 
 /**
  * HTML Padrao
  */
-$DOC_TYPE       = '<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">';
+$DOC_TYPE       = '<meta http-equiv="Content-Type" content="text/html; charset= UTF-8">';
 
 /**
  * Variaveis do sistema
  */
-$BASE_URL       = 'https://'. $_SERVER['HTTP_HOST'] . '/desenvolvimento/wanderson/producao/sistema-academico-eprotec/';
+$BASE_URL       = 'http://'. $_SERVER['HTTP_HOST'] . '/~wasare/dev/netbeans-php/academico/';
 $BASE_DIR       = dirname(dirname(realpath(__FILE__))) .'/';
 $LOGIN_URL      = $BASE_URL .'index.php';
 $LOGIN_LOG_FILE = $BASE_DIR .'app/sagu/logs/login.log';

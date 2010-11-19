@@ -54,7 +54,7 @@ if(empty($usuario_existe->fields[0]))
 ?>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>SA</title>
         <link href="../../public/styles/formularios.css" rel="stylesheet" type="text/css" />
     </head>

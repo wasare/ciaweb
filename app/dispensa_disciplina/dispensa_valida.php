@@ -61,7 +61,7 @@ if($_POST['second'] == 1)
 	if($flag_processa != 1)
 	{
 		if( $flag_erro )
-			echo iconv("utf-8", "iso-8859-1", $erro_valida);
+			echo iconv("utf-8", "utf-8", $erro_valida);
 		else
 			echo "0";
 

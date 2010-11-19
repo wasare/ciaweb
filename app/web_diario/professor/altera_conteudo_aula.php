@@ -61,7 +61,7 @@ else
 <html>
 <head>
 <title><?=$IEnome?> - Altera&ccedil;&atilde;o de conte&uacute;do de aula</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="<?=$BASE_URL .'public/styles/web_diario.css'?>" type="text/css">
 </head>
 <body>

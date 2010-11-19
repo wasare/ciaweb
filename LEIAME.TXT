@@ -1,27 +1,27 @@
 Bem-vindo
 
 ------------------------------------------------------------
-Arquivo LEIAME do SA - Sistema AcadÍmico EPROTEC
+Arquivo LEIAME do SA - Sistema Acad√™mico EPROTEC
 ------------------------------------------------------------
 
-Este arquivo contÈm informaÁıes importantes sobre este programa.
-Leia com atenÁ„o as informaÁıes antes de comeÁar a instalaÁ„o.
+Este arquivo cont√©m informa√ß√µes importantes sobre este programa.
+Leia com aten√ß√£o as informa√ß√µes antes de come√ßar a instala√ß√£o.
 
-O SA-Sistema AcadÍmico È desenvolvido pelo GTI do IFMG - Campus
-BambuÌ. O desenvolvimento comeÁou ainda quanto a instituiÁ„o se 
-chamava CEFET-BambuÌ. O sistema teve como base inicial o 
-sistema de controle acadÍmico SAGU vers„o1.
-
-
-------------------------------------------------------------
-Notas sobre atualizaÁ„o
-------------------------------------------------------------
-
-Verifique procedimentos de atualizaÁ„o no arquivo ATUALIZACAO.TXT
+O SA-Sistema Acad√™mico √© desenvolvido pelo GTI do IFMG - Campus
+Bambu√≠. O desenvolvimento come√ßou ainda quanto a institui√ß√£o se
+chamava CEFET-Bambu√≠. O sistema teve como base inicial o
+sistema de controle acad√™mico SAGU vers√£o1.
 
 
 ------------------------------------------------------------
-Notas sobre a instalaÁ„o
+Notas sobre atualiza√ß√£o
+------------------------------------------------------------
+
+Verifique procedimentos de atualiza√ß√£o no arquivo ATUALIZACAO.TXT
+
+
+------------------------------------------------------------
+Notas sobre a instala√ß√£o
 ------------------------------------------------------------
 
 Requisitos de Sistema:
@@ -31,82 +31,82 @@ Requisitos de Sistema:
 - PostgreSQL 8.x:
 - PHP 5.x
 
-Versıes efetivamente testadas:
+Vers√µes efetivamente testadas:
 
 - Apache 2.2.3
 - PostgreSQL 8.1.19
 - PHP 5.1.6
 
-Nota: - versıes diferentes eventualmente poder„o funcionar com ou sem 
-      alteraÁıes no sistema
-      - outros requisitos podem ser necess·rios apesar de n„o listados
+Nota: - vers√µes diferentes eventualmente poder√£o funcionar com ou sem
+      altera√ß√µes no sistema
+      - outros requisitos podem ser necess√°rios apesar de n√£o listados
       - o sistema foi criado, testado e usado somente em ambiente Linux,
         mas sendo um sistema web, pode ser operado por qualquer navegador.
-      - Tanto a instalaÁ„o e configuraÁ„o do sistema devem ser feita por 
-        pessoas com um mÌnimo de conhecimento de instalaÁ„o de aplicativos
-        web, Linux, Apache, PHP, etc. AlÈm de conhecimentos de processos
-        de registro acadÍmico.
+      - Tanto a instala√ß√£o e configura√ß√£o do sistema devem ser feita por
+        pessoas com um m√≠nimo de conhecimento de instala√ß√£o de aplicativos
+        web, Linux, Apache, PHP, etc. Al√©m de conhecimentos de processos
+        de registro acad√™mico.
 
 
-InstalaÁ„o do banco de dados:
+Instala√ß√£o do banco de dados:
 ================================
 
-1. Crie um usu·rio para acesso ao banco de dados do sistema
-2. Crie um usu·rio "aluno" especÌfico para acessar informaÁıes na ·rea do aluno
-3. Crie um banco de dados com encoding LATIN1 e de forma que o usu·rio 
-   criado no passo 1 seja o propriet·rio do mesmo
-4. Conecte-se ao banco com o usu·rio criado no passo 1 e restaure o esquema e os
-   dados b·sicos do sistema que se encontra em config/sql/banco-0.2.0. … importante
-   respeitar a sequÍncia de restauraÁ„o dos arquivos, 1_x, 2_x, 3_x, etc.
-   Na pasta config/sql esta disponÌvel um script em bash instala_banco-0.2.0.sh
-   que auxilia o processo de criaÁ„o do banco de dados, basta execut·-lo no terminal
+1. Crie um usu√°rio para acesso ao banco de dados do sistema
+2. Crie um usu√°rio "aluno" espec√≠fico para acessar informa√ß√µes na √°rea do aluno
+3. Crie um banco de dados com encoding LATIN1 e de forma que o usu√°rio
+   criado no passo 1 seja o propriet√°rio do mesmo
+4. Conecte-se ao banco com o usu√°rio criado no passo 1 e restaure o esquema e os
+   dados b√°sicos do sistema que se encontra em config/sql/banco-0.2.0. √â importante
+   respeitar a sequ√™ncia de restaura√ß√£o dos arquivos, 1_x, 2_x, 3_x, etc.
+   Na pasta config/sql esta dispon√≠vel um script em bash instala_banco-0.2.0.sh
+   que auxilia o processo de cria√ß√£o do banco de dados, basta execut√°-lo no terminal
    Linux.
 
 Dica para conseguir criar banco de dados LATIN1 no PostgreSQL
 =============================================================
 
-Quando se utiliza UTF8 para criar o cluster inicial do PostgreSQL n„o conseguimos
+Quando se utiliza UTF8 para criar o cluster inicial do PostgreSQL n√£o conseguimos
 criar banco de dados outros tipos enconding, principalmente LATIN1. Este problema 
-È conhecido e documentado. A melhor opÁ„o È setar o locale para "C" antes de 
-criar o cluster, desta forma ser· possÌvel criar bancos de dados com qualquer encoding 
+√© conhecido e documentado. A melhor op√ß√£o √© setar o locale para "C" antes de
+criar o cluster, desta forma ser√° poss√≠vel criar bancos de dados com qualquer encoding
 suportado pelo PostgreSQL. Siga estes passos para conseguir criar um banco LATIN1:
 
 1. Remova completamente o PostgreSQL, se for debian like no prompt execute "aptitute purge postgresql-8.3"
-2. No mesmo prompt como usu·rio root (#) seta seu locale excutando "export LC_ALL=C && export LANG=C && locale"
+2. No mesmo prompt como usu√°rio root (#) seta seu locale excutando "export LC_ALL=C && export LANG=C && locale"
 3. Instale novamente o PosgreSQL, ele vai detectar seu locale e criar o cluster 
    preparado para banco com qualquer enconding. 
 4. Depois basta criar o banco especificando o template0 como modelo, execute: 
    createdb  -T template0 -E latin1 --lc-collate=pt_BR.ISO-8859-1 --lc-ctype=pt_BR.ISO-8859-1 <nome do banco> 
 
-Executando os passos de 1 a 3, vocÍ poder· utilizar o script instala_banco-0.2.0.sh normalmente para terminar
-a criaÁ„o e instalaÁ„o do banco de dados.
+Executando os passos de 1 a 3, voc√™ poder√° utilizar o script instala_banco-0.2.0.sh normalmente para terminar
+a cria√ß√£o e instala√ß√£o do banco de dados.
 
 
 
-InstalaÁ„o do sistema no Apache:
+Instala√ß√£o do sistema no Apache:
 =================================
 
-1. Crie um novo host no Apache ou utilize o host padr„o
+1. Crie um novo host no Apache ou utilize o host padr√£o
 2. Copie todos os arquivos para qualquer pasta dentro da raiz
-   do host, esta pasta deve ser acessÌvel pelo navegador
-3. Edite o arquivo config/configuracao.php e altere os dados de conex„o com o banco 
-   de dados e a vari·vel $BASE_URL, para refletir as suas necessidades
+   do host, esta pasta deve ser acess√≠vel pelo navegador
+3. Edite o arquivo config/configuracao.php e altere os dados de conex√£o com o banco
+   de dados e a vari√°vel $BASE_URL, para refletir as suas necessidades
 
-Nota: … altamente recomend·vel que o sistema seja instalado em um host previamente
-      configurado com SSL (HTTPS), para tornar o tr·fego dos dados seguros, incluindo as senhas
-      de todos os usu·rios que acessarem o sistema.
+Nota: √â altamente recomend√°vel que o sistema seja instalado em um host previamente
+      configurado com SSL (HTTPS), para tornar o tr√°fego dos dados seguros, incluindo as senhas
+      de todos os usu√°rios que acessarem o sistema.
 
 
 Primeiro acesso:
 =================
 
-1. Aponte o seu navegador para o endereÁo (URL) onde esta instalado o sistema 
-2. Selecione o mÛdulo "Secretaria"
-3. Informe o usu·rio e senha inicial: admin admin, clique em entrar. Se estiver tudo
-   certo vocÍ ver· a tela inicial do sistema que exibe um diagrama colorido do funcionamento 
-   b·sico do sistema.
-4. Se n„o conseguir acesso ou ocorrer algum erro pesquise no google usando a mensagem de erro
-   como termo. VocÍ tambÈm deve procurar por possÌveis erros nos logs do Apache.
+1. Aponte o seu navegador para o endere√ßo (URL) onde esta instalado o sistema
+2. Selecione o m√≥dulo "Secretaria"
+3. Informe o usu√°rio e senha inicial: admin admin, clique em entrar. Se estiver tudo
+   certo voc√™ ver√° a tela inicial do sistema que exibe um diagrama colorido do funcionamento
+   b√°sico do sistema.
+4. Se n√£o conseguir acesso ou ocorrer algum erro pesquise no google usando a mensagem de erro
+   como termo. Voc√™ tamb√©m deve procurar por poss√≠veis erros nos logs do Apache.
 
 
 
@@ -114,72 +114,72 @@ Primeiro acesso:
 Primeiros passos
 ------------------------------------------------------------
 
-Um sistema acadÍmico normalmente È um programa complexo, e para um funcionamento
-correto È necess·rio uma sÈrie de informaÁıes e cadastros que devem ser previamente
-preenchidos. Na instalaÁ„o padr„o alguns cadastros b·sicos j· foram gravados 
-diretamente no banco de dados. Mas para o funcionamento completo È necess·rio
-realizar outras configuraÁıes e cadastros.
+Um sistema acad√™mico normalmente √© um programa complexo, e para um funcionamento
+correto √© necess√°rio uma s√©rie de informa√ß√µes e cadastros que devem ser previamente
+preenchidos. Na instala√ß√£o padr√£o alguns cadastros b√°sicos j√° foram gravados
+diretamente no banco de dados. Mas para o funcionamento completo √© necess√°rio
+realizar outras configura√ß√µes e cadastros.
 
 
-ConfiguraÁ„o b·sica
+Configura√ß√£o b√°sica
 =====================
 
-1. Em "Cadastros" -> "Pessoas FÌsicas", altere os dados do usu·rio de cÛdigo 1.
-   Atualize o cadastro para que seja o cadastro de uma pessoal fÌsica real que ser·
-   uma das administradoras do sistema. Mais usu·rios podem ser incluÌdos posteriormente,
-   neste caso cadastre primeiramente como pessoa fÌsica, depois a inclua como usu·rio
-   em "Sistema" -> "ConfiguraÁıes" -> "Usu·rios do sistema"
-2. Altere a senha do usu·rio admin para uma senha segura
-3. Ajuste as informaÁıes da instituiÁ„o em "Sistema" -> "ConfiguraÁıes" -> "Empresas"
-4. Ajuste as informaÁıes dos campi da instituiÁ„o em "Sistema" -> "ConfiguraÁıes" -> "Campus"
-5. Ajuste as informaÁıes dos carimbos que ser„o utilizados nos relatÛrios em 
-   "Sistema" -> "ConfiguraÁıes" -> "Carimbos" 
+1. Em "Cadastros" -> "Pessoas F√≠sicas", altere os dados do usu√°rio de c√≥digo 1.
+   Atualize o cadastro para que seja o cadastro de uma pessoal f√≠sica real que ser√°
+   uma das administradoras do sistema. Mais usu√°rios podem ser inclu√≠dos posteriormente,
+   neste caso cadastre primeiramente como pessoa f√≠sica, depois a inclua como usu√°rio
+   em "Sistema" -> "Configura√ß√µes" -> "Usu√°rios do sistema"
+2. Altere a senha do usu√°rio admin para uma senha segura
+3. Ajuste as informa√ß√µes da institui√ß√£o em "Sistema" -> "Configura√ß√µes" -> "Empresas"
+4. Ajuste as informa√ß√µes dos campi da institui√ß√£o em "Sistema" -> "Configura√ß√µes" -> "Campus"
+5. Ajuste as informa√ß√µes dos carimbos que ser√£o utilizados nos relat√≥rios em
+   "Sistema" -> "Configura√ß√µes" -> "Carimbos"
 
 
-ConfiguraÁıes acadÍmicas e de matrizes curriculares
+Configura√ß√µes acad√™micas e de matrizes curriculares
 ====================================================
 
-1. Cadastre o primeiro perÌodo letivo em "Sistema" -> "ConfiguraÁıes" -> "PerÌodos", o cÛdigo 
-   pode ser alfanumÈrico e poder· ser utilizado por mais de um curso. Como sugest„o poder· utilizar 
-    101 para 1∫ semestre 2010, 102 para 2∫ semestre de 2010, etc. As informaÁıes sobre os perÌodos
-    letivos s„o usados por todo o sistema e devem ser incluÌdos a cada novo perÌodo letivo.
+1. Cadastre o primeiro per√≠odo letivo em "Sistema" -> "Configura√ß√µes" -> "Per√≠odos", o c√≥digo
+   pode ser alfanum√©rico e poder√° ser utilizado por mais de um curso. Como sugest√£o poder√° utilizar
+    101 para 1¬∫ semestre 2010, 102 para 2¬∫ semestre de 2010, etc. As informa√ß√µes sobre os per√≠odos
+    letivos s√£o usados por todo o sistema e devem ser inclu√≠dos a cada novo per√≠odo letivo.
 2. Crie o primeiro curso em "Matrizes" -> "Cursos"
 3. Cadastre as disciplinas para o primeiro curso em "Matrizes" -> "Disciplinas", as disciplinas 
    cadastradas podem ser utilizadas por mais de um curso
 4. Monte a matriz / grade curricular do primeiro curso em "Matrizes" -> "Cursos / Disciplinas", 
-   clicando no bot„o  "Incluir" È possÌvel associar cada diciplina ao curso desejado
-5. Cadastre os "PrÈ-requisitos" ou as "Disciplinas Equivalentes" no menu "Matrizes" e conforme as
+   clicando no bot√£o  "Incluir" √© poss√≠vel associar cada diciplina ao curso desejado
+5. Cadastre os "Pr√©-requisitos" ou as "Disciplinas Equivalentes" no menu "Matrizes" e conforme as
    necessidades
 
 
-Processo de matrÌcula
+Processo de matr√≠cula
 ==============================
 
-Antes de efetuar qualquer matrÌcula È necess·rio:
+Antes de efetuar qualquer matr√≠cula √© necess√°rio:
 
-1. Cadastrar os alunos como pessoas fÌsicas em "Cadastros" -> "Pessoas FÌsicas"
-2. Vincular a pessoa fÌsica / aluno a algum curso em "Cadastros" -> "Contratos",
-   uma mesma pessoa fÌsica pode possuir mais de um contrato e tambÈm manter outros
-   vÌnculos dentro do sistema, como professor, coordenador, usu·rio do sistema, etc.
-3. Oferte as disciplinas do curso em "MatrÌculas" -> "Disciplinas Oferecidas", neste tela
-   È possÌvel tanto incluir disciplinas para posterior matrÌcula quanto consultar, alterar,
-   cancelar, etc. Depois de ofertada a disciplina È criado um cÛdigo ˙nico que identifica 
-   a disciplina ofertada como um di·rio. Este cÛdigo È muito importante dentro do sistema, 
-   relatÛrios, etc. N„o È necess·rio informar o professor durante a oferta da disciplina, 
-   inclusive È recomendado incluÌ-lo somente apÛs a realizaÁ„o das matrÌculas, basta
+1. Cadastrar os alunos como pessoas f√≠sicas em "Cadastros" -> "Pessoas F√≠sicas"
+2. Vincular a pessoa f√≠sica / aluno a algum curso em "Cadastros" -> "Contratos",
+   uma mesma pessoa f√≠sica pode possuir mais de um contrato e tamb√©m manter outros
+   v√≠nculos dentro do sistema, como professor, coordenador, usu√°rio do sistema, etc.
+3. Oferte as disciplinas do curso em "Matr√≠culas" -> "Disciplinas Oferecidas", neste tela
+   √© poss√≠vel tanto incluir disciplinas para posterior matr√≠cula quanto consultar, alterar,
+   cancelar, etc. Depois de ofertada a disciplina √© criado um c√≥digo √∫nico que identifica
+   a disciplina ofertada como um di√°rio. Este c√≥digo √© muito importante dentro do sistema,
+   relat√≥rios, etc. N√£o √© necess√°rio informar o professor durante a oferta da disciplina,
+   inclusive √© recomendado inclu√≠-lo somente ap√≥s a realiza√ß√£o das matr√≠culas, basta
    alterar a disciplina ofertada.
-4. Efetue as matrÌculas dos alunos em "MatrÌculas" -> "MatrÌcula", a matrÌcula pode ser regular ou
+4. Efetue as matr√≠culas dos alunos em "Matr√≠culas" -> "Matr√≠cula", a matr√≠cula pode ser regular ou
    avulsa, para um grupo de disciplinas ofertadas ou indivualmente para qualquer disciplina ofertada
 5. Depois de matricular os alunos, pode-se alterar a oferta de disciplina e incluir o professor ou 
    professores da disciplina. Os professores e coordenadores devem ser previamente cadastrados 
-   como pessoas fÌsicas, e posteriormente em "Cadastros" -> "Professores" e "Cadastros" -> 
+   como pessoas f√≠sicas, e posteriormente em "Cadastros" -> "Professores" e "Cadastros" ->
    "Coordenadores"
 
 
 
 
-Para instruÁıes um pouco mais detalhadas acesse a "Ajuda e DocumentaÁ„o" no rodapÈ da 
-tela inicial do sistema. Ou procure ajuda no grupo de discuss„o sobre o sistema em
+Para instru√ß√µes um pouco mais detalhadas acesse a "Ajuda e Documenta√ß√£o" no rodap√© da
+tela inicial do sistema. Ou procure ajuda no grupo de discuss√£o sobre o sistema em
 http://groups.google.com/group/sistema-academico-eprotec
 
 
@@ -202,5 +202,5 @@ Rogerio Costa Canto       - Campus Formiga
 
 
 ------------------------------------------------------------
-Copyright 2006-2010 - Instituto Federal de Minas Gerais - Campus BambuÌ
+Copyright 2006-2010 - Instituto Federal de Minas Gerais - Campus Bambu√≠
 Todos os direitos reservados

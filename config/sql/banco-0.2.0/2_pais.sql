@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-SET client_encoding = 'LATIN1';
+SET client_encoding = 'UTF8';
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
@@ -17,7 +17,7 @@ INSERT INTO pais VALUES (1, 'Brasil', 'brasileira');
 INSERT INTO pais VALUES (4, 'Espanha', NULL);
 INSERT INTO pais VALUES (5, 'Portugal', NULL);
 INSERT INTO pais VALUES (6, 'Noruega', NULL);
-INSERT INTO pais VALUES (7, 'México', NULL);
+INSERT INTO pais VALUES (7, 'MÃ©xico', NULL);
 INSERT INTO pais VALUES (9, 'Argentina', NULL);
 INSERT INTO pais VALUES (13, 'Congo', NULL);
 

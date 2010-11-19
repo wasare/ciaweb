@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Pesquisa de Pessoas</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="../../../public/styles/formularios.css" rel="stylesheet" type="text/css" />
 <link href="../../../public/styles/style.css" rel="stylesheet" type="text/css" />
 <script language="javascript" src="../../../lib/prototype.js"></script>

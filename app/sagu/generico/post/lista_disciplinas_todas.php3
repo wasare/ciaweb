@@ -9,7 +9,7 @@ $desc = $_POST['desc'];
 <html>
 <head>
 <title>Disciplinas</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script language="JavaScript">
 function _init()
 {

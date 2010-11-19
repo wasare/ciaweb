@@ -37,7 +37,7 @@ $sa_periodo_id = $_SESSION['sa_periodo_id'];
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
 
-        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
         <script src="../../lib/SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
         <script language="javascript" src="../../lib/prototype.js"></script>

@@ -7,7 +7,7 @@
 <html>
     <head>
         <title>Erro fatal</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     </head>
     <body bgcolor="#FFFFFF" marginwidth="20" marginheight="20">
         <table border="0" cellspacing="0" cellpadding="8" align="center" width="500">

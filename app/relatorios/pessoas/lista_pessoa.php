@@ -97,7 +97,7 @@ $pessoa = $conn->get_row($sql);
 <html>
     <head>
         <title>SA</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="../../../public/styles/formularios.css" rel="stylesheet" type="text/css" />
         <link href="<?=$BASE_URL?>public/styles/print.css" rel="stylesheet" type="text/css" media="print" />
     </head>

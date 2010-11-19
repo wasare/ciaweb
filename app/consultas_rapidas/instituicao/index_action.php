@@ -33,9 +33,9 @@ while(!$RsInstituicao->EOF){
 
     $tabela.= "<tr bgcolor='#DDDDDD'>";
     $tabela.= "   <td align=\"left\">" . $RsInstituicao->fields[0] . "</td>";
-    //$tabela.= "   <td align=\"left\">" . iconv("iso-8859-1", "utf-8", $RsInstituicao->fields[1]) . "</td>";
+    //$tabela.= "   <td align=\"left\">" . iconv("utf-8", "utf-8", $RsInstituicao->fields[1]) . "</td>";
     //$tabela.= "   <td align=\"left\"><a href=\"javascript:send('" . $RsInstituicao->fields[0] . "','". 
-iconv("iso-8859-1", "utf-8", $RsInstituicao->fields[1]) ."'); \"><img src=\"../../../public/images/icons/apply.png\" alt=\"Enviar\" /></a></td>";
+iconv("utf-8", "utf-8", $RsInstituicao->fields[1]) ."'); \"><img src=\"../../../public/images/icons/apply.png\" alt=\"Enviar\" /></a></td>";
     $tabela.= "   <td align=\"left\">" . $RsInstituicao->fields[1] . "</td>";
     $tabela.= "   <td align=\"left\"><a href=\"javascript:send('" . $RsInstituicao->fields[0] . "','".
  $RsInstituicao->fields[1] ."'); \"><img src=\"../../../public/images/icons/apply.png\" alt=\"Enviar\" 

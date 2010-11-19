@@ -29,7 +29,7 @@ createuser -P -S -D -R -U ${USUARIO_ADMIN} -h ${DB_HOST} ${USUARIO}
 echo "informe uma senha para o usuário aluno (para acesso aos dados da área do aluno): "
 createuser -P -S -D -R -U ${USUARIO_ADMIN} -h ${DB_HOST} aluno
 
-createdb -U ${USUARIO_ADMIN} -h ${DB_HOST} -T template0 -E latin1 --lc-collate=pt_BR.ISO-8859-1 --lc-ctype=pt_BR.ISO-8859-1 -O ${USUARIO} ${BANCO}
+createdb -U ${USUARIO_ADMIN} -h ${DB_HOST} -T template0 -E UTF8 --lc-collate=pt_BR.UTF-8 --lc-ctype=pt_BR.UTF-8 -O ${USUARIO} ${BANCO}
 #createdb -U ${USUARIO_ADMIN} -h ${DB_HOST} -E LATIN1 -O ${USUARIO} ${BANCO}
 createlang -U ${USUARIO_ADMIN} -h ${DB_HOST} plpgsql ${BANCO}
 

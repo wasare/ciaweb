@@ -36,7 +36,7 @@ unset($_SESSION['sa_diarios_matricula_avulsa']);
 
             -->
         </script>
-        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     </head>
     <body onload="Oculta('matricular')">
         <div align="center" style="height:600px;">

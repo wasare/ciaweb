@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-SET client_encoding = 'LATIN1';
+SET client_encoding = 'UTF8';
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
@@ -20,9 +20,9 @@ SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('papel', 'papel_id'),
 --
 
 INSERT INTO papel VALUES (3, 'Professor', 'Professor');
-INSERT INTO papel VALUES (2, 'Usuário com privilégio total', 'Administrador');
-INSERT INTO papel VALUES (1, 'Operadores do departamento de Registros Acadêmicos', 'Secretaria');
-INSERT INTO papel VALUES (4, 'Administração de matrizes', 'Administração de matrizes');
+INSERT INTO papel VALUES (2, 'UsuÃ¡rio com privilÃ©gio total', 'Administrador');
+INSERT INTO papel VALUES (1, 'Operadores do departamento de Registros AcadÃªmicos', 'Secretaria');
+INSERT INTO papel VALUES (4, 'AdministraÃ§Ã£o de matrizes', 'AdministraÃ§Ã£o de matrizes');
 
 
 --

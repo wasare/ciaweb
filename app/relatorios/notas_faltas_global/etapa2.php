@@ -33,7 +33,7 @@ $nome_periodo = $conn->get_one("SELECT descricao FROM periodos WHERE id = '$peri
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>SA</title>
         <link href="../../../public/styles/formularios.css" rel="stylesheet" type="text/css" />
         <script src="../../../lib/Spry/widgets/radiovalidation/SpryValidationRadio.js" type="text/javascript"></script>

@@ -19,7 +19,7 @@ if(!isset($_POST)){
 		FROM cursos
 		WHERE lower(to_ascii(descricao)) like lower(to_ascii('%". $termo_pesquisa ."%')) 
 		ORDER BY descricao DESC LIMIT 10;";
-	$sql = iconv("utf-8", "iso-8859-1", $sql);
+	$sql = iconv("utf-8", "utf-8", $sql);
 	$RsCurso = $conn->Execute($sql);
 
 

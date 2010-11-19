@@ -1,62 +1,62 @@
 Bem-vindo
 
 ------------------------------------------------------------
-Arquivo ATUALIZACAO do SA - Sistema AcadÍmico EPROTEC
+Arquivo ATUALIZACAO do SA - Sistema Acad√™mico EPROTEC
 ------------------------------------------------------------
 
-Este arquivo contÈm informaÁıes importantes sobre este programa.
-Leia com atenÁ„o as informaÁıes antes de comeÁar uma atualizaÁ„o.
+Este arquivo cont√©m informa√ß√µes importantes sobre este programa.
+Leia com aten√ß√£o as informa√ß√µes antes de come√ßar uma atualiza√ß√£o.
 
 
 ------------------------------------------------------------
-Notas sobre atualizaÁ„o
+Notas sobre atualiza√ß√£o
 ------------------------------------------------------------
 
-Procedimentos para atualizaÁ„o:
+Procedimentos para atualiza√ß√£o:
 ===============================
 
-Antes de fazer qualquer atualizaÁ„o verifique se existe alguma alteraÁ„o
-no banco de dados para a revis„o sendo atualizada. 
-As alteraÁıes no banco de dados s„o armazenadas na pasta config/sql/atualizacao 
-e os arquivos tem o seguinte nome atualiza_revXXX.sql, onde XXX È o 
-n˙mero da revis„o do sistema que foi disponibilizado. Este n˙mero de revis„o
-tambÈm È encontrado no nome do pacote de instalaÁ„o disponÌvel para
-download: sistema_academico-0.2.0_revXXX.tar.gz. Ser· necess·rio executar 
-uma atualizaÁ„o no banco de dados quando existir arquivos dentro de
-config/sql/atualizacao com n˙mero de revis„o maior ou igual do que a revis„o do 
-pacote de instalaÁ„o que vocÍ tem instalado atualmente (antes de atualizar),
-ou seja se o XXX da atualizaÁ„o do banco for maior ou igual ao XXX do pacote 
-da sua instalaÁ„o atual. Neste caso basta executar todos os scripts SQL de revis„o 
-maior ou igual a revis„o da sua instalaÁ„o no banco e verificar se n„o ocorreram erros. 
-AlÈm da revis„o do pacote de instalaÁ„o estar no prÛprio nome do pacote, vocÍ tambÈm 
-pode encontr·-la dentro do arquivo VERSAO.TXT. Se existir mais de um script SQL eles 
-devem ser executados na sequÍncia crescente da respectiva revis„o. 
+Antes de fazer qualquer atualiza√ß√£o verifique se existe alguma altera√ß√£o
+no banco de dados para a revis√£o sendo atualizada.
+As altera√ß√µes no banco de dados s√£o armazenadas na pasta config/sql/atualizacao
+e os arquivos tem o seguinte nome atualiza_revXXX.sql, onde XXX √© o
+n√∫mero da revis√£o do sistema que foi disponibilizado. Este n√∫mero de revis√£o
+tamb√©m √© encontrado no nome do pacote de instala√ß√£o dispon√≠vel para
+download: sistema_academico-0.2.0_revXXX.tar.gz. Ser√° necess√°rio executar
+uma atualiza√ß√£o no banco de dados quando existir arquivos dentro de
+config/sql/atualizacao com n√∫mero de revis√£o maior ou igual do que a revis√£o do
+pacote de instala√ß√£o que voc√™ tem instalado atualmente (antes de atualizar),
+ou seja se o XXX da atualiza√ß√£o do banco for maior ou igual ao XXX do pacote
+da sua instala√ß√£o atual. Neste caso basta executar todos os scripts SQL de revis√£o
+maior ou igual a revis√£o da sua instala√ß√£o no banco e verificar se n√£o ocorreram erros.
+Al√©m da revis√£o do pacote de instala√ß√£o estar no pr√≥prio nome do pacote, voc√™ tamb√©m
+pode encontr√°-la dentro do arquivo VERSAO.TXT. Se existir mais de um script SQL eles
+devem ser executados na sequ√™ncia crescente da respectiva revis√£o.
 
-Para realizar uma atualizaÁ„o com sucesso siga os seguintes passos:
+Para realizar uma atualiza√ß√£o com sucesso siga os seguintes passos:
 
 1. Edite o arquivo config/configurao.php e descomente a primeira linha comentada
-   no arquivo. Isto vai evitar que o sistema seja acessado durante a atualizaÁ„o;
-   Caso esta linha n„o exista, inclua-a, deve ser a primeira linha do arquivo:
+   no arquivo. Isto vai evitar que o sistema seja acessado durante a atualiza√ß√£o;
+   Caso esta linha n√£o exista, inclua-a, deve ser a primeira linha do arquivo:
    die('<h3>O sistema esta em manuten&ccedil;&atilde;o no momento. Voltaremos em breve.</h3>');
-2. FaÁa uma cÛpia completa do banco de dados antigo e dos arquivos da instalaÁ„o
+2. Fa√ßaa uma c√≥pia completa do banco de dados antigo e dos arquivos da instala√ß√£o
    atual;
-3. Descompacte o pacote de instalaÁ„o novo (atualizado);
-4. Exclua ou renomei o arquivo config/configurao.php padr„o que foi descompactado
-  junto com o pacote de instalaÁ„o que ser· utilizado na atualizaÁ„o;
-5. Verifique se existe alguma atualizaÁ„o de banco de dados e aplique-a no banco 
-   de dados da sua instalaÁ„o, se for o caso;
+3. Descompacte o pacote de instala√ß√£o novo (atualizado);
+4. Exclua ou renomei o arquivo config/configurao.php padr√£o que foi descompactado
+  junto com o pacote de instala√ß√£o que ser√° utilizado na atualiza√ß√£o;
+5. Verifique se existe alguma atualiza√ß√£o de banco de dados e aplique-a no banco
+   de dados da sua instala√ß√£o, se for o caso;
 6. Substitua todos os arquivos antigos pelos novos, mas mantenha o arquivo
-   config/configurao.php antigo, ou faÁa uma cÛpia do mesmo para a nova instalaÁ„o.
+   config/configurao.php antigo, ou fa√ßa uma c√≥pia do mesmo para a nova instala√ß√£o.
 7. Edite o arquivo config/configurao.php e comente novamente a linha que bloqueia
    o acesso ao sistema.
 
 
 
-AlteraÁıes especÌficas conforme a revis„o
+Altera√ß√µes espec√≠ficas conforme a revis√£o
 ===========================================
 
-- Se sua instalaÁ„o atual a ser atualizada for <= 0.2.0_rev246 substituir e 
-  adaptar o novo arquivo config/configuracao.php, este introduziu uma nova vari·vel 
+- Se sua instala√ß√£o atual a ser atualizada for <= 0.2.0_rev246 substituir e
+  adaptar o novo arquivo config/configuracao.php, este introduziu uma nova vari√°vel
   para guardar o email do administrador do sistema.
 
 
@@ -79,5 +79,5 @@ Rogerio Costa Canto       - Campus Formiga
 
 
 ------------------------------------------------------------
-Copyright 2006-2010 - Instituto Federal de Minas Gerais - Campus BambuÌ
+Copyright 2006-2010 - Instituto Federal de Minas Gerais - Campus Bambu√≠
 Todos os direitos reservados

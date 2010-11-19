@@ -308,7 +308,7 @@ function FatalExit($msg="",$info="",$href=""){
 	echo("<html>");
 	echo("<head>");
 	echo("<title>Untitled Document</title>");
-	echo("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">");
+	echo("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
 	echo("</head>");
 	echo("");
 	echo("<body bgcolor=\"#FFFFFF\">");

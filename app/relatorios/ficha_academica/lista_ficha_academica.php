@@ -74,7 +74,7 @@ $contrato = $conn->get_row('SELECT nome_campus, turma, dt_formatura FROM campus 
 <html>
 <head>
   <title><?=$IEnome?> - Sistema Acad&ecirc;mico</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link href="<?=$BASE_URL?>public/styles/relatorio.css" rel="stylesheet" type="text/css">
   <link href="<?=$BASE_URL?>public/styles/print.css" rel="stylesheet" type="text/css" media="print" />
 </head>

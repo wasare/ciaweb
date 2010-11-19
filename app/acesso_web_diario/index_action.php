@@ -12,7 +12,7 @@ $sql = "SELECT
 		WHERE 
 		lower(to_ascii(\"nome_completo\")) like lower(to_ascii('%".$_POST['nome']."%')) 
 		ORDER BY \"nome_completo\" LIMIT 15";
-$sql = iconv("utf-8","iso-8859-1",$sql);
+$sql = iconv("utf-8","utf-8",$sql);
 
 $RsNome = $conn->Execute($sql);
 

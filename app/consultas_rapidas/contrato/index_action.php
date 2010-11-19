@@ -43,8 +43,8 @@ $tabela.= "  </tr>";
 while(!$RsNome->EOF){
 
 	$cod_contrato = $RsNome->fields[0];
-	$aluno =  iconv("iso-8859-1", "utf-8", $RsNome->fields[2]) . " - " . $RsNome->fields[1];
-	$curso =  iconv("iso-8859-1", "utf-8", $RsNome->fields[4]) . " - " . $RsNome->fields[3];
+	$aluno =  iconv("utf-8", "utf-8", $RsNome->fields[2]) . " - " . $RsNome->fields[1];
+	$curso =  iconv("utf-8", "utf-8", $RsNome->fields[4]) . " - " . $RsNome->fields[3];
 
     $tabela.= "<tr bgcolor='#DDDDDD'>";
 	$tabela.= "   <td align=\"left\">" . $cod_contrato . "</td>";

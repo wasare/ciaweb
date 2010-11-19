@@ -19,7 +19,7 @@ $busca1  = new search('periodo','periodo_id','periodos_list', 'form1', '../perio
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>SA</title>
         <link href="../../../public/styles/formularios.css" rel="stylesheet" type="text/css" />
 	<link href="../../../lib/Spry/widgets/textfieldvalidation/SpryValidationTextField.css" rel="stylesheet" type="text/css" />
