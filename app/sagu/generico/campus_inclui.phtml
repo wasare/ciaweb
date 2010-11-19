@@ -1,0 +1,229 @@
+<?php
+
+require_once("../common.php");
+
+function MostraCampus()
+{
+	$conn = new Connection;
+
+	$conn->Open();
+
+	$sql = "select c2.id, c2.nome_campus, c1.nome_campus as sede from campus c1, campus c2 where c1.id = c2.ref_campus_sede order by 2";
+
+	$query = $conn->CreateQuery($sql);
+
+	$n = $query->GetColumnCount();
+
+	echo("<center><table width=\"90%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\">");
+	echo("<tr bgcolor=\"#000000\">\n");
+	echo ("<td width=\"15%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>C&oacute;digo</b></font></td>");
+	echo ("<td width=\"40%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Descri&ccedil;&atilde;o</b></font></td>");
+    echo ("<td width=\"35%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Sede</b></font></td>");
+	echo ("<td width=\"5%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\">&nbsp;</font></td>");
+	echo ("<td width=\"5%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\">&nbsp;</font></td>");
+	echo("  </tr>");
+
+	$i=1;
+
+	// cores fundo
+	$bg0 = "#000000";
+	$bg1 = "#EEEEFF";
+	$bg2 = "#FFFFEE";
+
+	// cores fonte
+	$fg0 = "#FFFFFF";
+	$fg1 = "#000099";
+	$fg2 = "#000099";
+
+	while( $query->MoveNext() )
+	{
+
+		$registro = $query->GetValue(1);
+		$href  = "<a href=\"altera_campus.phtml?id=$registro\"><img src=\"../images/update.gif\" title='Alterar Cadastro' align='absmiddle' border=0></a>";
+		$href1 = "";
+        // <a href=\"javascript:Confirma_Exclui('$registro')\"><img src=\"../images/delete.gif\" title='Excluir Cadastro' align='absmiddle' border=0></a>";
+
+		if ( $i % 2)
+		{
+
+			echo("<tr bgcolor=\"$bg1\">\n");
+			echo ("<td width=\"15%\"><Font face=\"Verdana\" size=\"2\" color=\"$fg2\">" . $query->GetValue(1) . "</td>");
+			echo ("<td width=\"40%\"><Font face=\"Verdana\" size=\"2\" color=\"$fg2\">" . $query->GetValue(2) . "</td>");
+            echo ("<td width=\"35%\"><Font face=\"Verdana\" size=\"2\" color=\"$fg2\">" . $query->GetValue(3) . "</td>");
+			echo ("<td width=\"5%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$bg1\">$href</font></b></td>\n");
+			echo ("<td width=\"5%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$bg1\">$href1</font></b></td>\n");
+
+			echo("  </tr>");
+
+		}
+		else
+		{
+			echo("<tr bgcolor=\"$bg2\">\n");
+			echo ("<td width=\"15%\"><Font face=\"Verdana\" size=\"2\" color=\"$fg1\">" . $query->GetValue(1) . "</td>");
+			echo ("<td width=\"40%\"><Font face=\"Verdana\" size=\"2\" color=\"$fg1\">" . $query->GetValue(2) . "</td>");
+            echo ("<td width=\"35%\"><Font face=\"Verdana\" size=\"2\" color=\"$fg1\">" . $query->GetValue(3) . "</td>");
+			echo ("<td width=\"5%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$bg1\">$href</font></b></td>\n");
+			echo ("<td width=\"5%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$bg1\">$href1</font></b></td>\n");
+			echo("  </tr>");
+		}
+
+		$i++;
+
+	}
+
+	echo("</table></center>");
+	$query->Close();
+	$conn->Close();
+}
+
+function SQL_Combo($nome,$sql,$default,$onchange)
+{
+  $conn = new Connection;
+  
+  $conn->Open();
+
+  $query = $conn->CreateQuery($sql);
+
+  if ( $onchange != "" )
+    echo("<select name=\"$nome\" onchange=\"$onchange\">");
+  else
+    echo("<select name=\"$nome\">");
+
+  echo("  <option value=\"0\" selected>----- clique aqui -----</option>\n");
+    
+  for ( $i=1; $query->MoveNext(); $i++ )
+  {
+    list ( $text, $value ) = $query->GetRowValues();
+      
+    if ( $value == $default )
+      echo("  <option value=\"$value\" selected>$text</option>\n");
+    else
+      echo("  <option value=\"$value\">$text</option>\n");
+  }
+
+  echo("</select>");
+
+  $query->Close();
+
+  $conn->Close();
+}
+
+?>
+<html>
+<head>
+<link rel="stylesheet" href="<?=$BASE_URL .'public/styles/required.css'?>" type="text/css">
+<script language="JavaScript">
+
+function Confirma_Exclui(arg1)
+{
+  url = 'post/campus_exclui.php3?id=' + arg1;
+
+  if (confirm("Voc&ecirc; tem certeza que deseja EXCLUIR o Campus: "+arg1+" ?"))
+    location=(url)
+  else
+    alert("Exclus&atilde;o Cancelada.");
+}
+
+function ChangeOption(opt,fld)
+{
+  var i = opt.selectedIndex;
+
+  if ( i != -1 )
+    fld.value = opt.options[i].value;
+  else
+    fld.value = '';
+}
+
+function ChangeOp()
+{
+  ChangeOption(document.myform.op,document.myform.ref_empresa);
+}
+
+function ChangeOpCampus()
+{
+  ChangeOption(document.myform.opcampus,document.myform.ref_campus_sede);
+}
+
+function ChangeCode(fld_name,op_name)
+{ 
+  var field = eval('document.myform.' + fld_name);
+  var combo = eval('document.myform.' + op_name);
+  var code  = field.value;
+  var n     = combo.options.length;
+  for ( var i=0; i<n; i++ )
+  {
+    if ( combo.options[i].value == code )
+    {
+      combo.selectedIndex = i;
+      return;
+    }
+  }
+
+  alert(code + ' n&atildeo &eacute; um c&oacute;digo v&aacute;lido!');
+
+  field.focus();
+
+  return true;
+}
+</script>
+<link href="../estilo.css" rel="stylesheet" type="text/css" />
+</head>
+<body bgcolor="#FFFFFF" marginwidth="20" marginheight="20">
+<form method="post" action="post/confirm_campus_inclui.phtml" name="myform">
+	<div class="titulo" align="center"><h2>Campus</h2></div>
+<table width="90%" align="center">
+	<tr>
+		<td bgcolor="#CCCCFF"><font
+			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Empresa&nbsp;<span class="required">*</span>&nbsp;</font></td>
+		<td><input name="ref_empresa" type=text size="10" maxlength="10"
+			onChange="ChangeCode('ref_empresa','op')"> <font color="#000000"> <script
+			language="PHP">
+            SQL_Combo("op","select substr(razao_social, 0, 120),id from configuracao_empresa order by razao_social","0","ChangeOp()");
+        </script> </font></td>
+	</tr>
+	<tr>
+		<td bgcolor="#CCCCFF"><font
+			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Nome
+		do Campus&nbsp;<span class="required">*</span>&nbsp;</font></td>
+		<td><input name="nome_campus" type=text size="50"></td>
+	</tr>
+	<tr>
+		<td bgcolor="#CCCCFF"><font
+			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Nome
+		da Cidade&nbsp;<span class="required">*</span>&nbsp;</font></td>
+		<td><input name="cidade_campus" type=text size="50"></td>
+	</tr>
+	<tr>
+        <td bgcolor="#CCCCFF"><font
+            face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Campus Sede&nbsp;<span class="required">*</span>&nbsp;</font></td>
+        <td><input name="ref_campus_sede" type=text size="10" maxlength="10"
+            onChange="ChangeCode('ref_campus_sede','opcampus')"> <font color="#000000">
+            <?=SQL_Combo("opcampus","select substr(nome_campus, 0, 120), id, cidade_campus from campus order by cidade_campus","0","ChangeOpCampus()");?> </font></td>
+    </tr>    
+
+	<tr>
+		<td colspan="2">
+		<hr size="1">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center"><input type="submit" name="Submit"
+			value=" Prosseguir "> <input type="reset" name="Submit2"
+			value="   Limpar   "> </td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		<hr size="1">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		<div align="center"><script language="PHP">
+            MostraCampus();
+          </script></div>
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

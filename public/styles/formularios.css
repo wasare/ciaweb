@@ -1,0 +1,145 @@
+body {
+    padding: 8px;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+img {
+    border: 0px;
+}
+
+h2 {
+    font-size:20px;
+}
+
+td {
+    padding: 4px;
+}
+
+.titulo {
+    font-size: 20px;
+    font-weight:bold;
+}
+
+.comentario {
+    color: #0099FF;
+    font-style: italic;
+}
+
+.botao {
+    padding: 10px;
+}
+
+.bar_menu_texto {
+    text-decoration:none;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color:#333333;
+}
+
+.box_menu_relatorio {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #333333;
+    text-decoration: none;
+}
+
+.panel .box_menu_relatorio a {
+    text-decoration: none;
+}
+
+.panel .box_menu_relatorio a:hover {
+    color: navy;
+    text-decoration: underline;
+}
+
+.msg_erro {
+    color: #FF0000;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size:12px;
+}
+
+.msg_sucesso {
+    color: #006633;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size:12px;
+}
+
+/** Painel do Formulario **/
+.panel {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #000066;
+    width: 80%;
+    text-decoration: none;
+    background-color: #EFEFEF;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-style: outset;
+    border-right-style: outset;
+    border-bottom-style: outset;
+    border-left-style: outset;
+    text-align: left;
+    padding: 15px;
+    margin: 10px;
+    height: auto;
+    position: relative;
+    display: block;
+    line-height: 22px;
+    clear:left;
+}
+
+.panel a {
+    text-decoration:underline;
+    color:blue;
+}
+/** Tabela de Formulario */
+.grid {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    padding:4px;
+}
+
+.grid a{
+    text-decoration:none;
+    color:#0000CC;
+}
+
+.grid_head{
+    font-weight:bold;
+    color: white;
+    background-color: #666666;
+}
+.grid_row{
+    background-color: #FFFFFF;
+}
+
+/** Botao de Formulario **/
+.btn_action {
+    width:60px;
+    text-align:center;
+    margin:4px;
+    float: left;
+    text-decoration:none;
+}
+
+.btn_action a:hover {
+    text-decoration:none;
+}
+
+.dica {
+   color: teal;
+   font-size: 0.75em;
+   font-weight: bold;
+   font-style: italic;
+}
+
+.required {
+   color: red;
+   font-size: 0.75em;
+   font-weight: bold;
+}
+

@@ -1,0 +1,49 @@
+/*Pesquisa*/
+
+body {
+	font-family: Helvetica, Arial, Verdana, sans-serif;
+	font-size:12px;
+	color:#000000;
+	margin: 0px;
+}
+img {
+	border: none;
+}
+h2 {
+	font-size:20px;
+}
+
+.corpo {
+	background-color:#FFFFFF;
+}
+.tabela_relatorio table {  
+	border: 0.06em solid ; 
+	border-collapse: collapse; 
+	/*border-spacing: 0px; */
+	padding: 0px;
+}
+.tabela_relatorio th {
+	text-decoration:none;
+	font-style:normal;
+	font-family: Helvetica, Arial, Verdana, sans-serif;
+	font-size:10px;
+	font-weight:bold;
+	background-color:#000000;
+	color:#ffffff;
+	border: 0.02em solid;
+	padding: 0.3em;
+	border-collapse: collapse; 
+	border-spacing: 0.015em;
+}
+.tabela_relatorio td { 
+	border: 0.02em solid;
+	padding: 0.25em;
+	border-collapse: collapse; 
+	border-spacing: 0.015em;
+	text-decoration:none;
+	font-style:normal;
+	font-family: Helvetica, Arial, Verdana, sans-serif;
+	font-size:10px;
+	color:#000000;
+}
+

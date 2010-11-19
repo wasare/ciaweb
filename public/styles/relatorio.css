@@ -1,0 +1,41 @@
+table.relato {
+    font: 0.85em verdana, arial, tahoma, sans-serif;
+    border: 0.0015em solid; 
+    border-collapse: collapse;
+    border-spacing: 0px;
+}   
+    
+.relato td, th {
+    font: 0.85em verdana, arial, tahoma, sans-serif;
+    border: 0.0015em solid;
+    padding: 0.35em;
+    border-collapse: collapse;
+    border-spacing: 1px;
+}
+
+.relato a {
+    text-decoration: none;
+    color: #00047D;
+    /*border-bottom: 2px #eee dotted;*/
+
+}
+
+.relato a:hover {
+    text-decoration: underline;
+    color: #00047D;
+}
+
+.relato a:visited, a:active {
+    color: #00047D;
+}
+
+.relato tr:hover td {
+  background: #e5ffcc; /*#ccccff/*#ccffe5;*/
+}
+
+.required {
+   color: red;
+   font-size: 0.75em;
+   font-weight: bold;
+}
+

@@ -1,0 +1,83 @@
+Bem-vindo
+
+------------------------------------------------------------
+Arquivo ATUALIZACAO do SA - Sistema Acadêmico EPROTEC
+------------------------------------------------------------
+
+Este arquivo contém informações importantes sobre este programa.
+Leia com atenção as informações antes de começar uma atualização.
+
+
+------------------------------------------------------------
+Notas sobre atualização
+------------------------------------------------------------
+
+Procedimentos para atualização:
+===============================
+
+Antes de fazer qualquer atualização verifique se existe alguma alteração
+no banco de dados para a revisão sendo atualizada. 
+As alterações no banco de dados são armazenadas na pasta config/sql/atualizacao 
+e os arquivos tem o seguinte nome atualiza_revXXX.sql, onde XXX é o 
+número da revisão do sistema que foi disponibilizado. Este número de revisão
+também é encontrado no nome do pacote de instalação disponível para
+download: sistema_academico-0.2.0_revXXX.tar.gz. Será necessário executar 
+uma atualização no banco de dados quando existir arquivos dentro de
+config/sql/atualizacao com número de revisão maior ou igual do que a revisão do 
+pacote de instalação que você tem instalado atualmente (antes de atualizar),
+ou seja se o XXX da atualização do banco for maior ou igual ao XXX do pacote 
+da sua instalação atual. Neste caso basta executar todos os scripts SQL de revisão 
+maior ou igual a revisão da sua instalação no banco e verificar se não ocorreram erros. 
+Além da revisão do pacote de instalação estar no próprio nome do pacote, você também 
+pode encontrá-la dentro do arquivo VERSAO.TXT. Se existir mais de um script SQL eles 
+devem ser executados na sequência crescente da respectiva revisão. 
+
+Para realizar uma atualização com sucesso siga os seguintes passos:
+
+1. Edite o arquivo config/configurao.php e descomente a primeira linha comentada
+   no arquivo. Isto vai evitar que o sistema seja acessado durante a atualização;
+   Caso esta linha não exista, inclua-a, deve ser a primeira linha do arquivo:
+   die('<h3>O sistema esta em manuten&ccedil;&atilde;o no momento. Voltaremos em breve.</h3>');
+2. Faça uma cópia completa do banco de dados antigo e dos arquivos da instalação
+   atual;
+3. Descompacte o pacote de instalação novo (atualizado);
+4. Exclua ou renomei o arquivo config/configurao.php padrão que foi descompactado
+  junto com o pacote de instalação que será utilizado na atualização;
+5. Verifique se existe alguma atualização de banco de dados e aplique-a no banco 
+   de dados da sua instalação, se for o caso;
+6. Substitua todos os arquivos antigos pelos novos, mas mantenha o arquivo
+   config/configurao.php antigo, ou faça uma cópia do mesmo para a nova instalação.
+7. Edite o arquivo config/configurao.php e comente novamente a linha que bloqueia
+   o acesso ao sistema.
+
+
+
+Alterações específicas conforme a revisão
+===========================================
+
+- Se sua instalação atual a ser atualizada for <= 0.2.0_rev246 substituir e 
+  adaptar o novo arquivo config/configuracao.php, este introduziu uma nova variável 
+  para guardar o email do administrador do sistema.
+
+
+
+
+------------------------------------------------------------
+Desenvolvedores
+------------------------------------------------------------
+Santiago Silva Pereira        - santiago.pereira@ifmg.edu.br
+Wanderson Santiago dos Reis   - wanderson.reis@ifmg.edu.br
+
+
+
+------------------------------------------------------------
+Colaboradores 
+------------------------------------------------------------
+Rafael Bernardino Cardoso - Campus Formiga
+Roger Santos Ferreira     - Campus Formiga
+Rogerio Costa Canto       - Campus Formiga
+
+
+------------------------------------------------------------
+Copyright 2006-2010 - Instituto Federal de Minas Gerais - Campus Bambuí
+Todos os direitos reservados

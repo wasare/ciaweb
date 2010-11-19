@@ -1,0 +1,181 @@
+body * {
+  font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+
+table.papeleta {
+    font: 0.85em verdana, arial, tahoma, sans-serif;
+    border: 0.0015em solid; 
+    border-collapse: collapse;
+    border-spacing: 0px;
+}   
+    
+.papeleta td, .papeleta th {
+    font: 0.85em verdana, arial, tahoma, sans-serif;
+    border: 0.0015em solid;
+    padding: 5px;
+    border-collapse: collapse;
+    border-spacing: 1px;
+}
+
+.papeleta a {
+    text-decoration: none;
+    color: #00047D;
+    /*border-bottom: 2px #eee dotted;*/
+
+}
+
+.papeleta a:hover {
+    text-decoration: underline;
+    color: #00047D;
+}
+
+.papeleta a:visited, a:active {
+    color: #00047D;
+}
+
+.papeleta tr:hover td {
+  background: #e5ffcc; /*#ccccff/*#ccffe5;*/
+  color: #000033;
+}
+
+.opcoes_web_diario {
+  border: 0.0015em solid;
+  width:200px;
+  text-align: left;
+  background-color: white;
+  line-height: 2em;
+}
+
+.opcoes_web_diario a {
+    text-decoration: none;
+    color: #00047D;
+    border-bottom: 2px #eee dotted;
+}
+
+.opcoes__web_diario a:hover {
+    text-decoration: underline;
+    color: #00047D;
+}
+
+.opcoes_web_diario a:visited, a:active {
+    color: #00047D;
+}
+
+.opcoes_diario {
+	line-height: 2em;
+}
+
+.opcoes_diario a {
+    text-decoration: none;
+    color: #00047D;
+    border-bottom: 2px #eee dotted;
+}
+
+.opcoes_diario a:hover {
+    text-decoration: underline;
+    color: #00047D;
+}
+
+.opcoes_diario a:visited, a:active {
+    color: #00047D;
+}
+
+.tabbed-pane * {
+	margin: 0;
+	padding: 0;
+}
+
+.tabbed-pane .guias {
+	list-style: none;
+	clear: both;
+	float: left;
+	margin-bottom: -1px;
+    border-top: 1px solid #333;
+    border-left: 1px solid #333;
+    border-right: 1px solid #333;
+    font-size: 0.85em;
+}
+
+.tabbed-pane .guias li a.active, .tabbed-pane .guias li:hover, .tabbed-pane .guias li.active {
+	background: #5699FF;
+	border: 0;
+}
+
+.tabbed-pane .guias li {
+	float: left;
+	margin: 0;
+    background: #AAD5FF;
+    padding: 0.3em 0.75em;
+}
+
+.tabbed-pane .guias li a {
+	color: #000000; /*336699;*/
+	display: block;
+	/*padding: 0.5em 0.75em;
+	 background: #AAD5FF;  #0066CC #e5ffcc #CCCCCC;*/
+	/*border-color: #333;
+	border-style: solid;
+	border-width: 1px;*/
+	text-decoration: none;
+    font-weight: normal;
+    /*font-size: 0.85em;*/
+}
+
+.tabbed-pane .pane {
+	border: 1px solid #333;
+	padding: 30px;
+	clear: both;
+	/*height: 100%;*/
+}
+
+.tabbed-container {
+	position: relative;
+	clear: both;
+	min-height: 3em;
+}
+.tabbed-container .overlay {
+	position: absolute;
+	clear: both;
+	border: 1px solid #333;
+	padding: 30px;
+	top: 0;
+	left: 0;
+	background: white center center no-repeat;
+	text-align: center;
+	z-index: 100;
+}
+
+a, a:link, a:visited{ color: #2A5685; text-decoration: none; font-weight:bold;}
+a:hover, a:active{ color: #c61a1a; text-decoration: underline;}
+
+.obrigatorio {
+   color: teal;
+   font-size: 0.75em;
+   font-weight: bold;
+   font-style: italic;
+}
+
+.titulo1 {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 1.25em;
+  font-weight: bold;
+  color: #990000;
+}
+
+.titulo_topo {
+	font-size: 18px;
+	text-decoration:none;
+	color:#000000;
+	font-weight: bold;
+}
+.titulo_topo:hover {
+	text-decoration:underline;
+	color:#003366;
+}
+
+.required {
+   color: red;
+   font-size: 0.75em;
+   font-weight: bold;
+}
+

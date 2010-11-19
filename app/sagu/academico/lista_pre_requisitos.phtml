@@ -1,0 +1,147 @@
+<?php
+
+require("../common.php");
+require("../lib/GetField.php3");
+
+
+$ref_curso = $_POST['ref_curso'];
+
+function ListaPreRequisitos( $ref_curso=null )
+{
+	 
+	$conn = new Connection;
+
+	$conn->open();
+
+	$sql = " select id, " .
+          "        ref_curso, " .
+          "        curso_desc(ref_curso), " .
+          "        ref_disciplina, " .
+          "        descricao_disciplina(ref_disciplina), " .
+          "        ref_disciplina_pre, " .
+          "        descricao_disciplina(ref_disciplina_pre), " .
+          "        ref_area, " .
+          "        horas_area, " .
+          "        tipo " .
+	      " from pre_requisitos ";
+
+	if ( $ref_curso )
+	{
+		$sql .= " where ref_curso = $ref_curso";
+	}
+
+	$sql .= " order by ref_curso";
+	 
+	$query = $conn->CreateQuery($sql);
+
+	echo("<center><table width=\"95%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\">");
+	echo ("<tr><td>&nbsp;</td></tr>");
+	echo ("<tr>");
+	echo ("<td bgcolor=\"#000099\" colspan=\"8\" height=\"28\" align=\"center\"><font size=\"3\" face=\"Verdana, Arial, Helvetica, sans-serif\" color=\"#FFFFFF\"><b>Listagem de Pré Requisitos Cadastrados</b></font></td>");
+	echo ("</tr>");
+
+	$i=1;
+
+	// cores fundo
+	$bg0 = "#000000";
+	$bg1 = "#DDDDFF";
+	$bg2 = "#FFFFEE";
+
+	// cores fonte
+	$fg0 = "#FFFFFF";
+	$fg1 = "#000099";
+	$fg2 = "#000099";
+
+	$aux_curso = -1;
+	 
+	while( $query->MoveNext() )
+	{
+		list ( $id,
+		$ref_curso,
+		$nome_curso,
+		$ref_disciplina,
+		$disciplina,
+		$ref_disciplina_pre,
+		$disciplina_pre,
+		$ref_area,
+		$horas_area,
+		$tipo) = $query->GetRowValues();
+
+		$area = GetField($ref_area, "area", "areas_ensino", true);
+		 
+		if ($aux_curso != $ref_curso)
+		{
+			echo ("<tr>");
+			echo ("<td bgcolor=\"#FFFFFF\" colspan=\"7\" height=\"28\" align=\"center\"><font size=\"3\" face=\"Verdana, Arial, Helvetica, sans-serif\" color=\"#000077\"><b>&nbsp;<br>$ref_curso - $nome_curso<br>&nbsp;</b></font></td>");
+			echo ("</tr>");
+
+			echo ("<tr bgcolor=\"#000000\">\n");
+			echo ("<td width=\"5%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Cont</b></font></td>");
+			echo ("<td width=\"28%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Cód - Disciplina</b></font></td>");
+			echo ("<td width=\"28%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Cód - Disciplina Pré</b></font></td>");
+			echo ("<td width=\"34%\" align=\"right\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Curso&nbsp;&nbsp;</b></font></td>");
+			echo ("<td width=\"5%\" align=\"right\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\">&nbsp;</td>");
+			echo ("<td width=\"5%\" align=\"right\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\">&nbsp;</b></td>");
+			echo ("</tr>");
+
+			$aux_curso = $ref_curso;
+		}
+
+		if ( $i % 2 )
+		{
+			$bg = $bg1;
+			$fg = $fg1;
+		}
+		else
+		{
+			$bg = $bg2;
+			$fg = $fg2;
+		}
+		 
+		$href  = "<a href=\"edita_pre_requisito.phtml?id=$id\"><img src=\"../images/update.gif\" alt='Alterar Pré-Requisito' align='absmiddle' border=0></a>";
+		$href2 = "<a href=\"javascript:Confirma_Exclui('$id')\"><img src=\"../images/delete.gif\" title='Excluir' align='absmiddle' border=0></a>";
+		 
+		echo("<tr bgcolor=\"$bg\">\n");
+		echo ("<td width=\"5%\"><Font face=\"Verdana\" size=\"2\" color=\"$fg1\">$i</td>");
+		echo ("<td width=\"28%\"><Font face=\"Verdana\" size=\"2\" color=\"$fg1\">$ref_disciplina - $disciplina</td>");
+		echo ("<td width=\"28%\"><Font face=\"Verdana\" size=\"2\" color=\"$fg1\">$ref_disciplina_pre - $disciplina_pre</td>");
+		echo ("<td width=\"34%\" align=\"right\"><Font face=\"Verdana\" size=\"2\" color=\"$fg1\">$ref_curso&nbsp;&nbsp;</td>");
+		echo ("<td width=\"5%\" align=\"right\">$href</td>");
+		echo ("<td width=\"5%\" align=\"right\">$href2</td>");
+		echo("  </tr>");
+		 
+		$i++;
+
+	}
+
+	echo("<tr><td colspan=\"8\" align=\"center\"><hr></td></tr>");
+	echo("</table></center>");
+
+	$query->Close();
+
+}
+?>
+<html>
+<head>
+<title></title>
+<script language="JavaScript">
+function Confirma_Exclui(arg1)
+{
+    url = 'post/pre_requisito_exclui.php3?id=' + arg1;
+
+  if (confirm("Você tem certeza que deseja EXCLUIR o Pré-requisito?"))
+    location=(url)
+  else
+    alert("Exclusão Cancelada.");
+}
+</script>
+</head>
+<body bgcolor="#FFFFFF">
+<form method="post" action="">
+<p><?php ListaPreRequisitos($ref_curso); ?></p>
+<div align="center"><input type="button" name="Button"
+	value="  Voltar  "
+	onClick="location='consulta_inclui_pre_requisito.phtml'"></div>
+</form>
+</body>
+</html>

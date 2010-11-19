@@ -1,0 +1,126 @@
+<?php
+
+require("../common.php");
+require("../lib/GetGrupoDiscipl.php3");
+require("../lib/GetDepartamento.php3");
+
+
+
+$ref_disciplina_ofer = $_GET['ref_disciplina_ofer'];
+
+CheckFormParameters(array("ref_disciplina_ofer"));
+
+$conn = new Connection;
+
+$conn->Open();
+
+$sql = " select A.id," .
+       "        A.ref_campus, " .
+       "        descricao_disciplina(A.ref_disciplina), ".
+       "        A.num_alunos," .
+       "        trim(B.num_sala) " .
+       " from disciplinas_ofer A, disciplinas_ofer_compl B " .
+       " where A.id = B.ref_disciplina_ofer and " .
+       "       A.id = $ref_disciplina_ofer and " .
+       "       B.ref_disciplina_ofer = $ref_disciplina_ofer";
+
+$query = $conn->CreateQuery($sql);
+
+while ( $query->MoveNext() )
+{
+	list ( $ref_disciplina_ofer,
+	$ref_campus,
+	$descricao_disciplina,
+	$num_alunos,
+	$num_sala) = $query->GetRowValues();
+
+}
+$query->Close();
+
+$conn->Close();
+
+?>
+<html>
+<head>
+<script language="Javascript">
+function buscaSala()
+{
+
+  var url = '../generico/post/lista_salas.php3' +
+            '?ref_campus=' + escape(document.myform.ref_campus.value);
+
+  var wnd = window.open(url,'busca','toolbar=no,width=550,height=350,scrollbars=yes');
+}
+
+function setResult(arg1,arg2)
+{
+    document.myform.num_sala.value = arg1;
+    document.myform.num_alunos.value = arg2;
+}
+</script>
+</head>
+<body bgcolor="#FFFFFF" marginwidth="20" marginheight="20">
+<form method="post" action="post/altera_salas_ofer.php3" name="myform">
+<table width="90%" align="center">
+	<tr bgcolor="#000099">
+		<td height="35" colspan="2" align="center">
+		<div align="center"><font size="3"
+			face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#CCCCFF">Altera&ccedil;&atilde;o
+		de Disciplina Oferecida</font></b></font></div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#CCCCFF" width="30%"><font
+			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;C&oacute;digo&nbsp;
+		da Oferecida</font></td>
+		<td width="70%"><font face="Verdana, Arial, Helvetica, sans-serif"
+			color="#FF0033"> <input type="hidden" name="ref_disciplina_ofer"
+			value="<? echo($ref_disciplina_ofer); ?>"> <?php echo($ref_disciplina_ofer); ?></font></td>
+	</tr>
+	<tr>
+		<td bgcolor="#CCCCFF" width="30%"><font
+			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Descri&ccedil;&atilde;o&nbsp;</font></td>
+		<td width="70%"><input name="descricao_disciplina" type=text
+			value="<?echo($descricao_disciplina);?>" maxlength="40" size="40"></td>
+	</tr>
+	<tr>
+		<td bgcolor="#CCCCFF" width="30%"><font
+			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;N&ordm;
+		Sala </font></td>
+		<td width="70%">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td width="20%">
+				<div align="left"><font color="#000000"> <input type="hidden"
+					name="ref_campus" value="<?echo($ref_campus)?>"> <input
+					name="num_sala" type="text" value="<?echo($num_sala)?>" size="6"> </font></div>
+				</td>
+				<td width="70%"><font color="#000000">&nbsp;</font></td>
+				<td width="10%"><font color="#000000"> <input type="button"
+					value="..." onClick="buscaSala()" name="button2"> </font></td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#CCCCFF" width="30%"><font
+			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Numero
+		máximo de Alunos</font></td>
+		<td width="70%"><input name="num_alunos" type=text
+			value="<?echo($num_alunos);?>" size="10"></td>
+	</tr>
+
+	<tr>
+		<td colspan="2">
+		<hr size="1">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center"><input type="submit" name="Submit"
+			value=" Salvar "> <input type="button" name="Button" value=" Voltar "
+			onClick="location='disciplina_ofer.phtml'"></td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

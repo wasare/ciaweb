@@ -1,0 +1,165 @@
+<?php 
+
+require("../../common.php");
+require_once '../../../../core/login/acl.php';
+
+$conn = new connection_factory($param_conn);
+
+$acl = new acl();
+if(!$acl->has_access(__FILE__, $conn)) {
+    exit ('Você não tem permissão para acessar este formulário!');
+}
+
+
+$id                  = $_POST['id'];
+$descricao           = $_POST['descricao'];
+$abreviatura         = $_POST['abreviatura'];
+$sigla               = $_POST['sigla'];
+$total_creditos      = $_POST['total_creditos'];
+$total_carga_horaria = $_POST['total_carga_horaria'];
+$total_semestres     = $_POST['total_semestres'];
+$grau_academico      = $_POST['grau_academico'];
+$exigencias          = $_POST['exigencias'];
+$agrupo_curso        = $_POST['agrupo_curso'];
+$ref_area            = $_POST['ref_area'];
+$reconhecimento      = $_POST['reconhecimento'];
+$autorizacao         = $_POST['autorizacao'];
+$turno               = $_POST['turno'];
+$ref_tipo_curso      = $_POST['ref_tipo_curso'];
+$cabecalho_historico = $_POST['cabecalho_historico'];
+
+CheckFormParameters(array("id","descricao","abreviatura",
+        "turno","agrupo_curso","ref_tipo_curso"));
+
+?>
+<html>
+    <head>
+    </head>
+    <body bgcolor="#FFFFFF" marginwidth="20" marginheight="20">
+        <form method="post" action="curso_ins.php3" name="myform">
+            <table width="90%" align="center">
+                <tr bgcolor="#000099">
+                    <td colspan="2" height="35">
+                        <div align="center"><font size="3" face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#CCCCFF">Confirme a Opera&ccedil;&atilde;o</font></b></font><font size="4" face="Verdana, Arial, Helvetica, sans-serif"><b></b></font></div>
+                    </td>
+                </tr>
+                <tr valign="middle">
+                    <td colspan="2" height="34">
+                        <div align="right"><font color="#FF0000" face="Verdana, Arial, Helvetica, sans-serif" size="3"><b>Inclus&atilde;o de Curso</b></font> </div>
+                        <hr size="1">
+                    </td>
+                </tr>
+                <tr valign="middle"> 
+                    <td colspan="2" height="24"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Verifique se os dados est&atilde;o corretos.</font></td>
+                </tr>
+                <tr valign="middle">
+                    <td colspan="2" height="15">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td bgcolor="#CCCCFF"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">C&oacute;digo</font></td>
+                    <td bgcolor="#FFFFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>
+                                <?PHP echo($id) ?> </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#CCCCFF"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">Descri&ccedil;&atilde;o</font></td>
+                    <td bgcolor="#FFFFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?PHP echo($descricao) ?> </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#CCCCFF"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">Abreviatura</font></td>
+                    <td bgcolor="#FFFFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?PHP echo($abreviatura) ?></b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#CCCCFF"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">Sigla</font></td>
+                    <td bgcolor="#FFFFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?PHP echo($sigla) ?></b></font></td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#CCCCFF"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">Total Cr&eacute;ditos&nbsp;</font></td>
+                    <td bgcolor="#FFFFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?PHP echo($total_creditos) ?></b></font></td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#CCCCFF"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">Total Carga Horária&nbsp;</font></td>
+                    <td bgcolor="#FFFFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?PHP echo($total_carga_horaria) ?></b></font></td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#CCCCFF"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">Total Semestres</font></td>
+                    <td bgcolor="#FFFFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?PHP echo($total_semestres) ?></b></font></td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#CCCCFF"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">Turno</font></td>
+                    <td bgcolor="#FFFFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?PHP echo($turno) ?></b></font></td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#CCCCFF"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">Tipo do Curso</font></td>
+                    <td bgcolor="#FFFFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?PHP echo($ref_tipo_curso) ?></b></font></td>
+                </tr>
+                <!--
+                  <tr>
+                    <td bgcolor="#CCCCFF"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">Área de Ensino</font></td>
+                    <td bgcolor="#FFFFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?PHP echo($ref_area) ?></b></font></td>
+                  </tr>
+                -->
+                <tr>
+                    <td bgcolor="#CCCCFF"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">Grau Acad&ecirc;mico</font></td>
+                    <td bgcolor="#FFFFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?PHP echo($grau_academico) ?></b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#CCCCFF"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">Exig&ecirc;ncias&nbsp;</font></td>
+                    <td bgcolor="#FFFFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?PHP echo($exigencias) ?></b></font></td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#CCCCFF"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">Agrupar Curso</font></td>
+                    <td bgcolor="#FFFFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?PHP echo($status[$agrupo_curso]) ?></b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#CCCCFF"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">Reconhecimento</font></td>
+                    <td bgcolor="#FFFFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?PHP echo($reconhecimento) ?></b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#CCCCFF"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">Autorização</font></td>
+                    <td bgcolor="#FFFFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?PHP echo($autorizacao) ?></b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#CCCCFF"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">Cabeçalho do Histórico</font></td>
+                    <td bgcolor="#FFFFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?PHP echo($cabecalho_historico) ?></b></font></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <hr size="1">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="hidden" name="id" value="<?echo($id);?>">
+                        <input type="hidden" name="descricao" value="<?echo($descricao);?>">
+                        <input type="hidden" name="abreviatura" value="<?echo($abreviatura);?>">
+                        <input type="hidden" name="sigla" value="<?echo($sigla);?>">
+                        <input type="hidden" name="total_creditos" value="<?echo($total_creditos);?>">
+                        <input type="hidden" name="total_carga_horaria" value="<?echo($total_carga_horaria);?>">
+                        <input type="hidden" name="total_semestres" value="<?echo($total_semestres);?>">
+                        <input type="hidden" name="turno" value="<?echo($turno);?>">
+                        <input type="hidden" name="ref_tipo_curso" value="<?echo($ref_tipo_curso);?>">
+                        <input type="hidden" name="grau_academico" value="<?echo($grau_academico);?>">
+                        <input type="hidden" name="exigencias" value="<?echo($exigencias);?>">
+                        <input type="hidden" name="agrupo_curso" value="<?echo($agrupo_curso);?>">
+                        <input type="hidden" name="ref_area" value="<?echo($ref_area);?>">
+                        <input type="hidden" name="reconhecimento" value="<?echo($reconhecimento);?>">
+                        <input type="hidden" name="autorizacao" value="<?echo($autorizacao);?>">
+                        <input type="hidden" name="cabecalho_historico" value="<?echo($cabecalho_historico);?>">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" name="Submit"  value=" Salvar ">
+                        <input type="button" name="Submit2" value=" Alterar " onClick="javascript:history.go(-1)">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

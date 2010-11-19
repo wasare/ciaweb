@@ -1,0 +1,23 @@
+/***************/
+/* PRINT STYLE */
+/***************/
+
+@media print {
+
+  .nao_imprime {display:none}
+
+  table.relato {
+    font: 0.7em verdana, arial, tahoma, sans-serif;
+    border: 0.0015em solid;
+    border-collapse: collapse;
+    border-spacing: 0px;
+  }
+
+  .relato td, th {
+    font: 0.7em verdana, arial, tahoma, sans-serif;
+    border: 0.0015em solid;
+    padding: 2px;
+    border-collapse: collapse;
+    border-spacing: 1px;
+  }
+}
