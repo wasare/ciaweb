@@ -1,9 +1,10 @@
 <?php
 
 require_once('../../config/configuracao.php');
-require_once('../../core/data/connection_factory.php');
-require_once('../../core/login/session.php');
-require_once('../../core/login/auth.php');
+require_once($BASE_DIR .'lib/adLDAP.php');
+require_once($BASE_DIR .'core/data/connection_factory.php');
+require_once($BASE_DIR .'core/login/session.php');
+require_once($BASE_DIR .'core/login/auth.php');
 
 $sessao = new session($param_conn);
 
@@ -12,7 +13,10 @@ if(isset($_POST['modulo'])) {
 
     $conn = new connection_factory($param_conn);
 
-    $autentica = new auth($BASE_URL);
+    // verifica usuário na base LDAP
+    $adLdap = new adLDAP($param_ldap);
+
+    $autentica = new auth($BASE_URL, $adLdap);
     $autentica->log_file($BASE_DIR .'logs/login.log');
 
     if($autentica->login(trim($_POST['uid']),trim($_POST['pwd']),$_POST['modulo'], $conn) === TRUE) {
@@ -192,3 +196,4 @@ else {
         <?php } ?>
     </body>
 </html>
+

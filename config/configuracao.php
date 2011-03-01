@@ -33,6 +33,13 @@ $param_conn_aluno['password'] = 'eokQdfaBO9M8CY6snUzy';
 $param_conn_aluno['port']     = $port;
 
 /**
+ * Variaveis de acesso a base LDAP (atualmente somente AD)
+ */
+$param_ldap['account_suffix']      = '@campuscar.ifsp';
+$param_ldap['base_dn']             = 'DC=campuscar,DC=ifsp';
+$param_ldap['domain_controllers']  = array();
+
+/**
  * HTML Padrao
  */
 $DOC_TYPE       = '<meta http-equiv="Content-Type" content="text/html; charset= UTF-8">';
@@ -77,7 +84,7 @@ $curriculos["A"] = "Atividade complementar";
 $historico["S"]  = "Sim";
 $historico["N"]  = "N&atilde;o";
 
-// app/sagu/academico/curso_altera.phtml 
+// app/sagu/academico/curso_altera.phtml
 // app/sagu/academico/lista_disciplinas_ofer.phtml
 $status["1"]     = "Sim";
 $status["0"]     = "N&atilde;o";
@@ -88,8 +95,8 @@ $status["0"]     = "N&atilde;o";
 $opcoes["t"]     = "Sim";
 $opcoes["f"]     = "N&atilde;o";
 
-// app/sagu/academico/pessoaf_edita.phtml 
-// app/sagu/academico/post/confirm_pessoaf_inclui.phtml 
+// app/sagu/academico/pessoaf_edita.phtml
+// app/sagu/academico/post/confirm_pessoaf_inclui.phtml
 $estados_civis["S"] = "Solteiro";
 $estados_civis["C"] = "Casado";
 $estados_civis["V"] = "Vi&uacute;vo";
@@ -121,3 +128,4 @@ FROM periodos
 ORDER BY 1 DESC;";
 
 ?>
+

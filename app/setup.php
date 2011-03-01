@@ -13,6 +13,7 @@ require_once(dirname(__FILE__).'/../config/configuracao.php');
 /**
  * Arquivos requeridos
  */
+require_once($BASE_DIR .'lib/adLDAP.php');
 require_once($BASE_DIR .'core/data/connection_factory.php');
 require_once($BASE_DIR .'core/login/session.php');
 require_once($BASE_DIR .'core/login/auth.php');
@@ -27,7 +28,7 @@ $sessao = new session($param_conn);
  */
 list($sa_usuario,$sa_senha,$sa_usuario_id,$sa_ref_pessoa) = explode(":",$_SESSION['sa_auth']);
 
-/* 
+/*
  * Verifica a autenticacao do usuario
  */
 $sa_verifica_login = new auth($BASE_URL);
@@ -36,3 +37,4 @@ $sa_verifica_login->check_login($sessao);
 
 
 ?>
+

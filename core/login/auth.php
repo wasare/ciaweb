@@ -12,11 +12,12 @@
  */
 class auth {
 
-    protected $redirect_url, $base_url, $sess_table, $log_file;
+    protected $redirect_url, $base_url, $sess_table, $log_file, $ldap_conn;
 
-    function __construct($base_url,$log_file='login.log',$sess_table='sessao') {
+    function __construct($base_url,$ldap_conn=FALSE,$log_file='login.log',$sess_table='sessao') {
 
         $this->base_url = $base_url;
+        $this->ldap_conn = $ldap_conn;
         $this->sess_table = $sess_table;
 
         // TODO: melhorar tratamento de logs
@@ -45,7 +46,25 @@ class auth {
         }
         else {
 
-            $sql = "SELECT u.id,ref_pessoa,nome_campus FROM usuario u, campus c
+            // autentica na base LDAP e atualiza a senha caso necessário
+            if ($this->ldap_conn) {
+              if ($this->ldap_conn->authenticate($login, $senha)) {
+
+                $nova_senha = hash('sha256',trim($senha));
+
+                $sql_verifica_senha = "SELECT senha FROM usuario WHERE nome = '$login' AND ativado = 'TRUE'; ";
+
+                $senha_banco = $GLOBALS['ADODB_SESS_CONN']->getOne($sql_verifica_senha);
+
+                // atualiza senha no banco com base na autenticação feita no LDAP
+                if($senha_banco != $nova_senha) {
+                  $atualiza_senha = "UPDATE usuario SET senha = '$nova_senha' WHERE nome = '$login' AND ativado = 'TRUE';";
+                  $usuario_atualizado = $GLOBALS['ADODB_SESS_CONN']->Execute($atualiza_senha);
+                }
+              }
+            }
+
+            $sql = "SELECT u.id,ref_pessoa,nome_campus,senha FROM usuario u, campus c
                     WHERE nome = '$login' AND
                     senha = '". hash('sha256',trim($senha)) ."' AND
                     c.id = ref_campus AND
@@ -209,3 +228,4 @@ class auth {
 }
 
 ?>
+
