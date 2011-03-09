@@ -16,7 +16,7 @@ COMMENT ON SCHEMA public IS 'Standard public schema';
 SET search_path = public, pg_catalog;
 
 --
--- Name: dblink_pkey_results; Type: TYPE; Schema: public; 
+-- Name: dblink_pkey_results; Type: TYPE; Schema: public;
 --
 
 CREATE TYPE dblink_pkey_results AS (
@@ -27,7 +27,7 @@ CREATE TYPE dblink_pkey_results AS (
 
 
 --
--- Name: campus_disciplina_ofer(integer); Type: FUNCTION; Schema: public; 
+-- Name: campus_disciplina_ofer(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION campus_disciplina_ofer(integer) RETURNS integer
@@ -37,7 +37,7 @@ CREATE FUNCTION campus_disciplina_ofer(integer) RETURNS integer
 
 
 --
--- Name: check_matricula_pessoa(integer, integer); Type: FUNCTION; Schema: public; 
+-- Name: check_matricula_pessoa(integer, integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION check_matricula_pessoa(integer, integer) RETURNS integer
@@ -47,7 +47,7 @@ CREATE FUNCTION check_matricula_pessoa(integer, integer) RETURNS integer
 
 
 --
--- Name: cria_ra(); Type: FUNCTION; Schema: public; 
+-- Name: cria_ra(); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION cria_ra() RETURNS "trigger"
@@ -62,7 +62,7 @@ $$
 
 
 --
--- Name: curso_desc(integer); Type: FUNCTION; Schema: public; 
+-- Name: curso_desc(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION curso_desc(integer) RETURNS character varying
@@ -72,7 +72,7 @@ CREATE FUNCTION curso_desc(integer) RETURNS character varying
 
 
 --
--- Name: curso_disciplina_ofer(integer); Type: FUNCTION; Schema: public; 
+-- Name: curso_disciplina_ofer(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION curso_disciplina_ofer(integer) RETURNS integer
@@ -82,7 +82,7 @@ CREATE FUNCTION curso_disciplina_ofer(integer) RETURNS integer
 
 
 --
--- Name: descricao_departamento(integer); Type: FUNCTION; Schema: public; 
+-- Name: descricao_departamento(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION descricao_departamento(integer) RETURNS character varying
@@ -92,7 +92,7 @@ CREATE FUNCTION descricao_departamento(integer) RETURNS character varying
 
 
 --
--- Name: descricao_disciplina(integer); Type: FUNCTION; Schema: public; 
+-- Name: descricao_disciplina(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION descricao_disciplina(integer) RETURNS text
@@ -102,7 +102,7 @@ CREATE FUNCTION descricao_disciplina(integer) RETURNS text
 
 
 --
--- Name: descricao_disciplina_sucinto(integer); Type: FUNCTION; Schema: public; 
+-- Name: descricao_disciplina_sucinto(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION descricao_disciplina_sucinto(integer) RETURNS character varying
@@ -112,7 +112,7 @@ CREATE FUNCTION descricao_disciplina_sucinto(integer) RETURNS character varying
 
 
 --
--- Name: descricao_periodo(character varying); Type: FUNCTION; Schema: public; 
+-- Name: descricao_periodo(character varying); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION descricao_periodo(character varying) RETURNS character varying
@@ -122,7 +122,7 @@ CREATE FUNCTION descricao_periodo(character varying) RETURNS character varying
 
 
 --
--- Name: dia_disciplina_ofer_todos(integer); Type: FUNCTION; Schema: public; 
+-- Name: dia_disciplina_ofer_todos(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION dia_disciplina_ofer_todos(integer) RETURNS character varying
@@ -142,7 +142,7 @@ $_$
 
 
 --
--- Name: get_area(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_area(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_area(integer) RETURNS character varying
@@ -153,7 +153,7 @@ CREATE FUNCTION get_area(integer) RETURNS character varying
 
 
 --
--- Name: get_campus(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_campus(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_campus(integer) RETURNS character varying
@@ -164,7 +164,7 @@ nome_campus from campus where id = $1$_$
 
 
 --
--- Name: get_carga_horaria(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_carga_horaria(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_carga_horaria(integer) RETURNS double precision
@@ -175,7 +175,7 @@ where id = $1$_$
 
 
 --
--- Name: get_carga_horaria_realizada(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_carga_horaria_realizada(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_carga_horaria_realizada(integer) RETURNS integer
@@ -183,14 +183,14 @@ CREATE FUNCTION get_carga_horaria_realizada(integer) RETURNS integer
     row RECORD;
     carga_horaria integer := 0;
 BEGIN
-        FOR row IN 
-            SELECT 
-                CASE 
-                    WHEN SUM(CAST(flag AS INTEGER)) IS NULL THEN 0 
-                    ELSE SUM(CAST(flag AS INTEGER)) END AS carga 
-                FROM 
-                    diario_seq_faltas 
-                WHERE   
+        FOR row IN
+            SELECT
+                CASE
+                    WHEN SUM(CAST(flag AS INTEGER)) IS NULL THEN 0
+                    ELSE SUM(CAST(flag AS INTEGER)) END AS carga
+                FROM
+                    diario_seq_faltas
+                WHERE
                     ref_disciplina_ofer = $1 LOOP
             carga_horaria := row.carga;
         END LOOP;
@@ -202,7 +202,7 @@ $_$
 
 
 --
--- Name: get_ccusto(integer, integer); Type: FUNCTION; Schema: public; 
+-- Name: get_ccusto(integer, integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_ccusto(integer, integer) RETURNS character varying
@@ -212,7 +212,7 @@ CREATE FUNCTION get_ccusto(integer, integer) RETURNS character varying
 
 
 --
--- Name: get_cidade(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_cidade(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_cidade(integer) RETURNS character varying
@@ -222,7 +222,7 @@ CREATE FUNCTION get_cidade(integer) RETURNS character varying
 
 
 --
--- Name: get_color_campus(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_color_campus(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_color_campus(integer) RETURNS character varying
@@ -232,7 +232,7 @@ CREATE FUNCTION get_color_campus(integer) RETURNS character varying
 
 
 --
--- Name: get_complemento_ofer(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_complemento_ofer(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_complemento_ofer(integer) RETURNS text
@@ -242,7 +242,7 @@ CREATE FUNCTION get_complemento_ofer(integer) RETURNS text
 
 
 --
--- Name: get_creditos(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_creditos(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_creditos(integer) RETURNS numeric
@@ -252,7 +252,7 @@ CREATE FUNCTION get_creditos(integer) RETURNS numeric
 
 
 --
--- Name: get_curriculo_mco(integer, integer, integer); Type: FUNCTION; Schema: public; 
+-- Name: get_curriculo_mco(integer, integer, integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_curriculo_mco(integer, integer, integer) RETURNS character
@@ -262,7 +262,7 @@ CREATE FUNCTION get_curriculo_mco(integer, integer, integer) RETURNS character
 
 
 --
--- Name: get_curso_abrv(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_curso_abrv(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_curso_abrv(integer) RETURNS character varying
@@ -272,7 +272,7 @@ CREATE FUNCTION get_curso_abrv(integer) RETURNS character varying
 
 
 --
--- Name: get_departamento(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_departamento(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_departamento(integer) RETURNS character varying
@@ -282,7 +282,7 @@ CREATE FUNCTION get_departamento(integer) RETURNS character varying
 
 
 --
--- Name: get_dia(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_dia(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_dia(integer) RETURNS character
@@ -292,7 +292,7 @@ CREATE FUNCTION get_dia(integer) RETURNS character
 
 
 --
--- Name: get_dia_semana(character varying); Type: FUNCTION; Schema: public; 
+-- Name: get_dia_semana(character varying); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_dia_semana(character varying) RETURNS character varying
@@ -302,7 +302,7 @@ CREATE FUNCTION get_dia_semana(character varying) RETURNS character varying
 
 
 --
--- Name: get_dia_semana_(character varying); Type: FUNCTION; Schema: public; 
+-- Name: get_dia_semana_(character varying); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_dia_semana_(character varying) RETURNS character varying
@@ -312,7 +312,7 @@ CREATE FUNCTION get_dia_semana_(character varying) RETURNS character varying
 
 
 --
--- Name: get_dia_semana_abrv(character varying); Type: FUNCTION; Schema: public; 
+-- Name: get_dia_semana_abrv(character varying); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_dia_semana_abrv(character varying) RETURNS character varying
@@ -322,7 +322,7 @@ CREATE FUNCTION get_dia_semana_abrv(character varying) RETURNS character varying
 
 
 --
--- Name: get_dia_semana_abrv_(character varying); Type: FUNCTION; Schema: public; 
+-- Name: get_dia_semana_abrv_(character varying); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_dia_semana_abrv_(character varying) RETURNS character varying
@@ -332,7 +332,7 @@ CREATE FUNCTION get_dia_semana_abrv_(character varying) RETURNS character varyin
 
 
 --
--- Name: get_disciplina_de_disciplina_of(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_disciplina_de_disciplina_of(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_disciplina_de_disciplina_of(integer) RETURNS integer
@@ -342,7 +342,7 @@ CREATE FUNCTION get_disciplina_de_disciplina_of(integer) RETURNS integer
 
 
 --
--- Name: get_dt_inicio_aula(character varying); Type: FUNCTION; Schema: public; 
+-- Name: get_dt_inicio_aula(character varying); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_dt_inicio_aula(character varying) RETURNS date
@@ -352,7 +352,7 @@ CREATE FUNCTION get_dt_inicio_aula(character varying) RETURNS date
 
 
 --
--- Name: get_motivo(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_motivo(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_motivo(integer) RETURNS character varying
@@ -362,7 +362,7 @@ CREATE FUNCTION get_motivo(integer) RETURNS character varying
 
 
 --
--- Name: get_num_matriculados(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_num_matriculados(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_num_matriculados(integer) RETURNS bigint
@@ -372,7 +372,7 @@ CREATE FUNCTION get_num_matriculados(integer) RETURNS bigint
 
 
 --
--- Name: get_ref_professor(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_ref_professor(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_ref_professor(integer) RETURNS integer
@@ -382,7 +382,7 @@ CREATE FUNCTION get_ref_professor(integer) RETURNS integer
 
 
 --
--- Name: get_status(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_status(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_status(integer) RETURNS character varying
@@ -392,7 +392,7 @@ CREATE FUNCTION get_status(integer) RETURNS character varying
 
 
 --
--- Name: get_status_disciplina(integer, integer, integer); Type: FUNCTION; Schema: public; 
+-- Name: get_status_disciplina(integer, integer, integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_status_disciplina(integer, integer, integer) RETURNS integer
@@ -402,7 +402,7 @@ CREATE FUNCTION get_status_disciplina(integer, integer, integer) RETURNS integer
 
 
 --
--- Name: get_tipo_curso(integer); Type: FUNCTION; Schema: public; 
+-- Name: get_tipo_curso(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_tipo_curso(integer) RETURNS integer
@@ -412,7 +412,7 @@ CREATE FUNCTION get_tipo_curso(integer) RETURNS integer
 
 
 --
--- Name: get_turno(character varying); Type: FUNCTION; Schema: public; 
+-- Name: get_turno(character varying); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_turno(character varying) RETURNS character varying
@@ -422,7 +422,7 @@ CREATE FUNCTION get_turno(character varying) RETURNS character varying
 
 
 --
--- Name: get_turno_(character varying); Type: FUNCTION; Schema: public; 
+-- Name: get_turno_(character varying); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION get_turno_(character varying) RETURNS character varying
@@ -432,7 +432,7 @@ CREATE FUNCTION get_turno_(character varying) RETURNS character varying
 
 
 --
--- Name: instituicao_nome(integer); Type: FUNCTION; Schema: public; 
+-- Name: instituicao_nome(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION instituicao_nome(integer) RETURNS character varying
@@ -442,7 +442,7 @@ CREATE FUNCTION instituicao_nome(integer) RETURNS character varying
 
 
 --
--- Name: is_ouvinte(integer, integer); Type: FUNCTION; Schema: public; 
+-- Name: is_ouvinte(integer, integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION is_ouvinte(integer, integer) RETURNS character
@@ -452,7 +452,7 @@ CREATE FUNCTION is_ouvinte(integer, integer) RETURNS character
 
 
 --
--- Name: nota_distribuida(integer); Type: FUNCTION; Schema: public; 
+-- Name: nota_distribuida(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION nota_distribuida(integer) RETURNS integer
@@ -462,7 +462,7 @@ CREATE FUNCTION nota_distribuida(integer) RETURNS integer
 
 
 --
--- Name: num_alunos(integer); Type: FUNCTION; Schema: public; 
+-- Name: num_alunos(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION num_alunos(integer) RETURNS integer
@@ -472,7 +472,7 @@ CREATE FUNCTION num_alunos(integer) RETURNS integer
 
 
 --
--- Name: num_sala_disciplina_ofer_todos(integer); Type: FUNCTION; Schema: public; 
+-- Name: num_sala_disciplina_ofer_todos(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION num_sala_disciplina_ofer_todos(integer) RETURNS character varying
@@ -492,7 +492,7 @@ $_$
 
 
 --
--- Name: periodo_disciplina_ofer(integer); Type: FUNCTION; Schema: public; 
+-- Name: periodo_disciplina_ofer(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION periodo_disciplina_ofer(integer) RETURNS character varying
@@ -502,7 +502,7 @@ CREATE FUNCTION periodo_disciplina_ofer(integer) RETURNS character varying
 
 
 --
--- Name: pessoa_idade(integer); Type: FUNCTION; Schema: public; 
+-- Name: pessoa_idade(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION pessoa_idade(integer) RETURNS integer
@@ -512,7 +512,7 @@ CREATE FUNCTION pessoa_idade(integer) RETURNS integer
 
 
 --
--- Name: pessoa_nome(integer); Type: FUNCTION; Schema: public; 
+-- Name: pessoa_nome(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION pessoa_nome(integer) RETURNS character varying
@@ -522,7 +522,7 @@ CREATE FUNCTION pessoa_nome(integer) RETURNS character varying
 
 
 --
--- Name: professor_disciplina_ofer(integer); Type: FUNCTION; Schema: public; 
+-- Name: professor_disciplina_ofer(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION professor_disciplina_ofer(integer) RETURNS character varying
@@ -532,7 +532,7 @@ CREATE FUNCTION professor_disciplina_ofer(integer) RETURNS character varying
 
 
 --
--- Name: professor_disciplina_ofer_todos(integer); Type: FUNCTION; Schema: public; 
+-- Name: professor_disciplina_ofer_todos(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION professor_disciplina_ofer_todos(integer) RETURNS character varying
@@ -540,24 +540,24 @@ CREATE FUNCTION professor_disciplina_ofer_todos(integer) RETURNS character varyi
 	row pessoas%ROWTYPE;
     professores varchar := '';
 BEGIN
-	FOR row IN  
-             SELECT * FROM 
-	        pessoas A 
-		    FULL OUTER JOIN 
+	FOR row IN
+             SELECT * FROM
+	        pessoas A
+		    FULL OUTER JOIN
 	        disciplinas_ofer_prof B ON (A.id = B.ref_professor)
-		    FULL OUTER JOIN 
+		    FULL OUTER JOIN
 	        disciplinas_ofer_compl C ON (B.ref_disciplina_compl = C.id)
 	    WHERE  B.ref_disciplina_ofer = $1 AND A.id IS NOT NULL ORDER BY A.nome, C.dia_semana LOOP
             professores := professores || ' / ' || SPLIT_PART( (row.nome::varchar), ' ', 1) || ' ' || SPLIT_PART( (row.nome::varchar), ' ', 2);
 	END LOOP;
-        
+
         BEGIN
             IF (trim(substr(professores, 3, length(professores))) is NULL ) THEN
               RETURN 'sem professor';
             ELSE
               RETURN trim(substr(professores, 3, length(professores)));
             END IF;
-        END;        
+        END;
 END;
 $_$
     LANGUAGE plpgsql;
@@ -565,7 +565,7 @@ $_$
 
 
 --
--- Name: turno_disciplina_ofer_todos(integer); Type: FUNCTION; Schema: public; 
+-- Name: turno_disciplina_ofer_todos(integer); Type: FUNCTION; Schema: public;
 --
 
 CREATE FUNCTION turno_disciplina_ofer_todos(integer) RETURNS character varying
@@ -590,7 +590,7 @@ SET default_tablespace = '';
 SET default_with_oids = true;
 
 --
--- Name: pessoas; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: pessoas; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE pessoas (
@@ -675,7 +675,7 @@ CREATE TABLE pessoas (
 SET default_with_oids = false;
 
 --
--- Name: acesso_aluno; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: acesso_aluno; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE acesso_aluno (
@@ -688,7 +688,7 @@ CREATE TABLE acesso_aluno (
 SET default_with_oids = true;
 
 --
--- Name: contratos; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: contratos; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE contratos (
@@ -733,7 +733,7 @@ CREATE TABLE contratos (
 
 
 --
--- Name: matricula; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: matricula; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE matricula (
@@ -799,7 +799,7 @@ CREATE TABLE matricula (
 
 
 --
--- Name: alunos_curso_periodo; Type: VIEW; Schema: public; 
+-- Name: alunos_curso_periodo; Type: VIEW; Schema: public;
 --
 
 CREATE VIEW alunos_curso_periodo AS
@@ -808,7 +808,7 @@ CREATE VIEW alunos_curso_periodo AS
 
 
 --
--- Name: areas_ensino; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: areas_ensino; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE areas_ensino (
@@ -821,7 +821,7 @@ CREATE TABLE areas_ensino (
 SET default_with_oids = false;
 
 --
--- Name: avisos; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: avisos; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE avisos (
@@ -835,7 +835,7 @@ CREATE TABLE avisos (
 SET default_with_oids = true;
 
 --
--- Name: campus; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: campus; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE campus (
@@ -852,7 +852,7 @@ CREATE TABLE campus (
 SET default_with_oids = false;
 
 --
--- Name: cargo; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: cargo; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE cargo (
@@ -866,7 +866,7 @@ CREATE TABLE cargo (
 SET default_with_oids = true;
 
 --
--- Name: carimbos; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: carimbos; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE carimbos (
@@ -879,7 +879,7 @@ CREATE TABLE carimbos (
 
 
 --
--- Name: cidade_id_seq; Type: SEQUENCE; Schema: public; 
+-- Name: cidade_id_seq; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE cidade_id_seq
@@ -891,7 +891,7 @@ CREATE SEQUENCE cidade_id_seq
 
 
 --
--- Name: cidade; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: cidade; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE cidade (
@@ -907,7 +907,7 @@ CREATE TABLE cidade (
 
 
 --
--- Name: configuracao_empresa; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: configuracao_empresa; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE configuracao_empresa (
@@ -926,7 +926,7 @@ CREATE TABLE configuracao_empresa (
 
 
 --
--- Name: coordenador; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: coordenador; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE coordenador (
@@ -938,7 +938,7 @@ CREATE TABLE coordenador (
 
 
 --
--- Name: cursos; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: cursos; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE cursos (
@@ -967,7 +967,7 @@ CREATE TABLE cursos (
 
 
 --
--- Name: cursos_disciplinas; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: cursos_disciplinas; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE cursos_disciplinas (
@@ -992,7 +992,7 @@ CREATE TABLE cursos_disciplinas (
 
 
 --
--- Name: cursos_externos; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: cursos_externos; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE cursos_externos (
@@ -1005,7 +1005,7 @@ CREATE TABLE cursos_externos (
 
 
 --
--- Name: departamentos; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: departamentos; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE departamentos (
@@ -1016,7 +1016,7 @@ CREATE TABLE departamentos (
 
 
 --
--- Name: diario_chamadas; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: diario_chamadas; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE diario_chamadas (
@@ -1036,7 +1036,7 @@ CREATE TABLE diario_chamadas (
 
 
 --
--- Name: diario_chamadas_id_seq; Type: SEQUENCE; Schema: public; 
+-- Name: diario_chamadas_id_seq; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE diario_chamadas_id_seq
@@ -1048,7 +1048,7 @@ CREATE SEQUENCE diario_chamadas_id_seq
 
 
 --
--- Name: diario_formulas; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: diario_formulas; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE diario_formulas (
@@ -1066,7 +1066,7 @@ CREATE TABLE diario_formulas (
 
 
 --
--- Name: diario_formulas_id_seq; Type: SEQUENCE; Schema: public; 
+-- Name: diario_formulas_id_seq; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE diario_formulas_id_seq
@@ -1078,7 +1078,7 @@ CREATE SEQUENCE diario_formulas_id_seq
 
 
 --
--- Name: diario_log; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: diario_log; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE diario_log (
@@ -1094,7 +1094,7 @@ CREATE TABLE diario_log (
 
 
 --
--- Name: diario_notas; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: diario_notas; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE diario_notas (
@@ -1114,7 +1114,7 @@ CREATE TABLE diario_notas (
 
 
 --
--- Name: diario_seq_faltas; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: diario_seq_faltas; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE diario_seq_faltas (
@@ -1132,7 +1132,7 @@ CREATE TABLE diario_seq_faltas (
 
 
 --
--- Name: dias; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: dias; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE dias (
@@ -1144,7 +1144,7 @@ CREATE TABLE dias (
 
 
 --
--- Name: disciplinas; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: disciplinas; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE disciplinas (
@@ -1160,7 +1160,7 @@ CREATE TABLE disciplinas (
 
 
 --
--- Name: disciplinas_equivalentes; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: disciplinas_equivalentes; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE disciplinas_equivalentes (
@@ -1173,7 +1173,7 @@ CREATE TABLE disciplinas_equivalentes (
 
 
 --
--- Name: disciplinas_ofer; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: disciplinas_ofer; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE disciplinas_ofer (
@@ -1196,7 +1196,7 @@ CREATE TABLE disciplinas_ofer (
 
 
 --
--- Name: disciplinas_ofer_compl; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: disciplinas_ofer_compl; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE disciplinas_ofer_compl (
@@ -1221,7 +1221,7 @@ CREATE TABLE disciplinas_ofer_compl (
 
 
 --
--- Name: disciplinas_ofer_prof; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: disciplinas_ofer_prof; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE disciplinas_ofer_prof (
@@ -1234,7 +1234,7 @@ CREATE TABLE disciplinas_ofer_prof (
 
 
 --
--- Name: documentos; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: documentos; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE documentos (
@@ -1257,7 +1257,7 @@ CREATE TABLE documentos (
 
 
 --
--- Name: estado; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: estado; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE estado (
@@ -1269,7 +1269,7 @@ CREATE TABLE estado (
 
 
 --
--- Name: filiacao; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: filiacao; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE filiacao (
@@ -1291,7 +1291,7 @@ CREATE TABLE filiacao (
 SET default_with_oids = false;
 
 --
--- Name: funcionario; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: funcionario; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE funcionario (
@@ -1305,7 +1305,7 @@ CREATE TABLE funcionario (
 SET default_with_oids = true;
 
 --
--- Name: grupos_disciplinas; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: grupos_disciplinas; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE grupos_disciplinas (
@@ -1316,7 +1316,7 @@ CREATE TABLE grupos_disciplinas (
 
 
 --
--- Name: horarios_id_seq; Type: SEQUENCE; Schema: public; 
+-- Name: horarios_id_seq; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE horarios_id_seq
@@ -1329,7 +1329,7 @@ CREATE SEQUENCE horarios_id_seq
 
 
 --
--- Name: instituicoes; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: instituicoes; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE instituicoes (
@@ -1342,7 +1342,7 @@ CREATE TABLE instituicoes (
 
 
 --
--- Name: motivo; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: motivo; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE motivo (
@@ -1354,7 +1354,7 @@ CREATE TABLE motivo (
 
 
 --
--- Name: pais_id_seq; Type: SEQUENCE; Schema: public; 
+-- Name: pais_id_seq; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE pais_id_seq
@@ -1366,7 +1366,7 @@ CREATE SEQUENCE pais_id_seq
 
 
 --
--- Name: pais; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: pais; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE pais (
@@ -1380,7 +1380,7 @@ CREATE TABLE pais (
 SET default_with_oids = false;
 
 --
--- Name: papel; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: papel; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE papel (
@@ -1392,7 +1392,7 @@ CREATE TABLE papel (
 
 
 --
--- Name: papel_url; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: papel_url; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE papel_url (
@@ -1405,7 +1405,7 @@ CREATE TABLE papel_url (
 SET default_with_oids = true;
 
 --
--- Name: periodos; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: periodos; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE periodos (
@@ -1445,7 +1445,7 @@ CREATE TABLE periodos (
 SET default_with_oids = false;
 
 --
--- Name: pessoas_fotos; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: pessoas_fotos; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE pessoas_fotos (
@@ -1458,7 +1458,7 @@ CREATE TABLE pessoas_fotos (
 SET default_with_oids = true;
 
 --
--- Name: pre_requisitos; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: pre_requisitos; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE pre_requisitos (
@@ -1474,7 +1474,7 @@ CREATE TABLE pre_requisitos (
 
 
 --
--- Name: professores; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: professores; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE professores (
@@ -1487,7 +1487,7 @@ CREATE TABLE professores (
 
 
 --
--- Name: professores_id_seq; Type: SEQUENCE; Schema: public; 
+-- Name: professores_id_seq; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE professores_id_seq
@@ -1499,7 +1499,7 @@ CREATE SEQUENCE professores_id_seq
 
 
 --
--- Name: salas; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: salas; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE salas (
@@ -1512,7 +1512,7 @@ CREATE TABLE salas (
 
 
 --
--- Name: seq_areas_ensino; Type: SEQUENCE; Schema: public; 
+-- Name: seq_areas_ensino; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_areas_ensino
@@ -1524,7 +1524,7 @@ CREATE SEQUENCE seq_areas_ensino
 
 
 --
--- Name: seq_campus; Type: SEQUENCE; Schema: public; 
+-- Name: seq_campus; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_campus
@@ -1536,7 +1536,7 @@ CREATE SEQUENCE seq_campus
 
 
 --
--- Name: seq_carimbos; Type: SEQUENCE; Schema: public; 
+-- Name: seq_carimbos; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_carimbos
@@ -1548,7 +1548,7 @@ CREATE SEQUENCE seq_carimbos
 
 
 --
--- Name: seq_configuracao_empresa; Type: SEQUENCE; Schema: public; 
+-- Name: seq_configuracao_empresa; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_configuracao_empresa
@@ -1560,7 +1560,7 @@ CREATE SEQUENCE seq_configuracao_empresa
 
 
 --
--- Name: seq_contratos; Type: SEQUENCE; Schema: public; 
+-- Name: seq_contratos; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_contratos
@@ -1572,7 +1572,7 @@ CREATE SEQUENCE seq_contratos
 
 
 --
--- Name: seq_cursos_externos; Type: SEQUENCE; Schema: public; 
+-- Name: seq_cursos_externos; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_cursos_externos
@@ -1584,7 +1584,7 @@ CREATE SEQUENCE seq_cursos_externos
 
 
 --
--- Name: seq_departamentos; Type: SEQUENCE; Schema: public; 
+-- Name: seq_departamentos; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_departamentos
@@ -1596,7 +1596,7 @@ CREATE SEQUENCE seq_departamentos
 
 
 --
--- Name: seq_disciplina; Type: SEQUENCE; Schema: public; 
+-- Name: seq_disciplina; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_disciplina
@@ -1609,7 +1609,7 @@ CREATE SEQUENCE seq_disciplina
 
 
 --
--- Name: seq_disciplinas_equivalentes_id; Type: SEQUENCE; Schema: public; 
+-- Name: seq_disciplinas_equivalentes_id; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_disciplinas_equivalentes_id
@@ -1621,7 +1621,7 @@ CREATE SEQUENCE seq_disciplinas_equivalentes_id
 
 
 --
--- Name: seq_disciplinas_ofer; Type: SEQUENCE; Schema: public; 
+-- Name: seq_disciplinas_ofer; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_disciplinas_ofer
@@ -1633,7 +1633,7 @@ CREATE SEQUENCE seq_disciplinas_ofer
 
 
 --
--- Name: seq_disciplinas_ofer_compl_id; Type: SEQUENCE; Schema: public; 
+-- Name: seq_disciplinas_ofer_compl_id; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_disciplinas_ofer_compl_id
@@ -1645,7 +1645,7 @@ CREATE SEQUENCE seq_disciplinas_ofer_compl_id
 
 
 --
--- Name: seq_disciplinas_ofer_id; Type: SEQUENCE; Schema: public; 
+-- Name: seq_disciplinas_ofer_id; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_disciplinas_ofer_id
@@ -1658,7 +1658,7 @@ CREATE SEQUENCE seq_disciplinas_ofer_id
 
 
 --
--- Name: seq_disciplinas_ofer_prof; Type: SEQUENCE; Schema: public; 
+-- Name: seq_disciplinas_ofer_prof; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_disciplinas_ofer_prof
@@ -1670,7 +1670,7 @@ CREATE SEQUENCE seq_disciplinas_ofer_prof
 
 
 --
--- Name: seq_filiacao; Type: SEQUENCE; Schema: public; 
+-- Name: seq_filiacao; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_filiacao
@@ -1682,7 +1682,7 @@ CREATE SEQUENCE seq_filiacao
 
 
 --
--- Name: seq_grupos_disciplinas; Type: SEQUENCE; Schema: public; 
+-- Name: seq_grupos_disciplinas; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_grupos_disciplinas
@@ -1694,7 +1694,7 @@ CREATE SEQUENCE seq_grupos_disciplinas
 
 
 --
--- Name: seq_instituicoes_id; Type: SEQUENCE; Schema: public; 
+-- Name: seq_instituicoes_id; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_instituicoes_id
@@ -1706,7 +1706,7 @@ CREATE SEQUENCE seq_instituicoes_id
 
 
 --
--- Name: seq_matricula; Type: SEQUENCE; Schema: public; 
+-- Name: seq_matricula; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_matricula
@@ -1718,7 +1718,7 @@ CREATE SEQUENCE seq_matricula
 
 
 --
--- Name: seq_pessoas; Type: SEQUENCE; Schema: public; 
+-- Name: seq_pessoas; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_pessoas
@@ -1730,7 +1730,7 @@ CREATE SEQUENCE seq_pessoas
 
 
 --
--- Name: seq_pre_requisitos; Type: SEQUENCE; Schema: public; 
+-- Name: seq_pre_requisitos; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_pre_requisitos
@@ -1742,7 +1742,7 @@ CREATE SEQUENCE seq_pre_requisitos
 
 
 --
--- Name: seq_sagu_setores; Type: SEQUENCE; Schema: public; 
+-- Name: seq_sagu_setores; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_sagu_setores
@@ -1754,7 +1754,7 @@ CREATE SEQUENCE seq_sagu_setores
 
 
 --
--- Name: seq_salas_id; Type: SEQUENCE; Schema: public; 
+-- Name: seq_salas_id; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_salas_id
@@ -1766,7 +1766,7 @@ CREATE SEQUENCE seq_salas_id
 
 
 --
--- Name: seq_tipos_curso; Type: SEQUENCE; Schema: public; 
+-- Name: seq_tipos_curso; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE seq_tipos_curso
@@ -1780,7 +1780,7 @@ CREATE SEQUENCE seq_tipos_curso
 SET default_with_oids = false;
 
 --
--- Name: sessao; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: sessao; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE sessao (
@@ -1797,7 +1797,7 @@ CREATE TABLE sessao (
 SET default_with_oids = true;
 
 --
--- Name: setor; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: setor; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE setor (
@@ -1809,7 +1809,7 @@ CREATE TABLE setor (
 
 
 --
--- Name: tipos_curso; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: tipos_curso; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE tipos_curso (
@@ -1821,7 +1821,7 @@ CREATE TABLE tipos_curso (
 
 
 --
--- Name: turno; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: turno; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE turno (
@@ -1835,7 +1835,7 @@ CREATE TABLE turno (
 SET default_with_oids = false;
 
 --
--- Name: url; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: url; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE url (
@@ -1847,7 +1847,7 @@ CREATE TABLE url (
 
 
 --
--- Name: usuario_id_seq; Type: SEQUENCE; Schema: public; 
+-- Name: usuario_id_seq; Type: SEQUENCE; Schema: public;
 --
 
 CREATE SEQUENCE usuario_id_seq
@@ -1861,7 +1861,7 @@ CREATE SEQUENCE usuario_id_seq
 SET default_with_oids = true;
 
 --
--- Name: usuario; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: usuario; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE usuario (
@@ -1879,7 +1879,7 @@ CREATE TABLE usuario (
 SET default_with_oids = false;
 
 --
--- Name: usuario_papel; Type: TABLE; Schema: public; ; Tablespace: 
+-- Name: usuario_papel; Type: TABLE; Schema: public; ; Tablespace:
 --
 
 CREATE TABLE usuario_papel (
@@ -1890,7 +1890,7 @@ CREATE TABLE usuario_papel (
 
 
 --
--- Name: acesso_aluno_ref_pessoa_unq; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: acesso_aluno_ref_pessoa_unq; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY acesso_aluno
@@ -1898,7 +1898,7 @@ ALTER TABLE ONLY acesso_aluno
 
 
 --
--- Name: aux_cargos_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: aux_cargos_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY cargo
@@ -1906,7 +1906,7 @@ ALTER TABLE ONLY cargo
 
 
 --
--- Name: avisos_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: avisos_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY avisos
@@ -1914,7 +1914,7 @@ ALTER TABLE ONLY avisos
 
 
 --
--- Name: diario_chamadas_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: diario_chamadas_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY diario_chamadas
@@ -1922,7 +1922,7 @@ ALTER TABLE ONLY diario_chamadas
 
 
 --
--- Name: diario_seq_faltas_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: diario_seq_faltas_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY diario_seq_faltas
@@ -1930,7 +1930,7 @@ ALTER TABLE ONLY diario_seq_faltas
 
 
 --
--- Name: dias_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: dias_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY dias
@@ -1938,7 +1938,7 @@ ALTER TABLE ONLY dias
 
 
 --
--- Name: disciplinas_equivalentes_key; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: disciplinas_equivalentes_key; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY disciplinas_equivalentes
@@ -1946,7 +1946,7 @@ ALTER TABLE ONLY disciplinas_equivalentes
 
 
 --
--- Name: disciplinas_equivalentes_unq; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: disciplinas_equivalentes_unq; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY disciplinas_equivalentes
@@ -1954,7 +1954,7 @@ ALTER TABLE ONLY disciplinas_equivalentes
 
 
 --
--- Name: funcionario_siape_unq; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: funcionario_siape_unq; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY funcionario
@@ -1962,7 +1962,7 @@ ALTER TABLE ONLY funcionario
 
 
 --
--- Name: periodos_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: periodos_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY periodos
@@ -1970,7 +1970,7 @@ ALTER TABLE ONLY periodos
 
 
 --
--- Name: pessoas_fotos_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: pessoas_fotos_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY pessoas_fotos
@@ -1978,7 +1978,7 @@ ALTER TABLE ONLY pessoas_fotos
 
 
 --
--- Name: pk_papel_id; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: pk_papel_id; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY papel
@@ -1986,7 +1986,7 @@ ALTER TABLE ONLY papel
 
 
 --
--- Name: pk_ref_papel_ref_url; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: pk_ref_papel_ref_url; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY papel_url
@@ -1994,7 +1994,7 @@ ALTER TABLE ONLY papel_url
 
 
 --
--- Name: pk_url_id; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: pk_url_id; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY url
@@ -2002,7 +2002,7 @@ ALTER TABLE ONLY url
 
 
 --
--- Name: pkey_campus; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: pkey_campus; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY campus
@@ -2010,7 +2010,7 @@ ALTER TABLE ONLY campus
 
 
 --
--- Name: sagu_usuarios_nome_uniq; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: sagu_usuarios_nome_uniq; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY usuario
@@ -2018,7 +2018,7 @@ ALTER TABLE ONLY usuario
 
 
 --
--- Name: sessao_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: sessao_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY sessao
@@ -2026,7 +2026,7 @@ ALTER TABLE ONLY sessao
 
 
 --
--- Name: setor_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: setor_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY setor
@@ -2034,7 +2034,7 @@ ALTER TABLE ONLY setor
 
 
 --
--- Name: turnos_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace: 
+-- Name: turnos_pkey; Type: CONSTRAINT; Schema: public; ; Tablespace:
 --
 
 ALTER TABLE ONLY turno
@@ -2042,637 +2042,637 @@ ALTER TABLE ONLY turno
 
 
 --
--- Name: aux_cidades_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: aux_cidades_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX aux_cidades_pkey ON cidade USING btree (id);
 
 
 --
--- Name: aux_estados_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: aux_estados_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX aux_estados_pkey ON estado USING btree (id);
 
 
 --
--- Name: aux_pais_nome_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: aux_pais_nome_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX aux_pais_nome_key ON pais USING btree (nome);
 
 
 --
--- Name: aux_paises_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: aux_paises_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX aux_paises_pkey ON pais USING btree (id);
 
 
 --
--- Name: campus_id; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: campus_id; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX campus_id ON campus USING btree (id);
 
 
 --
--- Name: carimbos_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: carimbos_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX carimbos_pkey ON carimbos USING btree (id);
 
 
 --
--- Name: cidades_id; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: cidades_id; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX cidades_id ON cidade USING btree (id);
 
 
 --
--- Name: configuracao_empresa_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: configuracao_empresa_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX configuracao_empresa_pkey ON configuracao_empresa USING btree (id);
 
 
 --
--- Name: contrato_id; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: contrato_id; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX contrato_id ON contratos USING btree (id);
 
 
 --
--- Name: contrato_id_dt_desativacao; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: contrato_id_dt_desativacao; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX contrato_id_dt_desativacao ON contratos USING btree (id, dt_desativacao);
 
 
 --
--- Name: contrato_pessoa_curso; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: contrato_pessoa_curso; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX contrato_pessoa_curso ON contratos USING btree (ref_pessoa, ref_curso);
 
 
 --
--- Name: contrato_pessoa_curso_data; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: contrato_pessoa_curso_data; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX contrato_pessoa_curso_data ON contratos USING btree (ref_pessoa, ref_curso, dt_desativacao);
 
 
 --
--- Name: contrato_ref_pessoa; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: contrato_ref_pessoa; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX contrato_ref_pessoa ON contratos USING btree (ref_pessoa);
 
 
 --
--- Name: contratons_ref_curso_ref_campus; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: contratons_ref_curso_ref_campus; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX contratons_ref_curso_ref_campus ON contratos USING btree (ref_curso, ref_campus);
 
 
 --
--- Name: contratos_dt_cancelamento; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: contratos_dt_cancelamento; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX contratos_dt_cancelamento ON contratos USING btree (dt_desativacao);
 
 
 --
--- Name: contratos_dt_pess_curs; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: contratos_dt_pess_curs; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX contratos_dt_pess_curs ON contratos USING btree (dt_desativacao, ref_pessoa, ref_curso);
 
 
 --
--- Name: contratos_id; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: contratos_id; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX contratos_id ON contratos USING btree (id);
 
 
 --
--- Name: contratos_id_dt_des; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: contratos_id_dt_des; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX contratos_id_dt_des ON contratos USING btree (id, dt_desativacao);
 
 
 --
--- Name: contratos_ref_campus_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: contratos_ref_campus_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX contratos_ref_campus_key ON contratos USING btree (ref_campus, ref_pessoa, ref_curso, dt_ativacao);
 
 
 --
--- Name: contratos_ref_curso_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: contratos_ref_curso_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX contratos_ref_curso_key ON contratos USING btree (ref_curso);
 
 
 --
--- Name: contratos_ref_last_periodo; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: contratos_ref_last_periodo; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX contratos_ref_last_periodo ON contratos USING btree (ref_last_periodo);
 
 
 --
--- Name: contratos_ref_pessoa; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: contratos_ref_pessoa; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX contratos_ref_pessoa ON contratos USING btree (ref_pessoa);
 
 
 --
--- Name: contratos_ref_pessoa_ref_curso_; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: contratos_ref_pessoa_ref_curso_; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX contratos_ref_pessoa_ref_curso_ ON contratos USING btree (ref_pessoa, ref_curso, ref_campus);
 
 
 --
--- Name: cursos_disciplin_ref_campus_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: cursos_disciplin_ref_campus_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX cursos_disciplin_ref_campus_key ON cursos_disciplinas USING btree (ref_campus, ref_curso, ref_disciplina);
 
 
 --
--- Name: cursos_disciplinas_equivalencia; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: cursos_disciplinas_equivalencia; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX cursos_disciplinas_equivalencia ON cursos_disciplinas USING btree (equivalencia_disciplina);
 
 
 --
--- Name: cursos_disciplinas_ref_curso; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: cursos_disciplinas_ref_curso; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX cursos_disciplinas_ref_curso ON cursos_disciplinas USING btree (ref_curso);
 
 
 --
--- Name: cursos_externos_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: cursos_externos_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX cursos_externos_pkey ON cursos_externos USING btree (id);
 
 
 --
--- Name: cursos_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: cursos_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX cursos_pkey ON cursos USING btree (id);
 
 
 --
--- Name: departamentos_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: departamentos_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX departamentos_pkey ON departamentos USING btree (id);
 
 
 --
--- Name: diario_chamadas_id_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: diario_chamadas_id_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX diario_chamadas_id_key ON diario_chamadas USING btree (id);
 
 
 --
--- Name: diario_formulas_id_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: diario_formulas_id_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX diario_formulas_id_key ON diario_formulas USING btree (id);
 
 
 --
--- Name: disciplinas_equivalentes_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: disciplinas_equivalentes_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX disciplinas_equivalentes_pkey ON disciplinas_equivalentes USING btree (id);
 
 
 --
--- Name: disciplinas_ofer_compl_desconto; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: disciplinas_ofer_compl_desconto; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX disciplinas_ofer_compl_desconto ON disciplinas_ofer_compl USING btree (desconto);
 
 
 --
--- Name: disciplinas_ofer_compl_num_cred; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: disciplinas_ofer_compl_num_cred; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX disciplinas_ofer_compl_num_cred ON disciplinas_ofer_compl USING btree (num_creditos_desconto);
 
 
 --
--- Name: disciplinas_ofer_compl_num_sala; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: disciplinas_ofer_compl_num_sala; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX disciplinas_ofer_compl_num_sala ON disciplinas_ofer_compl USING btree (num_sala);
 
 
 --
--- Name: disciplinas_ofer_compl_observac; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: disciplinas_ofer_compl_observac; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX disciplinas_ofer_compl_observac ON disciplinas_ofer_compl USING btree (observacao);
 
 
 --
--- Name: disciplinas_ofer_compl_ref_disc; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: disciplinas_ofer_compl_ref_disc; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX disciplinas_ofer_compl_ref_disc ON disciplinas_ofer_compl USING btree (ref_disciplina_ofer);
 
 
 --
--- Name: disciplinas_ofer_compl_turno; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: disciplinas_ofer_compl_turno; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX disciplinas_ofer_compl_turno ON disciplinas_ofer_compl USING btree (turno);
 
 
 --
--- Name: disciplinas_ofer_idkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: disciplinas_ofer_idkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX disciplinas_ofer_idkey ON disciplinas_ofer USING btree (id);
 
 
 --
--- Name: disciplinas_ofer_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: disciplinas_ofer_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX disciplinas_ofer_pkey ON disciplinas_ofer USING btree (id);
 
 
 --
--- Name: disciplinas_oferecidas_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: disciplinas_oferecidas_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX disciplinas_oferecidas_key ON disciplinas_ofer USING btree (id, ref_campus, ref_curso, ref_periodo, ref_disciplina);
 
 
 --
--- Name: disciplinas_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: disciplinas_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX disciplinas_pkey ON disciplinas USING btree (id);
 
 
 --
--- Name: documentos_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: documentos_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX documentos_pkey ON documentos USING btree (ref_pessoa);
 
 
 --
--- Name: filiacao_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: filiacao_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX filiacao_pkey ON filiacao USING btree (id);
 
 
 --
--- Name: grupos_disciplinas_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: grupos_disciplinas_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX grupos_disciplinas_pkey ON grupos_disciplinas USING btree (id);
 
 
 --
--- Name: id_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: id_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX id_key ON pessoas USING btree (id);
 
 
 --
--- Name: instituicoes_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: instituicoes_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX instituicoes_pkey ON instituicoes USING btree (id);
 
 
 --
--- Name: matricula_curso_ch_cr; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_curso_ch_cr; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_curso_ch_cr ON matricula USING btree (ref_curso, carga_horaria_aprov, creditos_aprov);
 
 
 --
--- Name: matricula_disc_curso_data; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_disc_curso_data; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_disc_curso_data ON matricula USING btree (ref_disciplina, ref_curso, dt_cancelamento);
 
 
 --
--- Name: matricula_dt_cancelamento; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_dt_cancelamento; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_dt_cancelamento ON matricula USING btree (dt_cancelamento);
 
 
 --
--- Name: matricula_fl_internet; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_fl_internet; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_fl_internet ON matricula USING btree (fl_internet);
 
 
 --
--- Name: matricula_nota_final; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_nota_final; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_nota_final ON matricula USING btree (nota_final);
 
 
 --
--- Name: matricula_periodo; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_periodo; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_periodo ON matricula USING btree (ref_periodo);
 
 
 --
--- Name: matricula_periodo_aprov; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_periodo_aprov; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_periodo_aprov ON matricula USING btree (ref_periodo, obs_aproveitamento);
 
 
 --
--- Name: matricula_periodo_dt; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_periodo_dt; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_periodo_dt ON matricula USING btree (ref_periodo, dt_cancelamento);
 
 
 --
--- Name: matricula_periodo_fl_internet; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_periodo_fl_internet; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_periodo_fl_internet ON matricula USING btree (ref_periodo, fl_internet);
 
 
 --
--- Name: matricula_pessoa_disciplina; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_pessoa_disciplina; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_pessoa_disciplina ON matricula USING btree (ref_pessoa, ref_disciplina);
 
 
 --
--- Name: matricula_pessoa_disciplina_not; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_pessoa_disciplina_not; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_pessoa_disciplina_not ON matricula USING btree (ref_pessoa, ref_disciplina, nota_final);
 
 
 --
--- Name: matricula_pessoa_periodo; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_pessoa_periodo; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_pessoa_periodo ON matricula USING btree (ref_pessoa, ref_periodo);
 
 
 --
--- Name: matricula_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX matricula_pkey ON matricula USING btree (id);
 
 
 --
--- Name: matricula_ref_contrato_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_ref_contrato_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_ref_contrato_key ON matricula USING btree (ref_contrato);
 
 
 --
--- Name: matricula_ref_curso_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_ref_curso_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_ref_curso_key ON matricula USING btree (ref_curso);
 
 
 --
--- Name: matricula_ref_disciplina_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_ref_disciplina_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_ref_disciplina_key ON matricula USING btree (ref_disciplina);
 
 
 --
--- Name: matricula_ref_disciplina_ofer_k; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_ref_disciplina_ofer_k; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_ref_disciplina_ofer_k ON matricula USING btree (ref_disciplina_ofer);
 
 
 --
--- Name: matricula_ref_periodo; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_ref_periodo; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_ref_periodo ON matricula USING btree (ref_periodo);
 
 
 --
--- Name: matricula_ref_pessoa; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_ref_pessoa; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_ref_pessoa ON matricula USING btree (ref_pessoa);
 
 
 --
--- Name: matricula_ref_pessoa_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: matricula_ref_pessoa_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX matricula_ref_pessoa_key ON matricula USING btree (ref_pessoa);
 
 
 --
--- Name: motivos_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: motivos_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX motivos_pkey ON motivo USING btree (id);
 
 
 --
--- Name: periodos_datas; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: periodos_datas; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX periodos_datas ON periodos USING btree (dt_inicial, dt_final);
 
 
 --
--- Name: pessoas_10; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: pessoas_10; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX pessoas_10 ON pessoas USING btree (fl_segurado, id);
 
 
 --
--- Name: pessoas_11; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: pessoas_11; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX pessoas_11 ON pessoas USING btree (fl_segurado);
 
 
 --
--- Name: pessoas_id; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: pessoas_id; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX pessoas_id ON pessoas USING btree (id);
 
 
 --
--- Name: pessoas_nome_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: pessoas_nome_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX pessoas_nome_key ON pessoas USING btree (nome);
 
 
 --
--- Name: pessoas_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: pessoas_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX pessoas_pkey ON pessoas USING btree (id);
 
 
 --
--- Name: pessoas_ref_cidade; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: pessoas_ref_cidade; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX pessoas_ref_cidade ON pessoas USING btree (ref_cidade);
 
 
 --
--- Name: pre_requisitos_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: pre_requisitos_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX pre_requisitos_pkey ON pre_requisitos USING btree (id);
 
 
 --
--- Name: pre_requisitos_ref_curso_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: pre_requisitos_ref_curso_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX pre_requisitos_ref_curso_key ON pre_requisitos USING btree (ref_curso, ref_disciplina, ref_disciplina_pre);
 
 
 --
--- Name: professores_id_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: professores_id_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX professores_id_key ON professores USING btree (id);
 
 
 --
--- Name: ref_campus_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: ref_campus_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX ref_campus_key ON disciplinas_ofer USING btree (ref_campus);
 
 
 --
--- Name: ref_curso_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: ref_curso_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX ref_curso_key ON disciplinas_ofer USING btree (ref_curso);
 
 
 --
--- Name: ref_disciplina_compl_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: ref_disciplina_compl_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX ref_disciplina_compl_key ON disciplinas_ofer_prof USING btree (ref_disciplina_compl);
 
 
 --
--- Name: ref_disciplina_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: ref_disciplina_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX ref_disciplina_key ON disciplinas_ofer USING btree (ref_disciplina);
 
 
 --
--- Name: ref_disciplina_ofer_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: ref_disciplina_ofer_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX ref_disciplina_ofer_key ON disciplinas_ofer_prof USING btree (ref_disciplina_ofer);
 
 
 --
--- Name: ref_periodo_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: ref_periodo_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX ref_periodo_key ON disciplinas_ofer USING btree (ref_periodo);
 
 
 --
--- Name: ref_professor_ofer_key; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: ref_professor_ofer_key; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX ref_professor_ofer_key ON disciplinas_ofer_prof USING btree (ref_professor);
 
 
 --
--- Name: sagu_usuarios_nome; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: sagu_usuarios_nome; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX sagu_usuarios_nome ON usuario USING btree (nome);
 
 
 --
--- Name: sagu_usuarios_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: sagu_usuarios_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX sagu_usuarios_pkey ON usuario USING btree (id);
 
 
 --
--- Name: salas_pkey; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: salas_pkey; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE UNIQUE INDEX salas_pkey ON salas USING btree (id);
 
 
 --
--- Name: sessao_expireref_idx; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: sessao_expireref_idx; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX sessao_expireref_idx ON sessao USING btree (expireref);
 
 
 --
--- Name: sessao_expiry_idx; Type: INDEX; Schema: public; ; Tablespace: 
+-- Name: sessao_expiry_idx; Type: INDEX; Schema: public; ; Tablespace:
 --
 
 CREATE INDEX sessao_expiry_idx ON sessao USING btree (expiry);
 
 
 --
--- Name: trg_cria_ra; Type: TRIGGER; Schema: public; 
+-- Name: trg_cria_ra; Type: TRIGGER; Schema: public;
 --
 
 CREATE TRIGGER trg_cria_ra
@@ -2682,7 +2682,7 @@ CREATE TRIGGER trg_cria_ra
 
 
 --
--- Name: campus_sede_fkey; Type: FK CONSTRAINT; Schema: public; 
+-- Name: campus_sede_fkey; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY campus
@@ -2690,21 +2690,21 @@ ALTER TABLE ONLY campus
 
 
 --
--- Name: cursos_disciplinas_cursos_fkey; Type: FK CONSTRAINT; Schema: public; 
+-- Name: cursos_disciplinas_cursos_fkey; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY cursos_disciplinas
     ADD CONSTRAINT cursos_disciplinas_cursos_fkey FOREIGN KEY (ref_curso) REFERENCES cursos(id) MATCH FULL;
 
 --
--- Name: cursos_disciplinas_campus_fkey; Type: FK CONSTRAINT; Schema: public; 
+-- Name: cursos_disciplinas_campus_fkey; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY cursos_disciplinas
     ADD CONSTRAINT cursos_disciplinas_campus_fkey FOREIGN KEY (ref_campus) REFERENCES campus(id) MATCH FULL;
 
 --
--- Name: cursos_disciplinas_disciplinas_fkey; Type: FK CONSTRAINT; Schema: public; 
+-- Name: cursos_disciplinas_disciplinas_fkey; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY cursos_disciplinas
@@ -2713,7 +2713,7 @@ ALTER TABLE ONLY cursos_disciplinas
 
 
 --
--- Name: campus_usuario_fkey; Type: FK CONSTRAINT; Schema: public; 
+-- Name: campus_usuario_fkey; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY usuario
@@ -2721,7 +2721,7 @@ ALTER TABLE ONLY usuario
 
 
 --
--- Name: fkey_campus_matricula; Type: FK CONSTRAINT; Schema: public; 
+-- Name: fkey_campus_matricula; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY matricula
@@ -2729,7 +2729,7 @@ ALTER TABLE ONLY matricula
 
 
 --
--- Name: fkey_contratos_matricula; Type: FK CONSTRAINT; Schema: public; 
+-- Name: fkey_contratos_matricula; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY matricula
@@ -2737,7 +2737,7 @@ ALTER TABLE ONLY matricula
 
 
 --
--- Name: fkey_cursos_matricula; Type: FK CONSTRAINT; Schema: public; 
+-- Name: fkey_cursos_matricula; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY matricula
@@ -2745,7 +2745,7 @@ ALTER TABLE ONLY matricula
 
 
 --
--- Name: fkey_disciplinas_ofer_matricula; Type: FK CONSTRAINT; Schema: public; 
+-- Name: fkey_disciplinas_ofer_matricula; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY matricula
@@ -2753,7 +2753,7 @@ ALTER TABLE ONLY matricula
 
 
 --
--- Name: fkey_periodos_matricula; Type: FK CONSTRAINT; Schema: public; 
+-- Name: fkey_periodos_matricula; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY matricula
@@ -2761,7 +2761,7 @@ ALTER TABLE ONLY matricula
 
 
 --
--- Name: fkey_pessoas_matricula; Type: FK CONSTRAINT; Schema: public; 
+-- Name: fkey_pessoas_matricula; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY matricula
@@ -2769,7 +2769,7 @@ ALTER TABLE ONLY matricula
 
 
 --
--- Name: papel_papel_url_fkey; Type: FK CONSTRAINT; Schema: public; 
+-- Name: papel_papel_url_fkey; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY papel_url
@@ -2777,7 +2777,7 @@ ALTER TABLE ONLY papel_url
 
 
 --
--- Name: papel_usuario_papel_fkey; Type: FK CONSTRAINT; Schema: public; 
+-- Name: papel_usuario_papel_fkey; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY usuario_papel
@@ -2785,7 +2785,7 @@ ALTER TABLE ONLY usuario_papel
 
 
 --
--- Name: periodo_fkey; Type: FK CONSTRAINT; Schema: public; 
+-- Name: periodo_fkey; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY diario_seq_faltas
@@ -2793,7 +2793,7 @@ ALTER TABLE ONLY diario_seq_faltas
 
 
 --
--- Name: pessoas_usuario_fkey; Type: FK CONSTRAINT; Schema: public; 
+-- Name: pessoas_usuario_fkey; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY usuario
@@ -2801,7 +2801,7 @@ ALTER TABLE ONLY usuario
 
 
 --
--- Name: setor_usuario_fkey; Type: FK CONSTRAINT; Schema: public; 
+-- Name: setor_usuario_fkey; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY usuario
@@ -2809,7 +2809,7 @@ ALTER TABLE ONLY usuario
 
 
 --
--- Name: url_papel_url_fkey; Type: FK CONSTRAINT; Schema: public; 
+-- Name: url_papel_url_fkey; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY papel_url
@@ -2817,7 +2817,7 @@ ALTER TABLE ONLY papel_url
 
 
 --
--- Name: usuario_usuario_papel_fkey; Type: FK CONSTRAINT; Schema: public; 
+-- Name: usuario_usuario_papel_fkey; Type: FK CONSTRAINT; Schema: public;
 --
 
 ALTER TABLE ONLY usuario_papel
@@ -2864,7 +2864,7 @@ ALTER TABLE disciplinas_ofer_prof ALTER COLUMN ref_professor SET NOT NULL;
 CREATE TABLE desempenho_docente_levantamento (
 ref_periodo character varying(10) NOT NULL ,
 descricao text DEFAULT ''::character varying NOT NULL,
-nota_maxima double precision DEFAULT 0 NOT NULL NOT NULL 
+nota_maxima double precision DEFAULT 0 NOT NULL NOT NULL
 );
 
 ALTER TABLE desempenho_docente_levantamento ADD CONSTRAINT desempenho_docente_levantamento_ref_periodo_pkey PRIMARY KEY (ref_periodo);
@@ -2874,7 +2874,7 @@ ALTER TABLE ONLY desempenho_docente_levantamento
 
 CREATE TABLE desempenho_docente_criterio (
 criterio_id serial,
-descricao character varying(100) NOT NULL 
+descricao character varying(100) NOT NULL
 );
 
 ALTER TABLE desempenho_docente_criterio ADD CONSTRAINT desempenho_docente_criterio_criterio_id_pkey PRIMARY KEY (criterio_id);
@@ -2886,7 +2886,7 @@ ref_disciplina_ofer integer NOT NULL ,
 ref_professor integer NOT NULL ,
 ref_criterio integer NOT NULL ,
 ref_periodo character varying(10) NOT NULL ,
-nota_media double precision DEFAULT 0 NOT NULL NOT NULL 
+nota_media double precision DEFAULT 0 NOT NULL NOT NULL
 );
 
 ALTER TABLE desempenho_docente_nota ADD CONSTRAINT desempenho_docente_nota_pkey PRIMARY KEY (ref_disciplina_ofer, ref_professor, ref_criterio);
@@ -2903,4 +2903,27 @@ ALTER TABLE ONLY desempenho_docente_nota
 ALTER TABLE ONLY desempenho_docente_nota
     ADD CONSTRAINT desempenho_docente_nota_ref_periodo_fkey FOREIGN KEY (ref_periodo) REFERENCES desempenho_docente_levantamento(ref_periodo) MATCH FULL;
 
+
+
+-- ffaa576
+
+CREATE TABLE pessoa_prontuario_campus (
+    ref_pessoa integer,
+    prontuario character varying(20),
+    ref_campus integer
+);
+
+ALTER TABLE pessoa_prontuario_campus ADD CONSTRAINT pessoa_prontuario_campus_pkey PRIMARY KEY (ref_pessoa, prontuario, ref_campus);
+
+
+ALTER TABLE ONLY pessoa_prontuario_campus
+    ADD CONSTRAINT pessoa_prontuario_campus_ref_pessoa_fkey FOREIGN KEY (ref_pessoa) REFERENCES pessoas(id) MATCH FULL;
+
+ALTER TABLE ONLY pessoa_prontuario_campus
+    ADD CONSTRAINT pessoa_prontuario_campus_ref_campus_fkey FOREIGN KEY (ref_campus) REFERENCES campus(id) MATCH FULL;
+
+
+ALTER TABLE disciplinas ADD COLUMN abreviatura character varying(20);
+ALTER TABLE disciplinas ALTER COLUMN abreviatura SET NOT NULL;
+ALTER TABLE disciplinas ADD CONSTRAINT abreviatura_unq UNIQUE (abreviatura);
 

@@ -136,7 +136,7 @@ SELECT * FROM (
         ) AND
         a.ref_motivo_matricula = '0'
 ) AS T1
-ORDER BY lower(to_ascii(nome)), ref_disciplina_ofer";
+ORDER BY lower(to_ascii(nome,'LATIN1')), ref_disciplina_ofer";
 
 
 $arr_rel = $conn->get_all($sql_rel);

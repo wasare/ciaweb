@@ -83,7 +83,7 @@ $periodo = $conn->get_row($qryPeriodo);
 					$sql .= " AND ref_curso = ". $curso_id;
 				}
 
-			$sql = 'SELECT * from ('. $sql .') AS T1 ORDER BY lower(to_ascii(descricao_extenso));';
+			$sql = 'SELECT * from ('. $sql .') AS T1 ORDER BY lower(to_ascii(descricao_extenso,\'LATIN1\'));';
 
 
    $diarios = $conn->get_all($sql);

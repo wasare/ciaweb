@@ -106,7 +106,7 @@ WHERE
   (matricula.dt_cancelamento is null) AND
   (matricula.ref_motivo_matricula = 0)
 ORDER BY
-   lower(to_ascii(pessoas.nome));"; 
+   lower(to_ascii(pessoas.nome,'LATIN1'));"; 
   
 
 $alunos = $conn->get_all($sql1);

@@ -41,7 +41,7 @@ contratos.ref_periodo_turma = '$id_periodo' AND
 contratos.dt_formatura IS NULL
 
 ORDER BY
-to_ascii(pessoas.nome);";
+to_ascii(pessoas.nome,'LATIN1');";
 
 $RsAlunos = $Conexao->Execute($sqlAlunos);
 

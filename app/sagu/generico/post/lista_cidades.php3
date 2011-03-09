@@ -66,8 +66,8 @@ function ListaCidades()
 		if ( $cnome != '' )
 		{
 
-			$where .= " WHERE lower(to_ascii(A.nome)) ";
-			$where .= " SIMILAR TO lower(to_ascii('$like')) ";
+			$where .= " WHERE lower(to_ascii(A.nome,'LATIN1')) ";
+			$where .= " SIMILAR TO lower(to_ascii('$like','LATIN1')) ";
 			$where .= " AND A.ref_pais = B.id ";
 
 		}

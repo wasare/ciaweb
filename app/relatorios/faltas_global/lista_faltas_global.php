@@ -52,7 +52,7 @@ if ( is_numeric($aluno_id) )
 $sql .= "  GROUP BY p.id, p.nome, m.ref_periodo, m.ref_curso   ORDER BY 2";
 
 
-$sql = 'SELECT * FROM ('. $sql .') AS T1 ORDER BY lower(to_ascii("Nome"));';
+$sql = 'SELECT * FROM ('. $sql .') AS T1 ORDER BY lower(to_ascii("Nome",\'LATIN1\'));';
 
 
 $Result1 = $conn->Execute($sql);

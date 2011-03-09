@@ -97,7 +97,7 @@ else
     }
 
 //die($sql);
-$sql = 'SELECT * from ('. $sql .') AS T1 ORDER BY lower(to_ascii(descricao_extenso));';
+$sql = 'SELECT * from ('. $sql .') AS T1 ORDER BY lower(to_ascii(descricao_extenso,\'LATIN1\'));';
 
 
 $diarios = $conn->get_all($sql);

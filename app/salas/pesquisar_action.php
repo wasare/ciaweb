@@ -15,8 +15,8 @@ $conn = new connection_factory($param_conn);
 $sql = "SELECT id, ref_campus, numero, capacidade
         FROM salas
         WHERE
-            lower(to_ascii(numero)) LIKE
-            lower(to_ascii('%".$_POST['numero']."%'))
+            lower(to_ascii(numero,'LATIN1')) LIKE
+            lower(to_ascii('%".$_POST['numero']."%','LATIN1'))
         ORDER BY numero
         DESC LIMIT 10;";
 

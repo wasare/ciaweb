@@ -175,7 +175,7 @@ $sql .= " c.ref_pessoa = p.id $condicao_turma ";
 
 if (isset($_POST["nome"]))
 { 
-	$sql = 'SELECT * FROM ('. $sql .') AS T1 ORDER BY lower(to_ascii("Nome"));';
+	$sql = 'SELECT * FROM ('. $sql .') AS T1 ORDER BY lower(to_ascii("Nome",\'LATIN1\'));';
 }else
 {
 	$sql .= ' ORDER BY p.id; ';

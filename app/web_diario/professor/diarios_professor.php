@@ -52,7 +52,7 @@ $sql =  " SELECT o.id as idof, " .
            "       o.id = p.ref_disciplina_ofer AND ".
            "       o.ref_periodo = '". $_SESSION['web_diario_periodo_id'] ."'";
 
-$sql = 'SELECT * from ('. $sql .') AS T1 ORDER BY lower(to_ascii(descricao_extenso));';
+$sql = 'SELECT * from ('. $sql .') AS T1 ORDER BY lower(to_ascii(descricao_extenso,\'LATIN1\'));';
 
 //   $diarios = $conn->get_all($sql);
 

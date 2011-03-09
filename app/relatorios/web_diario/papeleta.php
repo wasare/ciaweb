@@ -38,7 +38,7 @@ $sql3 = "SELECT
             a.ref_pessoa = b.id AND 
             a.ref_motivo_matricula = 0
             
-         ORDER BY lower(to_ascii(nome));" ;
+         ORDER BY lower(to_ascii(nome,'LATIN1'));" ;
 
 
 $qry3 = $conn->get_all($sql3);

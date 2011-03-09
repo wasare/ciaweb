@@ -59,7 +59,7 @@ if ($situacao == '2')
 $sql .= " ORDER BY 1, 2";
 
 
-$sql = 'SELECT * FROM ('. $sql .') AS T1 ORDER BY lower(to_ascii("Nome (Cód)"));';	
+$sql = 'SELECT * FROM ('. $sql .') AS T1 ORDER BY lower(to_ascii("Nome (Cód)",\'LATIN1\'));';	
  
 $RsCurso = $conn->Execute("SELECT descricao ||' (' || id || ') ' as \"Curso\" FROM cursos WHERE id = $curso;");
   

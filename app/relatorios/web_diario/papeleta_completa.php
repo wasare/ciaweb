@@ -88,7 +88,7 @@ $sql3 = 'SELECT
             c.d_ref_disciplina_ofer = a.ref_disciplina_ofer AND 
             a.ref_motivo_matricula = 0 
         ORDER BY 
-            lower(to_ascii(nome)), ref_diario_avaliacao;';
+            lower(to_ascii(nome,\'LATIN1\')), ref_diario_avaliacao;';
 
 
 $matriculas = $conn->get_all($sql3);
@@ -395,7 +395,7 @@ foreach($matriculas as $row3)
             a.ref_disciplina_ofer = $diario_id AND
             a.ref_pessoa = b.id AND 
             a.ref_motivo_matricula IN (2,3,4)
-         	ORDER BY lower(to_ascii(nome));" ;
+         	ORDER BY lower(to_ascii(nome,'LATIN1'));" ;
 	   
 		$qry_dispensas = $conn->adodb->getAll($sql_dispensas);
 

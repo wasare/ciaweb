@@ -8,8 +8,8 @@ require("../../../app/setup.php");
 $sql = "SELECT id, nome 
 		FROM public.pessoas
 		WHERE 
-		lower(to_ascii(nome)) ilike lower(to_ascii('".$_POST['nome']."%')) 
-		ORDER BY to_ascii(nome) LIMIT 50;";
+		lower(to_ascii(nome,'LATIN1')) ilike lower(to_ascii('".$_POST['nome']."%','LATIN1')) 
+		ORDER BY to_ascii(nome,'LATIN1') LIMIT 50;";
 
 
 //Criando a classe de conexão ADODB

@@ -35,9 +35,9 @@ function lista_diarios($value, $conn)
         disciplinas_ofer o, disciplinas d
     WHERE
         o.ref_disciplina = d.id AND
-        lower(to_ascii(d.descricao_disciplina)) ILIKE lower(to_ascii('%$value%')) AND
+        lower(to_ascii(d.descricao_disciplina,'LATIN1')) ILIKE lower(to_ascii('%$value%','LATIN1')) AND
         o.ref_periodo = '".$_SESSION['sa_periodo_id']."'
-    ORDER BY to_ascii(d.descricao_disciplina) LIMIT 40;";
+    ORDER BY to_ascii(d.descricao_disciplina,'LATIN1') LIMIT 40;";
 
     //echo $sql; die;
     

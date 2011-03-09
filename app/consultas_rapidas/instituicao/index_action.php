@@ -8,8 +8,8 @@ require_once("../../../app/setup.php");
 $sql = "SELECT i.id, i.nome 
 		FROM instituicoes i
 		WHERE 
-		lower(to_ascii(\"nome\")) ilike lower(to_ascii('%".$_POST['nome']."%')) 
-		ORDER BY to_ascii(nome) LIMIT 15;";
+		lower(to_ascii(\"nome\",'LATIN1')) ilike lower(to_ascii('%".$_POST['nome']."%','LATIN1')) 
+		ORDER BY to_ascii(nome,'LATIN1') LIMIT 15;";
 
 //Criando a classe de conexão ADODB
 $Conexao = NewADOConnection("postgres");

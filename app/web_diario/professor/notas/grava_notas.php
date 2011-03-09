@@ -131,7 +131,7 @@ $sql12 .= "SELECT DISTINCT
             WHERE
                (matricula.ref_disciplina_ofer = $diario_id) AND (matricula.dt_cancelamento is null) AND (matricula.ref_motivo_matricula = 0)";
 
-$sql12 .= ') AS T3 ON (T3.ref_pessoa = T2.id) ORDER BY to_ascii(nome);';
+$sql12 .= ') AS T3 ON (T3.ref_pessoa = T2.id) ORDER BY to_ascii(nome,\'LATIN1\');';
 
 
 $qrynotas_parciais = $conexao->get_all($sql12);

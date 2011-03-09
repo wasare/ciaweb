@@ -69,8 +69,8 @@ function ListaContratos()
 			$where .= ' and ';
 			//$where .= ( $where == '' ) ? ' where ' : ' and ';
 			//$where .= "upper(nome) like upper('$desc%') and tipo_pessoa='f'";
-			$where .= "  lower(to_ascii(p.nome)) ";
-			$where .= " SIMILAR TO lower(to_ascii('$aluno%')) ";
+			$where .= "  lower(to_ascii(p.nome,'LATIN1')) ";
+			$where .= " SIMILAR TO lower(to_ascii('$aluno%','LATIN1')) ";
 			//$where .= " AND p.id = c.ref_pessoa";
 		}
 

@@ -87,8 +87,8 @@ function ListaPessoas()
         {
             // $where .= ( $where == '' ) ? ' where ' : ' and ';
             //$where .= "upper(nome) like upper('$desc%') and tipo_pessoa='f'";
-            $where .= " WHERE lower(to_ascii(nome)) ";
-            $where .= " SIMILAR TO lower(to_ascii('". $_POST['desc']."%')) ";
+            $where .= " WHERE lower(to_ascii(nome,'LATIN1')) ";
+            $where .= " SIMILAR TO lower(to_ascii('". $_POST['desc']."%','LATIN1')) ";
             $where .= " AND tipo_pessoa='f' ";
         }
 

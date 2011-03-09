@@ -16,7 +16,7 @@ if(!isset($_POST)){
 
     $sql = "SELECT p.nome, p.id 
         FROM professores prof, pessoas p
-        WHERE lower(to_ascii(p.nome)) like lower(to_ascii('%". $termo_pesquisa ."%')) AND prof.ref_professor = p.id
+        WHERE lower(to_ascii(p.nome,'LATIN1')) like lower(to_ascii('%". $termo_pesquisa ."%','LATIN1')) AND prof.ref_professor = p.id
         ORDER BY p.nome DESC LIMIT 10;";
     $sql = iconv("utf-8", "utf-8", $sql);
     $RsCurso = $conn->Execute($sql);

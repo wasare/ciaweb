@@ -49,7 +49,7 @@ WHERE
 	t.ref_pessoa = p.id 
 ORDER BY 2";
 
-$sql = 'SELECT * FROM ('. $sql .') AS T1 ORDER BY lower(to_ascii("Nome"));';	
+$sql = 'SELECT * FROM ('. $sql .') AS T1 ORDER BY lower(to_ascii("Nome",\'LATIN1\'));';	
  
 $Result1 = $conn->Execute($sql);
   

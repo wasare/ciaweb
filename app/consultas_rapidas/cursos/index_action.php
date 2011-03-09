@@ -16,7 +16,7 @@ if( strlen($_SESSION['sa_periodo_id']) > 0 ) {
 $sql = "SELECT DISTINCT c.id, descricao 
 		FROM public.cursos c, matricula m
 		WHERE 
-		lower(to_ascii(\"descricao\")) like lower(to_ascii('%".$_POST['nome']."%')) 
+		lower(to_ascii(\"descricao\",'LATIN1')) like lower(to_ascii('%".$_POST['nome']."%','LATIN1')) 
 		AND c.id IN ( SELECT DISTINCT ref_curso FROM matricula $s_periodo )
 		AND c.id = m.ref_curso
 		ORDER BY descricao LIMIT 15;";

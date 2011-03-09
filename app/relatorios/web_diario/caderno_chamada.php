@@ -125,7 +125,7 @@ $campus_id = 'undefined';
     	    "          is_ouvinte(A.ref_pessoa, A.ref_curso), " .
     	    "          pessoa_nome(A.ref_pessoa)";
 
-    $sql = 'SELECT * FROM ('. $sql .') AS T1 ORDER BY lower(to_ascii(T1.aluno_nome));';
+    $sql = 'SELECT * FROM ('. $sql .') AS T1 ORDER BY lower(to_ascii(T1.aluno_nome,\'LATIN1\'));';
 
 function cabecalho($myfile_ps, $data, $ref_disciplina, $disciplina, $ref_curso, $curso, $campus, $texto, $dia_semana, $dia_semana_desc, $departamento, $creditos, $hora_aula, $creditos_desconto, $hora_aula_desconto, $ref_professor, $nome_professor, $periodo, $sala, $fl_ouvinte, $turno, $turno_desc, $ref_disciplina_ofer, $descricao_disciplina_subst, &$quebra_pagina, $complemento_disc)
 {

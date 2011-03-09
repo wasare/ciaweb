@@ -95,8 +95,8 @@ $sql .= '                   ORDER BY a.ref_pessoa
 		$sql .= " AND a.ra_cnec = '$campo_aluno' ";
     }
 	if(!is_numeric($campo_aluno)) {
-    	$sql .= " AND lower(to_ascii(a.nome)) ";
-        $sql .= " SIMILAR TO lower(to_ascii('$campo_aluno%')) ";
+    	$sql .= " AND lower(to_ascii(a.nome,'LATIN1')) ";
+        $sql .= " SIMILAR TO lower(to_ascii('$campo_aluno%','LATIN1')) ";
 	}
 
     $qtde_alunos = $conn->get_one('SELECT COUNT(*)  FROM (' .$sql .') AS T1 ;');

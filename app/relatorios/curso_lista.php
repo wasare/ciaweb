@@ -17,7 +17,7 @@ if(!isset($_POST)){
 
 	$sql = "SELECT descricao, id 
 		FROM cursos
-		WHERE lower(to_ascii(descricao)) like lower(to_ascii('%". $termo_pesquisa ."%')) 
+		WHERE lower(to_ascii(descricao,'LATIN1')) like lower(to_ascii('%". $termo_pesquisa ."%','LATIN1')) 
 		ORDER BY descricao DESC LIMIT 10;";
 	$sql = iconv("utf-8", "utf-8", $sql);
 	$RsCurso = $conn->Execute($sql);

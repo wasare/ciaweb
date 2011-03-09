@@ -35,7 +35,7 @@ $sql4 = "SELECT
          WHERE
             a.ref_disciplina_ofer = $diario_id AND
             a.ref_pessoa = b.id
-         ORDER BY lower(to_ascii(nome));" ;
+         ORDER BY lower(to_ascii(nome,'LATIN1'));" ;
 
 $sql5 = "SELECT dia, CASE 
                         WHEN faltas IS NULL THEN '0' 

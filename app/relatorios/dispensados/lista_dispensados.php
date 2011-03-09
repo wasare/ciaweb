@@ -69,7 +69,7 @@ SELECT
 		ref_pessoa = p.id AND 
 		ref_disciplina_ofer = o.id
         '. $filtro .'
-	ORDER BY lower(to_ascii(nome)),"Curso";';
+	ORDER BY lower(to_ascii(nome,\'LATIN1\')),"Curso";';
 
 $Result1 = $conn->Execute($sql_dispensas);
 

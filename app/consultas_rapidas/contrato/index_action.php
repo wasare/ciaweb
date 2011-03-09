@@ -18,7 +18,7 @@ WHERE
 	)  AND 
     c.ref_pessoa = a.id AND
     c.ref_curso = d.id  AND
-	lower(to_ascii(a.nome)) SIMILAR TO lower(to_ascii('%".$_POST['nome']."%')) 
+	lower(to_ascii(a.nome,'LATIN1')) SIMILAR TO lower(to_ascii('%".$_POST['nome']."%','LATIN1')) 
 ORDER BY a.nome LIMIT 20 OFFSET -1;"; 
 
 //Criando a classe de conexão ADODB

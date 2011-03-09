@@ -75,9 +75,9 @@ if ( $id != '' || $area != '' )
 
   if ( $area != '' )
     if ( $where != '' )
-		$where .= " AND lower(to_ascii(area)) SIMILAR TO lower(to_ascii('%". $area."%'))";
+		$where .= " AND lower(to_ascii(area,'LATIN1')) SIMILAR TO lower(to_ascii('%". $area."%','LATIN1'))";
     else
-		$where .= " lower(to_ascii(area)) SIMILAR TO lower(to_ascii('%". $area."%'))";
+		$where .= " lower(to_ascii(area,'LATIN1')) SIMILAR TO lower(to_ascii('%". $area."%','LATIN1'))";
   
 	$sql .= " where" . $where . " order by id;";
 

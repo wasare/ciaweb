@@ -76,8 +76,8 @@ if ($_POST) {
 
 	if(isset($nome) && ($nome != "") && strlen($nome) != 2) {
 
-    	$sql1 .= " AND lower(to_ascii(a.nome)) ";
-        $sql1 .= " SIMILAR TO lower(to_ascii('$nome%')) ";
+    	$sql1 .= " AND lower(to_ascii(a.nome,'LATIN1')) ";
+        $sql1 .= " SIMILAR TO lower(to_ascii('$nome%','LATIN1')) ";
         $btnOK = true;
 	}
 

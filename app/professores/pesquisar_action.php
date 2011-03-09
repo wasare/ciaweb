@@ -20,9 +20,9 @@ FROM
 WHERE
     o.ref_professor = p.id AND
     d.id = o.ref_departamento AND
-    lower(to_ascii(p.nome)) LIKE
-    lower(to_ascii('%".$_POST['nome']."%'))
-ORDER BY to_ascii(nome) DESC
+    lower(to_ascii(p.nome,'LATIN1')) LIKE
+    lower(to_ascii('%".$_POST['nome']."%','LATIN1'))
+ORDER BY to_ascii(nome,'LATIN1') DESC
 LIMIT 10;";
 
 $arr = $conn->get_all($sql);

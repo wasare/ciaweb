@@ -76,8 +76,8 @@ function ListaCidades()
 		{
 			//$where .= ( $where == '' ) ? ' where ' : ' and ';
 			//$where .= "upper(nome) like upper('$desc%')";
-			$where .= " WHERE lower(to_ascii(nome)) ";
-			$where .= " SIMILAR TO lower(to_ascii('$desc%')) ";
+			$where .= " WHERE lower(to_ascii(nome,'LATIN1')) ";
+			$where .= " SIMILAR TO lower(to_ascii('$desc%','LATIN1')) ";
 		}
 
 		$sql .= $where . " order by nome";

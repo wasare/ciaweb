@@ -53,7 +53,7 @@ function ListaInstituicoes()
 
         //$sql = "select id, nome from instituicoes where nome like '$like' order by nome";
         //Consulta case-insensitive e ignora acentos
-        $sql = "SELECT id, nome FROM instituicoes WHERE lower(to_ascii(\"nome\")) like lower(to_ascii('$like')) ORDER BY \"nome\"";
+        $sql = "SELECT id, nome FROM instituicoes WHERE lower(to_ascii(\"nome\",'LATIN1')) like lower(to_ascii('$like','LATIN1')) ORDER BY \"nome\"";
 
 
         $query = $conn->CreateQuery($sql);

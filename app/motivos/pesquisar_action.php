@@ -15,8 +15,8 @@ $conn = new connection_factory($param_conn);
 $sql = "SELECT id, descricao, ref_tipo_motivo
         FROM motivo
         WHERE
-            lower(to_ascii(descricao)) LIKE
-            lower(to_ascii('%".$_POST['nome']."%'))
+            lower(to_ascii(descricao,'LATIN1')) LIKE
+            lower(to_ascii('%".$_POST['nome']."%','LATIN1'))
         ORDER BY descricao
         DESC LIMIT 30;";
 

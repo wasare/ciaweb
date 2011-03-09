@@ -26,7 +26,7 @@ FROM
 WHERE
     o.ref_professor = p.id AND
     d.id = o.ref_departamento
-ORDER BY to_ascii(p.nome)';
+ORDER BY to_ascii(p.nome,\'LATIN1\')';
 
 ?>
 <html>

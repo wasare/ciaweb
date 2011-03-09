@@ -15,8 +15,8 @@ $conn = new connection_factory($param_conn);
 $sql = "SELECT id, nome_setor, email
         FROM setor
         WHERE
-            lower(to_ascii(nome_setor)) LIKE
-            lower(to_ascii('%".$_POST['nome']."%'))
+            lower(to_ascii(nome_setor,'LATIN1')) LIKE
+            lower(to_ascii('%".$_POST['nome']."%','LATIN1'))
         ORDER BY nome_setor
         DESC LIMIT 10;";
 

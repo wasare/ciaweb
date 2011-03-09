@@ -94,7 +94,7 @@ $sql12 .= "SELECT DISTINCT
 				(matricula.dt_cancelamento is null) AND 
 				(matricula.ref_motivo_matricula = 0)";
 
-$sql12 .= ') AS T3 ON (T3.ref_pessoa = T2.id) ORDER BY lower(to_ascii(nome));';
+$sql12 .= ') AS T3 ON (T3.ref_pessoa = T2.id) ORDER BY lower(to_ascii(nome,\'LATIN1\'));';
 
 //die('<pre>'.$sql12.'</pre>');
 
