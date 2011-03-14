@@ -75,7 +75,7 @@ $num_criterios = count($criterios);
 </head>
 <body>
 	<div align="left">
-      	<?=$header->get_empresa($PATH_IMAGES)?>
+      	<?=$header->get_empresa($PATH_IMAGES, $IEnome)?>
    </div> 
       <h2>Desempenho Docente</h2>
     <div id="cabecalho" style="text-align: left;">

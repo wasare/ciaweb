@@ -144,7 +144,7 @@ $contrato = $conn->get_row('SELECT nome_campus, turma FROM campus a , contratos 
 </head>
 <body>
 	<div align="left">		
-        	<?=$header->get_empresa($PATH_IMAGES)?>
+        	<?=$header->get_empresa($PATH_IMAGES, $IEnome)?>
     </div>
       <h2>Integraliza&ccedil;&atilde;o de Curso</h2>
     <div id="cabecalho" style="text-align: left;">

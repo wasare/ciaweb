@@ -49,7 +49,10 @@ function send(id,descricao){
 <span id="listagem"></span>
 </p>
 <br />
-<a href="https://sistemas.cefetbambui.edu.br/sa/app/sagu/generico/inclui_instituicao.phtml"> Incluir institui&ccedil;&atilde;o</a>
+<?php 
+  require_once('../../../config/configuracao.php');
+?>
+<a href="<?=$BASE_URL .'app/sagu/generico/inclui_instituicao.phtml'?>"> Incluir institui&ccedil;&atilde;o</a>
 <br />
 </body>
 </html>

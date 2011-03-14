@@ -11,7 +11,7 @@ $sessao->destroy();
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title> - Sistema Acad&ecirc;mico</title>
+        <title>Sistema Acad&ecirc;mico</title>
         <link href="../../public/images/favicon.ico" rel="shortcut icon" />
         <link href="../../public/styles/style.css" rel="stylesheet" type="text/css" />
         <style>
@@ -57,13 +57,12 @@ $sessao->destroy();
                     <td valign="top">
                         <h3>Bem vindo ao Sistema Acad&ecirc;mico - M&oacute;dulo do aluno.</h3>
 
-                        No Registro Escolar utilizar o n&uacute;mero da sua carteira de estudante; <br />
+                        No Registro Escolar utilizar o n&uacute;mero do seu prontu&aacute;rio; <br />
                         Na data de nascimento informe a data no formato DD/MM/AAAA.<br />
                         Se ocorrer algum problema de usu&aacute;rio ou senha inv&aacute;lido, verfique os dados.<br />
-                        Caso persista o erro consulte no Setor de Registros Escolares se a sua data de nascimento est&aacute; correta no sistema. <br />
+                        Caso persista o erro consulte a Ger&ecirc;ncia de Registros Escolares se a sua data de nascimento est&aacute; correta no sistema. <br />
 
-                        Na senha utilize o seu Registro Escolar + zeros a esquerda at&eacute; completar 5 algarismos.<br />
-                        <b>Exemplo:</b> para registro n&ordm; 135 a senha ser&aacute; 00135.<br />
+                        Na senha utilize o seu prontu&aacute;rio para o acesso inicial.<br />
                         <b>Qualquer diverg&ecirc;ncia em notas e faltas informe-se com o seu professor.</b><br />
 
                     </td>
@@ -117,18 +116,16 @@ $sessao->destroy();
             <table border="0">
                 <tr>
                     <td>
-                        <img src="../../public/images/logo.jpg" alt="IFMG Campus Bambu&ia&iacute;" style="margin: 10px;" />
+                        <img src="../../public/images/logo.jpg" alt="IFSP - Caraguatatuba" style="margin: 10px;" />
                     </td>
                     <td>
-                        <strong>Instituto Federal Minas Gerais</strong><br />
-                        Campus Bambu&iacute;<br />
-
-                        Ger&ecirc;ncia de Tecnologia da Informa&ccedil;&atilde;o
+                        <strong>Instituto Federal  S&atilde;o Paulo</strong><br />
+                        Campus Caraguatatuba<br />
                     </td>
                 </tr>
             </table>
             <p>
-                <font color="#999999">&copy;2009 IFMG Campus Bambu&iacute;</font>
+                <font color="#999999">&copy;2011 IFSP Campus Caraguatatuba</font>
             </p>
         </div>
 

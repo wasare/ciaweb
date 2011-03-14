@@ -101,17 +101,16 @@ $class_diarios = ($is_professor) ? ' class="active"' : '';
      </td>
      <td valign="top">
         <div align="right" style="font-size: 0.8em;">
-          <strong>Desenvolvimento: </strong>
+          &nbsp;
         </div>
      </td>    
      <td valign="middle">&nbsp;
        <a href="<?=$IEurl?>" target="_blank">
-        <img src="<?=$BASE_URL .'public/images/ifmg.jpg'?>" alt="IFMG - Campus Bambu&iacute;" title="IFMG - Campus Bambu&iacute;" border="0" />
+        <img src="<?=$BASE_URL .'public/images/if.jpg'?>" alt="IFSP - Campus Caraguatatuba" title="IFSP - Campus Caraguatatuba" border="0" />
        </a>&nbsp;&nbsp;
-       <img src="<?=$BASE_URL .'public/images/gti.jpg'?>" alt="Ger&ecirc;ncia TI" title="Ger&ecirc;ncia de TI" width="50" height="34" border="0" />
      </td>
         <?php
-              if ($host != 'dados.bambui.ifmg.edu.br') {
+              if ($host != '127.0.0.1' || $host != 'localhost') {
 				echo '<td>';
 				echo '&nbsp;&nbsp;&nbsp;&nbsp;<strong>Servidor de BD: </strong>'. $host;
 				echo '</td>';

@@ -38,12 +38,12 @@ class  Boletim extends PDF {
 	
 	function Header() {
     	// IMAGEM COM A LOGO
-    	$this->Image(dirname(__FILE__) .'/../../../public/images/if_minas_campus_bambui-logo.png',170,16,25);
+    	$this->Image(dirname(__FILE__) .'/../../../public/images/logo_boletim.png',170,16,25);
 	    // SELECIONA FONT ARIAL BOLD 10
     	$this->SetFont('Arial','',13);
 	    // PREPARA TITULO DO CABECALHO
     	$this->Cell(0,5,'MEC - SETEC',0,1,'L');
-	    $this->Cell(0,5,'INSTITUTO FEDERAL MINAS GERAIS - CAMPUS BAMBUÍ',0,1,'L');
+	$this->Cell(0,5,'INSTITUTO FEDERAL SÃO PAULO - CAMPUS CARAGUATATUBA',0,1,'L'); // @todo utilizar parâmetros para o nome da instituição
     	$this->Cell(0,5,'GERÊNCIA DE REGISTROS ESCOLARES',0,1,'L');
 	    // Quebra de linha
     	$this->Ln();

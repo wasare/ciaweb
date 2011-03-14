@@ -13,9 +13,9 @@ $grid = new grid();
 
 $sql = '
 SELECT
-    p.id as "Cód.",
+    p.id as "CÃ³d.",
     p.nome as "Nome", 
-    u.nome as "Usuário",
+    u.nome as "UsuÃ¡rio",
     to_char(o.dt_ingresso,\'DD/MM/YYYY\') as "Data de entrada",
     d.descricao as "Departamento"
     '. $grid->options('p.id', 'alterar.php') .'

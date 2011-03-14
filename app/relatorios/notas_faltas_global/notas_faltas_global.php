@@ -172,7 +172,7 @@ $num_alunos  = count($arr_alunosid);
         <link href="<?=$BASE_URL?>public/styles/print.css" rel="stylesheet" type="text/css" media="print" />
     </head>
     <body>
-        <?php echo $header->get_empresa($PATH_IMAGES); ?>
+        <?php echo $header->get_empresa($PATH_IMAGES, $IEnome); ?>
         <h2>Resumo de notas e faltas do curso no per&iacute;odo</h2>
         <p>
             <b style="color:red;">Atenção:</b><br />

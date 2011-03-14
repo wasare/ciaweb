@@ -11,14 +11,14 @@ class header{
         $this->param_conn = $arr;
     }
 
-    function get_empresa($path_images){
+    function get_empresa($path_images,$instituicao_nome){
 
 		$conn = new connection_factory($this->param_conn);
 
         $empresa = $conn->get_row("SELECT razao_social, sigla FROM configuracao_empresa WHERE id = 1");
 
         $cabecalho = '<div width="50" valign="middle" style="float: left; padding-right: 2em;">
-                        <img src="'. $path_images .'logo_ifmg.png" alt="Instituto Federal de Minas Gerais" title="Instituto Federal de Minas Gerais" border="0"/>
+                        <img src="'. $path_images .'logo_instituicao.png" alt="'. $instituicao_nome .' title="'. $instituicao_nome .'" border="0"/>
                       </div>
                       <div width="50" valign="top"  style="float: left;">
                         <img src="'. $path_images .'sa_icon.png" border="0"/>

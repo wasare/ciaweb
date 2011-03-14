@@ -103,7 +103,6 @@ else {
                     <td valign="top">
                         <h3>Bem-vindo ao Sistema Acad&ecirc;mico.</h3>
                         Para iniciar entre com os dados de sua conta e selecione um m&oacute;dulo.<br />
-                        Caso n&atilde;o possua uma conta cadastre-se junto a secretaria do campus.
                         <br />
                     </td>
                 </tr>
@@ -152,7 +151,7 @@ else {
                                 <p>
                                     <input type="image" src="../../public/images/bt_entrar.png" />
                                 </p>
-                                <a href="../../public/esqueci_senha.php">Esqueci minha senha.</a>
+                                <!--<a href="../../public/esqueci_senha.php">Esqueci minha senha.</a>-->
                             </td>
                         </tr>
                     </table>
@@ -161,17 +160,16 @@ else {
             <table border="0">
                 <tr>
                     <td>
-                        <img src="../../public/images/logo.jpg" alt="IFMG Campus Bambu&ia&iacute;" style="margin: 10px;" />
+                        <img src="../../public/images/logo.jpg" alt="IFSP Campus Caraguatatuba" style="margin: 10px;" />
                     </td>
                     <td>
-                        <strong>Instituto Federal Minas Gerais</strong><br />
-                        Campus Bambu&iacute;<br />
-                        Ger&ecirc;ncia de Tecnologia da Informa&ccedil;&atilde;o
+                        <strong>Instituto Federal S&atilde;o Paulo</strong><br />
+                        Campus Caraguatatuba<br />
                     </td>
                 </tr>
             </table>
 			<p>
-				<font color="#999999">&copy;2009 IFMG Campus Bambu&iacute;</font>
+				<font color="#999999">&copy;2011 IFSP Campus Caraguatatuba</font>
 			</p>
         </div>
         <!-- Mensagens -->

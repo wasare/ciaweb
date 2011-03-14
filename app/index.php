@@ -62,22 +62,16 @@ if (!$acl->has_role($sa_ref_pessoa, $PAPEIS_SA, $conn)) {
                                 </td>
                                 <td valign="top">
                                     <div align="right" class="texto1">
-                                        <strong>Desenvolvimento: </strong>
+                                        &nbsp;
                                     </div>
                                 </td>
                                 <td valign="middle">&nbsp;
                                     <a href="<?=$IEurl?>" target="_blank">
-                                        <img src="../public/images/ifmg.jpg"
-                                             alt="IFMG - Campus Bambu&iacute;"
-                                             title="IFMG - Campus Bambu&iacute;" />
-                                    </a>&nbsp;&nbsp;
-                                    <img src="../public/images/gti.jpg"
-                                         alt="Ger&ecirc;ncia TI"
-                                         title="Ger&ecirc;ncia de TI"
-                                         width="50"
-                                         height="34" />
+                                        <img src="../public/images/if.jpg"
+                                             alt="IFSP - Campus Caraguatatuba"
+                                             title="IFSP - Campus Caraguatatuba" /></a>&nbsp;&nbsp;
                                          <?php
-                                         if ($_SERVER['HTTP_HOST'] == 'dev.cefetbambui.edu.br' || $host != 'dados.bambui.ifmg.edu.br')
+                                         if ($_SERVER['HTTP_HOST'] != 'localhost' || $host != '127.0.0.1')
                                              echo '&nbsp;&nbsp;&nbsp;&nbsp;<strong>Servidor de BD: </strong>'. $host;
                                          ?>
                                 </td>

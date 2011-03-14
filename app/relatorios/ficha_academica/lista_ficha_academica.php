@@ -80,7 +80,7 @@ $contrato = $conn->get_row('SELECT nome_campus, turma, dt_formatura FROM campus 
 </head>
 <body>
 	<div align="left">
-        	<?=$header->get_empresa($PATH_IMAGES)?>
+        	<?=$header->get_empresa($PATH_IMAGES, $IEnome)?>
     </div>
 	<h2>Ficha Acad&ecirc;mica</h2>
     <div id="cabecalho" style="text-align: left;">

@@ -44,7 +44,7 @@ if($total < 1){
 <body marginwidth="20" marginheight="20">
 <div style="width: 760px;">
 
-       	<?php echo $header->get_empresa($PATH_IMAGES); ?>
+       	<?php echo $header->get_empresa($PATH_IMAGES, $IEnome); ?>
 
   <h2>MATRÍCULAS/CIDADES DE ALUNOS POR CURSO</h2>
   <h3>Per&iacute;odo: <?=$periodo; ?></h3>

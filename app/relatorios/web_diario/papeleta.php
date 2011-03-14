@@ -116,7 +116,7 @@ table.papeleta {
 <font size="2">
 
 <div align="left">
-     <?=$header->get_empresa($PATH_IMAGES)?>
+     <?=$header->get_empresa($PATH_IMAGES, $IEnome)?>
 </div>
 
 

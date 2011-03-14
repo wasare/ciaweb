@@ -4,7 +4,7 @@ require_once(dirname(__FILE__) .'/../../setup.php');
 
 if(empty($_SESSION['web_diario_periodo_coordena_id'])) {
        exit ('<script language="javascript">
-                window.alert("ERRO! Primeiro informe um período!");
+                window.alert("ERRO! Primeiro informe um perÃ­odo!");
                 window.close();
         </script>');
 }
@@ -66,7 +66,7 @@ $periodos = $conn->get_all($qry_periodos);
 
 <strong>
             <font size="4" face="Verdana, Arial, Helvetica, sans-serif">
-                Per&iacute;odo de coordenação: 
+                Per&iacute;odo de coordenaÃ§Ã£o: 
                 <font color="red" size="4" face="Verdana, Arial, Helvetica, sans-serif"><?=$periodo['descricao']?></font>
             </font>
 </strong>
@@ -92,23 +92,23 @@ $periodos = $conn->get_all($qry_periodos);
 <br />
 <?php 
     if (!$has_curso) :
-        exit('<h3>Nenhum curso encontrado para o período selecionado</h3>');
+        exit('<h3>Nenhum curso encontrado para o perÃ­odo selecionado</h3>');
     else :
 ?>
 
 <strong>
             <font size="4" face="Verdana, Arial, Helvetica, sans-serif">
-                Cursos desta coordenação 
+                Cursos desta coordenaÃ§Ã£o 
             </font>
 </strong>
 <br /> <br /> 
 
-<h5>clique no curso para acessar os diários</h5>
+<h5>clique no curso para acessar os diÃ¡rios</h5>
 <br />
 
 <?php
     foreach($cursos as $c) {
-		$onclick = 'onclick="abrir(\''. $IEnome .' - web diário\', \'requisita.php?do=lista_diarios_coordenacao&id='. $c['ref_curso'] .'\');"';
+		$onclick = 'onclick="abrir(\''. $IEnome .' - web diÃ¡rio\', \'requisita.php?do=lista_diarios_coordenacao&id='. $c['ref_curso'] .'\');"';
         echo '<a href="#" title="Curso '. $c['curso'] .'" alt="Curso '. $c['curso'] .'" '. $onclick .'>'. $c['curso'] .'</a><br />';
     }
 ?>
@@ -116,8 +116,8 @@ $periodos = $conn->get_all($qry_periodos);
 <br /><br />
 
 <form name="acessa_diario" id="acesso_diario" method="post" action="">
-<strong>Acesso rápido</strong> <br />
-Código do diário:
+<strong>Acesso rÃ¡pido</strong> <br />
+CÃ³digo do diÃ¡rio:
 <input type="text" name="diario_id" id="diario_id" size="10" />
 <input type="button" name="envia_diario" id="envia_diario" value="Consultar" onclick="enviar_diario('pesquisa_diario_coordenacao',null,null,'<?=$BASE_URL?>','<?=$IEnome?>');" />
 </form>

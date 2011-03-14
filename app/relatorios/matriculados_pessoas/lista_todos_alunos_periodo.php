@@ -69,7 +69,7 @@ $info .= "<strong>Período: </strong> <span>".$_POST['periodo']."</span> $txt_cid
     <link href="<?=$BASE_URL?>public/styles/print.css" rel="stylesheet" type="text/css" media="print" />
 </head>
 <body marginwidth="20" marginheight="20">
-  	<?php echo $header->get_empresa($PATH_IMAGES); ?>
+  	<?php echo $header->get_empresa($PATH_IMAGE, $IEnome); ?>
 	<h2>RELAT&Oacute;RIO COM TODOS OS ALUNOS MATRICULADOS POR PER&Iacute;ODO</h2>
 	<?=$info?>
 	<table cols=16 width="90%" cellspacing="0" border="0" class="tabela_relatorio" cellpadding="0">

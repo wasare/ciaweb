@@ -18,7 +18,7 @@ $campus     = $_POST["campus"];
 
 $sql = "
 SELECT DISTINCT
-    o.id AS \"Di·rio\",
+    o.id AS \"Di√°rio\",
     d.descricao_disciplina || ' (' || d.id ||') ' AS \"Disciplina\",
     t.descricao AS \"Tipo\",
     o.turma AS \"Turma\",
@@ -30,9 +30,9 @@ SELECT DISTINCT
     s.abreviatura AS \"Curso\",
 
     CASE WHEN o.fl_finalizada = TRUE THEN '<font color=\"red\">Finalizado</font>'
-         WHEN o.fl_digitada = TRUE THEN '<font color=\"blue\">ConcluÌdo</font>'
+         WHEN o.fl_digitada = TRUE THEN '<font color=\"blue\">Conclu√≠do</font>'
          ELSE '<font color=\"green\">Aberto</font>'
-    END AS \"SituaÁ„o\"
+    END AS \"Situa√ß√£o\"
 
 FROM
     disciplinas_ofer o,
@@ -67,7 +67,7 @@ $num_result = $Result1->RecordCount();
 $info .= "<strong>Data: </strong>" . date("d/m/Y") . "&nbsp;&nbsp;-&nbsp;&nbsp;";
 $info .= "<strong>Hora: </strong>" . date("H:i:s") . "&nbsp;&nbsp;-&nbsp;&nbsp;";
 $info .= "<strong>Total de Registros: </strong>" . $num_result . "&nbsp;&nbsp;-&nbsp;&nbsp;";
-$info .= "<strong>PerÌodo: </strong> <span>$periodo</span> <br><br>";
+$info .= "<strong>Per√≠odo: </strong> <span>$periodo</span> <br><br>";
 
 
 if($campus != ''){
@@ -95,7 +95,7 @@ $rodape .= '<span style="font-size: 9px;"><strong>' . $resp_cargo . "</strong></
 </head>
 <body marginwidth="20" marginheight="20">
     <div style="width: 760px;" align="center">
-      <?php echo $header->get_empresa($PATH_IMAGES); ?>
+      <?php echo $header->get_empresa($PATH_IMAGES, $IEnome); ?>
         <h2>RELAT&Oacute;RIO DE ANDAMENTO DOS DI&Aacute;RIOS</h2>
         <?=$info?>
         <?php rs2html($Result1, 'width="90%" cellspacing="0" border="0" class="tabela_relatorio" cellpadding="0"', FALSE, FALSE); ?>

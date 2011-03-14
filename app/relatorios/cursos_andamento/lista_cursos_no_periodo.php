@@ -145,7 +145,7 @@ $info .= "<strong>Total de Matr&iacute;culas: </strong>" . $Matriculas . $txt_ci
 </head>
 <body marginwidth="20" marginheight="20">
 	<div style="width: 760px;" align="center">
-      	<?php echo $header->get_empresa($PATH_IMAGES); ?>
+      	<?php echo $header->get_empresa($PATH_IMAGES, $IEnome); ?>
   
 		<h2>CURSOS COM ALUNOS MATRICULADOS NO PERÍODO</h2>
 		<?php 

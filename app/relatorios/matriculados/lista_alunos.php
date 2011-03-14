@@ -13,7 +13,7 @@ require_once('matriculados.php');
 <body>
 <div style="width: 760px;" align="center">
 
-   <?php echo $header->get_empresa($PATH_IMAGES); ?>
+   <?php echo $header->get_empresa($PATH_IMAGES, $IEnome); ?>
 	<h2><?php echo $titulo; ?></h2>
 	<?php echo $info; ?>
 	<?php rs2html($Result1, 'width="90%" cellspacing="0" border="0" class="tabela_relatorio" cellpadding="0"'); ?>

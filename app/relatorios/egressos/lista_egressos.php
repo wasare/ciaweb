@@ -75,7 +75,7 @@ if($total < 1){
 </head>
 <body marginwidth="20" marginheight="20">
 	<div style="width: 760px;">
-        	<?php echo $header->get_empresa($PATH_IMAGES); ?>
+        	<?php echo $header->get_empresa($PATH_IMAGES, $IEnome); ?>
         <div align="center">
             <h2>RELAT&Oacute;RIO DE EGRESSOS</h2>
             <p>

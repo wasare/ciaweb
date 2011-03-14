@@ -79,7 +79,7 @@ if($_POST) {
                 <font color="red"><?=$msg?></font>
             </form>
             <p>
-                <font color="#999999">&copy;2009 IFMG Campus Bambu&iacute; -</font>
+                <font color="#999999">&copy;2011 IFSP Campus Caraguatatuba -</font>
                 <a href="../index.php">P&aacute;gina inicial do SA.</a>
             </p>
         </center>

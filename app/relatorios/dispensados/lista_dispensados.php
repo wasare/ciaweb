@@ -99,7 +99,7 @@ $legenda .= '<font color="green">CE = Certifica&ccedil;&atilde;o de experi&ecirc
 </head>
 <body bgcolor="#FFFFFF" marginwidth="20" marginheight="20">
 <div style="width: 95%;" align="center">
-   	<?php echo $header->get_empresa($PATH_IMAGES); ?>
+   	<?php echo $header->get_empresa($PATH_IMAGES, $IEnome); ?>
     <h2>RELAT&Oacute;RIO DE ALUNOS DISPENSADOS</h2>
     <?=$info?>
     <br />

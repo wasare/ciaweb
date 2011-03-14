@@ -104,7 +104,7 @@ $pessoa = $conn->get_row($sql);
     <body>
         <div style="width: 760px;" align="center">
             <div align="center" style="text-align:center; font-size:12px;">
-                <?=$header->get_empresa($PATH_IMAGES)?>
+                <?=$header->get_empresa($PATH_IMAGES, $IEnome)?>
            </div>
             <h2>Informa&ccedil;&otilde;es pessoais</h2>
             <div class="panel">

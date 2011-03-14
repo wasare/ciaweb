@@ -119,7 +119,7 @@ if(count($aluno) == 0)
     <body>
         <div style="width: 760px;" align="center">
             <div align="center" style="text-align:center; font-size:12px;">
-                <?=$header->get_empresa($PATH_IMAGES)?>
+                <?=$header->get_empresa($PATH_IMAGES, $IEnome)?>
                 <br /><br />
             </div>
             <h2>Informa&ccedil;&otilde;es pessoais</h2>

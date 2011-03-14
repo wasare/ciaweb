@@ -12,7 +12,7 @@ require_once("aprovados_reprovados.php");
 </head>
 <body marginwidth="20" marginheight="20">
 <div style="width: 760px;" align="center">
-     <?php echo $header->get_empresa($PATH_IMAGES); ?>
+     <?php echo $header->get_empresa($PATH_IMAGES, $IEnome); ?>
 
 	<h2>RELAT&Oacute;RIO DE SITUA&Ccedil;&Atilde;O DE APROVA&Ccedil;&Atilde;O DE ALUNO(S)</h2>
     <?=$info?>

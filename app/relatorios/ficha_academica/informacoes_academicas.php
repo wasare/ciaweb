@@ -66,7 +66,7 @@ $contratos = $conn->get_all('SELECT DISTINCT c.id, pessoa_nome(c.ref_pessoa) AS 
 </head>
 <body>
 	<div align="left">
-      	<?=$header->get_empresa($PATH_IMAGES)?>
+      	<?=$header->get_empresa($PATH_IMAGES, $IEnome)?>
    </div> 
       <h2>Informa&ccedil;&otilde;es Acad&ecirc;micas</h2>
     <div id="cabecalho" style="text-align: left;">

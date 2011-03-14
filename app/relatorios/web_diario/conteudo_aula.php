@@ -54,7 +54,7 @@ $fl_finalizado = is_finalizado($diario_id);
 <body>
 
 <div align="left">
-     <?=$header->get_empresa($PATH_IMAGES)?>
+     <?=$header->get_empresa($PATH_IMAGES, $IEnome)?>
 </div>
 <br />
 <div align="left" class="titulo1">

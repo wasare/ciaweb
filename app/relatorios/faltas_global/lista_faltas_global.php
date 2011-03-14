@@ -93,7 +93,7 @@ $info .="<br><br>";
 </head>
 <body marginwidth="20" marginheight="20">
     <div style="width: 760px;" align="center">
-        	<?php echo $header->get_empresa($PATH_IMAGES); ?>
+        	<?php echo $header->get_empresa($PATH_IMAGES, $IEnome); ?>
             <h2>RELAT&Oacute;RIO DE FALTAS GLOBAL</h2>
             <?=$info?>
             <?php rs2html($Result1, 'width="90%" cellspacing="0" border="0" class="tabela_relatorio" cellpadding="0"', FALSE, FALSE); ?>

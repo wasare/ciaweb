@@ -20,7 +20,7 @@ ob_start();
 	<table border="0" cellpadding="0" cellspacing="0">
   		<tr>
 		<td style="text-align:center; width: 100%;">
-			<?php echo $header->get_empresa($PATH_IMAGES);  ?>
+			<?php echo $header->get_empresa($PATH_IMAGES, $IEnome);  ?>
 		</td>
 		</tr>
 	</table>
