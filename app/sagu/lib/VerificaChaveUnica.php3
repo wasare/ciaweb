@@ -1,6 +1,6 @@
 <?
 // ----------------------------------------------------------
-// Verifica se registro já existe
+// Verifica se registro jÃ¡ existe
 // ----------------------------------------------------------
   function VerificaChaveUnica($tabela, $campo, $valor)
   {

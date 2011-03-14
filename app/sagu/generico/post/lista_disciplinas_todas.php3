@@ -125,7 +125,7 @@ function _select(id,nome)
 	<tr>
 		<td colspan="4" align="center"><?php 
 		if ( $hasmore )
-		echo("<br>Se o Curso não estiver listado, seja mais específico.<br>");
+		echo("<br>Se o Curso nÃ£o estiver listado, seja mais especÃ­fico.<br>");
 		?>
 		<hr size="1" width="100%">
 		<input type="button" name="Button" value=" Voltar "

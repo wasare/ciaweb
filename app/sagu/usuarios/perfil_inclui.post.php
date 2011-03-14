@@ -20,25 +20,25 @@ $id_user = GetIdentity('usuario_id_seq');
 
 if (!$password1 || !$password2) 
 {
-   SaguAssert(0, "VocÍ deve digitar duas vezes a senha.");
+   SaguAssert(0, "Voc√™ deve digitar duas vezes a senha.");
    return false;
 }
 if ($password1 != $password2) 
 {
-   SaguAssert(0, "As duas senhas n„o s„o as mesmas.");
+   SaguAssert(0, "As duas senhas n√£o s√£o as mesmas.");
    return false;
 }
-// FIXME: migrar conex„o para adodb
+// FIXME: migrar conex√£o para adodb
 $conn = new Connection;
 $conn->Open();
 $conn->Begin();
 
 $sql = " CREATE USER $nome with password '$password1' in group $grupo;";
-$mensagem = "CriaÁ„o de Usu·rio...";
+$mensagem = "Cria√ß√£o de Usu√°rio...";
 
 $ok = $conn->Execute($sql);  
 
-// Insere usu·rio na tabela SAGU_USUARIOS no banco de dados sagu.
+// Insere usu√°rio na tabela SAGU_USUARIOS no banco de dados sagu.
 $sql2 = " insert into usuario (id,".
         "                            nome," .
         "                            nome_completo," .
@@ -60,13 +60,13 @@ $ok2 = $conn->Execute($sql2);
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Erro ao criar usu·rio!");
+SaguAssert($ok,"Erro ao criar usu√°rio!");
 
 SaguAssert($ok2,"Nao foi possivel inserir o registro!");
 
 SuccessPage("$mensagem",
             "location='../usuarios/consulta_inclui_usuarios.phtml'",
-            "O login do usu·rio È <b> $nome </b>.");
+            "O login do usu√°rio √© <b> $nome </b>.");
 
 ?>
 </HEAD>

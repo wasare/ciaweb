@@ -16,8 +16,8 @@ $ok = $conn->Execute($sql);
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível de excluir o registro!");
+SaguAssert($ok,"NÃ£o foi possÃ­vel de excluir o registro!");
 
-SuccessPage("Departamento excluído com sucesso",
+SuccessPage("Departamento excluÃ­do com sucesso",
             "location='../consulta_inclui_departamentos.phtml'");
 ?>

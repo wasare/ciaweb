@@ -27,7 +27,7 @@ if ( $query->MoveNext() )
 
 $query->Close();
 
-SaguAssert($success,"Nao foi possivel obter um numero do País!");    
+SaguAssert($success,"Nao foi possivel obter um numero do PaÃ­s!");    
 
 $sql = " insert into pais (id," .
        "                         nome)" .
@@ -42,11 +42,11 @@ SaguAssert($ok,"Nao foi possivel inserir o registro!");
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível inserir o registro!");
+SaguAssert($ok,"NÃ£o foi possÃ­vel inserir o registro!");
 
-SuccessPage("Inclusão de Países",
+SuccessPage("InclusÃ£o de PaÃ­ses",
             "location='../paises_inclui.phtml'",
-            "O código do País é $id_paises");
+            "O cÃ³digo do PaÃ­s Ã© $id_paises");
 ?>
 <html>
 <head>

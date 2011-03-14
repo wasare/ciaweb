@@ -44,10 +44,10 @@ function Footer()
 {
     //Vai para 1.0 cm da parte inferior
     $this->SetY(-15);
-    //Seleciona a fonte Arial itálico 8
+    //Seleciona a fonte Arial itÃ¡lico 8
     $this->SetFont('Arial','I',8);
-    //Imprime o número da página corrente e o total de páginas
-    $this->Cell(0,0,'Página '.$this->PageNo().'/{nb}',0,0,'C');
+    //Imprime o nÃºmero da pÃ¡gina corrente e o total de pÃ¡ginas
+    $this->Cell(0,0,'PÃ¡gina '.$this->PageNo().'/{nb}',0,0,'C');
 }
 
 

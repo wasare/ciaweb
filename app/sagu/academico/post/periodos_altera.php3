@@ -48,10 +48,10 @@ $ok = $conn->Execute($sql);  // tire o @ para visualizar mensagens de error do s
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível alterar o registro!");
-SuccessPage("Alteração de Período",
+SaguAssert($ok,"NÃ£o foi possÃ­vel alterar o registro!");
+SuccessPage("AlteraÃ§Ã£o de PerÃ­odo",
             "location='../consulta_periodos.phtml'",
-            "Período alterado com sucesso.");
+            "PerÃ­odo alterado com sucesso.");
 ?>
 <html>
 <head>

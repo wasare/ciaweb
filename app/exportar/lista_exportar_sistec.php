@@ -110,7 +110,7 @@ if(!empty($turma)) {
 
 <div class="panel">
     Copie o texto do formul&aacute;rio abaixo e cole no respectivo campo do SISTEC.<br />
-    Para facilitar dê um clique na caixa de texto do formul&aacute;rio e utilize os 
+    Para facilitar dÃª um clique na caixa de texto do formul&aacute;rio e utilize os 
     atalhos de teclado "Ctrl + A" para selecionar o texto, "Ctrl + C" para copiar e 
     "Ctrl + V" para colar na caixa de texto do SISTEC.<br /><br />
     <textarea name="" cols="100" rows="5"><?=$resp_ok?></textarea>

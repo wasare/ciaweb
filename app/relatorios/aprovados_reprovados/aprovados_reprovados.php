@@ -28,8 +28,8 @@ $turma 		= $_POST["turma"];
 $sql = "
   SELECT 
   	t.turma as \"Turma\", 
-  	p.nome || ' (' || m.ref_pessoa || ') ' as \"Nome (Cód)\", 
-  	d.descricao_disciplina || ' (' || o.ref_disciplina || '/' || m.ref_disciplina_ofer || ') ' as \"Disciplina (Cód Disc/Diário) \",
+  	p.nome || ' (' || m.ref_pessoa || ') ' as \"Nome (CÃ³d)\", 
+  	d.descricao_disciplina || ' (' || o.ref_disciplina || '/' || m.ref_disciplina_ofer || ') ' as \"Disciplina (CÃ³d Disc/DiÃ¡rio) \",
   	m.nota_final as \"Nota\", 
   	m.num_faltas || ' (' || d.carga_horaria || ') ' as \"Falta (Carga Horaria)\"
  	 
@@ -59,7 +59,7 @@ if ($situacao == '2')
 $sql .= " ORDER BY 1, 2";
 
 
-$sql = 'SELECT * FROM ('. $sql .') AS T1 ORDER BY lower(to_ascii("Nome (Cód)",\'LATIN1\'));';	
+$sql = 'SELECT * FROM ('. $sql .') AS T1 ORDER BY lower(to_ascii("Nome (CÃ³d)",\'LATIN1\'));';	
  
 $RsCurso = $conn->Execute("SELECT descricao ||' (' || id || ') ' as \"Curso\" FROM cursos WHERE id = $curso;");
   
@@ -79,5 +79,5 @@ if($total < 1){
 $info .= "<strong>Data: </strong>" . date("d/m/Y") . "&nbsp;&nbsp;-&nbsp;&nbsp;";
 $info .= "<strong>Hora: </strong>" . date("H:i:s") . "&nbsp;&nbsp;-&nbsp;&nbsp;";
 $info .= "<strong>Total de Registros: </strong>" . $total . "&nbsp;&nbsp;-&nbsp;&nbsp;";
-$info .= "<strong>Período: </strong> <span>$DescricaoPeriodo</span> <br><br>";
+$info .= "<strong>PerÃ­odo: </strong> <span>$DescricaoPeriodo</span> <br><br>";
   

@@ -1,7 +1,7 @@
 <?
 function SQL_Combo($nome,$sql,$default,$onchange)
 {
-  SaguAssert(false,"Use SQLArray em combinação com ComboArray!");
+  SaguAssert(false,"Use SQLArray em combinaÃ§Ã£o com ComboArray!");
 
   $conn = new Connection;
   

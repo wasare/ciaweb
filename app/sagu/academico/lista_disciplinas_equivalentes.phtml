@@ -8,10 +8,10 @@ function Confirma_Exclui(arg1, arg2)
 {
   url = 'post/disciplinas_equivalentes_exclui.php3?id=' + arg1;
 
-  if (confirm("Você tem certeza que deseja EXCLUIR a Equivalência da Disciplina: "+arg2+" ?"))
+  if (confirm("VocÃª tem certeza que deseja EXCLUIR a EquivalÃªncia da Disciplina: "+arg2+" ?"))
     location=(url)
   else
-    alert("Exclusão Cancelada.");
+    alert("ExclusÃ£o Cancelada.");
 }
 </script>
 <script language="PHP">
@@ -78,8 +78,8 @@ function ListaDisciplinasEquivalentes($ref_curso=null)
 
         echo ("<tr bgcolor=\"#000000\">\n");
         echo ("<td width=\"5%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Cont</b></font></td>");
-        echo ("<td width=\"35%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Cód - Disciplina</b></font></td>");
-        echo ("<td width=\"40%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Cód - Disciplina Equivalente</b></font></td>");
+        echo ("<td width=\"35%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>CÃ³d - Disciplina</b></font></td>");
+        echo ("<td width=\"40%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>CÃ³d - Disciplina Equivalente</b></font></td>");
         echo ("<td width=\"10%\" align=\"right\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Curso&nbsp;&nbsp;</b></font></td>");
         echo ("<td width=\"5%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>&nbsp;</b></td>");
         echo ("<td width=\"5%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>&nbsp;</b></td>");

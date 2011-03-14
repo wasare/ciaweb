@@ -8,7 +8,7 @@ if ($aluno_id == 0 || $curso_id == 0 || $contrato_id == 0)
 if(isset($_SESSION['sa_modulo']) && $_SESSION['sa_modulo'] == 'web_diario_login') {
   if(!acessa_ficha_aluno($aluno_id,$sa_ref_pessoa,$curso_id)) {
     exit('<script language="javascript" type="text/javascript">
-            alert(\'Você não tem direito de acesso a estas informações!\');
+            alert(\'VocÃª nÃ£o tem direito de acesso a estas informaÃ§Ãµes!\');
             window.close();</script>');
   }
   // ^ VERIFICA O DIREITO DE ACESSO A FICHA COMO PROFESSOR OU COORDENADOR ^ //

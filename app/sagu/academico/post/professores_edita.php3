@@ -36,7 +36,7 @@ SaguAssert($ok,"Nao foi possivel inserir o registro!");
 
 $conn->Close();
 
-SuccessPage("Alteração de Professores",
+SuccessPage("AlteraÃ§Ã£o de Professores",
             "location='../consulta_inclui_professores.phtml'",
             "Professor alterado com sucesso!!!.") 
 

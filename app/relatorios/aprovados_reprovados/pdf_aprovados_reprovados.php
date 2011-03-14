@@ -12,7 +12,7 @@ ob_start();
 		<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
   			<tr>
     			<td style="text-align: right; width: 100%">
-    				página [[page_cu]]/[[page_nb]]
+    				pÃ¡gina [[page_cu]]/[[page_nb]]
     			</td>
   			</tr>
 		</table>

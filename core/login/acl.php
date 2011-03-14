@@ -87,10 +87,10 @@ class acl {
     }
 
     /**
-     * Retorna os papeis do usu·rio
+     * Retorna os papeis do usu√°rio
      * @param $pessoa_id
      * @param conexao com banco de dados
-     * @return array contendo os papeis do usu·rio
+     * @return array contendo os papeis do usu√°rio
      */
     public static function get_roles($pessoa_id, connection_factory $conn) {
 
@@ -102,7 +102,7 @@ class acl {
     }
 
     /**
-     * Verifica se usu·rio possue papel para acessar determinado conte˙do
+     * Verifica se usu√°rio possue papel para acessar determinado conte√∫do
      * @param $pessoa_id
      * @param $papeis_permitidos
      * @param conexao com banco de dados

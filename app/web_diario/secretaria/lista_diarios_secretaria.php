@@ -24,7 +24,7 @@ if (empty($periodo_id) OR ($curso_id == 0 AND $professor_id == 0)) {
 
     if ($diario_id == 0) {
         exit('<script language="javascript">
-                window.alert("ERRO! Primeiro informe um di·rio ou um perÌodo + um curso e / ou + um professor!");
+                window.alert("ERRO! Primeiro informe um di√°rio ou um per√≠odo + um curso e / ou + um professor!");
 		window.history.back(-1);
 		</script>');
     }
@@ -104,7 +104,7 @@ $diarios = $conn->get_all($sql);
 
 if (count($diarios) == 0) {
     exit('<script language="javascript">
-                window.alert("Nenhum di·rio encontrado para o filtro selecionado!");
+                window.alert("Nenhum di√°rio encontrado para o filtro selecionado!");
                 window.history.back(-1);
 		</script>');
 }
@@ -250,11 +250,11 @@ if (count($diarios) == 0) {
                         <td align="center"><?=$fl_situacao?></td>
                         <td align="center">
                             <a href="#" id="<?=$diario_id . '_pane'?>" title="clique para visualizar / ocultar">Acessar</a>
-                            <!-- panel com as opÁıes do di·rio // inicio //-->
+                            <!-- panel com as op√ß√µes do di√°rio // inicio //-->
                             <div id="diario_<?=$diario_id?>_pane" style="display:none; margin: 1.2em; padding: 1em; background-color: <?=$op_color?>" class="opcoes_web_diario">
                                     <?=$sem_opcoes . $opcoes_diario?>
                             </div>
-                            <!-- panel com as opÁıes do di·rio \\ fim \\ -->
+                            <!-- panel com as op√ß√µes do di√°rio \\ fim \\ -->
                         </td>
                     </tr>
 
@@ -268,7 +268,7 @@ if (count($diarios) == 0) {
 
                 <br />
                 &nbsp;&nbsp;&nbsp;
-                <input type="button" value="Finalizar todos os di·rios concluÌdos" onclick="finaliza_todos_secretaria('<?=$diario_id?>','<?=$IEnome?>');" />
+                <input type="button" value="Finalizar todos os di√°rios conclu√≠dos" onclick="finaliza_todos_secretaria('<?=$diario_id?>','<?=$IEnome?>');" />
 
             </form>
             <script language="javascript" type="text/javascript">

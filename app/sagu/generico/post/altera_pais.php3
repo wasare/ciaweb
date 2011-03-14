@@ -25,9 +25,9 @@ $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel de atualizar o registro!");
 
-SuccessPage("Alteração de Países",
+SuccessPage("AlteraÃ§Ã£o de PaÃ­ses",
 	        "location='../paises_inclui.phtml'",
-	        "As informações do país <b>$nome</b> foram atualizadas com sucesso.");
+	        "As informaÃ§Ãµes do paÃ­s <b>$nome</b> foram atualizadas com sucesso.");
 ?>
 <html>
 <head>

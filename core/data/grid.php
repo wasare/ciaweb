@@ -62,7 +62,7 @@ class grid {
             $remove .= '</a>  \'';
         }
 
-        $options = $update . $remove . ' as "Opções"';
+        $options = $update . $remove . ' as "OpÃ§Ãµes"';
 
         return $options;
     }

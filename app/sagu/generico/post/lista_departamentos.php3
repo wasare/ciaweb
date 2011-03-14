@@ -137,7 +137,7 @@ echo($nome);
 		<td colspan="4" align="center"><font
 			face="Verdana, Arial, Helvetica, sans-serif"><font size="2"><b><font
 			color="#FF0000"> <?PHP
-			if ( $hasmore ) echo("<br>Se o Departamento não estiver listado, seja mais específico.<br>");
+			if ( $hasmore ) echo("<br>Se o Departamento nÃ£o estiver listado, seja mais especÃ­fico.<br>");
 			?> </font></b></font></font>
 		<hr size="1" width="500">
 		<input type="button" name="Button" value="Cancelar"

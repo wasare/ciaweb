@@ -94,8 +94,8 @@ $ok = $conn->Execute($sql);
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível alterar o registro!");
-SuccessPage("Atualização de Documentação",
+SaguAssert($ok,"NÃ£o foi possÃ­vel alterar o registro!");
+SuccessPage("AtualizaÃ§Ã£o de DocumentaÃ§Ã£o",
             "location='../consulta_inclui_pessoa.phtml'",
-            "Documentação atualizada com sucesso.");
+            "DocumentaÃ§Ã£o atualizada com sucesso.");
 ?>

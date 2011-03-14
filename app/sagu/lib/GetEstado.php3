@@ -20,7 +20,7 @@
     $conn->Close();
 
     if ( $SaguAssert )
-      SaguAssert(!empty($obj),"Estado [<b><i>$id</b></i>] n„o cadastrado ou cÛdigo Inv·lido!");
+      SaguAssert(!empty($obj),"Estado [<b><i>$id</b></i>] n√£o cadastrado ou c√≥digo Inv√°lido!");
 
     return $obj;
   }

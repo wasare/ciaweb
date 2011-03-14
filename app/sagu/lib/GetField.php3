@@ -17,7 +17,7 @@
     $conn->Close();
 
 //    if ( $SaguAssert )
-//      SaguAssert(!empty($obj),"$field [<b><i>$id</b></i>] n„o cadastrado ou cÛdigo Inv·lido!");
+//      SaguAssert(!empty($obj),"$field [<b><i>$id</b></i>] n√£o cadastrado ou c√≥digo Inv√°lido!");
 
     return $obj;
   }

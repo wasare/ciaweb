@@ -7,7 +7,7 @@ $conn = new connection_factory($param_conn);
 
 $acl = new acl();
 if(!$acl->has_access(__FILE__, $conn)) {
-    exit ('Você não tem permissão para acessar este formulário!');
+    exit ('VocÃª nÃ£o tem permissÃ£o para acessar este formulÃ¡rio!');
 }
 
 $id = $_GET['id'];
@@ -24,9 +24,9 @@ $ok = $conn->Execute($sql);
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível de excluir o registro!");
+SaguAssert($ok,"NÃ£o foi possÃ­vel de excluir o registro!");
 
-SuccessPage("Disciplina Equivalente excluída com sucesso",
+SuccessPage("Disciplina Equivalente excluÃ­da com sucesso",
             "location='../consulta_disciplinas_equivalentes.phtml'");
 
 ?>

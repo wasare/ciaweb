@@ -20,7 +20,7 @@ unset($_SESSION['sa_diarios_matricula_avulsa']);
                 {
                     document.form1.submit();
                 } else {
-                    // se n„o confirmar, coloque o codigo aqui
+                    // se n√£o confirmar, coloque o codigo aqui
                 }
             }
             //Ajax que busca os contratos e os cursos

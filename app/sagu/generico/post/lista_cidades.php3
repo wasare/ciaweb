@@ -82,10 +82,10 @@ function ListaCidades()
 
 		echo("  <tr bgcolor=\"$bg0\">\n");
 		echo("    <td width=\"5%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"1\" color=\"$fg0\">&nbsp;</font></b></td>\n");
-		echo("    <td width=\"10%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"1\" color=\"$fg0\">CÛd.</font></b></td>\n");
-		echo("    <td width=\"46%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"1\" color=\"$fg0\">DescriÁ„o</font></b></td>\n");
+		echo("    <td width=\"10%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"1\" color=\"$fg0\">C√≥d.</font></b></td>\n");
+		echo("    <td width=\"46%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"1\" color=\"$fg0\">Descri√ß√£o</font></b></td>\n");
 		echo("    <td width=\"15%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"1\" color=\"$fg0\">CEP</font></b></td>\n");
-		echo("    <td width=\"18%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"1\" color=\"$fg0\">PaÌs</font></b></td>\n");
+		echo("    <td width=\"18%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"1\" color=\"$fg0\">Pa√≠s</font></b></td>\n");
 		echo("    <td width=\"6%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"1\" color=\"$fg0\">UF</font></b></td>\n");
 		echo("  </tr>\n");
 
@@ -185,7 +185,7 @@ function ListaCidades()
 			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">
 			<?php
 			if ( $hasmore )
-			echo("<center>Se a cidade n„o estiver listada, seja mais especÌfico.</center>");
+			echo("<center>Se a cidade n√£o estiver listada, seja mais espec√≠fico.</center>");
 			?></b></font></td>
 	</tr>
 	<tr>

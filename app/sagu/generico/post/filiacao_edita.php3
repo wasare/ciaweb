@@ -2,7 +2,7 @@
 
 <html>
 <head>
-<title>Atualização de Filiação</title>
+<title>AtualizaÃ§Ã£o de FiliaÃ§Ã£o</title>
 <script language="PHP">
 
 CheckFormParameters(array("id"));
@@ -19,7 +19,7 @@ $mae_instrucao		= trim($_POST['mae_instrucao']);
 $mae_loc_trabalho	= trim($_POST['mae_loc_trabalho']);
 $id					= trim($_POST['id']);
 
-SaguAssert($pai_nome || $mae_nome, "É necessário informar pelo menos o nome do pai ou da mãe!!!");
+SaguAssert($pai_nome || $mae_nome, "Ã‰ necessÃ¡rio informar pelo menos o nome do pai ou da mÃ£e!!!");
 
 $conn = new Connection;
 
@@ -45,7 +45,7 @@ $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel atualizar o registro!");
 
-SuccessPage("Filiação Atualizada com Sucesso",
+SuccessPage("FiliaÃ§Ã£o Atualizada com Sucesso",
             "location='javascript:window.close()'",
             "");
 

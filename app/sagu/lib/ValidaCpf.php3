@@ -35,12 +35,12 @@ if (($cpf == $nulo) || ($cpf == $nulo1) || ($cpf == $nulo2)
 }
 else
    {
-     /* AlocaÁ„o de cada digito digitado no formul·rio, em uma celula de
+     /* Aloca√ß√£o de cada digito digitado no formul√°rio, em uma celula de
 um vetor */
      for ($i=0; $i<11; $i++) {
            $cpf_temp[$i]="$cpf[$i]";
      }
-     /*Calcula o pen˙ltimo dÌgito verificador*/
+     /*Calcula o pen√∫ltimo d√≠gito verificador*/
      $acum=0;
      for ($i=0; $i<9; $i++){
            $acum=$acum+($cpf[$i]*(10-$i));
@@ -54,7 +54,7 @@ um vetor */
      $cpf_temp[9]="$acum";
 
 
-     /* Calcula o ˙ltimo dÌgito verificador*/
+     /* Calcula o √∫ltimo d√≠gito verificador*/
      $acum=0;
      for ($i=0; $i<10; $i++) {
            $acum=$acum+($cpf_temp[$i]*(11-$i));
@@ -67,8 +67,8 @@ um vetor */
          $acum=0;
      $cpf_temp[10]="$acum";
 
-     /* Este laÁo verifica se o cpf original È igual ao cpf gerado pelos
-dois laÁos acima*/
+     /* Este la√ßo verifica se o cpf original √© igual ao cpf gerado pelos
+dois la√ßos acima*/
 
      for ($i=0; $i<11; $i++) {
            if ($cpf[$i] != $cpf_temp[$i]) {

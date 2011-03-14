@@ -20,7 +20,7 @@
     $conn->Close();
 
     if ( $SaguAssert )
-      SaguAssert(!empty($obj),"Curso Externo [<b><i>$id</b></i>] n„o cadastrada ou cÛdigo Inv·lido!");
+      SaguAssert(!empty($obj),"Curso Externo [<b><i>$id</b></i>] n√£o cadastrada ou c√≥digo Inv√°lido!");
 
     return $obj;
   }

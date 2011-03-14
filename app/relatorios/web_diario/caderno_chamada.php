@@ -17,7 +17,7 @@ if(isset($_SESSION['sa_modulo']) && $_SESSION['sa_modulo'] == 'web_diario_login'
   if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 
     exit('<script language="javascript" type="text/javascript">
-            alert(\'Você não tem direito de acesso a estas informações!\');
+            alert(\'VocÃª nÃ£o tem direito de acesso a estas informaÃ§Ãµes!\');
             window.close();</script>');
   }
   // ^ VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR ^ //
@@ -139,7 +139,7 @@ function cabecalho($myfile_ps, $data, $ref_disciplina, $disciplina, $ref_curso, 
     SA_PS_show_xy_font($myfile_ps, "ALUNO OUVINTE", 370, -30, 'Arial-Bold', 10);
  }
 
- SA_PS_show_xy_font($myfile_ps, "Emissão: $data", 580, -30, 'Arial', 8);
+ SA_PS_show_xy_font($myfile_ps, "EmissÃ£o: $data", 580, -30, 'Arial', 8);
  SA_PS_show_xy_font($myfile_ps, "Disciplina:", 45, -42, 'Arial-Bold', 10);
 
  $nome_disciplina = $ref_disciplina . ' - ' . $disciplina;
@@ -171,7 +171,7 @@ function cabecalho($myfile_ps, $data, $ref_disciplina, $disciplina, $ref_curso, 
 
  // echo '$campus:'.$campus.'</br>';
  
- SA_PS_show_xy_font($myfile_ps, "Período:", 480, "$lin", 'Arial-Bold', 10);
+ SA_PS_show_xy_font($myfile_ps, "PerÃ­odo:", 480, "$lin", 'Arial-Bold', 10);
  SA_PS_show_xy_font($myfile_ps, "$periodo", 522, "$lin", 'Arial', 10);
 
  // echo '$periodo:'.$periodo.'</br>'; 
@@ -207,7 +207,7 @@ function cabecalho($myfile_ps, $data, $ref_disciplina, $disciplina, $ref_curso, 
  $lin = $lin - 12;
 
  $frequencia_minima = (($hora_aula * 75) / 100);
- SA_PS_show_xy_font($myfile_ps, "* Frequência Mínima para aprovação: $frequencia_minima H/A", 370, "$lin", 'Arial', 8);
+ SA_PS_show_xy_font($myfile_ps, "* FrequÃªncia MÃ­nima para aprovaÃ§Ã£o: $frequencia_minima H/A", 370, "$lin", 'Arial', 8);
 
  $lin_aux = $lin - 12;
  
@@ -274,7 +274,7 @@ $col_txt = $col_ini + 3;
 $lin_txt = $lin_fin + 10;
 
 SA_PS_rect($myfile_ps, $col_ini, $lin_ini, $col_fin, $lin_fin, 0.3);
-SA_PS_show_xy_font($myfile_ps, 'Cód', $col_txt, $lin_txt, 'Arial-Bold', 10);
+SA_PS_show_xy_font($myfile_ps, 'CÃ³d', $col_txt, $lin_txt, 'Arial-Bold', 10);
 
 $col_ini = $col_fin;
 $col_fin = $col_ini + 225;
@@ -303,7 +303,7 @@ SA_PS_show_xy_font($myfile_ps, 'Aula', $col_txt, $lin_txt, 'Arial', 6);
 $col_txt = $col_ini + 1;
 $lin_txt = $lin_fin + 15;
 
-SA_PS_show_xy($myfile_ps, 'Mês', $col_txt, $lin_txt);
+SA_PS_show_xy($myfile_ps, 'MÃªs', $col_txt, $lin_txt);
 
 $col_txt = $col_ini + 1;
 $lin_txt = $lin_fin + 4;
@@ -415,29 +415,29 @@ SA_PS_line($myfile_ps, 45, $lin, 814, $lin, 2);
 
 $lin = $lin - 15;
 
-SA_PS_show_xy_font($myfile_ps, 'Registro de Presença:', 45, $lin, 'Arial-Bold', 8);
+SA_PS_show_xy_font($myfile_ps, 'Registro de PresenÃ§a:', 45, $lin, 'Arial-Bold', 8);
 SA_PS_show_xy_font($myfile_ps, '-    Ex.: 2 H/A |-/|    4 H/A |=|', 132, $lin, 'Arial', 8);
-SA_PS_show_xy_font($myfile_ps, 'Códigos:', 350, $lin, 'Arial', 8);
+SA_PS_show_xy_font($myfile_ps, 'CÃ³digos:', 350, $lin, 'Arial', 8);
 SA_PS_show_xy_font($myfile_ps, 'Fr', 390, $lin, 'Arial-Bold', 8);
-SA_PS_show_xy_font($myfile_ps, '- Frequência', 400, $lin, 'Arial', 8);
+SA_PS_show_xy_font($myfile_ps, '- FrequÃªncia', 400, $lin, 'Arial', 8);
 SA_PS_show_xy($myfile_ps, 'OBS.:', 512, $lin);
 
 $lin = $lin - 14;
 
-SA_PS_show_xy_font($myfile_ps, 'Registro de Ausência:', 45, $lin, 'Arial-Bold', 8);
+SA_PS_show_xy_font($myfile_ps, 'Registro de AusÃªncia:', 45, $lin, 'Arial-Bold', 8);
 SA_PS_show_xy_font($myfile_ps, '/    Ex.: 4 H/A |X|', 132, $lin, 'Arial', 8);
 SA_PS_show_xy_font($myfile_ps, 'N', 390, $lin, 'Arial-Bold', 8);
-SA_PS_show_xy_font($myfile_ps, ' - Notas das avaliações (1 e 2)', 400, $lin, 'Arial', 8);
+SA_PS_show_xy_font($myfile_ps, ' - Notas das avaliaÃ§Ãµes (1 e 2)', 400, $lin, 'Arial', 8);
 
 $lin = $lin - 14;
 
 SA_PS_show_xy_font($myfile_ps, '* :', 45, $lin, 'Arial-Bold', 8);
 SA_PS_show_xy_font($myfile_ps, 'Trancamento conforme processo encaminhado via Protocolo.', 55, $lin, 'Arial', 8);
 SA_PS_show_xy_font($myfile_ps, 'Md', 390, $lin, 'Arial-Bold', 8);
-SA_PS_show_xy_font($myfile_ps, ' - Média => (N1+N2)/2', 400, $lin, 'Arial', 8);
+SA_PS_show_xy_font($myfile_ps, ' - MÃ©dia => (N1+N2)/2', 400, $lin, 'Arial', 8);
 $lin = $lin - 14;
 
-SA_PS_show_xy_font($myfile_ps, 'Somente a Secretaria Geral está autorizada a incluir alunos na folha de chamada.', 45, $lin, 'Arial', 8);
+SA_PS_show_xy_font($myfile_ps, 'Somente a Secretaria Geral estÃ¡ autorizada a incluir alunos na folha de chamada.', 45, $lin, 'Arial', 8);
 SA_PS_show_xy_font($myfile_ps, 'Ex', 390, $lin, 'Arial-Bold', 8);
 SA_PS_show_xy_font($myfile_ps, ' - Nota do Exame', 400, $lin, 'Arial', 8);
 
@@ -468,7 +468,7 @@ $totalLinhas = count($alunos_diario);
 
 if($totalLinhas < 1)
 {
-      echo '<script language=javascript>window.alert("ERRO! Não existem alunos matriculados nesta disciplina!"); javascript:window.history.back(1);</script>';
+      echo '<script language=javascript>window.alert("ERRO! NÃ£o existem alunos matriculados nesta disciplina!"); javascript:window.history.back(1);</script>';
       exit;
 }
 

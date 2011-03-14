@@ -8,7 +8,7 @@ $conn = new connection_factory($param_conn);
 // Definindo as permissoes do usuario quanto ao arquivo
 $acl = new acl();
 if(!$acl->has_access(__FILE__, $conn)) {
-    exit ('Você não tem permissão para acessar este formulário!');
+    exit ('VocÃª nÃ£o tem permissÃ£o para acessar este formulÃ¡rio!');
 }
 
 $id_usuario  = $_GET['id_usuario'];

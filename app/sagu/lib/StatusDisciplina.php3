@@ -15,7 +15,7 @@ Function StatusDisciplina($dt_cancelamento, $nota_final, $fl_liberado, $conceito
         $media_final = $query_media->GetValue(1);
     
     if (empty($media_final))
-        SaguAssert(0 ," Cadastre a Média Final do Período <b>$ref_periodo</b>");
+        SaguAssert(0 ," Cadastre a MÃ©dia Final do PerÃ­odo <b>$ref_periodo</b>");
 
     $query_media->Close();
 

@@ -17,11 +17,11 @@ if ( is_numeric($_POST['cidade']) ) {
 
 $sql = "
 SELECT DISTINCT 
-	p.id as \"Código\", 
+	p.id as \"CÃ³digo\", 
   	p.nome as \"Nome\" , 
 	f.pai_nome as \"Pai\", 
 	f.mae_nome as \"Mae\" , 
-	p.rua || ' ' || p.complemento as \"Endereço\", 
+	p.rua || ' ' || p.complemento as \"EndereÃ§o\", 
 	p.bairro as \"Bairro\", 
 	m.nome || '-' || m.ref_estado as \"Cidade\", 
 	p.cep as \"CEP\", 
@@ -58,7 +58,7 @@ $num_result = $Result1->RecordCount();
 $info = "<strong>Data: </strong>" . date("d/m/Y") . "&nbsp;&nbsp;-&nbsp;&nbsp;";
 $info .= "<strong>Hora: </strong>" . date("H:i:s") . "&nbsp;&nbsp;-&nbsp;&nbsp;";
 $info .= "<strong>Total de Registros: </strong>" . $num_result . "&nbsp;&nbsp;-&nbsp;&nbsp;";
-$info .= "<strong>Período: </strong> <span>".$_POST['periodo']."</span> $txt_cidade <br><br>";
+$info .= "<strong>PerÃ­odo: </strong> <span>".$_POST['periodo']."</span> $txt_cidade <br><br>";
   
 ?>
 <html>
@@ -74,11 +74,11 @@ $info .= "<strong>Período: </strong> <span>".$_POST['periodo']."</span> $txt_cid
 	<?=$info?>
 	<table cols=16 width="90%" cellspacing="0" border="0" class="tabela_relatorio" cellpadding="0">
 		<tr>
-			<th>Código</th>
+			<th>CÃ³digo</th>
 			<th>Nome</ht>
 			<th>Pai</th>
 			<th>Mae</th>
-			<th>Endereço</th>
+			<th>EndereÃ§o</th>
 			<th>Bairro</th>
 			<th>Cidade</th>
 			<th>CEP</th>

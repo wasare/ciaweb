@@ -15,7 +15,7 @@ $mae_instrucao    = $_POST['mae_instrucao'];
 $mae_loc_trabalho = $_POST['mae_loc_trabalho'];
 
 
-SaguAssert($pai_nome || $mae_nome, "… necess·rio informar pelo menos o nome do pai ou da m„e!!!");
+SaguAssert($pai_nome || $mae_nome, "√â necess√°rio informar pelo menos o nome do pai ou da m√£e!!!");
 
 $conn = new Connection;
 
@@ -36,7 +36,7 @@ if ( $query->MoveNext() )
 
 $query->Close();
 
-SaguAssert($success,"N„o foi possÌvel obter o cÛdigo de filiaÁ„o!");
+SaguAssert($success,"N√£o foi poss√≠vel obter o c√≥digo de filia√ß√£o!");
 
 $sql = " insert into filiacao ( " .
          "      id," .
@@ -65,14 +65,14 @@ $sql = " insert into filiacao ( " .
 
 $ok = $conn->Execute($sql);  // tire o @ para visualizar mensagens de error do sistema DB
 
-SaguAssert($ok,"N„o foi possÌvel incluir a filiaÁ„o!");
+SaguAssert($ok,"N√£o foi poss√≠vel incluir a filia√ß√£o!");
 
 $conn->Close();
 
 ?>
 <html>
     <head>
-        <title>Inclus„o de FiliaÁ„o</title>
+        <title>Inclus√£o de Filia√ß√£o</title>
         <script language="JavaScript">
             function _select(id,nome_pai,nome_mae)
             {

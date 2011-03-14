@@ -58,7 +58,7 @@ $AlunoCont = $conn->get_one($qryUsuarioCont);
 
 if ($AlunoCont != 1) {
     print '<script language=javascript>
-           window.alert("Usu·rio e/ou senha inv·lido(s)");
+           window.alert("Usu√°rio e/ou senha inv√°lido(s)");
            javascript:window.history.back(1);
            </script>';
     exit;
@@ -104,7 +104,7 @@ else {
     if ($MatCont == 0) {
         print '
             <script language=javascript>
-                window.alert("MatrÌcula para o perÌodo corrente n„o encontrada!");
+                window.alert("Matr√≠cula para o per√≠odo corrente n√£o encontrada!");
                 javascript:window.history.back(1);
             </script>';
         exit;

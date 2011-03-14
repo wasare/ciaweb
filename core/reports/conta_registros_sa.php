@@ -29,7 +29,7 @@ foreach ($tables as $tb) {
 
 arsort($num_registros, SORT_NUMERIC);
 
-echo "<h3>N&uacute;mero de Registros no banco do Sistema Acadêmico <br /><br /> Esquemas</h3>";
+echo "<h3>N&uacute;mero de Registros no banco do Sistema AcadÃªmico <br /><br /> Esquemas</h3>";
 foreach($num_registros as $key => $value)
   echo '<h4>'. $key .': <font color="red">'. number::numeric2decimal_br($value,0) .'</font></h4>';
 

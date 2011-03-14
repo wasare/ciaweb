@@ -42,10 +42,10 @@ else {
 
 
 
-//Criando a classe de conex„o ADODB
+//Criando a classe de conex√£o ADODB
 $Conexao = NewADOConnection("postgres");
 
-//Setando como conex„o persistente
+//Setando como conex√£o persistente
 $Conexao->PConnect("host=$host dbname=$database user=$user password=$password");
 
 //Exibindo a descricao do curso caso setado
@@ -54,11 +54,11 @@ $Result1 = $Conexao->Execute($sql);
 //Se executado com sucesso
 if ($Result1) {
 	
-	$msg = "<p class=\"msg_sucesso\">AlteraÁ„o realizada com sucesso!</p>";
+	$msg = "<p class=\"msg_sucesso\">Altera√ß√£o realizada com sucesso!</p>";
 }
 else {
 	
-	$msg = "<p class=\"msg_erro\">Erro ao realizar alteraÁ„o!</p>";
+	$msg = "<p class=\"msg_erro\">Erro ao realizar altera√ß√£o!</p>";
 }
 
 ?>
@@ -72,7 +72,7 @@ else {
 </head>
 
 <body>
-<h2>Alterar acesso ao Web Di·rio</h2>
+<h2>Alterar acesso ao Web Di√°rio</h2>
 <?php echo $msg; ?>
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>

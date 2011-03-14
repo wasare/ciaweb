@@ -17,26 +17,26 @@ CheckFormParameters(array("nome","nome_completo","password1","password2","grupo"
 
 if (!$password1 || !$password2) 
 {
-   SaguAssert(0, "VocÍ deve digitar duas vezes a senha.");
+   SaguAssert(0, "Voc√™ deve digitar duas vezes a senha.");
    return false;
 }
 if ($password1 != $password2) 
 {
-   SaguAssert(0, "As duas senhas n„o s„o as mesmas.");
+   SaguAssert(0, "As duas senhas n√£o s√£o as mesmas.");
    return false;
 }
 
-// FIXME: migrar conex„o para adodb
+// FIXME: migrar conex√£o para adodb
 $conn = new Connection;
 $conn->Open();
 $conn->Begin();
 
 $sql = " ALTER USER $nome with password '$password1';";
-$mensagem = "AlteraÁ„o de Usu·rio...";
+$mensagem = "Altera√ß√£o de Usu√°rio...";
 
 $ok = $conn->Execute($sql);  
 
-// Altera usu·rio na tabela SAGU_USUARIOS no banco de dados sagu.
+// Altera usu√°rio na tabela SAGU_USUARIOS no banco de dados sagu.
 $sql2 = " update usuario set " .
         "        nome = '$nome', " .
         "        nome_completo = '$nome_completo', " .
@@ -51,12 +51,12 @@ $ok2 = $conn->Execute($sql2);
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Erro ao alterar o usu·rio no Banco de Dados!");
-SaguAssert($ok2,"Erro ao alterar o usu·rio!");
+SaguAssert($ok,"Erro ao alterar o usu√°rio no Banco de Dados!");
+SaguAssert($ok2,"Erro ao alterar o usu√°rio!");
 
 SuccessPage("$mensagem",
             "",
-            "O login do usu·rio È <b>$nome</b>.<br> Efetue o login novamente clicando <A href=\"../../../index.php\" target=\"_top\"><font color=\"#0000CC\"><b>aqui</b></font></a>");
+            "O login do usu√°rio √© <b>$nome</b>.<br> Efetue o login novamente clicando <A href=\"../../../index.php\" target=\"_top\"><font color=\"#0000CC\"><b>aqui</b></font></a>");
 
 ?>
 </HEAD>

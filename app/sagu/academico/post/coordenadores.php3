@@ -32,9 +32,9 @@ saguassert($ok,"Nao foi possivel inserir o registro!");
 
 $conn->Close();
 
-SuccessPage("Inclusão de Coordenadores",
+SuccessPage("InclusÃ£o de Coordenadores",
             "location='../coordenadores.phtml'",
-            "Coordenador incluído com sucesso!!!.");
+            "Coordenador incluÃ­do com sucesso!!!.");
 
 ?>
 <html>

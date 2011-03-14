@@ -12,7 +12,7 @@ $papeis = $acl->get_roles($sa_ref_pessoa, $conn);
 
 if (count(array_intersect($papeis, $PAPEIS_WEB_DIARIO)) == 0) {
   exit('<script language="javascript" type="text/javascript">
-            alert(\'Você não tem direito de acesso a estas informações!\');
+            alert(\'VocÃª nÃ£o tem direito de acesso a estas informaÃ§Ãµes!\');
             window.history.back(1);</script>');
 }
 // ^ VERIFICA SE O USUARIO TEM DIREITO DE ACESSO ^ /
@@ -33,7 +33,7 @@ if (count(array_intersect($papeis, $PAPEIS_WEB_DIARIO)) == 0) {
 
 <div align="left">
 
-<h5>clique nos links abaixo para acessar as funções desejadas</h5>
+<h5>clique nos links abaixo para acessar as funÃ§Ãµes desejadas</h5>
 <br />
 
 <span><a href="#" title="consultar aluno" id="consulta_aluno">Consultar aluno</a></span>
@@ -49,7 +49,7 @@ if (count(array_intersect($papeis, $PAPEIS_WEB_DIARIO)) == 0) {
 <br />
 <br />
 
-<span><a href="#" id="trocar_senha" onclick="abrir('<?=$IEnome?>' + '- web diário', 'requisita.php?do=troca_senha');">Alterar senha de acesso</a></span>
+<span><a href="#" id="trocar_senha" onclick="abrir('<?=$IEnome?>' + '- web diÃ¡rio', 'requisita.php?do=troca_senha');">Alterar senha de acesso</a></span>
 &nbsp;&nbsp;
 <br />
 <br />
@@ -99,7 +99,7 @@ if (count(array_intersect($papeis, $PAPEIS_WEB_DIARIO)) == 0) {
 <?php
     endforeach;
   else:
-    echo 'Não foi encontrado nenhum registro';
+    echo 'NÃ£o foi encontrado nenhum registro';
   endif;
 ?>
 </table>

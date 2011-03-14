@@ -13,7 +13,7 @@ if (empty($periodo_id) OR $curso_id == 0) {
 
     if ($diario_id == 0) {
 		exit('<script language="javascript">
-                window.alert("ERRO! Primeiro informe um período e um curso ou um diário!");
+                window.alert("ERRO! Primeiro informe um perÃ­odo e um curso ou um diÃ¡rio!");
 				window.close();
 		</script>');
 	}
@@ -37,7 +37,7 @@ $coordenacao = $conn->get_one($sql_coordena);
 
 if ($coordenacao == 0) {
   exit('<script language="javascript" type="text/javascript">
-            alert(\'Você não tem direito de acesso a estas informações!\');
+            alert(\'VocÃª nÃ£o tem direito de acesso a estas informaÃ§Ãµes!\');
             window.history.back(1);</script>');
 }
 // ^ VERIFICA SE O USUARIO TEM DIREITO DE ACESSO ^ /
@@ -90,7 +90,7 @@ $periodo = $conn->get_row($qryPeriodo);
 
    if (count($diarios) == 0) {
 		exit('<script language="javascript">
-                window.alert("Nenhum diário encontrado para o filtro selecionado!");
+                window.alert("Nenhum diÃ¡rio encontrado para o filtro selecionado!");
                 window.close();
 		</script>');
    }
@@ -128,7 +128,7 @@ $periodo = $conn->get_row($qryPeriodo);
 <h4><strong>Curso: </strong><font color="blue"><?=$curso['id'] .' - '. $curso['nome']?></font></h4>
 
 <span>
-<input type="button" value="Relat&oacute;rio de notas e faltas do curso no período" id="notas_faltas"/>
+<input type="button" value="Relat&oacute;rio de notas e faltas do curso no perÃ­odo" id="notas_faltas"/>
 </span>
 
 <!-- panel para selecao de turma para o relatorio // inicio //-->
@@ -158,7 +158,7 @@ $periodo = $conn->get_row($qryPeriodo);
         $url .= '&campus=1'; // TODO: selecionar campus de outra maneira
         $url .= '&turma='. $turma['turma'];
 ?>
-		<a href="#" onclick="abrir('Sistema Acadêmico', '<?=$url?>')" title="clique para visualizar"><?=$turma['turma']?></a>		     <br />
+		<a href="#" onclick="abrir('Sistema AcadÃªmico', '<?=$url?>')" title="clique para visualizar"><?=$turma['turma']?></a>		     <br />
 <?php
     endforeach;
 ?>
@@ -261,11 +261,11 @@ foreach($diarios as $row3) :
       <td align="center"><?=$fl_situacao?></td>
       <td align="center">
         <a href="#" id="<?=$diario_id . '_pane'?>" title="clique para visualizar / ocultar">Acessar</a>
-        <!-- panel com as opções do diário // inicio //-->
+        <!-- panel com as opÃ§Ãµes do diÃ¡rio // inicio //-->
         <div id="diario_<?=$diario_id?>_pane" style="display:none; margin: 1.2em; padding: 1em; background-color: <?=$op_color?>" class="opcoes_web_diario">
             <?=$sem_opcoes . $opcoes_diario?>
         </div>
-        <!-- panel com as opções do diário \\ fim \\ -->
+        <!-- panel com as opÃ§Ãµes do diÃ¡rio \\ fim \\ -->
       </td>
     </tr>
 
@@ -277,7 +277,7 @@ foreach($diarios as $row3) :
 ?>
 </table>
 <br />
-<input type="button" value="Finaliza todos os diários concluídos" onclick="enviar_diario('finaliza_todos',<?=$diario_id?>,<?=$fl_encerrado?>,'<?=$BASE_URL?>','<?=$IEnome?>');" />
+<input type="button" value="Finaliza todos os diÃ¡rios concluÃ­dos" onclick="enviar_diario('finaliza_todos',<?=$diario_id?>,<?=$fl_encerrado?>,'<?=$BASE_URL?>','<?=$IEnome?>');" />
 &nbsp;&nbsp;
 <a href="#" onclick="javascript:window.close();">Fechar</a>
 </form>

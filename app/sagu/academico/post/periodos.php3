@@ -79,11 +79,11 @@ $err= $conn->GetError();
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"N„o foi possÌvel inserir o registro!<BR><BR>$err");
+SaguAssert($ok,"N√£o foi poss√≠vel inserir o registro!<BR><BR>$err");
 
-SuccessPage("Inclus„o de PerÌodo",
+SuccessPage("Inclus√£o de Per√≠odo",
             "location='../periodos.phtml'",
-            "O cÛdigo do perÌodo È <b>$id</b>.",
+            "O c√≥digo do per√≠odo √© <b>$id</b>.",
             "location='../consulta_periodos.phtml'");
 ?>
 <html>

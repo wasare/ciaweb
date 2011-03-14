@@ -206,9 +206,9 @@ $conn->Finish();
 $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel de atualizar o registro!");
-SuccessPage("Alteração de Alunos",
+SuccessPage("AlteraÃ§Ã£o de Alunos",
             "location='../consulta_inclui_pessoa.phtml'",
-            "As informações de <b>$nome</b> foram atualizadas com sucesso.");
+            "As informaÃ§Ãµes de <b>$nome</b> foram atualizadas com sucesso.");
 ?>
 <div align="center">
     <a href="../consulta_inclui_pessoa.phtml">Consultar pessoa</a> |

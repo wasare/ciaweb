@@ -12,7 +12,7 @@ function confirma()
 	{
 		document.form1.submit();
 	} else {
-		// se n„o confirmar, coloque o codigo aqui
+		// se n√£o confirmar, coloque o codigo aqui
     }
 }
 function selecionar_tudo()

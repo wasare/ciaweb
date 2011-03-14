@@ -15,7 +15,7 @@ if (empty($periodo_id) OR $curso_id == 0) {
 
     if ($diario_id == 0) {
 		exit('<script language="javascript">
-                window.alert("ERRO! Primeiro informe um perÌodo e um curso ou um di·rio!");
+                window.alert("ERRO! Primeiro informe um per√≠odo e um curso ou um di√°rio!");
 				window.close();
 		</script>');
 	}

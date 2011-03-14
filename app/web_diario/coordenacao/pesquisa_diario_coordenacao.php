@@ -14,7 +14,7 @@ if (!is_diario($diario_id))
 if(isset($_SESSION['sa_modulo']) && $_SESSION['sa_modulo'] == 'web_diario_login') {
   if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
     exit('<script language="javascript" type="text/javascript">
-            alert(\'Di·rio indisponÌvel para consulta!\');
+            alert(\'Di√°rio indispon√≠vel para consulta!\');
             window.close();</script>');
   }
 }
@@ -40,7 +40,7 @@ if (count($info_diario) == 4) {
 }
 else {
   exit('<script language="javascript" type="text/javascript">
-            alert(\'Di·rio indisponÌvel para consulta!\');
+            alert(\'Di√°rio indispon√≠vel para consulta!\');
             window.close();</script>');
 }
 

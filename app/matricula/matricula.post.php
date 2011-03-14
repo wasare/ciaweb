@@ -20,7 +20,7 @@ $id_diarios  = (array) $_POST["id_diarios"]; //Array com todos os diarios a matr
 if (count($id_diarios) > 0)
 {
     $msg = '<h3><font color=\"#006600\">Disciplinas matr&iacute;culadas:</font></h3>'; //-- resposta para o usuario
-    $sqlInsereDiario = "BEGIN;"; //-- Variavel com a sql de insercao das matr�culas
+    $sqlInsereDiario = "BEGIN;"; //-- Variavel com a sql de insercao das matrículas
 
      //-- Percorre os diarios
 	foreach($id_diarios as $diario){
@@ -85,7 +85,7 @@ if (count($id_diarios) > 0)
 				$tot_alunos = 0;
 			}
 		
-			//-- Se o total de vagas excedeu não matricula
+			//-- Se o total de vagas excedeu nÃ£o matricula
 			if (($num_matriculados+1) > $tot_alunos)
 			{
 				$msg .= "<p>>> <b><font color=\"#FF0000\">Aluno n&atilde;o matr&iacute;culado!</font></b><br>";
@@ -227,7 +227,7 @@ function confirma()
 	{
 		document.form1.submit();
 	} else {
-		// se n�o confirmar, coloque o codigo aqui
+		// se não confirmar, coloque o codigo aqui
     }
 }
 

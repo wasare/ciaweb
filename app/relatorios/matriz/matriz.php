@@ -12,10 +12,10 @@ $curso = $_GET["cs"];
 
 
 
-//Criando a classe de conex„o ADODB
+//Criando a classe de conex√£o ADODB
 $Conexao = NewADOConnection("postgres");
 
-//Setando como conex„o persistente
+//Setando como conex√£o persistente
 $Conexao->PConnect("host=$host dbname=$database user=$user password=$password");
 
 //Debug
@@ -109,7 +109,7 @@ $RsDisciplina = $Conexao->Execute($sqlDisciplinas);
 			echo "<td colspan=\"3\">";
 			echo '<div style="background-color: #000000; color: #ffffff; padding: 1px;">';
 			$lista_periodo = $RsDisciplina->fields[2];
-			echo $RsDisciplina->fields[2] . "&deg; PerÌodo";
+			echo $RsDisciplina->fields[2] . "&deg; Per√≠odo";
 			echo '</div>';
 			echo "</td>";
 			echo "</tr>";

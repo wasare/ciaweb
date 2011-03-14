@@ -7,7 +7,7 @@ $conn = new connection_factory($param_conn);
 
 $acl = new acl();
 if(!$acl->has_access(__FILE__, $conn)) {
-    exit ('Você não tem permissão para acessar este formulário!');
+    exit ('VocÃª nÃ£o tem permissÃ£o para acessar este formulÃ¡rio!');
 }
 
 $ref_curso      = $_GET['ref_curso'];
@@ -24,9 +24,9 @@ $ok = $conn->Execute($sql);  // tire o @ para visualizar mensagens de error do s
 
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível de excluir o registro!");
+SaguAssert($ok,"NÃ£o foi possÃ­vel de excluir o registro!");
 
-SuccessPage("Registro excluído com sucesso",
+SuccessPage("Registro excluÃ­do com sucesso",
             "location='../consulta_inclui_cursos_disciplinas.phtml'");
 
 ?>

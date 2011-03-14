@@ -6,7 +6,7 @@ UebiMiau is a GPL'ed software developed by
  - http://uebimiau.sourceforge.net
 
 Fell free to contact, send donations or anything to me :-)
-São Paulo - Brasil
+SÃ£o Paulo - Brasil
 *************************************************************************/
 
 

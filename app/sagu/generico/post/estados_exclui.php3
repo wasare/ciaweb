@@ -20,7 +20,7 @@ $conn->Finish();
 $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel excluir o registro!");
-SuccessPage("Exclusão de Estado",
+SuccessPage("ExclusÃ£o de Estado",
             "location='../consulta_inclui_estados.phtml'");
 ?>
 <html>

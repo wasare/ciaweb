@@ -7,7 +7,7 @@ $conn = new connection_factory($param_conn);
 
 $acl = new acl();
 if(!$acl->has_access(__FILE__, $conn)) {
-    exit ('Você não tem permissão para acessar este formulário!');
+    exit ('VocÃª nÃ£o tem permissÃ£o para acessar este formulÃ¡rio!');
 }
 
 require("../../lib/VerificaChaveUnica.php3");
@@ -23,7 +23,7 @@ $carga_horaria        = $_POST['carga_horaria'];
 
 CheckFormParameters(array("id","descricao_disciplina"));
 
-SaguAssert(VerificaChaveUnica("disciplinas", "id", "$id"), "Código já existente");
+SaguAssert(VerificaChaveUnica("disciplinas", "id", "$id"), "CÃ³digo jÃ¡ existente");
 
 $conn = new Connection;
 
@@ -54,8 +54,8 @@ $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel inserir o registro!");
 
-SuccessPage("Inclusão de Disciplinas",
+SuccessPage("InclusÃ£o de Disciplinas",
             "location='../disciplinas.phtml'",
-            "Disciplina incluída com sucesso!!!",
+            "Disciplina incluÃ­da com sucesso!!!",
             "location='../consulta_disciplinas.phtml'");
 ?>

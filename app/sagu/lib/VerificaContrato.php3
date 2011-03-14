@@ -1,6 +1,6 @@
 <?
 // ----------------------------------------------------------
-// Verifica o motivo de desativação do contrato
+// Verifica o motivo de desativaÃ§Ã£o do contrato
 // ----------------------------------------------------------
 function VerificaContrato($ref_motivo_desativacao)
 {
@@ -24,16 +24,16 @@ function VerificaContrato($ref_motivo_desativacao)
     url = "javascript:history.go(-1)";
     
     if (confirm("O contrato deste aluno foi desativado por um dos seguintes motivos:\n" +
-                "105 - Transferência para outra Instituição\n" +
-                "152 - Guia de Tranferência Expedida\n" +
-                "550 - Óbito\n" +
-                "6 - Tranferência interna para outro Curso\n" +
-                "10 - Reingresso com transferência para outro curso\n" +
+                "105 - TransferÃªncia para outra InstituiÃ§Ã£o\n" +
+                "152 - Guia de TranferÃªncia Expedida\n" +
+                "550 - Ã“bito\n" +
+                "6 - TranferÃªncia interna para outro Curso\n" +
+                "10 - Reingresso com transferÃªncia para outro curso\n" +
                 "16 - Vestibulando desistente de vaga\n" +
-                "14 - Conclusão de todas as disciplinas do curso\n" +
+                "14 - ConclusÃ£o de todas as disciplinas do curso\n" +
                 "Deseja alterar o contrato mesmo assim?"))
     {
-         alert("Não esqueça de mudar o Motivo de Ativação e o \nStatus do Livro Matrícula do Contrato do Aluno.");
+         alert("NÃ£o esqueÃ§a de mudar o Motivo de AtivaÃ§Ã£o e o \nStatus do Livro MatrÃ­cula do Contrato do Aluno.");
     }
     else
     {

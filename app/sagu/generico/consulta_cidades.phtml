@@ -87,7 +87,7 @@ function ListaCidades()
 		echo("<table width=\"490\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\">");
 
 		echo("  <tr bgcolor=\"$bg0\">\n");
-		echo("    <td width=\"20%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Código</font></b></td>\n");
+		echo("    <td width=\"20%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">CÃ³digo</font></b></td>\n");
 		echo("    <td width=\"65%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Nome</font></b></td>\n");
 		echo("    <td width=\"5%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">UF</font></b></td>\n");
 		echo("    <td width=\"5%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">&nbsp;</font></b></td>\n");
@@ -150,10 +150,10 @@ function ListaCidades()
             {
                 url = 'post/cidade_exclui.php3?id=' + arg1;
 
-                if (confirm("Você tem certeza que deseja EXCLUIR a Cidade: "+arg1+" ?"))
+                if (confirm("VocÃª tem certeza que deseja EXCLUIR a Cidade: "+arg1+" ?"))
                     location=(url)
                 else
-                    alert("Exclusão Cancelada.");
+                    alert("ExclusÃ£o Cancelada.");
             }
 </script>
 <link href="../estilo.css" rel="stylesheet" type="text/css" />
@@ -207,7 +207,7 @@ N&Atilde;O DUPLICAR CADASTROS !</font></b></font></p>
 			color="#FF0000"> </font><font
 			face="Verdana, Arial, Helvetica, sans-serif"><font size="2"><b><font
 			color="#FF0000"><?php  if ( $hasmore )
-			echo("<BR><center>Se a Cidade não estiver listada, seja mais específico.</center>"); ?></font></b></font></font><font
+			echo("<BR><center>Se a Cidade nÃ£o estiver listada, seja mais especÃ­fico.</center>"); ?></font></b></font></font><font
 			color="#FF0000"> </font></b></font></font></td>
 	</tr>
 	<tr align="center">

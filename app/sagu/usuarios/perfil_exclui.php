@@ -13,11 +13,11 @@ $conn->Open();
 $conn->Begin();
 
 $sql = " DROP USER $nome;";
-$mensagem = "Exclusão de Usuário...";
+$mensagem = "ExclusÃ£o de UsuÃ¡rio...";
 
 $ok = $conn->Execute($sql);  
 
-// Exclui usuário na tabela SAGU_USUARIOS no banco de dados sagu.
+// Exclui usuÃ¡rio na tabela SAGU_USUARIOS no banco de dados sagu.
 $sql2 = " DELETE FROM usuario " .
         " WHERE nome = '$nome';";
 
@@ -26,13 +26,13 @@ $ok2 = $conn->Execute($sql2);
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Erro ao excluir usuário no banco de dados!");
+SaguAssert($ok,"Erro ao excluir usuÃ¡rio no banco de dados!");
 
-SaguAssert($ok2,"Erro ao excluir o usuário!");
+SaguAssert($ok2,"Erro ao excluir o usuÃ¡rio!");
 
 SuccessPage("$mensagem",
             "location='../consulta_inclui_usuarios.phtml'",
-            "O usuário <b>$nome</b> foi excluído com sucesso!!!");
+            "O usuÃ¡rio <b>$nome</b> foi excluÃ­do com sucesso!!!");
 
 ?>
 </HEAD>

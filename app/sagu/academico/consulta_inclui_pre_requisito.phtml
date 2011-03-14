@@ -102,7 +102,7 @@ function ListaDisciplinas()
 	if ($ctrl == 0)
 	{
 		echo(" <tr>\n");
-		echo("    <td width=\"100%\" colspan=\"9\" align=\"center\"><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"red\"><b>Nenhuma disciplina prÈ requisito!!!</b></font></td>\n");
+		echo("    <td width=\"100%\" colspan=\"9\" align=\"center\"><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"red\"><b>Nenhuma disciplina pr√© requisito!!!</b></font></td>\n");
 		echo("  </tr>\n");
 	}
 
@@ -115,7 +115,7 @@ function ListaDisciplinas()
 ?>
 <html>
 <head>
-<title>Inclus„o de PrÈ-Requisitos</title>
+<title>Inclus√£o de Pr√©-Requisitos</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script language="JavaScript">
  function _init()
@@ -127,10 +127,10 @@ function ListaDisciplinas()
  {
    url = 'post/exclui_pre_requisito.php3?id=' + arg1 + '&ref_disciplina=' + arg2 + '&ref_disciplia_pre=' + arg3 + '&ref_curso=' + arg4;
 
-   if (confirm("VocÍ tem certeza que deseja EXCLUIR a Disciplina "+arg3+" do Curso "+arg4))
+   if (confirm("Voc√™ tem certeza que deseja EXCLUIR a Disciplina "+arg3+" do Curso "+arg4))
      location=(url)
    else
-     alert("Exclus„o Cancelada.");
+     alert("Exclus√£o Cancelada.");
  }
 </script>
 <link href="../estilo.css" rel="stylesheet" type="text/css" />
@@ -156,18 +156,18 @@ function ListaDisciplinas()
 	<tr bgcolor="#FFFFFF">
 		<td colspan="5" align="center" height="50"><font
 			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000"><b>CUIDADO
-		PARA N√O DUPLICAR CADASTROS !</font></b>
+		PARA N√ÉO DUPLICAR CADASTROS !</font></b>
 		</p>
 		</td>
 	</tr>
 	<tr bgcolor="#0066CC">
 		<td colspan="5" height="28" align="center"><font size="2"
 			color="#FFFFFF"><b><font face="Verdana, Arial, Helvetica, sans-serif">Consulta/Altera&ccedil;&atilde;o
-		PrÈ-Requisitos por Curso</font></b></font></td>
+		Pr√©-Requisitos por Curso</font></b></font></td>
 	</tr>
 	<tr bgcolor="#FFFFFF">
 		<td align="center"><font face="Verdana, Arial, Helvetica, sans-serif"
-			size="2">CÛdigo do Curso:&nbsp;&nbsp;</font> <input type="text"
+			size="2">C√≥digo do Curso:&nbsp;&nbsp;</font> <input type="text"
 			name="ref_curso" size="10"> <input type="submit" value="Consultar"
 			name="button"><br>
 		</td>
@@ -185,7 +185,7 @@ function ListaDisciplinas()
 	<tr bgcolor="#0066CC">
 		<td colspan="5" height="28" align="center"><font size="2"
 			color="#FFFFFF"><b><font face="Verdana, Arial, Helvetica, sans-serif">Consulta/Altera&ccedil;&atilde;o
-		PrÈ Requisitos por Disciplina</font></b></font></td>
+		Pr√© Requisitos por Disciplina</font></b></font></td>
 	</tr>
 	<tr>
 		<td width="10%"><font face="Verdana, Arial, Helvetica, sans-serif"
@@ -193,7 +193,7 @@ function ListaDisciplinas()
 		<td width="10%"><input type="text" name="ref_disciplina" size="10"
 			value=""></td>
 		<td width="10%"><font face="Verdana, Arial, Helvetica, sans-serif"
-			size="2">DescriÁ„o:&nbsp;&nbsp;</font></td>
+			size="2">Descri√ß√£o:&nbsp;&nbsp;</font></td>
 		<td width="60%"><input type="text" name="nome" size="30" value="">&nbsp;&nbsp;
 		</td>
 		<td width="10%" align="right"><input type="submit" name="botao"

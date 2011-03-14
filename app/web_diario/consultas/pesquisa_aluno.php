@@ -7,9 +7,9 @@ $conn = new connection_factory($param_conn);
 
 $campo_aluno = $_GET['aluno'];
 
-// validaÁ„o simples
+// valida√ß√£o simples
 if (empty($campo_aluno))
-    exit('<script language="javascript" type="text/javascript">window.alert("ERRO! Aluno ou matrÌcula inv·lida! '. $campo_aluno .'");window.close();</script>');
+    exit('<script language="javascript" type="text/javascript">window.alert("ERRO! Aluno ou matr√≠cula inv√°lida! '. $campo_aluno .'");window.close();</script>');
 
 ?>
 
@@ -110,7 +110,7 @@ $sql .= '                   ORDER BY a.ref_pessoa
 ?>
     <?php if ($qtde_alunos > 15) : ?>
        <br />
-       <span class="obrigatorio" style="background: yellow;">Exibindo somente os 15 primeiros resultados, seja mais especÌfico para visualizar os demais.</span>
+       <span class="obrigatorio" style="background: yellow;">Exibindo somente os 15 primeiros resultados, seja mais espec√≠fico para visualizar os demais.</span>
        <br />
     <?php endif; ?>
     <br />
@@ -132,10 +132,10 @@ $sql .= '                   ORDER BY a.ref_pessoa
           <td><?=$aluno['abreviatura']?></td>
           <td align="center"><?=$aluno['turma']?></td>
           <td align="center">
-            <a  href="#" onclick="abrir('<?=$IEnome?> - web di·rio','<?=$BASE_URL .'app/relatorios/ficha_academica/lista_ficha_academica.php?aluno='. $aluno['id'] .'&contrato='. $aluno['contrato'] .'&cs='. $aluno['ref_curso']?>');">
+            <a  href="#" onclick="abrir('<?=$IEnome?> - web di√°rio','<?=$BASE_URL .'app/relatorios/ficha_academica/lista_ficha_academica.php?aluno='. $aluno['id'] .'&contrato='. $aluno['contrato'] .'&cs='. $aluno['ref_curso']?>');">
               <img src="<?=$BASE_URL .'public/images/icons/report.png'?>" width="20" height="20" border="0" title="Ficha acad&ecirc;mica" alt="Ficha acad&ecirc;mica" /></a>
               &nbsp;&nbsp;
-              <a  href="#" onclick="abrir('<?=$IEnome?> - web di·rio','<?=$BASE_URL .'app/web_diario/consultas/cadastro_aluno.php?aluno='. $aluno['id'] .'&curso='. $aluno['ref_curso']?>');">
+              <a  href="#" onclick="abrir('<?=$IEnome?> - web di√°rio','<?=$BASE_URL .'app/web_diario/consultas/cadastro_aluno.php?aluno='. $aluno['id'] .'&curso='. $aluno['ref_curso']?>');">
               <img src="<?=$BASE_URL .'public/images/icons/pessoa.png'?>" width="20" height="20" border="0" title="Informa&ccedil;&otilde;es pessoais" alt="Informa&ccedil;&otilde;es pessoais" /></a>
           </td>
         </tr>

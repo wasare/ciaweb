@@ -32,7 +32,7 @@ $sql = " select " .
 
 $query = $conn->CreateQuery($sql);
 
-SaguAssert($query && $query->MoveNext(),"Registro não encontrado!");
+SaguAssert($query && $query->MoveNext(),"Registro nÃ£o encontrado!");
 
 list ( $ref_pessoa,
     $pessoa_nome,
@@ -68,7 +68,7 @@ $conn->Close();
                 <table width="90%" align="center">
                     <tr bgcolor="#000099">
                         <td colspan="4" height="35">
-                            <div align="center"><font size="3" face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#CCCCFF">Atualização de Documentação</font></b></font></div>
+                            <div align="center"><font size="3" face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#CCCCFF">AtualizaÃ§Ã£o de DocumentaÃ§Ã£o</font></b></font></div>
                         </td>
                     </tr>
                     <tr>
@@ -77,24 +77,24 @@ $conn->Close();
                         <?php echo($id); ?> - <?php echo($pessoa_nome); ?></font></b></td>
                     </tr>
                     <tr>
-                        <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Cópia do RG&nbsp;</font></td>
+                        <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;CÃ³pia do RG&nbsp;</font></td>
                         <td>
                             <select name="rg_num">
                                 <option selected><?echo($opcoes[$rg_num]); ?></option>
                                 <?if ($rg_num == 'f')
                                 { echo "<option value=\"t\">Sim</option>";}
                                 if ($rg_num == 't')
-                                { echo "<option value=\"f\">Não</option>";};?>
+                                { echo "<option value=\"f\">NÃ£o</option>";};?>
                             </select>
                         </td>
-                        <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Cópia do CPF</font></td>
+                        <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;CÃ³pia do CPF</font></td>
                         <td>
                             <select name="cpf">
                                 <option selected><?echo($opcoes[$cpf]); ?></option>
                                 <?if ($cpf == 'f')
                                 { echo "<option value=\"t\">Sim</option>";}
                                 if ($cpf == 't')
-                                { echo "<option value=\"f\">Não</option>";};?>
+                                { echo "<option value=\"f\">NÃ£o</option>";};?>
                             </select>
                         </td>
                     </tr>
@@ -106,17 +106,17 @@ $conn->Close();
                                 <?if ($hist_original == 'f')
                                 { echo "<option value=\"t\">Sim</option>";}
                                 if ($hist_original == 't')
-                                { echo "<option value=\"f\">Não</option>";};?>
+                                { echo "<option value=\"f\">NÃ£o</option>";};?>
                             </select>
                         </td>
-                        <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Cópia do Histórico</font></td>
+                        <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;CÃ³pia do HistÃ³rico</font></td>
                         <td>
                             <select name="hist_escolar">
                                 <option selected><?echo($opcoes[$hist_escolar]); ?></option>
                                 <?if ($hist_escolar == 'f')
                                 { echo "<option value=\"t\">Sim</option>";}
                                 if ($hist_escolar == 't')
-                                { echo "<option value=\"f\">Não</option>";};?>
+                                { echo "<option value=\"f\">NÃ£o</option>";};?>
                             </select>
                         </td>
                     </tr>
@@ -128,29 +128,29 @@ $conn->Close();
                                 <?if ($titulo_eleitor == 'f')
                                 { echo "<option value=\"t\">Sim</option>";}
                                 if ($titulo_eleitor == 't')
-                                { echo "<option value=\"f\">Não</option>";};?>
+                                { echo "<option value=\"f\">NÃ£o</option>";};?>
                             </select>
                         </td>
-                        <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Quitação Eleitoral</font></td>
+                        <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;QuitaÃ§Ã£o Eleitoral</font></td>
                         <td>
                             <select name="quitacao_eleitoral">
                                 <option selected><?echo($opcoes[$quitacao_eleitoral]); ?></option>
                                 <?if ($quitacao_eleitoral == 'f')
                                 { echo "<option value=\"t\">Sim</option>";}
                                 if ($quitacao_eleitoral == 't')
-                                { echo "<option value=\"f\">Não</option>";};?>
+                                { echo "<option value=\"f\">NÃ£o</option>";};?>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Documentação Militar</font></td>
+                        <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;DocumentaÃ§Ã£o Militar</font></td>
                         <td>
                             <select name="doc_militar">
                                 <option selected><?echo($opcoes[$doc_militar]); ?></option>
                                 <?if ($doc_militar == 'f')
                                 { echo "<option value=\"t\">Sim</option>";}
                                 if ($doc_militar == 't')
-                                { echo "<option value=\"f\">Não</option>";};?>
+                                { echo "<option value=\"f\">NÃ£o</option>";};?>
                             </select>
                         </td>
                         <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Foto&nbsp;</font></td>
@@ -160,19 +160,19 @@ $conn->Close();
                                 <?if ($foto == 'f')
                                 { echo "<option value=\"t\">Sim</option>";}
                                 if ($foto == 't')
-                                { echo "<option value=\"f\">Não</option>";};?>
+                                { echo "<option value=\"f\">NÃ£o</option>";};?>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Atestado Médico&nbsp;</font></td>
+                        <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Atestado MÃ©dico&nbsp;</font></td>
                         <td>
                             <select name="atestado_medico">
                                 <option selected><?echo($opcoes[$atestado_medico]); ?></option>
                                 <?if ($atestado_medico == 'f')
                                 { echo "<option value=\"t\">Sim</option>";}
                                 if ($atestado_medico == 't')
-                                { echo "<option value=\"f\">Não</option>";};?>
+                                { echo "<option value=\"f\">NÃ£o</option>";};?>
                             </select>
                         </td>
                         <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Diploma Autenticado</font></td>
@@ -182,7 +182,7 @@ $conn->Close();
                                 <?if ($diploma_autenticado == 'f')
                                 { echo "<option value=\"t\">Sim</option>";}
                                 if ($diploma_autenticado == 't')
-                                { echo "<option value=\"f\">Não</option>";};?>
+                                { echo "<option value=\"f\">NÃ£o</option>";};?>
                             </select>
                         </td>
                     </tr>
@@ -194,19 +194,19 @@ $conn->Close();
                                 <?if ($solteiro_emancipado == 'f')
                                 { echo "<option value=\"t\">Sim</option>";}
                                 if ($solteiro_emancipado == 't')
-                                { echo "<option value=\"f\">Não</option>";};?>
+                                { echo "<option value=\"f\">NÃ£o</option>";};?>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Observações</font>
+                        <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;ObservaÃ§Ãµes</font>
                         </td>
                         <td colspan="3">
                             <textarea name="obs_documentos" cols="40" rows="2"><?echo($obs_documentos);?></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Anotações</font>
+                        <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;AnotaÃ§Ãµes</font>
                         </td>
                         <td colspan="3">
                             <textarea name="anotacoes" cols="40" rows="2"><?echo($anotacoes);?></textarea>

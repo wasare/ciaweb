@@ -23,7 +23,7 @@ if ($aluno_id == 0 && empty($periodo)) {
 $filtro = $periodo_dispensa = '';
 if ($aluno_id > 0) {
   $filtro = ' AND m.ref_pessoa = '. $aluno_id;
-  $periodo_dispensa = 'descricao_periodo(m.ref_periodo) AS "Período da disciplina dispensada",';
+  $periodo_dispensa = 'descricao_periodo(m.ref_periodo) AS "PerÃ­odo da disciplina dispensada",';
 }
 else {
   $filtro = ' AND m.ref_periodo = \''. $periodo .'\' ';
@@ -37,7 +37,7 @@ else {
 
 $sql_dispensas = '
 SELECT
-	ref_pessoa AS "Matrícula", 
+	ref_pessoa AS "MatrÃ­cula", 
     p.nome AS "Aluno", 
     m.ref_curso || \' - \' || curso_desc(m.ref_curso) AS "Curso",
     descricao_disciplina(get_disciplina_de_disciplina_of(m.ref_disciplina_ofer)) AS "Disciplina",
@@ -46,18 +46,18 @@ SELECT
     END AS "Disciplina de origem",    
     CASE WHEN instituicao_nome(m.ref_instituicao) IS NULL THEN \'<div align="center"> - </div> \'
     ELSE instituicao_nome(m.ref_instituicao)
-    END AS "Instituição de origem",
+    END AS "InstituiÃ§Ã£o de origem",
     to_char(m.nota_final,\'9G999D9\') AS "Nota",
 	CASE WHEN m.ref_motivo_matricula = 2 THEN \'<div align="center"><font color="blue">AE</font></div>\'
          WHEN m.ref_motivo_matricula = 3 THEN \'<div align="center"><font color="green">CE</font></div>\'
          WHEN m.ref_motivo_matricula = 4 THEN \'<div align="center"><font color="red">EF</font></div>\'
     END AS "Motivo",
     get_campus(campus_disciplina_ofer(m.ref_disciplina_ofer)) AS "Campus",
-    to_char(m.hora_matricula, \'dd/mm/yyyy\') AS "Data lançamento",
+    to_char(m.hora_matricula, \'dd/mm/yyyy\') AS "Data lanÃ§amento",
     '. $periodo_dispensa .'
     CASE WHEN m.obs_final = \'\' OR  m.obs_final IS NULL THEN \'<div align="center"> - </div> \'
     ELSE m.obs_final
-    END AS "Observação"
+    END AS "ObservaÃ§Ã£o"
 
 	FROM
 		matricula m, 
@@ -84,7 +84,7 @@ $info .= "<strong>Data: </strong>" . date("d/m/Y") . "&nbsp;&nbsp;-&nbsp;&nbsp;"
 $info .= "<strong>Hora: </strong>" . date("H:i:s") . "&nbsp;&nbsp;-&nbsp;&nbsp;";
 $info .= "<strong>Total de Registros: </strong>" . $total . "&nbsp;&nbsp;";
 if ($aluno_id == 0) {
-  $info .= "-&nbsp;&nbsp;<strong>Período: </strong> <span>$periodo</span> <br />";
+  $info .= "-&nbsp;&nbsp;<strong>PerÃ­odo: </strong> <span>$periodo</span> <br />";
 }
 $legenda = '<font color="blue">AE = Aproveitamento de estudos</font>&nbsp;&nbsp;-&nbsp;&nbsp;';
 $legenda .= '<font color="green">CE = Certifica&ccedil;&atilde;o de experi&ecirc;ncia</font>&nbsp;&nbsp;-&nbsp;&nbsp;<font color="red">EF = Dispensa de Educa&ccedil;&atilde;o F&iacute;sica</font>';

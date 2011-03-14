@@ -71,8 +71,8 @@ function Lista_Cursos()
 		echo("<table width=\"490\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\">");
 
 		echo("  <tr bgcolor=\"$bg0\">\n");
-		echo("    <td width=\"20%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">CÛdigo</font></b></td>\n");
-		echo("    <td width=\"70%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">DescriÁ„o</font></b></td>\n");
+		echo("    <td width=\"20%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">C√≥digo</font></b></td>\n");
+		echo("    <td width=\"70%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Descri√ß√£o</font></b></td>\n");
 		echo("    <td width=\"5%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">&nbsp;</font></b></td>\n");
 		echo("    <td width=\"5%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">&nbsp;</font></b></td>\n");
 		echo("  </tr>\n");
@@ -142,10 +142,10 @@ function Confirma_Exclui(arg1)
 {
   url = 'post/cursos_exclui.php3?id=' + arg1;
 
-  if (confirm("VocÍ tem certeza que deseja excluir o Curso: "+arg1))
+  if (confirm("Voc√™ tem certeza que deseja excluir o Curso: "+arg1))
     location=(url)
   else
-    alert("Exclus„o Cancelada.");
+    alert("Exclus√£o Cancelada.");
 }
 </script>
 <link href="../estilo.css" rel="stylesheet" type="text/css" />
@@ -162,7 +162,7 @@ function Confirma_Exclui(arg1)
 </div>
 <hr align="center" width="500">
 <p align="center"><font face="Verdana, Arial, Helvetica, sans-serif"
-	size="2" color="#0000FF"><b><font color="#FF0000">CUIDADO PARA N√O
+	size="2" color="#0000FF"><b><font color="#FF0000">CUIDADO PARA N√ÉO
 DUPLICAR CADASTROS !</font></b></font></p>
 <div align="center">
 <table width="500" border="0" cellspacing="0" cellpadding="2"
@@ -170,7 +170,7 @@ DUPLICAR CADASTROS !</font></b></font></p>
 	<tr bgcolor="#0066CC">
 		<td colspan="4" height="28">
 		<div align="center"><font size="2" color="#FFFFFF"><b><font
-			face="Verdana, Arial, Helvetica, sans-serif">Consulta/AlteraÁ„o de
+			face="Verdana, Arial, Helvetica, sans-serif">Consulta/Altera√ß√£o de
 		Cursos</font></b></font></div>
 		</td>
 	</tr>
@@ -201,7 +201,7 @@ DUPLICAR CADASTROS !</font></b></font></p>
 			color="#FF0000"> </font><font
 			face="Verdana, Arial, Helvetica, sans-serif"><font size="2"><b><font
 			color="#FF0000"><?PHP  if ( $hasmore )
-			echo("<BR>Se o Curso n„o estiver listado, seja mais especÌfico."); ?></font></b></font></font><font
+			echo("<BR>Se o Curso n√£o estiver listado, seja mais espec√≠fico."); ?></font></b></font></font><font
 			color="#FF0000"> </font></b></font></font></td>
 	</tr>
 	<tr align="center">

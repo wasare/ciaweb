@@ -20,7 +20,7 @@
     $conn->Close();
 
     if ( $SaguAssert )
-      SaguAssert(!empty($obj),"Cidade [<b><i>$id</b></i>] não cadastrada ou código Inválido!");
+      SaguAssert(!empty($obj),"Cidade [<b><i>$id</b></i>] nÃ£o cadastrada ou cÃ³digo InvÃ¡lido!");
 
     return $obj;
   }

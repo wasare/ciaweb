@@ -26,7 +26,7 @@ $sql = " select nome," .
 
 $query = $conn->CreateQuery($sql);
 
-SaguAssert($query && $query->MoveNext(),"Registro n„o encontrado!");
+SaguAssert($query && $query->MoveNext(),"Registro n√£o encontrado!");
 
 list ( $nome,
 $nome_completo,
@@ -79,7 +79,7 @@ function ChangeCode(fld_name,op_name)
     }
   }
 
-  alert(code + ' n„o È um cÛdigo v·lido!');
+  alert(code + ' n√£o √© um c√≥digo v√°lido!');
 
   field.focus();
 
@@ -93,7 +93,7 @@ function ChangeCode(fld_name,op_name)
 <TABLE align=center cols=2 width=500>
 	<tr>
 		<td bgcolor="#000099" colspan="2" height="28"><font size="3"
-			face="Verdana, Arial, Helvetica, sans-serif" color="#CCCCFF"><b>&nbsp;AlteraÁ„o
+			face="Verdana, Arial, Helvetica, sans-serif" color="#CCCCFF"><b>&nbsp;Altera√ß√£o
 		de Usu&aacute;rio </b></font></td>
 	</tr>
 	<TBODY>
@@ -136,8 +136,8 @@ function ChangeCode(fld_name,op_name)
 				color="#00009C">&nbsp;Grupo</font></td>
 			<td colspan="3" width="410"><select name="grupo">
 				<option value="access" <?php if($grupo == 'access') echo 'selected="selected"';?>>Acesso</option>
-				<option value="admin" <?php if($grupo == 'admin') echo 'selected="selected"';?>>AdministraÁ„o</option>
-                <option value="admin_matriz" <?php if($grupo == 'admin_matriz') echo 'selected="selected"';?>>AdministraÁ„o da Matriz Curricular</option>
+				<option value="admin" <?php if($grupo == 'admin') echo 'selected="selected"';?>>Administra√ß√£o</option>
+                <option value="admin_matriz" <?php if($grupo == 'admin_matriz') echo 'selected="selected"';?>>Administra√ß√£o da Matriz Curricular</option>
 			</select></td>
 		</tr>
 

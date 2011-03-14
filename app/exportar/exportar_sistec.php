@@ -47,7 +47,7 @@ $RsCidades = $conn->Execute("SELECT nome_campus, id FROM campus WHERE ref_empres
                     return;
                 }
             }
-            alert(code + ' n„o È um cÛdigo v·lido!');
+            alert(code + ' n√£o √© um c√≥digo v√°lido!');
             field.focus();
             return true;
         }

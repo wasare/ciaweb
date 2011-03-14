@@ -42,13 +42,13 @@ if($novatos == true)
 /**
  * Array com o nome das colunas para a planilha (xls)
  */
-$colunas[] = "Código";
+$colunas[] = "CÃ³digo";
 
 
 /**
  * SQL Principal
  */
-$sql = " SELECT DISTINCT p.id as \"Código\""; 
+$sql = " SELECT DISTINCT p.id as \"CÃ³digo\""; 
 
 if (isset($_POST["nome"]))
 {
@@ -86,16 +86,16 @@ if (isset($_POST["pai"]))
 
 if (isset($_POST["mae"]))
 {
-	$colunas[]       = "Mãe";
+	$colunas[]       = "MÃ£e";
 	$sql            .= ', f.mae_nome as "Mae" ';
 	$tabela_filiacao = "LEFT OUTER JOIN filiacao f ON(p.ref_filiacao = f.id)";
 }
 
 if (isset($_POST["endereco"]))
 {
-	$colunas[] = "Endereço";
+	$colunas[] = "EndereÃ§o";
 	$sql      .= ", p.rua || '  ' || CASE WHEN p.complemento IS NULL THEN ' ' 
-	 ELSE p.complemento END AS \"Endereço\"";
+	 ELSE p.complemento END AS \"EndereÃ§o\"";
 }
 
 if (isset($_POST["bairro"]))
@@ -209,6 +209,6 @@ $DescricaoPeriodo = $RsPeriodo->fields[0];
 $info .= "<strong>Data: </strong>" . date("d/m/Y") . "&nbsp;&nbsp;-&nbsp;&nbsp;";
 $info .= "<strong>Hora: </strong>" . date("H:i:s") . "&nbsp;&nbsp;-&nbsp;&nbsp;";
 $info .= "<strong>Total de Registros: </strong>" . $num_result . "&nbsp;&nbsp;-&nbsp;&nbsp;";
-$info .= "<strong>Período: </strong> <span>$DescricaoPeriodo</span> $des_turma<br><br>";
+$info .= "<strong>PerÃ­odo: </strong> <span>$DescricaoPeriodo</span> $des_turma<br><br>";
 
 ?>

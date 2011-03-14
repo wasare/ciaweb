@@ -13,12 +13,12 @@ $pdf->AddPage();
 
 $pdf->SetMargins(20,20,20);
 
-$pdf->SetTitle('Declaração de matrícula');
+$pdf->SetTitle('DeclaraÃ§Ã£o de matrÃ­cula');
 
 $pdf->SetFont('Times','B',14);
-//$pdf->Write(5,'DECLARAÇÃO');
+//$pdf->Write(5,'DECLARAÃ‡ÃƒO');
 $pdf->Ln(70);
-$pdf->Cell(0,5,'DECLARAÇÃO',0,1,'C',0,0,0);
+$pdf->Cell(0,5,'DECLARAÃ‡ÃƒO',0,1,'C',0,0,0);
 $pdf->Ln(15);
 $pdf->SetFont('Times','',13);
 $pdf->MultiCell(0,5,$corpo,0,'J');

@@ -1,4 +1,4 @@
-// Função de crição da tabela de listagem de ramais
+// FunÃ§Ã£o de criÃ§Ã£o da tabela de listagem de ramais
 
 function pesquisar() {
 	nome = $F('nome');

@@ -54,30 +54,30 @@ $letra=$letra+substr_count($string, "]");
 
 if(($ch1 > $ch2) OR ($ch1 < $ch2)) 
 {
-   print '<script language=javascript>                   window.alert("ERRO ! VocÍ abriu '.$ch1.' chave(s) e fechou '.$ch2.'"); javascript:window.history.back(1);               </script>';
+   print '<script language=javascript>                   window.alert("ERRO ! Voc√™ abriu '.$ch1.' chave(s) e fechou '.$ch2.'"); javascript:window.history.back(1);               </script>';
 }
 
 if($operador != 0) 
 {
-   print '<script language=javascript>		                   window.alert("ERRO ! Foi detectado um operador n„o valido use (+)para soma (-)para subtraÁ„o (/)para divis„o e (*)para multiplicaÁ„o"); javascript:window.history.back(1); </script>';
+   print '<script language=javascript>		                   window.alert("ERRO ! Foi detectado um operador n√£o valido use (+)para soma (-)para subtra√ß√£o (/)para divis√£o e (*)para multiplica√ß√£o"); javascript:window.history.back(1); </script>';
 }
 
 if($letra != 0) 
 {
-   print '<script language=javascript>                  window.alert("ERRO ! Foi detectado uma letra n„o v·lida use somente P1, P2..... para as provas");                        javascript:window.history.back(1); </script>';
+   print '<script language=javascript>                  window.alert("ERRO ! Foi detectado uma letra n√£o v√°lida use somente P1, P2..... para as provas");                        javascript:window.history.back(1); </script>';
 }
 
 
 if($pv != 0) 
 {
-   print '<script language=javascript> 	                   window.alert("ERRO ! Foi detectado um separador n„o valido use somente ponto como separador");                               javascript:window.history.back(1);</script>';
+   print '<script language=javascript> 	                   window.alert("ERRO ! Foi detectado um separador n√£o valido use somente ponto como separador");                               javascript:window.history.back(1);</script>';
 }
 
 
 
 if($formula == "") 
 {
-   print '<script language=javascript> 	                   window.alert("ERRO ! N„o foi inserido a FÛrmula !  (Obs: no caso de uma ˙nica nota deve ser colocado P1)");                      javascript:window.history.back(1); </script>';
+   print '<script language=javascript> 	                   window.alert("ERRO ! N√£o foi inserido a F√≥rmula !  (Obs: no caso de uma √∫nica nota deve ser colocado P1)");                      javascript:window.history.back(1); </script>';
 }    
 else  
 {

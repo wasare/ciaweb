@@ -140,7 +140,7 @@ function _select(curso_id,curso_nome)
 	<tr>
 		<td colspan="4" align="center"><?php 
 		if ( $hasmore )
-		echo("<br><center>Se o curso n„o estiver listado, seja mais especÌfico.</center><br>");
+		echo("<br><center>Se o curso n√£o estiver listado, seja mais espec√≠fico.</center><br>");
 		?>
 		<hr size="1" width="500">
 		<input type="button" name="Button" value=" Voltar "

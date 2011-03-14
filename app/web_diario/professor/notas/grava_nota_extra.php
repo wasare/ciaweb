@@ -4,7 +4,7 @@ require_once(dirname(__FILE__) .'/../../../setup.php');
 require_once($BASE_DIR .'core/web_diario.php');
 require_once($BASE_DIR .'core/number.php');
 
-// CONEXAO ABERTA PARA TRABALHAR COM TRANSACAO (N√O PERSISTENTE)
+// CONEXAO ABERTA PARA TRABALHAR COM TRANSACAO (N√ÉO PERSISTENTE)
 $conexao = new connection_factory($param_conn, FALSE);
 
 $diario_id = (int) $_POST['diario_id'];
@@ -16,7 +16,7 @@ $valor_avaliacao = $_POST['valor_avaliacao'];
 if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 
     exit('<script language="javascript" type="text/javascript"> 
-            alert(\'VocÍ n„o tem direito de acesso a estas informaÁıes!\');
+            alert(\'Voc√™ n√£o tem direito de acesso a estas informa√ß√µes!\');
             window.close();</script>');
 }
 
@@ -24,7 +24,7 @@ if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 if (is_finalizado($diario_id)){
 
     echo '<script language="javascript" type="text/javascript">';
-    echo 'alert("ERRO! Este di·rio est· finalizado e n„o pode ser alterado!");';
+    echo 'alert("ERRO! Este di√°rio est√° finalizado e n√£o pode ser alterado!");';
     echo 'window.close();';
     echo '</script>';
     exit;
@@ -67,7 +67,7 @@ foreach($qrynotas_parciais as $aluno)
 	
    // CALCULA NOTA TOTAL
 
-   // TODO: Selecionar mÈtodo de c·lculo da nota final com base em par‚metros do sistema
+   // TODO: Selecionar m√©todo de c√°lculo da nota final com base em par√¢metros do sistema
    // SE FOR NOTA DE RECUPERACAO / REAVALIACAO CALCULA CONFORME CRITERIOS DE CADA CURSO
    if($nota != -1) {
 
@@ -87,7 +87,7 @@ foreach($qrynotas_parciais as $aluno)
     // VERIFICA CONDICOES PARA REGISTRAR A NOTA
 	// GRAVA AS NOTAS NO BANCO DE DADOS
 	// SO ATUALIZA A NOTA SE A MEDIA FOR MAIOR QUE 60 E
-	// SE A NOTA FINAL OU A NOTA EXTRA N√O FOR MAIOR QUE 100 E
+	// SE A NOTA FINAL OU A NOTA EXTRA N√ÉO FOR MAIOR QUE 100 E
 	// SE A NOTA EXTRA ESTIVER SENDO ALTERADA
 	if($flag_diff == 1 && $flag_media == 0 && $flag_maior == 0 && $nota != -1) { 
 			

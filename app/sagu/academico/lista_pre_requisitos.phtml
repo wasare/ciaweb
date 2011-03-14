@@ -37,7 +37,7 @@ function ListaPreRequisitos( $ref_curso=null )
 	echo("<center><table width=\"95%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\">");
 	echo ("<tr><td>&nbsp;</td></tr>");
 	echo ("<tr>");
-	echo ("<td bgcolor=\"#000099\" colspan=\"8\" height=\"28\" align=\"center\"><font size=\"3\" face=\"Verdana, Arial, Helvetica, sans-serif\" color=\"#FFFFFF\"><b>Listagem de Pré Requisitos Cadastrados</b></font></td>");
+	echo ("<td bgcolor=\"#000099\" colspan=\"8\" height=\"28\" align=\"center\"><font size=\"3\" face=\"Verdana, Arial, Helvetica, sans-serif\" color=\"#FFFFFF\"><b>Listagem de PrÃ© Requisitos Cadastrados</b></font></td>");
 	echo ("</tr>");
 
 	$i=1;
@@ -77,8 +77,8 @@ function ListaPreRequisitos( $ref_curso=null )
 
 			echo ("<tr bgcolor=\"#000000\">\n");
 			echo ("<td width=\"5%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Cont</b></font></td>");
-			echo ("<td width=\"28%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Cód - Disciplina</b></font></td>");
-			echo ("<td width=\"28%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Cód - Disciplina Pré</b></font></td>");
+			echo ("<td width=\"28%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>CÃ³d - Disciplina</b></font></td>");
+			echo ("<td width=\"28%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>CÃ³d - Disciplina PrÃ©</b></font></td>");
 			echo ("<td width=\"34%\" align=\"right\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Curso&nbsp;&nbsp;</b></font></td>");
 			echo ("<td width=\"5%\" align=\"right\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\">&nbsp;</td>");
 			echo ("<td width=\"5%\" align=\"right\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\">&nbsp;</b></td>");
@@ -98,7 +98,7 @@ function ListaPreRequisitos( $ref_curso=null )
 			$fg = $fg2;
 		}
 		 
-		$href  = "<a href=\"edita_pre_requisito.phtml?id=$id\"><img src=\"../images/update.gif\" alt='Alterar Pré-Requisito' align='absmiddle' border=0></a>";
+		$href  = "<a href=\"edita_pre_requisito.phtml?id=$id\"><img src=\"../images/update.gif\" alt='Alterar PrÃ©-Requisito' align='absmiddle' border=0></a>";
 		$href2 = "<a href=\"javascript:Confirma_Exclui('$id')\"><img src=\"../images/delete.gif\" title='Excluir' align='absmiddle' border=0></a>";
 		 
 		echo("<tr bgcolor=\"$bg\">\n");
@@ -129,10 +129,10 @@ function Confirma_Exclui(arg1)
 {
     url = 'post/pre_requisito_exclui.php3?id=' + arg1;
 
-  if (confirm("Você tem certeza que deseja EXCLUIR o Pré-requisito?"))
+  if (confirm("VocÃª tem certeza que deseja EXCLUIR o PrÃ©-requisito?"))
     location=(url)
   else
-    alert("Exclusão Cancelada.");
+    alert("ExclusÃ£o Cancelada.");
 }
 </script>
 </head>

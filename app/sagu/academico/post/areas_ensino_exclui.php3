@@ -14,9 +14,9 @@ $ok = $conn->Execute($sql);  // tire o @ para visualizar mensagens de error do s
 
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível de excluir o registro!");
+SaguAssert($ok,"NÃ£o foi possÃ­vel de excluir o registro!");
 
-SuccessPage("Registro excluído com sucesso",
+SuccessPage("Registro excluÃ­do com sucesso",
             "location='../areas_ensino.phtml'");
 
 ?>

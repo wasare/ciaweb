@@ -175,12 +175,12 @@ $num_alunos  = count($arr_alunosid);
         <?php echo $header->get_empresa($PATH_IMAGES, $IEnome); ?>
         <h2>Resumo de notas e faltas do curso no per&iacute;odo</h2>
         <p>
-            <b style="color:red;">AtenÁ„o:</b><br />
+            <b style="color:red;">Aten√ß√£o:</b><br />
             <span style="color: teal; font-size: 0.8em;font-style: italic;">
-            - Este relatÛrio exibe somente os di·rios concluÌdos ou finalizados.<br />
-            - Lista todos os alunos com matrÌcula no perÌodo
-            selecionado e que tenham vÌnculo no curso/turma selecionados,
-            independente da situaÁ„o atual do aluno.
+            - Este relat√≥rio exibe somente os di√°rios conclu√≠dos ou finalizados.<br />
+            - Lista todos os alunos com matr√≠cula no per√≠odo
+            selecionado e que tenham v√≠nculo no curso/turma selecionados,
+            independente da situa√ß√£o atual do aluno.
             </span>
         </p>
         <strong>Per&iacute;odo:</strong> <?php echo $desc_periodo; ?><br />

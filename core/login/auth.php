@@ -1,6 +1,6 @@
 <?php
 /**
- * Classe de autenticação de usuário
+ * Classe de autenticaÃ§Ã£o de usuÃ¡rio
  * @filesource
  * @copyright 2009 IFMG Campus Bambui
  * @author santiago
@@ -28,10 +28,10 @@ class auth {
 
 
     /**
-     * Efetua a autenticação do usuário em um módulo do SA
+     * Efetua a autenticaÃ§Ã£o do usuÃ¡rio em um mÃ³dulo do SA
      * @param Login
      * @param Senha
-     * @param Módulo que vai acessar no SA
+     * @param MÃ³dulo que vai acessar no SA
      * @param conexao com banco de dados
      * @return boolean
      */
@@ -42,11 +42,11 @@ class auth {
         $log_msg = $_SERVER['REMOTE_ADDR'] .' - ['. date("d/m/Y H:i:s") .'] - ';
 
         if(empty($login) || empty($senha)) {
-            exit(header('Location: '. $this->base_url .'app/login/index.php?sa_msg=Nome de usuário e senha não preenchidos.'));
+            exit(header('Location: '. $this->base_url .'app/login/index.php?sa_msg=Nome de usuÃ¡rio e senha nÃ£o preenchidos.'));
         }
         else {
 
-            // autentica na base LDAP e atualiza a senha caso necessário
+            // autentica na base LDAP e atualiza a senha caso necessÃ¡rio
             if ($this->ldap_conn) {
               if ($this->ldap_conn->authenticate($login, $senha)) {
 
@@ -56,7 +56,7 @@ class auth {
 
                 $senha_banco = $GLOBALS['ADODB_SESS_CONN']->getOne($sql_verifica_senha);
 
-                // atualiza senha no banco com base na autenticação feita no LDAP
+                // atualiza senha no banco com base na autenticaÃ§Ã£o feita no LDAP
                 if($senha_banco != $nova_senha) {
                   $atualiza_senha = "UPDATE usuario SET senha = '$nova_senha' WHERE nome = '$login' AND ativado = 'TRUE';";
                   $usuario_atualizado = $GLOBALS['ADODB_SESS_CONN']->Execute($atualiza_senha);
@@ -86,7 +86,7 @@ class auth {
                 $_SESSION['sa_modulo'] = $modulo;
                 $_SESSION['sa_campus'] = $usuario[2];
 
-                // força atualização da sessão recriando o ID da sessão
+                // forÃ§a atualizaÃ§Ã£o da sessÃ£o recriando o ID da sessÃ£o
                 adodb_session_regenerate_id();
 
                 $log_msg .= $login .' - *** LOGIN ACEITO ***'."\n";
@@ -113,7 +113,7 @@ class auth {
 
 
     /**
-     * Checa a autenticação do usuário
+     * Checa a autenticaÃ§Ã£o do usuÃ¡rio
      * @return void
      */
     public function check_login($sessao) {
@@ -132,7 +132,7 @@ class auth {
         }
 
         if(!isset($_SESSION['sa_auth']) || empty($_SESSION['sa_auth'])) {
-            exit(header('Location: '. $redirecionamento .'Sem permissão de acesso ou sessão expirada'));
+            exit(header('Location: '. $redirecionamento .'Sem permissÃ£o de acesso ou sessÃ£o expirada'));
         }
         else {
             $log_msg = $_SERVER['REMOTE_ADDR'] .' - ['. date("d/m/Y H:i:s") .'] - ';
@@ -153,7 +153,7 @@ class auth {
 
                 error_log( $log_msg,3,$this->log_file);
 
-                exit(header('Location: '. $redirecionamento .'Sessão expirada por duplicidade de acesso.'));
+                exit(header('Location: '. $redirecionamento .'SessÃ£o expirada por duplicidade de acesso.'));
             }
             elseif($cont_sess == 1) {
                 // CONFIGURA OS PARAMETRO DE TRATAMENTO DE EXPIRACAO DA SESSAO
@@ -172,7 +172,7 @@ class auth {
 
                 error_log($log_msg,3,$this->log_file);
 
-                exit(header('Location: '. $redirecionamento .'Sessão expirada ou inexistente.'));
+                exit(header('Location: '. $redirecionamento .'SessÃ£o expirada ou inexistente.'));
             }
         }
     }

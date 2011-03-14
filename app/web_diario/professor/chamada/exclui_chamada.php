@@ -15,7 +15,7 @@ $sa_ref_periodo = $_SESSION['web_diario_periodo_id'];
 if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 
     exit('<script language="javascript" type="text/javascript">
-            alert(\'Você não tem direito de acesso a estas informações!\');
+            alert(\'VocÃª nÃ£o tem direito de acesso a estas informaÃ§Ãµes!\');
             window.close();</script>');
 }
 // ^ VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR ^ //
@@ -27,7 +27,7 @@ if (!existe_chamada($diario_id)) {
 if (is_finalizado($diario_id)){
 
     echo '<script language="javascript" type="text/javascript">';
-    echo 'alert("ERRO! Este diário está finalizado e não pode ser alterado!");';
+    echo 'alert("ERRO! Este diÃ¡rio estÃ¡ finalizado e nÃ£o pode ser alterado!");';
     echo 'window.close();';
     echo '</script>';
     exit;
@@ -35,7 +35,7 @@ if (is_finalizado($diario_id)){
 
 
 
-// @todo registrar no log a operação de exclusão de chamada
+// @todo registrar no log a operaÃ§Ã£o de exclusÃ£o de chamada
 if(isset($_POST['exclui_ok']) && $_POST['exclui_ok'] === 'exclui_chamada') {    
 	
     $sql_exclui_chamada = 'BEGIN;';
@@ -91,7 +91,7 @@ if(isset($_POST['exclui_ok']) && $_POST['exclui_ok'] === 'exclui_chamada') {
 
     $conn->Execute($sql_exclui_chamada);
 
-	exit('<script language="javascript" type="text/javascript">  window.alert(\'Foram excluídos com sucesso \n os registros referente ao dia ' . $_POST['select_data_chamada'] . '\'); javascript:window.history.back(1); </script>');
+	exit('<script language="javascript" type="text/javascript">  window.alert(\'Foram excluÃ­dos com sucesso \n os registros referente ao dia ' . $_POST['select_data_chamada'] . '\'); javascript:window.history.back(1); </script>');
 }
 
 ?>
@@ -105,7 +105,7 @@ function jsConfirm(dia)
 {
    if (! dia == "")
    {
-    if (! confirm('Você realmente deseja apagar \n a chamada do dia ' + dia + '?' + '\nTodas as faltas lançadas nesta data, \n caso existam, serão excluídas!'))
+    if (! confirm('VocÃª realmente deseja apagar \n a chamada do dia ' + dia + '?' + '\nTodas as faltas lanÃ§adas nesta data, \n caso existam, serÃ£o excluÃ­das!'))
       {
          return false; 
       } 

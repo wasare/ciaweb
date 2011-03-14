@@ -29,9 +29,9 @@ $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel de atualizar o registro!");
 
-SuccessPage("Alteração de Estado",
+SuccessPage("AlteraÃ§Ã£o de Estado",
   	        "location='../consulta_inclui_estados.phtml'",
-	        "As informações do estado <b>$nome</b> foram atualizadas com sucesso.");
+	        "As informaÃ§Ãµes do estado <b>$nome</b> foram atualizadas com sucesso.");
 ?>
 <html>
 <head>

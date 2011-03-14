@@ -22,9 +22,9 @@ $ok = $conn->Execute($sql);
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível alterar o registro!");
-SuccessPage("Alteração de Área de Ensino",
+SaguAssert($ok,"NÃ£o foi possÃ­vel alterar o registro!");
+SuccessPage("AlteraÃ§Ã£o de Ãrea de Ensino",
             "location='../areas_ensino.phtml'",
-            "Área de Ensino alterada com sucesso.");
+            "Ãrea de Ensino alterada com sucesso.");
 
 ?>

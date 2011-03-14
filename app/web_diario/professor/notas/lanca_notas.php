@@ -12,7 +12,7 @@ $operacao = $_GET['do'];
 if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 
     exit('<script language="javascript" type="text/javascript">
-            alert(\'Você não tem direito de acesso a estas informações!\');
+            alert(\'VocÃª nÃ£o tem direito de acesso a estas informaÃ§Ãµes!\');
             window.close();</script>');
 }
 // ^ VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR ^ //
@@ -74,7 +74,7 @@ else
 // ^ ATUALIZA NOTAS E FALTAS CASO O DIARIO TENHA SIDO INICIALIZADO ^//
 
 }
-// técnico integrado 7
+// tÃ©cnico integrado 7
 $curso_tipo = get_curso_tipo($diario_id);
 
 ?>
@@ -129,7 +129,7 @@ $formula = substr($formula, 0, ($qtde_notas * 3 - 1));
 
 if (!empty($formula)) 
 { 
-     echo '<table cellspacing="0" cellpadding="0" class="papeleta"><tr bgcolor="#CCCCCC"> <td><b>Descrição</b></td></tr>';
+     echo '<table cellspacing="0" cellpadding="0" class="papeleta"><tr bgcolor="#CCCCCC"> <td><b>DescriÃ§Ã£o</b></td></tr>';
 	 echo '<tr bgcolor="#F3F3F3"><td style="font-size: 1.2em">'. $formula .'</td></tr></table>';
      // $st = '#E3E3E3';
 } 
@@ -141,7 +141,7 @@ else
 ?>
 <br />
     <form name="envia_nota" id="envia_nota" method="post" action="<?=$BASE_URL .'app/web_diario/professor/notas/informa_notas.php'?>">
-      <div align="left">Lan&ccedil;amento referente à :
+      <div align="left">Lan&ccedil;amento referente Ã  :
 
 			<input type="hidden" name="diario_id" id="diario_id" value="<?=$diario_id?>">
 			<input type="hidden" name="operacao" id="operacao" value="<?=$operacao?>">
@@ -176,7 +176,7 @@ else
 <?php
   else: 
 ?>
-* Estas notas representam as avalia&ccedil;&otilde;es aplicadas durante o per&iacute;odo (Provas, Trabalhos, Relatórios, Monitorias, etc).<br /> 
+* Estas notas representam as avalia&ccedil;&otilde;es aplicadas durante o per&iacute;odo (Provas, Trabalhos, RelatÃ³rios, Monitorias, etc).<br /> 
 <?php
  endif;
 ?>

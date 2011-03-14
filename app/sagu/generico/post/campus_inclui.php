@@ -43,9 +43,9 @@ $conn->Finish();
 $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel inserir o registro!");
-SuccessPage("Inclus„o de Campus",
+SuccessPage("Inclus√£o de Campus",
             "location='../campus_inclui.phtml'",
-            "O cÛdigo do campus È <b>$id_campus</b>.");
+            "O c√≥digo do campus √© <b>$id_campus</b>.");
 ?>
 <html>
 <head>

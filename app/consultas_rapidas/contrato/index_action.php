@@ -7,7 +7,7 @@ require_once("../../../app/setup.php");
 		
 $sql = "
 SELECT  DISTINCT 
-c.id as \"Contrato\", a.id as \"Cód. Pessoa\", a.nome, c.ref_curso, d.abreviatura
+c.id as \"Contrato\", a.id as \"CÃ³d. Pessoa\", a.nome, c.ref_curso, d.abreviatura
 FROM 
 pessoas a, contratos c, cursos d
 WHERE
@@ -21,10 +21,10 @@ WHERE
 	lower(to_ascii(a.nome,'LATIN1')) SIMILAR TO lower(to_ascii('%".$_POST['nome']."%','LATIN1')) 
 ORDER BY a.nome LIMIT 20 OFFSET -1;"; 
 
-//Criando a classe de conexão ADODB
+//Criando a classe de conexÃ£o ADODB
 $Conexao = NewADOConnection("postgres");
 
-//Setando como conexão persistente
+//Setando como conexÃ£o persistente
 $Conexao->PConnect("host=$host dbname=$database user=$user password=$password");
 
 //Exibindo a descricao do curso caso setado

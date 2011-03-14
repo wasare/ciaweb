@@ -7,7 +7,7 @@ $conn = new connection_factory($param_conn);
 
 $acl = new acl();
 if(!$acl->has_access(__FILE__, $conn)) {
-    exit ('Você não tem permissão para acessar este formulário!');
+    exit ('VocÃª nÃ£o tem permissÃ£o para acessar este formulÃ¡rio!');
 }
 
 
@@ -55,7 +55,7 @@ SaguAssert($ok,"Nao foi possivel inserir o registro!");
 $conn->Finish();
 $conn->Close();
 
-SuccessPage("Equivalência de de Disciplina alterada com sucesso",
+SuccessPage("EquivalÃªncia de de Disciplina alterada com sucesso",
               "location='../consulta_disciplinas_equivalentes.phtml'",
               "Disciplina: $descricao1 ($ref_disciplina)<br>Disciplina Equivalente: $descricao2 ($ref_disciplina_equivalente)<br>Curso: $curso ($ref_curso)");
 

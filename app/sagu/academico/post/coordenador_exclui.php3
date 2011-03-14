@@ -21,9 +21,9 @@ $sql = "delete from coordenador
 $ok = $conn->Execute($sql);
 $conn->Close();
 
-saguassert($ok,"Não foi possível de excluir o coordenador!");
+saguassert($ok,"NÃ£o foi possÃ­vel de excluir o coordenador!");
 
-SuccessPage("Coordenador excluído do curso com sucesso",
+SuccessPage("Coordenador excluÃ­do do curso com sucesso",
             "location='../coordenadores.phtml'");
 
 ?>

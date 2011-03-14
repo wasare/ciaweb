@@ -26,7 +26,7 @@ $conn->Finish();
 $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel excluir o registro!");
-SuccessPage("Exclusão de Cidades",
+SuccessPage("ExclusÃ£o de Cidades",
             "location='../consulta_cidades.phtml'");
 
 ?>

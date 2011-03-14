@@ -14,7 +14,7 @@ $operacao = $_POST['operacao'];
 if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 
     exit('<script language="javascript" type="text/javascript"> 
-            alert(\'Você não tem direito de acesso a estas informações!\');
+            alert(\'VocÃª nÃ£o tem direito de acesso a estas informaÃ§Ãµes!\');
             window.close();</script>');
 }
 // ^ VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR ^ //
@@ -29,7 +29,7 @@ $grupo_novo = ("%-" . $periodo_id . "-%-" . $diario_id);
 if(empty($prova))
 {
      print '<script language="javascript" type="text/javascript">
-	window.alert("Você deve selecionar qual a prova que será lançada as notas.");
+	window.alert("VocÃª deve selecionar qual a prova que serÃ¡ lanÃ§ada as notas.");
 	javascript:window.history.back(1);
 	</script>';
 	exit;
@@ -186,7 +186,7 @@ function toNumeric(nStr) {
 function validate_nota(field) {
 	var distribuida = $F('valor_avaliacao');
     if(((toNumeric(field.value) + toNumeric(distribuida) ) / 2) > toNumeric(distribuida)) {
-		alert("Você não pode lançar " + field.value + " pontos e distribuir somente " + distribuida + " pontos!");
+		alert("VocÃª nÃ£o pode lanÃ§ar " + field.value + " pontos e distribuir somente " + distribuida + " pontos!");
         field.focus();
     }
 }
@@ -227,14 +227,14 @@ function validate_nota(field) {
 
 			<p><strong>Nota distribu&iacute;da:</strong>
 			<input name="valor_avaliacao" type="text" id="valor_avaliacao" size="5" maxlength="4" value="<?=$nota_distribuida?>" tabindex="1" />&nbsp;
-			<span class="obrigatorio">* obrigatória</span>
+			<span class="obrigatorio">* obrigatÃ³ria</span>
 			</p>
 <?php	else : ?>
 			<p>
             <font color="green"><strong>
 <?php 
 			$curso_tipo = get_curso_tipo($diario_id);
-			// TODO: Selecionar método de cálculo da nota final com base em parâmetros do sistema
+			// TODO: Selecionar mÃ©todo de cÃ¡lculo da nota final com base em parÃ¢metros do sistema
 			if( $curso_tipo == 2 || $curso_tipo == 4 || $curso_tipo == 5 || $curso_tipo == 6 || $curso_tipo == 10 ) : ?>
 				Nota Final ser&aacute; igual  (Nota Anterior + Nota Extra) / 2		
 <?php		else : ?>

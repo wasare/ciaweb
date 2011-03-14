@@ -3,7 +3,7 @@ require_once(dirname(__FILE__) .'/../../../setup.php');
 require_once($BASE_DIR .'core/web_diario.php');
 require_once($BASE_DIR .'core/number.php');
 
-// CONEXAO ABERTA PARA TRABALHAR COM TRANSACAO (N√O PERSISTENTE)
+// CONEXAO ABERTA PARA TRABALHAR COM TRANSACAO (N√ÉO PERSISTENTE)
 $conexao = new connection_factory($param_conn, FALSE);
 
 $diario_id = (int) $_POST['diario_id'];
@@ -17,14 +17,14 @@ $nota_distribuida = number::decimal_br2numeric($valor_avaliacao,1);
 if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 
     exit('<script language="javascript" type="text/javascript"> 
-            alert(\'VocÍ n„o tem direito de acesso a estas informaÁıes!\');
+            alert(\'Voc√™ n√£o tem direito de acesso a estas informa√ß√µes!\');
             window.close();</script>');
 }
 
 if (is_finalizado($diario_id)){
 
 	echo '<script language="javascript" type="text/javascript">';
-    echo 'alert("ERRO! Este di·rio est· finalizado e n„o pode ser alterado!");';
+    echo 'alert("ERRO! Este di√°rio est√° finalizado e n√£o pode ser alterado!");';
     echo 'window.close();';
 	echo '</script>';
 	exit;
@@ -45,7 +45,7 @@ foreach($notas as $n) {
    if(number::decimal_br2numeric($n) > $nota_distribuida) {
 
       exit('<script language="javascript" type="text/javascript">
-            alert(\'VocÍ n„o pode lanÁar uma nota ('. $n .') maior que a nota distribuÌda ('. $valor_avaliacao .')! \n\n Retorne e corrija!\');
+            alert(\'Voc√™ n√£o pode lan√ßar uma nota ('. $n .') maior que a nota distribu√≠da ('. $valor_avaliacao .')! \n\n Retorne e corrija!\');
             window.history.back(1);</script>');
       break;
    }
@@ -158,7 +158,7 @@ $nota_distribuida_parcial = $conexao->get_one($sql_total);
 $total_nota_distribuida = $nota_distribuida_parcial + $nota_distribuida;
 
 if($total_nota_distribuida > 100) {
-  $msg_registros .= '<font color="red"><b>Erro: N„o foi possÌvel gravar, resultado do somatÛrio das notas distribuÌdas superior a 100!</b></font>';
+  $msg_registros .= '<font color="red"><b>Erro: N√£o foi poss√≠vel gravar, resultado do somat√≥rio das notas distribu√≠das superior a 100!</b></font>';
   $flag_nota_distribuida_maior = 1;
 }
 else {  
@@ -168,15 +168,15 @@ else {
 
 $flag_elimina_notas = (array_sum($notas) == 0 && $nota_distribuida == 0) ? 1 : 0;
 
-// SOMENTE PROCESSA AS NOTAS SE A NOTA DISTRIBUÕDA FOR V¡LIDA
-// E O SOMAT”RIO DAS NOTAS DISTRIBUÕDAS N√O PASSAR DE 100
+// SOMENTE PROCESSA AS NOTAS SE A NOTA DISTRIBU√çDA FOR V√ÅLIDA
+// E O SOMAT√ìRIO DAS NOTAS DISTRIBU√çDAS N√ÉO PASSAR DE 100
 if(($flag_nota_distribuida == 0 && $flag_nota_distribuida_maior == 0) || $flag_elimina_notas == 1) {
 
    // SQL NOTA DISTRIBUIDA
   $sql_update .= "UPDATE diario_formulas SET nota_distribuida = $nota_distribuida
 					WHERE grupo ILIKE '%-$diario_id' AND prova = '$prova';";
 
-  $msg_registros .= "<font color=\"brownn\" >Nota distribuÌda <font color=\"blue\">(<strong>". number::numeric2decimal_br($nota_distribuida,1) ." pontos</strong>)</font> registrada com sucesso!</b></font><br /><br />";
+  $msg_registros .= "<font color=\"brownn\" >Nota distribu√≠da <font color=\"blue\">(<strong>". number::numeric2decimal_br($nota_distribuida,1) ." pontos</strong>)</font> registrada com sucesso!</b></font><br /><br />";
   // ^ SQL NOTA DISTRIBUIDA ^
 
   foreach($qrynotas_parciais as $aluno)
@@ -223,10 +223,10 @@ if(($flag_nota_distribuida == 0 && $flag_nota_distribuida_maior == 0) || $flag_e
 	  
    $NotaReal = number::numeric2decimal_br($nota,1);  
 
-		// SE NOTA EXTRA N√O FOI LANCADA,
-		// E A NOTA FOR DIFERENTE DA ANTERIOR E N√O FOR MAIOR QUE 100 GRAVA
-        // E O SOMAT”RIO DAS NOTAS DISTRIBUIDA … MENOR/IGUAL A 100
-        // E A NOTA … MENOR/IGUAL O VALOR DA NOTA DISTRIBUIDA
+		// SE NOTA EXTRA N√ÉO FOI LANCADA,
+		// E A NOTA FOR DIFERENTE DA ANTERIOR E N√ÉO FOR MAIOR QUE 100 GRAVA
+        // E O SOMAT√ìRIO DAS NOTAS DISTRIBUIDA √â MENOR/IGUAL A 100
+        // E A NOTA √â MENOR/IGUAL O VALOR DA NOTA DISTRIBUIDA
 		if($flag_extra == 0 && $flag_diff == 1 && $flag_maior == 0 && $flag_nota_distribuida_maior == 0) {
 				$flag_grava = 1; 
 		}
@@ -271,7 +271,7 @@ if(($flag_nota_distribuida == 0 && $flag_nota_distribuida_maior == 0) || $flag_e
 				else {
 
                     if($flag_nota_distribuida_maior == 1) {
-                  		$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"#cc0000\" ><strong>Nota $NotaReal n&atilde;o registrada, causa: </strong></font><font color=\"#FF0000\"><strong>NOTA > Nota DistribuÌda</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
+                  		$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"#cc0000\" ><strong>Nota $NotaReal n&atilde;o registrada, causa: </strong></font><font color=\"#FF0000\"><strong>NOTA > Nota Distribu√≠da</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
 					}
                     elseif($flag_diff == 0) {
                   		$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota $NotaReal Mantida</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
@@ -285,7 +285,7 @@ if(($flag_nota_distribuida == 0 && $flag_nota_distribuida_maior == 0) || $flag_e
 
 }
 else
-   $msg_registros .= '<br /><font color="red"><b>Erro: N„o foi possÌvel gravar, nota distribuÌda inv·lida ou n„o informada!</b></font>';
+   $msg_registros .= '<br /><font color="red"><b>Erro: N√£o foi poss√≠vel gravar, nota distribu√≠da inv√°lida ou n√£o informada!</b></font>';
 
 
 $sql_update .= 'COMMIT;';

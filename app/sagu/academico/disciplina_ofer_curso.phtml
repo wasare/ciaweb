@@ -24,7 +24,7 @@ $sql = "select nome_campus from campus where id = $ref_campus;";
  
 $query = $conn->CreateQuery($sql);
  
-SaguAssert($query && $query->MoveNext(),"Campus não encontrado!");
+SaguAssert($query && $query->MoveNext(),"Campus nÃ£o encontrado!");
  
 list ($nome_campus) = $query->GetRowValues();
 
@@ -34,7 +34,7 @@ $sql = "select descricao from cursos where id = $ref_curso;";
  
 $query = $conn->CreateQuery($sql);
 
-SaguAssert($query && $query->MoveNext(),"Curso não encontrado!");
+SaguAssert($query && $query->MoveNext(),"Curso nÃ£o encontrado!");
  
 list ($nome_curso) = $query->GetRowValues();
 
@@ -181,7 +181,7 @@ function setResult(arg1,arg2,arg3)
 	<tr bgcolor="#000099">
 		<td colspan="2" height="40">
 		<div align="center"><font size="3"
-			face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#CCCCFF">Inclusão
+			face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#CCCCFF">InclusÃ£o
 		de Disciplinas Oferecidas</font></b></font></div>
 		</td>
 	</tr>
@@ -313,12 +313,12 @@ function setResult(arg1,arg2,arg3)
 	</tr>
 	<tr>
 		<td bgcolor="#CCCCFF" width="109"><font
-			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Conteúdo</font></td>
+			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;ConteÃºdo</font></td>
 		<td width="387"><input name="conteudo" type=text size="38"></td>
 	</tr>
 	<tr>
 		<td bgcolor="#CCCCFF" width="109"><font
-			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Observação</font></td>
+			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;ObservaÃ§Ã£o</font></td>
 		<td width="387"><input name="observacao" type=text size="38"></td>
 	</tr>
 	<tr>

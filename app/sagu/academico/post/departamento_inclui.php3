@@ -23,11 +23,11 @@ $err= $conn->GetError();
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível inserir o registro!<BR><BR>$err");
+SaguAssert($ok,"NÃ£o foi possÃ­vel inserir o registro!<BR><BR>$err");
 
-SuccessPage("Inclusão de Departamento",
+SuccessPage("InclusÃ£o de Departamento",
             "location='../departamento_inclui.phtml'",
-            "Departamento incluído com sucesso!!!",
+            "Departamento incluÃ­do com sucesso!!!",
             "location='../consulta_inclui_departamentos.phtml'");
 ?>
 <html>

@@ -90,7 +90,7 @@ $curso = '';
     
     if(!$arr_curso)
         echo '<font color="grey">
-        Você não possue vínculo em nenhum curso ou disciplina
+        VocÃª nÃ£o possue vÃ­nculo em nenhum curso ou disciplina
         </font>';
 
     for($i = 0; $i < count($arr_curso) ; $i++) {

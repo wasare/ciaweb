@@ -21,7 +21,7 @@
     $conn->Close();
 
     if ( $SaguAssert )
-      SaguAssert(!empty($obj),"Escola [<b><i>$id</b></i>] n„o cadastrada ou cÛdigo Inv·lido!");
+      SaguAssert(!empty($obj),"Escola [<b><i>$id</b></i>] n√£o cadastrada ou c√≥digo Inv√°lido!");
 
     return $obj;
   }

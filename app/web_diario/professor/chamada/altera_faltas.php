@@ -14,7 +14,7 @@ $num_aulas = $flag = (int) $_GET['flag'];
 if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 
     exit('<script language="javascript" type="text/javascript">
-            alert(\'Você não tem direito de acesso a estas informações!\');
+            alert(\'VocÃª nÃ£o tem direito de acesso a estas informaÃ§Ãµes!\');
             window.close();</script>');
 }
 // ^ VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR ^ //
@@ -22,7 +22,7 @@ if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 if (is_finalizado($diario_id)){
 
     echo '<script language="javascript" type="text/javascript">';
-    echo 'alert("ERRO! Este diário está finalizado e não pode ser alterado!");';
+    echo 'alert("ERRO! Este diÃ¡rio estÃ¡ finalizado e nÃ£o pode ser alterado!");';
     echo 'window.close();';
     echo '</script>';
     exit;
@@ -104,7 +104,7 @@ function validate(field) {
 	}
 	
 	if (ok == "no") {
-		alert("Você não pode lançar " + field.value + " faltas para uma chamada de " + <?=$num_aulas?> + " aulas !");
+		alert("VocÃª nÃ£o pode lanÃ§ar " + field.value + " faltas para uma chamada de " + <?=$num_aulas?> + " aulas !");
 		//field.focus();
 		field.value = "";
 		field.focus();

@@ -141,7 +141,7 @@ echo($nome);
       <td colspan="4" align="center"> 
   <font face="Verdana, Arial, Helvetica, sans-serif"><font size="2"><b><font color="#FF0000"> 
         <?PHP
-if ( $hasmore ) echo("<br>Se o Grupo de Disciplina não estiver listada, seja mais específico.<br>");
+if ( $hasmore ) echo("<br>Se o Grupo de Disciplina nÃ£o estiver listada, seja mais especÃ­fico.<br>");
 ?>
           </font></b></font></font> 
         <hr size="1" width="500">

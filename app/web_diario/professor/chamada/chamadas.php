@@ -12,7 +12,7 @@ $operacao  = $_GET['do'];
 if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 
     exit('<script language="javascript" type="text/javascript">
-            alert(\'VocÍ n„o tem direito de acesso a estas informaÁıes!\');
+            alert(\'Voc√™ n√£o tem direito de acesso a estas informa√ß√µes!\');
             window.close();</script>');
 }
 // ^ VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR ^ //
@@ -20,7 +20,7 @@ if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 if (is_finalizado($diario_id)) {
 
     echo '<script language="javascript" type="text/javascript">';
-    echo 'alert("ERRO! Este di·rio est· finalizado e n„o pode ser alterado!");';
+    echo 'alert("ERRO! Este di√°rio est√° finalizado e n√£o pode ser alterado!");';
     echo 'window.close();';
     echo '</script>';
     exit;

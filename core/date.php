@@ -25,7 +25,7 @@ class date {
 				$mes = "fevereiro";
 				break;
 			case 3:
-				$mes = "março";
+				$mes = "marÃ§o";
 				break;
 			case 4:
 				$mes = "abril";

@@ -22,7 +22,7 @@ function bt_confirma($listaMatriculas, $Con) {
 		die();
 	}else{
 		print "<div align='center'>";
-		print "<h2><font color='red'><strong>MatrÌculas excluÌdas com sucesso!</strong></font></h2>";
+		print "<h2><font color='red'><strong>Matr√≠culas exclu√≠das com sucesso!</strong></font></h2>";
 		print "<a href='filtro.php'>Excluir outra matricula</a>";
 		print "</div>";
 		die;
@@ -171,7 +171,7 @@ else {
   </p>
   <table border="0" cellpadding="0" cellspacing="2">
     <tr>
-      <td height="32" align="center" bgcolor="#CCCCFF">Di·rio</td>
+      <td height="32" align="center" bgcolor="#CCCCFF">Di√°rio</td>
       <td height="32" align="center" bgcolor="#CCCCFF">Disciplina</td>
       <td height="32" align="center" bgcolor="#CCCCFF">Curso</td>
     </tr>

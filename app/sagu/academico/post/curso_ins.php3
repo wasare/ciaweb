@@ -28,7 +28,7 @@ CheckFormParameters(array("id",
                             "agrupo_curso",
                             "ref_tipo_curso"));
 
-SaguAssert(VerificaChaveUnica("cursos", "id", "$id"), "Já existente Curso com esse código!");
+SaguAssert(VerificaChaveUnica("cursos", "id", "$id"), "JÃ¡ existente Curso com esse cÃ³digo!");
 
 $conn = new Connection;
 
@@ -73,11 +73,11 @@ $ok = $conn->Execute($sql);
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível inserir o curso!!!");
+SaguAssert($ok,"NÃ£o foi possÃ­vel inserir o curso!!!");
 
-SuccessPage("Inclusão de Cursos",
+SuccessPage("InclusÃ£o de Cursos",
             "location='../curso_ins.phtml'",
-            "Curso incluído com sucesso!!!",
+            "Curso incluÃ­do com sucesso!!!",
             "location='../consulta_cursos.phtml'");
 
 ?>

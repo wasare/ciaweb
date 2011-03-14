@@ -17,7 +17,7 @@ $sql = "select " .
 
 $query = $conn->CreateQuery($sql);
 
-SaguAssert($query && $query->MoveNext(),"Registro não encontrado!");
+SaguAssert($query && $query->MoveNext(),"Registro nÃ£o encontrado!");
 
 list ( $id,
        $area) = $query->GetRowValues();

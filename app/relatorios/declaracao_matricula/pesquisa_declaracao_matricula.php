@@ -51,7 +51,7 @@ $carimbo = new carimbo($param_conn);
 
         <h1>Declara&ccedil;&atilde;o de matr&iacute;cula</h1>
 
-        <span class="comentario">ATENÇÃO: este relatório não verifica a situação acadêmica do aluno, apenas emite o documento.</span>
+        <span class="comentario">ATENÃ‡ÃƒO: este relatÃ³rio nÃ£o verifica a situaÃ§Ã£o acadÃªmica do aluno, apenas emite o documento.</span>
 
         <div class="panel">Data de emiss&atilde;o: <br />
 

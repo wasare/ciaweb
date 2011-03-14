@@ -10,7 +10,7 @@ $snome = $_POST['snome'];
 
 <html>
 <head>
-<title>LocalizaÁ„o de Pessoas por Nome</title>
+<title>Localiza√ß√£o de Pessoas por Nome</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <?php
 
@@ -80,7 +80,7 @@ function ListaPessoas()
 
 		echo "      <tr bgcolor=\"$bg0\">\n";
 		echo "        <td width=\"5%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">&nbsp;</font></b></td>\n";
-		echo "        <td width=\"25%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">CÛdigo</font></b></td>\n";
+		echo "        <td width=\"25%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">C√≥digo</font></b></td>\n";
 		echo "        <td width=\"7%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Nome</font></b></td>\n";
 		echo "      </tr>\n";
 
@@ -180,7 +180,7 @@ ListaPessoas();
 if ( $hasmore )
 {
 	echo "<font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"#FF0000\">";
-	echo "<br><center><b>Se a Pessoa n„o estiver listada, seja mais especÌfico.</b></center>";
+	echo "<br><center><b>Se a Pessoa n√£o estiver listada, seja mais espec√≠fico.</b></center>";
 	echo "</font>";
 }
 

@@ -20,7 +20,7 @@ $conn->Finish();
 $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel excluir o registro!");
-SuccessPage("Exclusão de Campus",
+SuccessPage("ExclusÃ£o de Campus",
             "location='../campus_inclui.phtml'");
 ?>
 <html>

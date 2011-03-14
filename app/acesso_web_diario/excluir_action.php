@@ -4,10 +4,10 @@
 header ("Cache-Control: no-cache");
 require_once("../../app/setup.php");
 
-//Criando a classe de conex„o ADODB
+//Criando a classe de conex√£o ADODB
 $Conexao = NewADOConnection("postgres");
 
-//Setando como conex„o persistente
+//Setando como conex√£o persistente
 $Conexao->PConnect("host=$host dbname=$database user=$user password=$password");
 
 
@@ -21,11 +21,11 @@ $Result1 = $Conexao->Execute($sql);
 	
 if ($Result1) {
 	
-	$msg = "<p class=\"msg_erro\">Exclus„o realizada com sucesso!</p>";
+	$msg = "<p class=\"msg_erro\">Exclus√£o realizada com sucesso!</p>";
 }
 else {
 	
-	$msg = "<p class=\"msg_sucesso\">Erro ao realizar exclus„o!</p>";
+	$msg = "<p class=\"msg_sucesso\">Erro ao realizar exclus√£o!</p>";
 }
 
 ?>
@@ -39,7 +39,7 @@ else {
 </head>
 
 <body>
-<h2>Excluir acesso ao Web Di·rio</h2>
+<h2>Excluir acesso ao Web Di√°rio</h2>
 <?php echo $msg; ?>
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>

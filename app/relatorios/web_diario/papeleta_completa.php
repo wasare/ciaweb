@@ -19,7 +19,7 @@ if(isset($_SESSION['sa_modulo']) && $_SESSION['sa_modulo'] == 'web_diario_login'
   if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 
     exit('<script language="javascript" type="text/javascript">
-            alert(\'VocÍ n„o tem direito de acesso a estas informaÁıes!\');
+            alert(\'Voc√™ n√£o tem direito de acesso a estas informa√ß√µes!\');
             window.close();</script>');
   }
   // ^ VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR ^ //
@@ -30,15 +30,15 @@ if(!is_inicializado($diario_id))
 {
     if(!ini_diario($diario_id))
     {
-        echo '<script type="text/javascript">  window.alert("Falha ao inicializar o di·rio!!!!!!!"); </script>';
-        envia_erro('Falha ao inicializar o di·rio '. $diario_id .'!!!!!!!');
+        echo '<script type="text/javascript">  window.alert("Falha ao inicializar o di√°rio!!!!!!!"); </script>';
+        envia_erro('Falha ao inicializar o di√°rio '. $diario_id .'!!!!!!!');
         exit; 
     }
 }
 //^  INICIALIZA O DIARIO CASO NECESSARIO ^ //
 
 // ATUALIZA NOTAS E FALTAS CASO O DIARIO TENHA SIDO INICIALIZADO
-// SER¡ NECESSARIO PRINCIPALMENTE EM CASOS DE DISPENSA, ONDE O DIARIO … INICIALIZADO SOMENTE PARA O ALUNO DISPENSADO
+// SER√Å NECESSARIO PRINCIPALMENTE EM CASOS DE DISPENSA, ONDE O DIARIO √â INICIALIZADO SOMENTE PARA O ALUNO DISPENSADO
 $qryNotas = 'SELECT
         m.ref_pessoa, id_ref_pessoas
         FROM
@@ -73,7 +73,7 @@ foreach($qry as $registro)
 
 
 if (!existe_matricula($diario_id)) {
-  exit('<script language="javascript">window.alert("Este di·rio ainda n„o possue alunos matriculados!"); javascript:window.close(); </script>');
+  exit('<script language="javascript">window.alert("Este di√°rio ainda n√£o possue alunos matriculados!"); javascript:window.close(); </script>');
 }
 
 $sql3 = 'SELECT 
@@ -194,11 +194,11 @@ else {
     }
 }
 
-echo 'SituaÁ„o: ' . $fl_situacao;
+echo 'Situa√ß√£o: ' . $fl_situacao;
 
 if( $fl_finalizada == 'f') {
 
-	echo '<br /><font color="red" size="-2"><strong>SEM VALOR COMO DOCUMENTO, PASSÕVEL DE ALTERA«’ES</strong></font>';
+	echo '<br /><font color="red" size="-2"><strong>SEM VALOR COMO DOCUMENTO, PASS√çVEL DE ALTERA√á√ïES</strong></font>';
 
 }
 

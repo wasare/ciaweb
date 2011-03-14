@@ -16,7 +16,7 @@ $aluno_id   = $_POST["aluno"];
 
 $sql = "
 SELECT DISTINCT
-    p.id as \"Matrícula\",
+    p.id as \"MatrÃ­cula\",
     p.nome as \"Nome\",
     SUM(d.carga_horaria) AS \"CH Matriculada\",
     SUM(m.num_faltas) as \"Total Faltas\",
@@ -64,7 +64,7 @@ $num_result = $Result1->RecordCount();
 $info .= "<strong>Data: </strong>" . date("d/m/Y") . "&nbsp;&nbsp;-&nbsp;&nbsp;";
 $info .= "<strong>Hora: </strong>" . date("H:i:s") . "&nbsp;&nbsp;-&nbsp;&nbsp;";
 $info .= "<strong>Total de Registros: </strong>" . $num_result . "&nbsp;&nbsp;-&nbsp;&nbsp;";
-$info .= "<strong>Período: </strong> <span>$periodo</span> <br><br>";
+$info .= "<strong>PerÃ­odo: </strong> <span>$periodo</span> <br><br>";
 
 
 $sqlCurso = "

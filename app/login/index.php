@@ -13,7 +13,7 @@ if(isset($_POST['modulo'])) {
 
     $conn = new connection_factory($param_conn);
 
-    // verifica usuário na base LDAP
+    // verifica usuÃ¡rio na base LDAP
     $adLdap = new adLDAP($param_ldap);
 
     $autentica = new auth($BASE_URL, $adLdap);
@@ -33,11 +33,11 @@ if(isset($_POST['modulo'])) {
           exit(header('Location: '. $BASE_URL .'app/aluno'));
           break;
         default:
-          exit(header('Location: '. $BASE_URL .'index.php?sa_msg=Sessão inválida'));
+          exit(header('Location: '. $BASE_URL .'index.php?sa_msg=SessÃ£o invÃ¡lida'));
        }
     }
     else {
-      exit(header('Location: '. $BASE_URL .'index.php?sa_msg=Senha ou usuário inválido'));
+      exit(header('Location: '. $BASE_URL .'index.php?sa_msg=Senha ou usuÃ¡rio invÃ¡lido'));
     }
 }
 else {

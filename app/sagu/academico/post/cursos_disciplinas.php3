@@ -7,7 +7,7 @@ $conn = new connection_factory($param_conn);
 
 $acl = new acl();
 if(!$acl->has_access(__FILE__, $conn)) {
-    exit ('Você não tem permissão para acessar este formulário!');
+    exit ('VocÃª nÃ£o tem permissÃ£o para acessar este formulÃ¡rio!');
 }
 
 require("../../lib/InvData.php3");
@@ -151,9 +151,9 @@ SaguAssert($ok,"Nao foi possivel inserir o registro!");
 $conn->Finish();
 $conn->Close();
 
-SuccessPage("Inclusão de Cursos Disciplinas",
+SuccessPage("InclusÃ£o de Cursos Disciplinas",
             "location='../cursos_disciplinas.phtml'",
-            "Curso Disciplina incluído com sucesso!!!",
+            "Curso Disciplina incluÃ­do com sucesso!!!",
             "location='../consulta_inclui_cursos_disciplinas.phtml'");
 
 ?>

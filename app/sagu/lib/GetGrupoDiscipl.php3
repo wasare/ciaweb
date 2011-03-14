@@ -20,7 +20,7 @@
     $conn->Close();
 
     if ( $SaguAssert )
-      SaguAssert(!empty($obj),"Grupo de Disciplina [<b><i>$id</b></i>] não cadastrado ou código inválido!");
+      SaguAssert(!empty($obj),"Grupo de Disciplina [<b><i>$id</b></i>] nÃ£o cadastrado ou cÃ³digo invÃ¡lido!");
 
     return $obj;
   }

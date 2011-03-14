@@ -60,7 +60,7 @@ $fl_cartao              = $_POST['fl_cartao'];
 
 
 $ok = ValidaCpf($cod_cpf_cgc);
-SaguAssert($ok,"Número de CPF inválido!");
+SaguAssert($ok,"NÃºmero de CPF invÃ¡lido!");
 
 CheckFormParameters(array("nome",
                           "cep",
@@ -243,11 +243,11 @@ echo($estados_civis[$estado_civil]);
                     </b></font></td>
                 </tr>
                 <tr>
-                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Deficiência</font></td>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;DeficiÃªncia</font></td>
                     <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
                                 <?
                                 if ( $deficiencia == '0' )
-                                { echo 'Não'; }
+                                { echo 'NÃ£o'; }
                                 else
                                 { echo 'Sim: ' . $deficiencia_desc; }
                                 ?>
@@ -288,7 +288,7 @@ echo($rg_cidade . " " . $rg_cidade_);
                     </font></td>
                     <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
                                 <script language="PHP">
-echo($ref_filiacao . "    Pai: " . $nome_pai . "    Mãe: " . $nome_mae);
+echo($ref_filiacao . "    Pai: " . $nome_pai . "    MÃ£e: " . $nome_mae);
                                 </script>
                     </b></font></td>
                 </tr>
@@ -341,7 +341,7 @@ echo($opcoes[$fl_cartao]);
                     </b></font></td>
                 </tr>
                 <tr>
-                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Permite Divulgação<br>&nbsp;dos Dados Pessoais</font></td>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Permite DivulgaÃ§Ã£o<br>&nbsp;dos Dados Pessoais</font></td>
                     <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
                                 <script language="PHP">
 echo($opcoes[$fl_dados_pessoais]);
@@ -350,10 +350,10 @@ echo($opcoes[$fl_dados_pessoais]);
                 </tr>
                 <tr><td>&nbsp;</td></tr>
                 <tr>
-                    <td colspan="2"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">Documentação</font></td>
+                    <td colspan="2"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">DocumentaÃ§Ã£o</font></td>
                 </tr>
                 <tr>
-                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Cópia do RG</font></td>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;CÃ³pia do RG</font></td>
                     <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
                                 <script language="PHP">
 echo($opcoes[$rg_num]);
@@ -361,7 +361,7 @@ echo($opcoes[$rg_num]);
                     </b></font></td>
                 </tr>
                 <tr>
-                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Cópia do CPF</font></td>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;CÃ³pia do CPF</font></td>
                     <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
                                 <script language="PHP">
 echo($opcoes[$cpf]);
@@ -369,7 +369,7 @@ echo($opcoes[$cpf]);
                     </b></font></td>
                 </tr>
                 <tr>
-                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Cópia do Título de Eleitor</font></td>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;CÃ³pia do TÃ­tulo de Eleitor</font></td>
                     <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
                                 <script language="PHP">
 echo($opcoes[$titulo_eleitord]);
@@ -385,7 +385,7 @@ echo($opcoes[$quitacao_eleitoral]);
                     </b></font></td>
                 </tr>
                 <tr>
-                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Histórico Original</font></td>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;HistÃ³rico Original</font></td>
                     <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
                                 <script language="PHP">
 echo($opcoes[$hist_original]);
@@ -393,7 +393,7 @@ echo($opcoes[$hist_original]);
                     </b></font></td>
                 </tr>
                 <tr>
-                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Cópia do Histórico</font></td>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;CÃ³pia do HistÃ³rico</font></td>
                     <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
                                 <script language="PHP">
 echo($opcoes[$hist_escolar]);
@@ -417,7 +417,7 @@ echo($opcoes[$foto]);
                     </b></font></td>
                 </tr>
                 <tr>
-                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Atestado Médico</font></td>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Atestado MÃ©dico</font></td>
                     <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
                                 <script language="PHP">
 echo($opcoes[$atestado_medico]);
@@ -442,10 +442,10 @@ echo($opcoes[$solteiro_emancipado]);
                 </tr>
                 <tr><td>&nbsp;</td></tr>
                 <tr>
-                    <td colspan="2"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">Informações do Ensino Médio</font></td>
+                    <td colspan="2"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">InformaÃ§Ãµes do Ensino MÃ©dio</font></td>
                 </tr>
                 <tr>
-                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Ano de conclusão</font></td>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Ano de conclusÃ£o</font></td>
                     <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
                                 <script language="PHP">echo($ano_2g);</script>
                     </b></font></td>

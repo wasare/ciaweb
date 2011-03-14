@@ -54,9 +54,9 @@ $conn->Finish();
 $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel inserir o registro!");
-SuccessPage("Inclus„o de Empresa",
+SuccessPage("Inclus√£o de Empresa",
             "location='../configuracao_empresa.phtml'",
-            "O cÛdigo da empresa È <b>$id_config_empresa</b>.");
+            "O c√≥digo da empresa √© <b>$id_config_empresa</b>.");
 ?>
 <html>
 <head>

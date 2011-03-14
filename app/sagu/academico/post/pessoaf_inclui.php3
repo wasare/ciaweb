@@ -61,7 +61,7 @@ CheckFormParameters(array("nome",
                           "sexo",
                           "deficiencia",
                           "fl_dados_pessoais",
-                          "")); // Marca fim da Lista -> é opcional
+                          "")); // Marca fim da Lista -> Ã© opcional
 
 $dt_cadastro    = InvData($dt_cadastro);
 $rg_data        = InvData($rg_data);
@@ -150,7 +150,7 @@ $sql .= "
 
 $ok = $conn->Execute($sql);
 
-SaguAssert($ok,"Não foi possível inserir o registro!<br>$sql");
+SaguAssert($ok,"NÃ£o foi possÃ­vel inserir o registro!<br>$sql");
 
 $sql = " 
 INSERT INTO documentos (
@@ -232,11 +232,11 @@ $ok = $conn->Execute($sql);
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível inserir o registro!<br>$sql");
+SaguAssert($ok,"NÃ£o foi possÃ­vel inserir o registro!<br>$sql");
 
-SuccessPage("Inclusão de Alunos", 
+SuccessPage("InclusÃ£o de Alunos", 
 			"location='../pessoaf_inclui.phtml'",
-            "O código do Aluno é $id_pessoa",
+            "O cÃ³digo do Aluno Ã© $id_pessoa",
             "location='../consulta_inclui_pessoa.phtml'");
 
 ?>

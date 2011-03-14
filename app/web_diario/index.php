@@ -9,16 +9,16 @@ $conn = new connection_factory($param_conn);
 // VERIFICA SE O USUARIO TEM DIREITO DE ACESSO
 $acl = new acl();
 
-// @todo melhorar o retorno ao usu·rio usando um metÛdo de logout
+// @todo melhorar o retorno ao usu√°rio usando um met√≥do de logout
 if (!$acl->has_role($sa_ref_pessoa, $PAPEIS_WEB_DIARIO, $conn)) {
   exit('<script language="javascript" type="text/javascript">
-            alert(\'VocÍ n„o tem direito de acesso a estas informaÁıes!\');
+            alert(\'Voc√™ n√£o tem direito de acesso a estas informa√ß√µes!\');
             window.history.back(1);</script>');
 }
 // ^ VERIFICA SE O USUARIO TEM DIREITO DE ACESSO ^ //
 
 
-// @todo verificar se quem acessou possui pelo menos um di·rio ou coordena pelo menos um curso
+// @todo verificar se quem acessou possui pelo menos um di√°rio ou coordena pelo menos um curso
 
 unset($_SESSION['conteudo']);
 unset($_SESSION['flag_falta']);
@@ -67,7 +67,7 @@ if ($is_coordenador) {
 	// ^ RECUPERA INFORMACOES SOBRE OS PERIODOS E CURSOS DO COORDENADOR ^ //
 }
 
-// recurso para carregar a p·gina padr„o
+// recurso para carregar a p√°gina padr√£o
 $class_coordenacao = ($is_coordenador && !$is_professor) ? ' class="active"' : '';
 $class_diarios = ($is_professor) ? ' class="active"' : '';
 

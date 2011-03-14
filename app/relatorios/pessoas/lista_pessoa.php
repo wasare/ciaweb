@@ -196,7 +196,7 @@ $pessoa = $conn->get_row($sql);
                 <strong>CPF:</strong> 
                 <?=$pessoa['cod_cpf_cgc'];?>
                 <br />
-                <strong>Título de eleitor:</strong>
+                <strong>TÃ­tulo de eleitor:</strong>
                 <?=$pessoa['titulo_eleitor'];?>
                 <br />
                 <h3>Filia&ccedil;&atilde;o</h3>

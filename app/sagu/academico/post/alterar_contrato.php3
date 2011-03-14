@@ -145,7 +145,7 @@ $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel de atualizar o registro!");
 
-SuccessPage("Alteração do Contrato",
+SuccessPage("AlteraÃ§Ã£o do Contrato",
             "location='../consulta_inclui_contratos.phtml'",
             "Contrato alterado com sucesso.");
 ?>

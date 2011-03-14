@@ -36,8 +36,8 @@ if ( is_numeric($tipo_curso) ){
 
 $sqlCursos = "
 SELECT
-	t1.id as \"CÛd.\",
-	t1.descricao AS \"DescriÁ„o do Curso\",
+	t1.id as \"C√≥d.\",
+	t1.descricao AS \"Descri√ß√£o do Curso\",
 	tipo_curso AS \"Tipo Curso\",
 	t2.mat AS \"Alunos\"
 FROM
@@ -147,7 +147,7 @@ $info .= "<strong>Total de Matr&iacute;culas: </strong>" . $Matriculas . $txt_ci
 	<div style="width: 760px;" align="center">
       	<?php echo $header->get_empresa($PATH_IMAGES, $IEnome); ?>
   
-		<h2>CURSOS COM ALUNOS MATRICULADOS NO PERÕODO</h2>
+		<h2>CURSOS COM ALUNOS MATRICULADOS NO PER√çODO</h2>
 		<?php 
 	        echo $info;
 			rs2html($RsCursos, 'cellspacing="0" border="0" class="tabela_relatorio" cellpadding="0"'); 

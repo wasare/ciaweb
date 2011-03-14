@@ -69,7 +69,7 @@ function consulta_pessoa() {
         <label>
         <input name="codigo_pessoa" type="text" id="codigo_pessoa" size="20" />
         </label>
-        <a href="javascript:consulta_pessoa()"><img src="../../public/images/icons/lupa.png" alt="Pesquisar usuário" width="20" height="20" /></a> <span class="textfieldRequiredMsg">Obrigat&oacute;rio.</span><span class="textfieldInvalidFormatMsg">Formato inv&aacute;lido.</span></span></td>
+        <a href="javascript:consulta_pessoa()"><img src="../../public/images/icons/lupa.png" alt="Pesquisar usuÃ¡rio" width="20" height="20" /></a> <span class="textfieldRequiredMsg">Obrigat&oacute;rio.</span><span class="textfieldInvalidFormatMsg">Formato inv&aacute;lido.</span></span></td>
     </tr>
     <tr>
       <td>Nome Completo:</td>

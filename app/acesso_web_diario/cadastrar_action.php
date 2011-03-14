@@ -30,7 +30,7 @@ $NumPessoa = $RsConfPessoa->RecordCount();
 
 if($NumPessoa > 0) {
 
-    $msg = "<p class=\"msg_erro\">Erro: n„o foi possÌvel cadastrar.<br>Usu·rio j· cadastrado!</p>";
+    $msg = "<p class=\"msg_erro\">Erro: n√£o foi poss√≠vel cadastrar.<br>Usu√°rio j√° cadastrado!</p>";
 }
 else {
 
@@ -57,7 +57,7 @@ else {
     </head>
 
     <body>
-        <h2>Cadastrar novo acesso ao Web Di·rio</h2>
+        <h2>Cadastrar novo acesso ao Web Di√°rio</h2>
         <?php echo $msg; ?>
         <table border="0" cellspacing="0" cellpadding="0">
             <tr>

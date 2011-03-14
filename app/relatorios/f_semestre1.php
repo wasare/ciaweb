@@ -22,11 +22,11 @@ include_once('../../conf/webdiario.conf.php');
                 }
                 ?>
             </select>
-            <input type="radio" name="semestre" id="semestre" value="01/01|30/06|01/07" checked="checked" />1º Semestre
-            <input type="radio" name="semestre" id="semestre" value="01/07|31/12|01/07" />2º Semestre
+            <input type="radio" name="semestre" id="semestre" value="01/01|30/06|01/07" checked="checked" />1Âº Semestre
+            <input type="radio" name="semestre" id="semestre" value="01/07|31/12|01/07" />2Âº Semestre
             <input type="hidden" name="envio" id="envio" value="1" />
             <br />
-            <input type="submit" name="enviar" id="enviar" value="Filtar períodos" />
+            <input type="submit" name="enviar" id="enviar" value="Filtar perÃ­odos" />
 
         </form>
 

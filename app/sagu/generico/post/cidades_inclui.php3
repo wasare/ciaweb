@@ -44,9 +44,9 @@ $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel inserir o registro!<br><br>$err");
 
-SuccessPage("Inclusão de Cidades",
+SuccessPage("InclusÃ£o de Cidades",
             "location='../cidades_inclui.phtml'",
-            "O código da Cidade é $id",
+            "O cÃ³digo da Cidade Ã© $id",
             "location='../consulta_cidades.phtml'");
 
 ?>

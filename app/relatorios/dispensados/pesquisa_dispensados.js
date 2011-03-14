@@ -23,7 +23,7 @@ function ChangeCode(fld_name, op_name) {
 			return;
 		}
 	}
-	alert(code + ' n„o È um cÛdigo v·lido!');
+	alert(code + ' n√£o √© um c√≥digo v√°lido!');
 	field.focus();
 	return true;
 }

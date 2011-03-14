@@ -8,7 +8,7 @@
 
 require_once(dirname(__FILE__) .'/../app/setup.php');
 
-// CONEXAO ABERTA PARA TRABALHAR COM TRANSACAO (N√O PERSISTENTE)
+// CONEXAO ABERTA PARA TRABALHAR COM TRANSACAO (N√ÉO PERSISTENTE)
 $conn = new connection_factory($param_conn);
 
 function envia_erro($msg) {
@@ -304,7 +304,7 @@ function ini_diario($ofer) {
     return $ret;
 }
 
-// function registra as faltas da chamada e alteraÁıes destas faltas
+// function registra as faltas da chamada e altera√ß√µes destas faltas
 function registra_faltas($ref_aluno, $diario_id, $num_faltas, $data_chamada, $professor,$altera=FALSE) {
     global $conn;
 
@@ -522,7 +522,7 @@ function calcula_nota_reavaliacao($diario_id,$nota_parcial,$nota_extra) {
 	 10    Licenciatura
 	 */
 
-    // TODO: Selecionar mÈtodo de c·lculo da nota final com base em par‚metros do sistema
+    // TODO: Selecionar m√©todo de c√°lculo da nota final com base em par√¢metros do sistema
     // SE FOR NOTA DE RECUPERACAO / REAVALIACAO CALCULA CONFORME CRITERIOS DE CADA CURSO
 	if( $curso_tipo == 2 || $curso_tipo == 4 || $curso_tipo == 5 || $curso_tipo == 6 || $curso_tipo == 10 ) {
 
@@ -887,7 +887,7 @@ function atualiza_dispensa($aluno,$diario_id,$dispensa_tipo) {
     $rs_dispensa = $conn->Execute($sql_dispensa);
     // ^ EXCLUI FALTAS E NOTAS ANTERIORES ^ //
 
-    // INICIALIZA O DIARIO CASO NECESS¡RIO
+    // INICIALIZA O DIARIO CASO NECESS√ÅRIO
     if(!is_inicializado($diario_id)) {    
 		if (ini_diario($diario_id)) {
 			atualiza_diario($aluno, $diario_id,$dispensa_tipo);
@@ -905,8 +905,8 @@ function lanca_nota($aluno,$nota_final,$diario_id,$codprova=1) {
 	global $conn;
 
     // FIXME: antes de gravar a nota verificar:
-    //     - se nota n„o È > 100
-    //     - lanÁamento de nota extra, n„o lanÁar nota caso exista a extra
+    //     - se nota n√£o √© > 100
+    //     - lan√ßamento de nota extra, n√£o lan√ßar nota caso exista a extra
     $msg = '';
 
     $nota = str_replace(",",".",$nota_final);
@@ -937,7 +937,7 @@ function lanca_chamada($aluno,$num_faltas,$getofer,$data_inicial) {
 
 }
 
-// FIXME  -- gravar o conte˙do de aula na primeira chamada e anexar uma observaÁ„o
+// FIXME  -- gravar o conte√∫do de aula na primeira chamada e anexar uma observa√ß√£o
 function lanca_conteudo($getofer,$data_inicial,$conteudo) {
 
 

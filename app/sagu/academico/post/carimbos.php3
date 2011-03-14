@@ -23,9 +23,9 @@ SaguAssert($ok,"Nao foi possivel inserir o registro!");
 $conn->Finish();
 $conn->Close();
 
-SuccessPage("Inclusão de Carimbos",
+SuccessPage("InclusÃ£o de Carimbos",
             "location='../carimbos.phtml'",
-            "Carimbo incluído com sucesso!!!.");
+            "Carimbo incluÃ­do com sucesso!!!.");
 ?>
 <html>
 <head>

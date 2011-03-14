@@ -31,9 +31,9 @@ $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel de atualizar o registro!");
 
-SuccessPage("Alteração de Campus",
+SuccessPage("AlteraÃ§Ã£o de Campus",
 	        "location='../campus_inclui.phtml'",
-	        "As informações do campus <b>$nome</b> foram atualizadas com sucesso.");
+	        "As informaÃ§Ãµes do campus <b>$nome</b> foram atualizadas com sucesso.");
 ?>
 <html>
 <head>

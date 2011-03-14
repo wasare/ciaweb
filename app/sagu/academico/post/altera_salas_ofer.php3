@@ -17,7 +17,7 @@ $sql = " update disciplinas_ofer set " .
 
 $ok = $conn->Execute($sql);
                 
-SaguAssert($ok,"Não foi possível alterar o registro!");
+SaguAssert($ok,"NÃ£o foi possÃ­vel alterar o registro!");
 
 $sql = " update disciplinas_ofer_compl set " .
        "    num_sala = '$num_sala'" .
@@ -25,11 +25,11 @@ $sql = " update disciplinas_ofer_compl set " .
 
 $ok = $conn->Execute($sql);
 
-SaguAssert($ok,"Não foi possível alterar o registro!");
+SaguAssert($ok,"NÃ£o foi possÃ­vel alterar o registro!");
 
 $conn->Close();
 
-SuccessPage("Alteração de Disciplinas Oferecidas",
+SuccessPage("AlteraÃ§Ã£o de Disciplinas Oferecidas",
             "location='../disciplina_ofer.phtml'",
             "Disciplina Oferecida alterada com sucesso.");
 </script>

@@ -35,13 +35,13 @@ function Lista_Instituicoes()
    $fg2 = "#000099";
 
    echo ("<tr>");
-   echo ("<td bgcolor=\"#000099\" colspan=\"7\" height=\"28\" align=\"center\"><font size=\"3\" face=\"Verdana, Arial, Helvetica, sans-serif\" color=\"#FFFFFF\"><b>Listagem de Instituições Cadastradas</b></font></td>");
+   echo ("<td bgcolor=\"#000099\" colspan=\"7\" height=\"28\" align=\"center\"><font size=\"3\" face=\"Verdana, Arial, Helvetica, sans-serif\" color=\"#FFFFFF\"><b>Listagem de InstituiÃ§Ãµes Cadastradas</b></font></td>");
    echo ("</tr>");
 
    echo ("<tr bgcolor=\"#000000\">\n");
    echo ("  <td width=\"10%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Cont</b></font></td>");
-   echo ("  <td width=\"10%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Código</b></font></td>");
-   echo ("  <td width=\"40%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Nome da Instituição</b></font></td>");
+   echo ("  <td width=\"10%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>CÃ³digo</b></font></td>");
+   echo ("  <td width=\"40%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Nome da InstituiÃ§Ã£o</b></font></td>");
    echo ("  <td width=\"40%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Nome Atual</b></font></td>");
    echo ("</tr>"); 
 
@@ -87,7 +87,7 @@ function Lista_Instituicoes()
 ?>
 <html>
 <head>
-<title>Lista Instituições Cadastradas</title>
+<title>Lista InstituiÃ§Ãµes Cadastradas</title>
 </head>
 <body bgcolor="#FFFFFF">
 <form method="post" action="">

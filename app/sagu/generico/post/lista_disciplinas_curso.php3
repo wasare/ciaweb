@@ -38,7 +38,7 @@ function _select(id,nome,num_creditos)
     <td width="15%"> <font face="Arial, Helvetica, sans-serif" size="2"> C&oacute;digo</font>
     </td>
     <td width="70%"> <font face="Arial, Helvetica, sans-serif" size="2"> Descri&ccedil;&atilde;o</font>
-    <td width="10%"> <font face="Arial, Helvetica, sans-serif" size="2"> CrÈditos</font>
+    <td width="10%"> <font face="Arial, Helvetica, sans-serif" size="2"> Cr√©ditos</font>
     </td>
   </tr>
   <script language="PHP">
@@ -113,7 +113,7 @@ function _select(id,nome,num_creditos)
       <hr size="1" width="500">
       <?
       if ( $hasmore )
-    	echo("<center><br>Se a Disciplina n„o estiver listada, seja mais especÌfico.<br></center>");
+    	echo("<center><br>Se a Disciplina n√£o estiver listada, seja mais espec√≠fico.<br></center>");
       ?>
       <input type="button" name="Button" value=" Voltar " onClick="javascript:window.close()">
     </td>

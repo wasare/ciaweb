@@ -10,10 +10,10 @@
   $btnOK = false;
   //print_r($_SESSION);
   
-  //Criando a classe de conexão ADODB
+  //Criando a classe de conexÃ£o ADODB
   $Conexao = NewADOConnection("postgres");
   
-  //Setando como conexão persistente
+  //Setando como conexÃ£o persistente
   $Conexao->PConnect("host=$host dbname=$database user=$user password=$password");
 
 ?>
@@ -21,7 +21,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Situação do aluno no curso (Histórico)</title>
+<title>SituaÃ§Ã£o do aluno no curso (HistÃ³rico)</title>
 <link href="../../../public/styles/formularios.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 <!--
@@ -33,7 +33,7 @@
 </style>
 </head>
 <body bgcolor="#FFFFFF">
-<h2>Situação do aluno no curso (Histórico)</h2>
+<h2>SituaÃ§Ã£o do aluno no curso (HistÃ³rico)</h2>
 <form action="../../../relatorios/matriz/filtro.php" method="post" name="busca">
   <table border="0" cellpadding="0" cellspacing="0">
     <tr>
@@ -159,7 +159,7 @@ if ($_POST) {
 			else {
   				
 				echo '<script language="javascript">
-						window.alert("Não foi encontrado nenhum aluno!"); 
+						window.alert("NÃ£o foi encontrado nenhum aluno!"); 
 						javascript:window.history.back(1); 
 					  </script>';
 					  

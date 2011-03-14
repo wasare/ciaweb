@@ -83,15 +83,15 @@ require("../../app/setup.php");
                     <fieldset style="padding-left: 2em; padding-right: 2em; padding-bottom: 2em">
                         <legend><strong><h3>Acesso R&aacute;pido</h3></strong></legend>
                         <fieldset>
-                            <legend><strong>InformaÁıes Acad&ecirc;micas</strong></legend>
+                            <legend><strong>Informa√ß√µes Acad&ecirc;micas</strong></legend>
                             Matr&iacute;cula:&nbsp;<input type="text" name="aluno_id" id="aluno_id" size="6" />
-                            <input type="button" name="envia_aluno" id="envia_aluno" value="OK" onclick="abrir('<?=$IEnome?>' + ' web di·rio', '<?=$BASE_URL?>' + 'app/relatorios/ficha_academica/informacoes_academicas.php?aluno=' + $F('aluno_id'));" />
+                            <input type="button" name="envia_aluno" id="envia_aluno" value="OK" onclick="abrir('<?=$IEnome?>' + ' web di√°rio', '<?=$BASE_URL?>' + 'app/relatorios/ficha_academica/informacoes_academicas.php?aluno=' + $F('aluno_id'));" />
                         </fieldset>
                         <br />
                         <fieldset>
-                            <legend><strong>Consulta Di·rio</strong></legend>
+                            <legend><strong>Consulta Di√°rio</strong></legend>
                             C&oacute;digo:&nbsp;<input type="text" name="diario_id" id="diario_id" size="6" />
-                            <input type="button" name="envia_diario" id="envia_diario" value="OK" onclick="abrir( '<?=$IEnome?>' + ' web di·rio', '<?=$BASE_URL?>' + 'app/web_diario/secretaria/lista_diarios_secretaria.php?diario_id=' + $F('diario_id'));" />
+                            <input type="button" name="envia_diario" id="envia_diario" value="OK" onclick="abrir( '<?=$IEnome?>' + ' web di√°rio', '<?=$BASE_URL?>' + 'app/web_diario/secretaria/lista_diarios_secretaria.php?diario_id=' + $F('diario_id'));" />
                         </fieldset>
                     </fieldset>
                 </form>

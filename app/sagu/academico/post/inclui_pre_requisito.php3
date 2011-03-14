@@ -48,9 +48,9 @@ $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel inserir o registro!");
 
-SuccessPage("Pré-Requisito incluído com sucesso!",
+SuccessPage("PrÃ©-Requisito incluÃ­do com sucesso!",
             "location='../inclui_pre_requisito.phtml'",
-            "Pré-Requisito incluído com sucesso!",
+            "PrÃ©-Requisito incluÃ­do com sucesso!",
             "location='../consulta_inclui_pre_requisito.phtml'");
 
 ?>

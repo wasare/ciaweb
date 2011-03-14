@@ -153,7 +153,7 @@ if ($_POST) {
 			else {
   				
 				echo '<script language="javascript">
-						window.alert("Não foi encontrado nenhum aluno!"); 
+						window.alert("NÃ£o foi encontrado nenhum aluno!"); 
 						javascript:window.history.back(1); 
 					  </script>';
 					  

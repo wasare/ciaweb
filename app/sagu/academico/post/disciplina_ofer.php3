@@ -52,7 +52,7 @@ if ( $query->MoveNext() ) {
 
 $query->Close();
 
-SaguAssert($success,"Não foi possível obter o número da disciplina cadastrada!");
+SaguAssert($success,"NÃ£o foi possÃ­vel obter o nÃºmero da disciplina cadastrada!");
 
 $sql = "
     INSERT INTO disciplinas_ofer (
@@ -147,9 +147,9 @@ else
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok1,"Não foi possível inserir o registro na tabela de disciplinas_ofer!");
-SaguAssert($ok2,"Não foi possível inserir o registro na tabela de disciplinas_ofer_compl!");
-SaguAssert($ok3,"Não foi possível inserir o registro na tabela de disciplinas_ofer_prof!");
+SaguAssert($ok1,"NÃ£o foi possÃ­vel inserir o registro na tabela de disciplinas_ofer!");
+SaguAssert($ok2,"NÃ£o foi possÃ­vel inserir o registro na tabela de disciplinas_ofer_compl!");
+SaguAssert($ok3,"NÃ£o foi possÃ­vel inserir o registro na tabela de disciplinas_ofer_prof!");
 
 
 function Lista_Complemento($id, $ref_campus) {
@@ -206,7 +206,7 @@ function Lista_Complemento($id, $ref_campus) {
                 if ($i == 1)
                 {
                         echo("<tr>");
-                        echo ("<td bgcolor=\"#000099\" colspan=\"12\"><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\" color=\"#FFFFFF\"><center><b>Informações Complementares</b></center></font></td>");
+                        echo ("<td bgcolor=\"#000099\" colspan=\"12\"><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\" color=\"#FFFFFF\"><center><b>InformaÃ§Ãµes Complementares</b></center></font></td>");
                         echo("</tr>");
                         echo ("<tr bgcolor=\"#000000\">\n");
                         echo ("<td width=\"5%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Ofer</b></font></td>");
@@ -217,7 +217,7 @@ function Lista_Complemento($id, $ref_campus) {
                         echo ("<td width=\"10%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Turno</b></font></td>");
                         echo ("<td width=\"10%\" align=\"center\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Desconto</b></font></td>");
                         echo ("<td width=\"10%\" align=\"center\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Sala</b></font></td>");
-                        echo ("<td width=\"5%\" align=\"center\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Créditos</b></font></td>");
+                        echo ("<td width=\"5%\" align=\"center\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>CrÃ©ditos</b></font></td>");
                         echo ("<td width=\"5%\" align=\"center\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Obs.</b></font></td>");
                         echo ("  </tr>");
                 }
@@ -342,7 +342,7 @@ function Lista_Complemento($id, $ref_campus) {
                 </tr>
                 <tr>
                     <td bgcolor="#CCCCFF" width="30%"><font
-                            face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Nº
+                            face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;NÂº
 		Alunos</font></td>
                     <td bgcolor="#FFFFFF" width="70%"><font
                             face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?echo($num_alunos);?></b></font>
@@ -353,7 +353,7 @@ if ($fixar_num_sala == '1') {
     $fixar_num_sala = 'Sim';
 }
 else {
-    $fixar_num_sala = 'Não';
+    $fixar_num_sala = 'NÃ£o';
 }
                 echo($fixar_num_sala);
                 ?></b></font>
@@ -361,7 +361,7 @@ else {
             </tr>-->
                 <tr>
                     <td bgcolor="#CCCCFF" width="30%"><font
-                            face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Conteúdo</font></td>
+                            face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;ConteÃºdo</font></td>
                     <td bgcolor="#FFFFFF" width="70%"><font
                             face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b><?echo($conteudo);?></b></font>
                     </td>

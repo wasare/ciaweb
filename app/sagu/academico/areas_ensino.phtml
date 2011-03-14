@@ -36,8 +36,8 @@ function Mostra_Areas_Ensino()
 		{
 
 			echo("<tr bgcolor=\"#000000\">\n");
-			echo ("<td width=\"20%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>CÛdigo</b></font></td>");
-			echo ("<td width=\"70%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>DescriÁ„o da &Aacute;rea de Ensino</b></font></td>");
+			echo ("<td width=\"20%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>C√≥digo</b></font></td>");
+			echo ("<td width=\"70%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Descri√ß√£o da &Aacute;rea de Ensino</b></font></td>");
 			echo ("<td width=\"5%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>&nbsp;</b></font></td>");
 			echo ("<td width=\"5%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>&nbsp;</b></font></td>");
 			echo("  </tr>");
@@ -92,7 +92,7 @@ Function Exclui_Area_Ensino($arg)
 
 	$conn->Close();
 
-	SaguAssert($ok,"N„o foi possÌvel de excluir o registro!");
+	SaguAssert($ok,"N√£o foi poss√≠vel de excluir o registro!");
 
 }
 ?>
@@ -108,10 +108,10 @@ function Confirma_Exclui(arg1)
 {
   url = 'post/areas_ensino_exclui.php3?id=' + arg1;
 
-  if (confirm("VocÍ tem certeza que deseja excluir a ¡rea de Ensino: "+arg1))
+  if (confirm("Voc√™ tem certeza que deseja excluir a √Årea de Ensino: "+arg1))
     location=(url)
   else
-    alert("Exclus„o Cancelada.");
+    alert("Exclus√£o Cancelada.");
 }
 </script>
 <link href="../estilo.css" rel="stylesheet" type="text/css" />

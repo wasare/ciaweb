@@ -71,7 +71,7 @@ $sql = "select A.id, " .
 
 $query = $conn->CreateQuery($sql);
 
-SaguAssert($query && $query->MoveNext(),"Registro não encontrado!");
+SaguAssert($query && $query->MoveNext(),"Registro nÃ£o encontrado!");
 
 list ( $id,
 $ref_professor,
@@ -144,7 +144,7 @@ $conn->Close();
 	<tr>
 		<td bgcolor="#CCCCFF"><font
 			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Data
-		de Ingresso na Instituição<br>
+		de Ingresso na InstituiÃ§Ã£o<br>
 		&nbsp;(dd-mm-aaaa)</font></td>
 		<td><input type="text" name="dt_ingresso" size="10" maxlength="10"
 			value="<?=$dt_ingresso?>"></td>

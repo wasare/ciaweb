@@ -22,8 +22,8 @@ $ok = $conn->Execute($sql);
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível alterar o registro!");
-SuccessPage("Alteração de Departamento",
+SaguAssert($ok,"NÃ£o foi possÃ­vel alterar o registro!");
+SuccessPage("AlteraÃ§Ã£o de Departamento",
             "location='../consulta_inclui_departamentos.phtml'",
             "Departamento alterado com sucesso.");
 ?>

@@ -69,7 +69,7 @@ function ListaPessoas()
 
 		echo("  <tr bgcolor=\"$bg0\">\n");
 		echo("    <td width=\"20%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Login</font></b></td>\n");
-		echo("    <td width=\"70%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Nome do Usu·rio</font></b></td>\n");
+		echo("    <td width=\"70%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Nome do Usu√°rio</font></b></td>\n");
 		echo("    <td width=\"5%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">&nbsp;</font></b></td>\n");
 		echo("    <td width=\"5%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">&nbsp;</font></b></td>\n");
 		echo("  </tr>\n");
@@ -91,8 +91,8 @@ function ListaPessoas()
 				$fg = $fg2;
 			}
 
-			$href  = "<a href=\"perfil_edita.phtml?nome=$nome\"><img src=\"../images/update.gif\" alt='Alterar Usu·rio' align='absmiddle' border=0></a>";
-			$href1 = "<a href=\"javascript:Confirma_Exclui('$nome')\"><img src=\"../images/delete.gif\" alt='Excluir Usu·rio' align='absmiddle' border=0></a>";
+			$href  = "<a href=\"perfil_edita.phtml?nome=$nome\"><img src=\"../images/update.gif\" alt='Alterar Usu√°rio' align='absmiddle' border=0></a>";
+			$href1 = "<a href=\"javascript:Confirma_Exclui('$nome')\"><img src=\"../images/delete.gif\" alt='Excluir Usu√°rio' align='absmiddle' border=0></a>";
 
 
 			echo("  <tr bgcolor=\"$bg\">\n");
@@ -133,10 +133,10 @@ function Confirma_Exclui(arg1)
 {
   url = 'perfil_exclui.php?nome=' + arg1;
 
-  if (confirm("VocÍ tem certeza que deseja EXCLUIR o usu·rio: "+arg1+" ?"))
+  if (confirm("Voc√™ tem certeza que deseja EXCLUIR o usu√°rio: "+arg1+" ?"))
     location=(url)
   else
-    alert("Exclus„o Cancelada.");
+    alert("Exclus√£o Cancelada.");
 }
 </script>
 <link href="../estilo.css" rel="stylesheet" type="text/css" />
@@ -147,7 +147,7 @@ function Confirma_Exclui(arg1)
 	name="selecao">
 <div align="center">
 <div class="titulo"><h2>Usu&aacute;rios do sistema</h2></div>
-<p><input type="button" value=" Incluir Usu·rio "
+<p><input type="button" value=" Incluir Usu√°rio "
 	onClick="location='perfil_inclui.phtml'" name="button"></p>
 <hr>
 <p><font face="Verdana, Arial, Helvetica, sans-serif" size="2"
@@ -159,7 +159,7 @@ DUPLICAR CADASTROS !</font></b></font></p>
 		<td colspan="4" height="28">
 		<div align="center"><font size="2" color="#FFFFFF"><b><font
 			face="Verdana, Arial, Helvetica, sans-serif">Consulta/Altera&ccedil;&atilde;o
-		de Usu·rios</font></b></font></div>
+		de Usu√°rios</font></b></font></div>
 		</td>
 	</tr>
 	<tr>
@@ -192,7 +192,7 @@ DUPLICAR CADASTROS !</font></b></font></p>
 		<td colspan="4"><? ListaPessoas(); ?> <font
 			face="Verdana, Arial, Helvetica, sans-serif"><font size="2"><b><font
 			color="#FF0000"> <?  if ( $hasmore )
-			echo("<BR><center>Se o usu·rio n„o estiver listado, seja mais especÌfico.</center>"); ?>
+			echo("<BR><center>Se o usu√°rio n√£o estiver listado, seja mais espec√≠fico.</center>"); ?>
 		</font></b></font></font></td>
 	</tr>
 	<tr align="center">
@@ -206,17 +206,17 @@ DUPLICAR CADASTROS !</font></b></font></p>
 		<ul>
 			<li><font face="Arial, Helvetica, sans-serif" size="2"
 				color="#0000CC"><b><font
-				face="Verdana, Arial, Helvetica, sans-serif">Se o usu·rio que
+				face="Verdana, Arial, Helvetica, sans-serif">Se o usu√°rio que
 			voc&ecirc; pesquisou estiver presente na lista pesquisada, n&atilde;o
 			&eacute; necess&aacute;rio inclu&iacute;-lo novamente.</font></b></font></li>
 			<li><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"
 				color="#0000CC">Se voc&ecirc; quiser consultar ou alterar os dados
-			de um usu·rio da lista pesquisada, clique na imagem correspondente.</font></b></li>
+			de um usu√°rio da lista pesquisada, clique na imagem correspondente.</font></b></li>
 			<li><font face="Arial, Helvetica, sans-serif" size="2"
 				color="#0000CC"><b><font
-				face="Verdana, Arial, Helvetica, sans-serif">Se o usu·rio n&atilde;o
+				face="Verdana, Arial, Helvetica, sans-serif">Se o usu√°rio n&atilde;o
 			estiver na lista acima, ele n&atilde;o est&aacute; cadastrado no
-			sistema. Clique no bot&atilde;o &quot;Incluir Usu·rio&quot; para
+			sistema. Clique no bot&atilde;o &quot;Incluir Usu√°rio&quot; para
 			fazer um novo cadastro.</font></b></font></li>
 		</ul>
 		</div>

@@ -8,10 +8,10 @@ $conn = new connection_factory($param_conn);
 // VERIFICA SE O USUARIO TEM DIREITO DE ACESSO
 $acl = new acl();
 
-// @todo melhorar o retorno ao usuário usando um metódo de logout
+// @todo melhorar o retorno ao usuÃ¡rio usando um metÃ³do de logout
 if (!$acl->has_role($sa_ref_pessoa, $PAPEIS_SA, $conn)) {
     exit('<script language="javascript" type="text/javascript">
-            alert(\'Você não tem direito de acesso a estas informações!\');
+            alert(\'VocÃª nÃ£o tem direito de acesso a estas informaÃ§Ãµes!\');
             window.history.back(1);</script>');
 }
 // ^ VERIFICA SE O USUARIO TEM DIREITO DE ACESSO ^ //

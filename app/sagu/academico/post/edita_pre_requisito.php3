@@ -7,7 +7,7 @@ $conn = new connection_factory($param_conn);
 
 $acl = new acl();
 if(!$acl->has_access(__FILE__, $conn)) {
-    exit ('Você não tem permissão para acessar este formulário!');
+    exit ('VocÃª nÃ£o tem permissÃ£o para acessar este formulÃ¡rio!');
 }
 
 require("../../lib/InvData.php3");
@@ -47,7 +47,7 @@ $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel de atualizar o registro!");
 
-SuccessPage("Alteração do Pré-Requisito",
+SuccessPage("AlteraÃ§Ã£o do PrÃ©-Requisito",
             "location='../consulta_inclui_pre_requisito.phtml'");
 
 ?>

@@ -210,7 +210,7 @@ if ($percentual_pago == '')
 { $sql=$sql . " null) " ;} else { $sql=$sql . "'$percentual_pago') " ;}
 	
 
-// CRIA O ACESSO PARA TODOS OS ALUNOS QUE AINDA NÃO POSSUEM,
+// CRIA O ACESSO PARA TODOS OS ALUNOS QUE AINDA NÃƒO POSSUEM,
 // MAS ESTEJAM MATRICULADOS NO SEMESTRE DO CONTRATO DESTE ALUNO
 $sql2 = 'INSERT INTO acesso_aluno (ref_pessoa, senha) ';
 $sql2 .= 'SELECT ref_pessoa, md5(lpad(CAST(ref_pessoa AS VARCHAR), \'5\', \'0\')) 
@@ -232,9 +232,9 @@ $conn->Close();
 SaguAssert($ok,"Nao foi possivel inserir o registro!");
 
 
-SuccessPage("Inclusão de Contrato",
+SuccessPage("InclusÃ£o de Contrato",
                "location='../novo_contrato.phtml'",
-               "Contrato incluído com sucesso!!!",
+               "Contrato incluÃ­do com sucesso!!!",
                "location='../consulta_inclui_contratos.phtml'");
 
 ?>

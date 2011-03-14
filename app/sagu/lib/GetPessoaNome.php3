@@ -20,7 +20,7 @@
     $conn->Close();
 
     if ( $SaguAssert )
-      SaguAssert(!empty($obj),"Pessoa [<b><i>$id</b></i>] não cadastrada ou código inválido!");
+      SaguAssert(!empty($obj),"Pessoa [<b><i>$id</b></i>] nÃ£o cadastrada ou cÃ³digo invÃ¡lido!");
 
     return $obj;
   }

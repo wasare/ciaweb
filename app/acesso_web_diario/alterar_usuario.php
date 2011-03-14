@@ -5,10 +5,10 @@ header("Cache-Control: no-cache");
 require_once("../../app/setup.php");
 
 
-//Criando a classe de conexão ADODB
+//Criando a classe de conexÃ£o ADODB
 $Conexao = NewADOConnection("postgres");
 
-//Setando como conexão persistente
+//Setando como conexÃ£o persistente
 $Conexao->PConnect("host=$host dbname=$database user=$user password=$password");
 
 

@@ -18,7 +18,7 @@ $sql = "select " .
 
 $query = $conn->CreateQuery($sql);
 
-SaguAssert($query && $query->MoveNext(),"Registro não encontrado!");
+SaguAssert($query && $query->MoveNext(),"Registro nÃ£o encontrado!");
 
 list ( $id,
        $descricao_depto) = $query->GetRowValues();
@@ -36,7 +36,7 @@ $conn->Close();
   <table width="90%" align="center">
     <tr bgcolor="#000099" align "center">
        <td height="35" colspan="2">
-         <div align="center"><font size="3" face="Verdana, Arial, Helvetica, sans-serif" color="#CCCCFF"><b>&nbsp;Alteração de Departamento</b></font></div>
+         <div align="center"><font size="3" face="Verdana, Arial, Helvetica, sans-serif" color="#CCCCFF"><b>&nbsp;AlteraÃ§Ã£o de Departamento</b></font></div>
        </td>
     </tr>
     <tr>
@@ -46,7 +46,7 @@ $conn->Close();
        </font></td>
     </tr>
     <tr> 
-      <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Descrição</font></td>
+      <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;DescriÃ§Ã£o</font></td>
       <td> 
         <input name="descricao_depto" type=text size="50" value="<? echo($descricao_depto); ?>">
       </td>

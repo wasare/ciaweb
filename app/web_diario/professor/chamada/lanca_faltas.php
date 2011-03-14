@@ -12,7 +12,7 @@ $operacao  = $_POST['operacao'];
 if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 
     exit('<script language="javascript" type="text/javascript">
-            alert(\'Você não tem direito de acesso a estas informações!\');
+            alert(\'VocÃª nÃ£o tem direito de acesso a estas informaÃ§Ãµes!\');
             window.close();</script>');
 }
 // ^ VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR ^ //
@@ -20,7 +20,7 @@ if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 if (is_finalizado($diario_id)){
 
     echo '<script language="javascript" type="text/javascript">';
-    echo 'alert("ERRO! Este diário está finalizado e não pode ser alterado!");';
+    echo 'alert("ERRO! Este diÃ¡rio estÃ¡ finalizado e nÃ£o pode ser alterado!");';
     echo 'window.close();';
     echo '</script>';
     exit;
@@ -45,7 +45,7 @@ $num_aulas = ($aula_tipo[strlen($aula_tipo) - 1] == 0) ? 10 : $aula_tipo[strlen(
 
 
 if(!is_numeric($aula_tipo) || (strlen($aula_tipo) < 1 || strlen($aula_tipo) > 10 ))
-   die('<script language="javascript" type="text/javascript"> window.alert("Você deverá selecionar a quantidade de aulas para esta chamada."); window.history.back(1);</script>');
+   die('<script language="javascript" type="text/javascript"> window.alert("VocÃª deverÃ¡ selecionar a quantidade de aulas para esta chamada."); window.history.back(1);</script>');
 
 
 /*
@@ -77,14 +77,14 @@ $data_chamada = $_POST['data_chamada'];
 
 // VALIDAR CONTEUDO AQUI
 if(empty($conteudo))
-  die('<script language="javascript" type="text/javascript"> window.alert("Você não informou o conteúdo da(s) aula(s)!");window.history.back(1); </script>');
+  die('<script language="javascript" type="text/javascript"> window.alert("VocÃª nÃ£o informou o conteÃºdo da(s) aula(s)!");window.history.back(1); </script>');
 
 // VERIFICA SE EXISTE CHAMADA NESTA DATA
 if(existe_chamada($diario_id, $data_chamada))
-	die('<script language="javascript" type="text/javascript"> window.alert("Já existe chamada realizada para esta data.");window.history.back(1); </script>');
+	die('<script language="javascript" type="text/javascript"> window.alert("JÃ¡ existe chamada realizada para esta data.");window.history.back(1); </script>');
 // ^ VERIFICA SE EXISTE CHAMADA NESTA DATA ^ //
 
-// NÃO HOUVE FALTAS PARA A CHAMADA
+// NÃƒO HOUVE FALTAS PARA A CHAMADA
 if($flag_falta === 'F') {
 	require_once('registra_faltas.php');
 	exit;
@@ -125,7 +125,7 @@ $curso = get_curso($diario_id);
 <!--
 function validate(field, total) {
 	if (field.value > total || field.value < 0) {
-		alert("Você não pode lançar " + field.value + " faltas para uma chamada de " + total + " aulas !");
+		alert("VocÃª nÃ£o pode lanÃ§ar " + field.value + " faltas para uma chamada de " + total + " aulas !");
         field.focus();
 		field.value = total;	
    }

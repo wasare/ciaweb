@@ -29,7 +29,7 @@ $sql = "SELECT COUNT(*)
 $num_concluida = $conn->get_one($sql);
 
 if($num_concluida == 0) {	
-  echo '<script type="text/javascript">alert(\'N„o existe nenhum di·rio concluÌdo para ser finalizado!\');window.close();</script>';
+  echo '<script type="text/javascript">alert(\'N√£o existe nenhum di√°rio conclu√≠do para ser finalizado!\');window.close();</script>';
 }
 else {
   $sql1 = "UPDATE
@@ -49,13 +49,13 @@ else {
   if ($_SESSION['sa_modulo'] == 'sa_login') {
 
     exit('<script language="javascript" type="text/javascript">
-            alert(\''.$num_concluida.' di·rio(s) finalizado(s) com sucesso!\');
+            alert(\''.$num_concluida.' di√°rio(s) finalizado(s) com sucesso!\');
 			window.opener.location.reload();
 			setTimeout("self.close()",450);</script>');
 
   }
   else {
-    echo '<script type="text/javascript"> alert(\''.$num_concluida.' di·rio(s) finalizado(s) com sucesso!\'); </script>';
+    echo '<script type="text/javascript"> alert(\''.$num_concluida.' di√°rio(s) finalizado(s) com sucesso!\'); </script>';
   }
 }
 	

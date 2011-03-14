@@ -7,7 +7,7 @@ $cnome = $_POST['cnome'];
 ?>
 <html>
     <head>
-        <title>Localizar Instituições</title>
+        <title>Localizar InstituiÃ§Ãµes</title>
         <script language="JavaScript">
             function _init()
             {
@@ -62,8 +62,8 @@ function ListaInstituicoes()
 
         echo("  <tr bgcolor=\"$bg0\">\n");
         echo("    <td width=\"5%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"1\" color=\"$fg0\">&nbsp;</font></b></td>\n");
-        echo("    <td width=\"10%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"1\" color=\"$fg0\">Cód.</font></b></td>\n");
-        echo("    <td width=\"75%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"1\" color=\"$fg0\">Descrição</font></b></td>\n");
+        echo("    <td width=\"10%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"1\" color=\"$fg0\">CÃ³d.</font></b></td>\n");
+        echo("    <td width=\"75%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"1\" color=\"$fg0\">DescriÃ§Ã£o</font></b></td>\n");
         echo("  </tr>\n");
 
         for ( $i=1; $i <= $limite_list; $i++ )
@@ -125,11 +125,11 @@ function ListaInstituicoes()
                 <table width="490" border="0" cellspacing="0" cellpadding="2">
                     <tr bgcolor="#0066CC">
                         <td colspan="2">
-                            <div align="center"><font size="2" color="#FFFFFF"><b><font face="Verdana, Arial, Helvetica, sans-serif">Localização de Instituições</font></b></font></div>
+                            <div align="center"><font size="2" color="#FFFFFF"><b><font face="Verdana, Arial, Helvetica, sans-serif">LocalizaÃ§Ã£o de InstituiÃ§Ãµes</font></b></font></div>
                         </td>
                     </tr>
                     <tr>
-                        <td width="260"><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Nome da Instituição:</font> </td>
+                        <td width="260"><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Nome da InstituiÃ§Ã£o:</font> </td>
                         <td width="222">&nbsp; </td>
                     </tr>
                     <tr>
@@ -153,7 +153,7 @@ ListaInstituicoes();
                             <font face="Verdana, Arial, Helvetica, sans-serif"><font size="2"><b><font color="#FF0000">
                                             <script language="PHP">
 if ( $hasmore )
-echo("<center>Se a instituição não estiver listada, seja mais específico.</center>");
+echo("<center>Se a instituiÃ§Ã£o nÃ£o estiver listada, seja mais especÃ­fico.</center>");
                                             </script>
                         </font></b></font></font> </td>
                     </tr>

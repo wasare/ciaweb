@@ -81,12 +81,12 @@ function ListaAlunos($ref_disciplina_ofer)
 
 			echo ("<tr bgcolor=\"#000000\">\n");
 			echo ("<td width=\"5%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Num</b></font></td>");
-			echo ("<td width=\"10%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Código</b></font></td>");
+			echo ("<td width=\"10%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>CÃ³digo</b></font></td>");
 			echo ("<td width=\"45%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Nome/e-mail</b></font></td>");
 			echo ("<td width=\"10%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Telefone<br>Residencial</b></font></td>");
 			echo ("<td width=\"10%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Telefone<br>Profissional</b></font></td>");
 			echo ("<td width=\"10%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Telefone<br>Celular</b></font></td>");
-			echo ("<td width=\"10%\" align=\"center\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Disciplina<br>Currículo</b></font></td>");
+			echo ("<td width=\"10%\" align=\"center\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Disciplina<br>CurrÃ­culo</b></font></td>");
 			echo ("  </tr>");
 
 		}
@@ -140,7 +140,7 @@ function ListaAlunos($ref_disciplina_ofer)
 ?>
 <html>
 <head>
-<title>Número de Alunos por Oferta</title>
+<title>NÃºmero de Alunos por Oferta</title>
 </head>
 <body marginwidth="20" marginheight="20">
 <form method="post" action=""><?php ListaAlunos($ref_disciplina_ofer);?>

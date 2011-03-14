@@ -24,7 +24,7 @@ $sql = " select " .
 
 $query = $conn->CreateQuery($sql);
 
-SaguAssert($query && $query->MoveNext(),"Registro não encontrado!");
+SaguAssert($query && $query->MoveNext(),"Registro nÃ£o encontrado!");
 
 list ( $id,
        $nome) = $query->GetRowValues();
@@ -39,7 +39,7 @@ $conn->Close();
   <table border="0" width="90%" align="center" cellspacing="2" height="40" align="center">
     <tr bgcolor="#000099" align "center">
       <td height="35" colspan="2" align="center">
-        <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#CCCCFF">Altera&ccedil;&atilde;o de Países</font></b></font>
+        <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#CCCCFF">Altera&ccedil;&atilde;o de PaÃ­ses</font></b></font>
       </td>
     </tr>
     <tr>

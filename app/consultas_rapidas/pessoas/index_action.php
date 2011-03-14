@@ -12,10 +12,10 @@ $sql = "SELECT id, nome
 		ORDER BY to_ascii(nome,'LATIN1') LIMIT 50;";
 
 
-//Criando a classe de conexão ADODB
+//Criando a classe de conexÃ£o ADODB
 $Conexao = NewADOConnection("postgres");
 
-//Setando como conexão persistente
+//Setando como conexÃ£o persistente
 $Conexao->PConnect("host=$host dbname=$database user=$user password=$password");
 
 //Exibindo a descricao do curso caso setado

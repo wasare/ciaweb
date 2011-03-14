@@ -20,7 +20,7 @@ $conn->Finish();
 $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel excluir o registro!");
-SuccessPage("Exclusão de Empresa",
+SuccessPage("ExclusÃ£o de Empresa",
             "location='../configuracao_empresa.phtml'");
 ?>
 <html>

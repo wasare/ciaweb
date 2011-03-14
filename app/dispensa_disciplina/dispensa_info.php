@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Monta formulário  para entrada de informações da dispensa
+* Monta formulÃ¡rio  para entrada de informaÃ§Ãµes da dispensa
 * @author Wanderson Santiago dos Reis
 * @version 1
 * @since 19-02-2009

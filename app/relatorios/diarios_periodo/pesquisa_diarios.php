@@ -48,7 +48,7 @@ $Result3 = $conn->Execute("SELECT descricao, id FROM tipos_curso ORDER BY 1 DESC
                     return;
                 }
             }
-            alert(code + ' n„o È um cÛdigo v·lido!');
+            alert(code + ' n√£o √© um c√≥digo v√°lido!');
             field.focus();
             return true;
         }

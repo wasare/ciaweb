@@ -49,7 +49,7 @@ $sa_periodo_id = $_SESSION['sa_periodo_id'];
 	      return;
 	    }
 	  }
-	  alert(code + ' n„o È um cÛdigo v·lido!');
+	  alert(code + ' n√£o √© um c√≥digo v√°lido!');
 	  field.focus();
 	  return true;
 	}
@@ -72,7 +72,7 @@ $sa_periodo_id = $_SESSION['sa_periodo_id'];
 	<link href="../../../lib/SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<h2>RelatÛrio de Faltas Global por Per&iacute;odo / Curso</h2>
+	<h2>Relat√≥rio de Faltas Global por Per&iacute;odo / Curso</h2>
 	<form method="post" name="form1" id="form1" target="_blank">
 		<input type="image" name="input" 
 			src="../../../public/images/icons/print.jpg" 

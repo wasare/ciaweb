@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>Atualização de Filiação</title>
+        <title>AtualizaÃ§Ã£o de FiliaÃ§Ã£o</title>
         <script language="PHP">
 
 CheckFormParameters(array("id"));
@@ -28,7 +28,7 @@ $sql = " select " .
 
 $query = $conn->CreateQuery($sql);
 
-SaguAssert($query && $query->MoveNext(),"Registro não encontrado!");
+SaguAssert($query && $query->MoveNext(),"Registro nÃ£o encontrado!");
 
 list ( $id,
     $pai_nome,
@@ -86,31 +86,31 @@ $conn->Close();
                     </td>
                 </tr>
                 <tr>
-                    <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Nome da Mãe</font></td>
+                    <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Nome da MÃ£e</font></td>
                     <td>
                         <input name="mae_nome" type=text value="<?echo($mae_nome);?>" size="30">
                     </td>
                 </tr>
                 <tr>
-                    <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Telefone da Mãe</font></td>
+                    <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Telefone da MÃ£e</font></td>
                     <td>
                         <input name="mae_fone" type=text value="<?echo($mae_fone);?>" size="15">
                     </td>
                 </tr>
                 <tr>
-                    <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Profiss&atilde;o da Mãe</font></td>
+                    <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Profiss&atilde;o da MÃ£e</font></td>
                     <td>
                         <input name="mae_profissao" type=text value="<?echo($mae_profissao);?>" size="30">
                     </td>
                 </tr>
                 <tr>
-                    <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Grau de Instru&ccedil;&atilde;o da Mãe</font></td>
+                    <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Grau de Instru&ccedil;&atilde;o da MÃ£e</font></td>
                     <td>
                         <input name="mae_instrucao" type=text value="<?echo($mae_instrucao);?>" size="30">
                     </td>
                 </tr>
                 <tr>
-                    <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Local de Trabalho da Mãe</font></td>
+                    <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Local de Trabalho da MÃ£e</font></td>
                     <td>
                         <input name="mae_loc_trabalho" type=text value="<?echo($mae_loc_trabalho);?>" size="30">
                     </td>

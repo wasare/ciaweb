@@ -25,7 +25,7 @@ $busca   = new search('search','codigo_curso','searchlist', 'form1', '../curso_l
     </head>
 
     <body>
-        <h2>Relatório de Alunos Aprovados/Reprovados</h2>
+        <h2>RelatÃ³rio de Alunos Aprovados/Reprovados</h2>
         <form method="post" name="form1" id="form1" target="_blank">
 
             <input type="image" name="input"

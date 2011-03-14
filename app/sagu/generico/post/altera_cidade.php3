@@ -31,9 +31,9 @@ $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel de atualizar o registro!");
 
-SuccessPage("Alteração de Cidade",
+SuccessPage("AlteraÃ§Ã£o de Cidade",
             "location='../consulta_cidades.phtml'",
-	        "As informações da Cidade <b>$nome</b> foram atualizadas com sucesso.");
+	        "As informaÃ§Ãµes da Cidade <b>$nome</b> foram atualizadas com sucesso.");
 ?>
 <html>
 <head>

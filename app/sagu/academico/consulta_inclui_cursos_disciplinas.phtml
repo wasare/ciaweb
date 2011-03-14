@@ -115,7 +115,7 @@ function ListaCursosDisciplinas()
 					echo("    <td width=\"36%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Disciplina</font></b></td>\n");
 					// echo("    <td width=\"10%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Disc.<br>Equiv.</font></b></td>\n");
 					echo("    <td width=\"8%\" align=\"center\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Per&iacute;odo</font></b></td>\n");
-					echo("    <td width=\"5%\" align=\"center\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">CrÈd</font></b></td>\n");
+					echo("    <td width=\"5%\" align=\"center\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Cr√©d</font></b></td>\n");
 					echo("    <td width=\"5%\" align=\"center\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">CH</font></b></td>\n");
 					//       echo("    <td width=\"10%\" align=\"center\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Data Final</font></b></td>\n");
 					echo("    <td width=\"10%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Campus</font></b></td>\n");
@@ -171,9 +171,9 @@ function ListaCursosDisciplinas()
 				echo(" <tr><td colspan=\"11\">&nbsp;</td></tr>");
 
 				echo(" <tr bgcolor=\"$bg0\">\n");
-				echo("  <td  colspan=\"3\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Totais: CrÈditos: $tot_num_creditos</font></b></td>\n");
+				echo("  <td  colspan=\"3\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Totais: Cr√©ditos: $tot_num_creditos</font></b></td>\n");
 				echo("  <td  colspan=\"3\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Disciplinas: $tot_disciplinas</font></b></td>\n");
-				echo("  <td  colspan=\"3\" align=\"right\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Carga Hor·ria: $tot_carga_horaria</font></b></td>\n");
+				echo("  <td  colspan=\"3\" align=\"right\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Carga Hor√°ria: $tot_carga_horaria</font></b></td>\n");
 				echo(" </tr>\n");
 
 				echo("<tr><td colspan=\"11\">&nbsp;</td></tr>");
@@ -213,7 +213,7 @@ function ChangeCode(fld_name,op_name)
     }
   }
 
-  alert(code + ' n„o È um cÛdigo v·lido!');
+  alert(code + ' n√£o √© um c√≥digo v√°lido!');
 
   field.focus();
 
@@ -248,10 +248,10 @@ function Confirma_Exclui(arg1, arg2, arg3)
 {
     url = 'post/cursos_disciplinas_exclui.php3?ref_curso=' + arg1 + '&ref_disciplina=' + arg2 + '&ref_campus=' + arg3;
 
-  if (confirm("VocÍ tem certeza que deseja EXCLUIR a Disciplina "+arg2+" do Curso "+arg1+" no Campus "+arg3))
+  if (confirm("Voc√™ tem certeza que deseja EXCLUIR a Disciplina "+arg2+" do Curso "+arg1+" no Campus "+arg3))
     location=(url)
   else
-    alert("Exclus„o Cancelada.");
+    alert("Exclus√£o Cancelada.");
 }
 </script>
 <link href="../estilo.css" rel="stylesheet" type="text/css" />

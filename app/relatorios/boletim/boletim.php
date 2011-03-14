@@ -43,8 +43,8 @@ class  Boletim extends PDF {
     	$this->SetFont('Arial','',13);
 	    // PREPARA TITULO DO CABECALHO
     	$this->Cell(0,5,'MEC - SETEC',0,1,'L');
-	$this->Cell(0,5,'INSTITUTO FEDERAL SÃO PAULO - CAMPUS CARAGUATATUBA',0,1,'L'); // @todo utilizar parâmetros para o nome da instituição
-    	$this->Cell(0,5,'GERÊNCIA DE REGISTROS ESCOLARES',0,1,'L');
+	$this->Cell(0,5,'INSTITUTO FEDERAL SÃƒO PAULO - CAMPUS CARAGUATATUBA',0,1,'L'); // @todo utilizar parÃ¢metros para o nome da instituiÃ§Ã£o
+    	$this->Cell(0,5,'GERÃŠNCIA DE REGISTROS ESCOLARES',0,1,'L');
 	    // Quebra de linha
     	$this->Ln();
 	    // SELECIONA FONT ARIAL  12
@@ -58,7 +58,7 @@ class  Boletim extends PDF {
 	function Footer() {
     	//Vai para 1.0 cm da parte inferior
 	    $this->SetY(-15);
-    	//Seleciona a fonte Arial itï¿½lico 8
+    	//Seleciona a fonte Arial itÃ¯Â¿Â½lico 8
 	    $this->SetFont('Arial','I',8);
 	}
 
@@ -90,7 +90,7 @@ class  Boletim extends PDF {
     	 		$Texto = $Dados[$j][0];
      			$this->Write(5,$Texto);
 	     		$this->SetFont('Arial','B',10);
-    	 		$Texto = "               Matrícula: ";
+    	 		$Texto = "               MatrÃ­cula: ";
      			$this->Write(5,$Texto);
            		$this->SetFont('Arial','',11);
 	           	$Texto = str_pad($Dados[$j][1], 5, "0", STR_PAD_LEFT);
@@ -106,14 +106,14 @@ class  Boletim extends PDF {
 				// QUEBRA DE LINHA
         	    $this->Ln(5);
 			    $this->SetFont('Arial','B',10);
-    	        $Texto = "Período: ";
+    	        $Texto = "PerÃ­odo: ";
         	    $this->Write(5,$Texto);
 		        $this->SetFont('Arial','',11);
         		$Texto = str_pad($Dados[$j][7], 5, "0", STR_PAD_LEFT);
            		$this->Write(5,$Texto);
            	    $this->Ln(5);
                 $this->SetFont('Arial','B',10);
-                $Texto = "Data de Emissão: ";
+                $Texto = "Data de EmissÃ£o: ";
                 $this->Write(5,$Texto);
             	$this->SetFont('Arial','',10);
             	$this->Write(5,date('d/m/Y H:i s').'s');
@@ -243,7 +243,7 @@ foreach ($aAlunos as $aluno) {
     $bo_pdf->AliasNbPages();
     
     //PREPARA O CABELHO  DA TABELA
-    $TableHeader = array('Componente Modular', 'CH', 'Nota', 'Nota Distribuída', 'Faltas');
+    $TableHeader = array('Componente Modular', 'CH', 'Nota', 'Nota DistribuÃ­da', 'Faltas');
     
     $NArquivo = "Boletim_".$curso."_".$aluno['ref_pessoa'].".pdf"; 
     

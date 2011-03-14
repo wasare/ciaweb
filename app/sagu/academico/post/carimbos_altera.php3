@@ -25,9 +25,9 @@ $ok = $conn->Execute($sql);
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível alterar o registro!");
+SaguAssert($ok,"NÃ£o foi possÃ­vel alterar o registro!");
 
-SuccessPage("Alteração do Carimbo",
+SuccessPage("AlteraÃ§Ã£o do Carimbo",
             "location='../carimbos.phtml'",
             "Carimbo alterado com sucesso.");
 ?>

@@ -12,7 +12,7 @@ ob_start();
 		<table style="width: 700px;">
 			<tr>
 				<td style="text-align: left; width: 50%">&nbsp;</td>
-				<td style="text-align: right; width: 50%">página [[page_cu]]/[[page_nb]]</td>
+				<td style="text-align: right; width: 50%">pÃ¡gina [[page_cu]]/[[page_nb]]</td>
 			</tr>
 		</table>
 	</page_footer>

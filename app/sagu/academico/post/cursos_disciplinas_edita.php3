@@ -7,7 +7,7 @@ $conn = new connection_factory($param_conn);
 
 $acl = new acl();
 if(!$acl->has_access(__FILE__, $conn)) {
-    exit ('Você não tem permissão para acessar este formulário!');
+    exit ('VocÃª nÃ£o tem permissÃ£o para acessar este formulÃ¡rio!');
 }
 
 require("../../lib/InvData.php3");
@@ -88,8 +88,8 @@ $ok = $conn->Execute($sql);  // tire o @ para visualizar mensagens de error do s
 
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível alterar o registro!");
-SuccessPage("Alteração de Curso/Disciplina",
+SaguAssert($ok,"NÃ£o foi possÃ­vel alterar o registro!");
+SuccessPage("AlteraÃ§Ã£o de Curso/Disciplina",
             "location='../consulta_inclui_cursos_disciplinas.phtml'",
             "Curso/Disciplina alterado com sucesso.");
 ?>

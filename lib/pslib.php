@@ -492,7 +492,7 @@ function SA_PS_circ($file, $xcoord, $ycoord, $raio, $angulo_ini, $angulo_fim, $l
         echo $e_msg;
 }
 
-//quebra nas linhas novas ou na especificaçao de final de linha
+//quebra nas linhas novas ou na especificaÃ§ao de final de linha
 function SA_PS_show_xy_font_quebrado($file, $text, $xcoord, $ycoord, $font_name, $font_size, $n_char, $increment)
 {
   if (empty($file))

@@ -18,7 +18,7 @@ $password_hash = hash('sha256',$password);
 if($_POST['password'] != $_POST['confirm']) {
     echo '
     <script language="javascript" type="text/javascript">
-        alert("As senhas n„o conferem!");
+        alert("As senhas n√£o conferem!");
         history.back(-1);
     </script>';
     exit ();

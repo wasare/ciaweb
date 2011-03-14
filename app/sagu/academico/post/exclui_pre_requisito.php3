@@ -7,7 +7,7 @@ $conn = new connection_factory($param_conn);
 
 $acl = new acl();
 if(!$acl->has_access(__FILE__, $conn)) {
-    exit ('Você não tem permissão para acessar este formulário!');
+    exit ('VocÃª nÃ£o tem permissÃ£o para acessar este formulÃ¡rio!');
 }
 
 $id = $_GET['id'];
@@ -27,7 +27,7 @@ $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel excluir o registro!");
 
-SuccessPage("Exclusão de Pré-Requisito",
+SuccessPage("ExclusÃ£o de PrÃ©-Requisito",
             "location='../consulta_inclui_pre_requisito.phtml'");
 
 ?>

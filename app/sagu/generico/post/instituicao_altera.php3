@@ -26,10 +26,10 @@ $ok = $conn->Execute($sql);
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível alterar o registro!");
-SuccessPage("Alteração de Instituição",
+SaguAssert($ok,"NÃ£o foi possÃ­vel alterar o registro!");
+SuccessPage("AlteraÃ§Ã£o de InstituiÃ§Ã£o",
             "location='../consulta_inclui_instituicoes.phtml'",
-            "Instituição alterada com sucesso.");
+            "InstituiÃ§Ã£o alterada com sucesso.");
 ?>
 <html>
 <head>

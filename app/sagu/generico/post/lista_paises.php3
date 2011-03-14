@@ -9,7 +9,7 @@ $desc = $_POST['desc'];
 
 <html>
     <head>
-        <title>Localizar Países</title>
+        <title>Localizar PaÃ­ses</title>
         <script language="JavaScript">
             function _select(id,desc)
             {

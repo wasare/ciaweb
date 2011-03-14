@@ -24,9 +24,9 @@ SaguAssert($ok,"Nao foi possivel inserir o registro!");
 $conn->Finish();
 $conn->Close();
 
-SuccessPage("Inclusão de Áreas de Ensino",
+SuccessPage("InclusÃ£o de Ãreas de Ensino",
             "location='../areas_ensino.phtml'",
-            "Área de Ensino incluída com sucesso!!!.");
+            "Ãrea de Ensino incluÃ­da com sucesso!!!.");
 ?>
 <html>
 <head>

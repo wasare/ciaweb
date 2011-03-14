@@ -22,10 +22,10 @@
             {
                 url = 'post/pessoaf_exclui.php3?id=' + arg1;
 
-                if (confirm("Você tem certeza que deseja EXCLUIR o Pessoa: "+arg1))
+                if (confirm("VocÃª tem certeza que deseja EXCLUIR o Pessoa: "+arg1))
                     location=(url)
                 else
-                    alert("Exclusão Cancelada.");
+                    alert("ExclusÃ£o Cancelada.");
             }
         </script>
 
@@ -99,7 +99,7 @@ function ListaPessoas()
         echo("<table width=\"490\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\">");
 
         echo("  <tr bgcolor=\"$bg0\">\n");
-        echo("    <td width=\"20%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Código</font></b></td>\n");
+        echo("    <td width=\"20%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">CÃ³digo</font></b></td>\n");
         echo("    <td width=\"70%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">Nome do Pessoa</font></b></td>\n");
         echo("    <td width=\"5%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">&nbsp;</font></b></td>\n");
         echo("    <td width=\"5%\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"$fg0\">&nbsp;</font></b></td>\n");
@@ -211,7 +211,7 @@ function ListaPessoas()
                             <font face="Verdana, Arial, Helvetica, sans-serif" color="#FF0000" size="2"><b>
                                             <?php
                                             if ( $hasmore )
-                                            echo("<BR><center>Se o aluno não estiver listado, seja mais específico.</center>");
+                                            echo("<BR><center>Se o aluno nÃ£o estiver listado, seja mais especÃ­fico.</center>");
                                             ?>
                             </b></font>
                         <td>

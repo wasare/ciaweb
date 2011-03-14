@@ -69,7 +69,7 @@ $nome_periodo = $conn->get_one("SELECT descricao FROM periodos WHERE id = '$peri
             </div>
             <div class="panel" id="panel">
                 <h3>Etapa 2 de 2</h3>
-                <span class="comentario"><strong>Aten&ccedil;&atilde;o:</strong> O relat&oacute;rio exibir&aacute; somente os di&aacute;rio concluídos.</span>
+                <span class="comentario"><strong>Aten&ccedil;&atilde;o:</strong> O relat&oacute;rio exibir&aacute; somente os di&aacute;rio concluÃ­dos.</span>
                 <br /><br />
                 <strong>Per&iacute;odo:</strong>
                 <?=$nome_periodo?>

@@ -14,8 +14,8 @@ $sql = " delete from professores where id = '$id'";
 $ok = $conn->Execute($sql);
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível de excluir o professor!");
-SuccessPage("Professor excluído com sucesso",
+SaguAssert($ok,"NÃ£o foi possÃ­vel de excluir o professor!");
+SuccessPage("Professor excluÃ­do com sucesso",
             "location='../consulta_inclui_professores.phtml'");
 
 ?>

@@ -31,11 +31,11 @@ SaguAssert($ok,"Nao foi possivel inserir o registro!");
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível inserir o registro!");
+SaguAssert($ok,"NÃ£o foi possÃ­vel inserir o registro!");
 
-SuccessPage("Inclusão de Estados",
+SuccessPage("InclusÃ£o de Estados",
             "location='../estados_inclui.phtml'",
-            "O código do Estado é $id",
+            "O cÃ³digo do Estado Ã© $id",
             "location='../consulta_inclui_estados.phtml'");
 ?>
 

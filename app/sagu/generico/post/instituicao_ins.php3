@@ -49,11 +49,11 @@ $ok = pg_query_params($conn->id, $sql, array("$id", "$nome", "$sucinto", "$nome_
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível inserir o registro!");
+SaguAssert($ok,"NÃ£o foi possÃ­vel inserir o registro!");
 
-SuccessPage("Inclusão de Instituição",
+SuccessPage("InclusÃ£o de InstituiÃ§Ã£o",
             "location='../inclui_instituicao.phtml'",
-            "O código da Instituição é $id",
+            "O cÃ³digo da InstituiÃ§Ã£o Ã© $id",
             "location='../consulta_inclui_instituicoes.phtml'");
 
 ?>

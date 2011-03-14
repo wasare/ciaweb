@@ -4,7 +4,7 @@ require_once(dirname(__FILE__) .'/../../setup.php');
 
 if(empty($_SESSION['web_diario_periodo_id']) OR empty($_SESSION['web_diario_periodo_id'])) {
         exit('<script language="javascript" type="text/javascript">
-                window.alert("ERRO! Primeiro informe um perÌodo!");
+                window.alert("ERRO! Primeiro informe um per√≠odo!");
                 window.close();
         </script>');
 }
@@ -18,14 +18,14 @@ $diario = @explode("|", $_GET['diario']);
 
 if(isset($_GET['id']) AND ( !is_numeric($diario['0']) OR !is_numeric($diario['1'])) ) {
      exit('<script language="javascript" type="text/javascript">
-	 		window.alert("ERRO! Primeiro selecione um di·rio!"); javascript:window.history.back(1);</script>');
+	 		window.alert("ERRO! Primeiro selecione um di√°rio!"); javascript:window.history.back(1);</script>');
 }
 else {
 
 	if($diario['2'] === '1' && in_array($_GET['acao'], $Movimento) ) {
  
      exit('<script language="javascript" type="text/javascript">
-            window.alert("ERRO! Este di·rio est· fechado e n„o pode ser alterado!"); javascript:window.history.back(1);
+            window.alert("ERRO! Este di√°rio est√° fechado e n√£o pode ser alterado!"); javascript:window.history.back(1);
      </script>');
     }
 }
@@ -76,7 +76,7 @@ $sql3 = 'SELECT DISTINCT
    if(count($diarios) == 0)
    {
         /*exit('<script language="javascript">
-                window.alert("Nenhum di·rio encontrado para o filtro selecionado!");
+                window.alert("Nenhum di√°rio encontrado para o filtro selecionado!");
         </script>');*/
         $nenhum_diario = "Nenhum di&aacute;rio encontrado para o filtro selecionado.";
    }
@@ -227,11 +227,11 @@ foreach($diarios as $row3) :
       <td align="center"><?=$fl_situacao?></td>
       <td align="center">
         <a href="#" id="<?=$diario_id . '_pane'?>" title="clique para visualizar / ocultar">Acessar</a>
-        <!-- panel com as opÁıes do di·rio // inicio //-->
+        <!-- panel com as op√ß√µes do di√°rio // inicio //-->
         <div id="diario_<?=$diario_id?>_pane" style="display:none; margin: 1.2em; padding: 1em; background-color: <?=$op_color?>" class="opcoes_web_diario">
             <?=$sem_opcoes . $opcoes_diario?>
         </div>
-        <!-- panel com as opÁıes do di·rio \\ fim \\ -->       
+        <!-- panel com as op√ß√µes do di√°rio \\ fim \\ -->       
       </td>
 
     </tr>
@@ -249,7 +249,7 @@ foreach($diarios as $row3) :
 <span><a href="#" title="acessar relat&oacute;rios" id="desempenho_professor">Desempenho docente</a></span>
 <br />
 <br />
-<!-- panel para acesso aos relatÛrios de desempenho docente // inicio //-->
+<!-- panel para acesso aos relat√≥rios de desempenho docente // inicio //-->
 <div id="desempenho_professor_pane" style="display:none; border: 0.0015em solid; width:200px; text-align:center;">
 <br />
 
@@ -263,7 +263,7 @@ foreach($diarios as $row3) :
 <?php endif; ?>
 <br />
 </div>
-<!-- panel para acesso aos relatÛrios de desempenho docente \\ fim \\ -->
+<!-- panel para acesso aos relat√≥rios de desempenho docente \\ fim \\ -->
 
 <br />
 </form>

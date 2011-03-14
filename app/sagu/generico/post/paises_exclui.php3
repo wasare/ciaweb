@@ -20,7 +20,7 @@ $conn->Finish();
 $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel excluir o registro!");
-SuccessPage("Exclusão de Países",
+SuccessPage("ExclusÃ£o de PaÃ­ses",
             "location='../paises_inclui.phtml'");
 ?>
 <html>

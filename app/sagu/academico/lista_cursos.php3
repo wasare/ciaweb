@@ -21,8 +21,8 @@ function ListaCursos()
 	echo ("</tr>");
 	 
 	echo ("<tr bgcolor=\"#000000\">\n");
-	echo ("<td width=\"5%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Cód</b></font></td>");
-	echo ("<td width=\"75%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Descrição</b></font></td>");
+	echo ("<td width=\"5%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>CÃ³d</b></font></td>");
+	echo ("<td width=\"75%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>DescriÃ§Ã£o</b></font></td>");
 	echo ("<td width=\"10%\"><Font face=\"Verdana\" size=\"2\" color=\"#ffffff\"><b>Turno</b></font></td>");
 	echo ("</tr>");
 

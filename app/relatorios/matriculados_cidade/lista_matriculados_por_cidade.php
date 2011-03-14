@@ -15,7 +15,7 @@ $periodo = $_POST['periodo1'];
 
 $sqlCursos = "
 select distinct 
-    c.id as \"CÛd.\", c.descricao as \"DescriÁ„o do Curso\"
+    c.id as \"C√≥d.\", c.descricao as \"Descri√ß√£o do Curso\"
 from 
     matricula m, cursos c
 where
@@ -46,7 +46,7 @@ if($total < 1){
 
        	<?php echo $header->get_empresa($PATH_IMAGES, $IEnome); ?>
 
-  <h2>MATRÕCULAS/CIDADES DE ALUNOS POR CURSO</h2>
+  <h2>MATR√çCULAS/CIDADES DE ALUNOS POR CURSO</h2>
   <h3>Per&iacute;odo: <?=$periodo; ?></h3>
   <br />
     <?php

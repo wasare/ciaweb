@@ -149,7 +149,7 @@ if ( $id != '' || $curso != '' )
                     <td colspan="4" align="center">
                         <script language="PHP">
 if ( $hasmore )
-echo("<center>Se a curso externo n„o estiver listado, seja mais especÌfico.</center>");
+echo("<center>Se a curso externo n√£o estiver listado, seja mais espec√≠fico.</center>");
                         </script>
                         <hr size="1" width="500">
                         <input type="button" name="Button" value=" Voltar " onClick="javascript:window.close()">
