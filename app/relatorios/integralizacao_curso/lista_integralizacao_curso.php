@@ -4,7 +4,7 @@ require_once(dirname(__FILE__) .'/../../setup.php');
 require_once($BASE_DIR .'core/situacao_academica.php');
 require_once($BASE_DIR .'core/web_diario.php');
 require_once($BASE_DIR .'core/reports/header.php');
-  
+
 $conn = new connection_factory($param_conn);
 $header  = new header($param_conn);
 
@@ -12,6 +12,9 @@ $aluno_id    = (int) $_GET['aluno'];
 $curso_id    = (int) $_GET['cs'];
 $contrato_id = (int) $_GET['contrato'];
 
+$NOTAS = mediaPeriodo($conn->get_one('SELECT ref_periodo_turma FROM contratos WHERE id = '. $contrato_id));
+$MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
+$NOTA_MAXIMA = $NOTAS['nota_maxima'];
 
 if ($aluno_id == 0 || $curso_id == 0 || $contrato_id == 0)
     exit('<script language="javascript" type="text/javascript">window.alert("ERRO! Dados invalidos!");window.close();</script>');
@@ -45,14 +48,14 @@ $sql_disciplinas_aprovadas = "
                 m.ref_curso = $curso_id AND
                 o.is_cancelada = '0' AND
                 m.dt_cancelamento IS NULL AND
-                ( 
-                    ( m.nota_final >= 60 AND 
+                (
+                    ( m.nota_final >= $MEDIA_FINAL_APROVACAO AND
                       o.fl_finalizada = 't' AND
                       ( m.num_faltas <= ( get_carga_horaria_realizada(o.id) ) * 0.25 ) ) OR
                     ref_motivo_matricula IN (2,3,4)
                 ); ";
 
-     
+
 $disciplinas_curso = (array) $conn->get_col($sql_disciplinas_curso);
 //$disciplinas_curso = is_array($disciplinas_curso) ? $disciplinas_curso : array();
 
@@ -67,7 +70,7 @@ $disciplinas_aprovadas = (array) $conn->get_col($sql_disciplinas_aprovadas);
 //echo '<br />';
 
 $disciplinas_nao_cursadas = array_diff($disciplinas_curso, $disciplinas_aprovadas);
-$disciplinas_cursadas_fora_da_matriz = array_diff($disciplinas_aprovadas, $disciplinas_curso);     
+$disciplinas_cursadas_fora_da_matriz = array_diff($disciplinas_aprovadas, $disciplinas_curso);
 
 /*
 $cursadas = array("green", "red", "blue");
@@ -91,7 +94,7 @@ elseif (count($disciplinas_cursadas_fora_da_matriz) > 0) {
                                       WHERE
                                           ref_curso = $curso_id AND
                                           ref_disciplina_equivalente IN (". implode(",", $disciplinas_cursadas_fora_da_matriz) .");";
-        
+
   $disciplinas_equivalentes_cursadas = (array) $conn->get_col($sql_disciplinas_equivalentes);
   //$disciplinas_equivalentes_cursadas = is_array($disciplinas_equivalentes_cursadas) ? $disciplinas_equivalentes_cursadas : array();
 
@@ -99,7 +102,7 @@ elseif (count($disciplinas_cursadas_fora_da_matriz) > 0) {
 
   // array_diff       Returns an array containing all the entries from array1  that are not present in any of the other arrays.
   // array_intersect Returns an array containing all of the values in array1  whose values exist in all of the parameters.
-        
+
   if (count($disciplinas_nao_cursadas_como_equivalentes) == 0) {
     $fl_integralizado = TRUE;
   }
@@ -143,7 +146,7 @@ $contrato = $conn->get_row('SELECT nome_campus, turma FROM campus a , contratos 
   <link href="<?=$BASE_URL?>public/styles/print.css" rel="stylesheet" type="text/css" media="print" />
 </head>
 <body>
-	<div align="left">		
+	<div align="left">
         	<?=$header->get_empresa($PATH_IMAGES, $IEnome)?>
     </div>
       <h2>Integraliza&ccedil;&atilde;o de Curso</h2>
@@ -187,10 +190,10 @@ $contrato = $conn->get_row('SELECT nome_campus, turma FROM campus a , contratos 
 
                 $carga_nao_integralizada += ($disc['curriculo'] == 'M') ? $carga_prevista : 0;
 
-	
+
                 $st = ($st == '#F3F3F3') ? '#FFFFFF' : '#F3F3F3';
       ?>
-	
+
               <tr bgcolor="<?=$st?>">
                 <td>&nbsp;&nbsp;<?=$nome_disciplina?></td>
                 <td align="center"><?=$carga_prevista?></td>
@@ -203,9 +206,9 @@ $contrato = $conn->get_row('SELECT nome_campus, turma FROM campus a , contratos 
               </table>
             <span style="font-size: 0.7em;">
               * Carga hor&aacute;ria n&atilde;o integralizada no curr&iacute;culo m&iacute;nimo: <strong><?=$carga_nao_integralizada?></strong>
-            </span>            
+            </span>
     <?php
-        endif; 
+        endif;
      ?>
 
     <br /> <br />
@@ -233,3 +236,4 @@ $contrato = $conn->get_row('SELECT nome_campus, turma FROM campus a , contratos 
 <br />
 </body>
 </html>
+

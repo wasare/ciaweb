@@ -1,14 +1,14 @@
-<?php 
+<?php
 
 require("../../common.php");
-require("../../lib/InvData.php"); 
+require("../../lib/InvData.php");
 
 $id                   = $_POST['id'];
 $ref_anterior         = $_POST['ref_anterior'];
 $descricao            = $_POST['descricao'];
 $dt_inicial           = $_POST['dt_inicial'];
 $dt_final             = $_POST['dt_final'];
-$media                = $_POST['media'];
+$nota_maxima          = $_POST['nota_maxima'];
 $media_final          = $_POST['media_final'];
 $dt_inicio_aula       = $_POST['dt_inicio_aula'];
 
@@ -17,7 +17,7 @@ CheckFormParameters(array("id",
                           "ref_cobranca",
                           "dt_inicial",
                           "dt_final",
-                          "media",
+                          "nota_maxima",
                           "media_final",
                           "dt_inicio_aula"));
 
@@ -31,14 +31,14 @@ $dt_inicial = InvData($dt_inicial);
 $dt_final = InvData($dt_final);
 $dt_inicio_aula = InvData($dt_inicio_aula);
 
-              
+
 $sql = " update periodos set " .
        "    id = '$id'," .
        "    ref_anterior = '$ref_anterior'," .
        "    descricao = '$descricao'," .
        "    dt_inicial = '$dt_inicial'," .
        "    dt_final = '$dt_final'," .
-       "    media = '$media', " .
+       "    nota_maxima = '$nota_maxima', " .
        "    media_final = '$media_final', " .
        "    dt_inicio_aula = '$dt_inicio_aula'" .
        " where id = '$id'";
@@ -55,3 +55,8 @@ SuccessPage("Alteração de Período",
 ?>
 <html>
 <head>
+  <?=$DOC_TYPE?>
+</head>
+<body></body>
+</html>
+

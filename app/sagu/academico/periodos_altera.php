@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 require("../common.php");
 require("../lib/SQLCombo.php");
-require("../lib/InvData.php"); 
+require("../lib/InvData.php");
 
 $op1_options = SQLArray($sql_periodos_academico);
 
@@ -11,6 +11,7 @@ $id = $_GET['id'];
 ?>
 <html>
 <head>
+<?=$DOC_TYPE?>
 <link rel="stylesheet" href="<?=$BASE_URL .'public/styles/required.css'?>" type="text/css">
 <script language="JavaScript">
 function _init()
@@ -65,7 +66,7 @@ function ChangeCode(fld_name,op_name)
   return true;
 }
 </script>
-<?php 
+<?php
 
 CheckFormParameters(array("id"));
 
@@ -80,7 +81,7 @@ $sql = " select id," .
        "        dt_inicial," .
        "        dt_final," .
        "        fl_livro_matricula," .
-       "        media," .
+       "        nota_maxima," .
        "        media_final," .
        "        dt_inicio_aula" .
        " from periodos where id = '$id'";
@@ -95,9 +96,9 @@ list ($id,
       $ref_anterior,
       $descricao,
       $dt_inicial,
-      $dt_final,      
+      $dt_final,
       $fl_livro_matricula,
-      $media,
+      $nota_maxima,
       $media_final,
       $dt_inicio_aula) = $query->GetRowValues();
 
@@ -148,10 +149,10 @@ $dt_inicio_aula = InvData($dt_inicio_aula);
       </td>
     </tr>
     <tr>
-      <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;M&eacute;dia aprova&ccedil;&atilde;o sem reavalia&ccedil;&atilde;o&nbsp;<span class="required">*</span>&nbsp;</font>
+      <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Nota m&aacute;xima<span class="required">*</span>&nbsp;</font>
       </td>
       <td>
-        <input name="media" type=text size="5" maxlength="5" value="<?echo($media);?>">
+        <input name="nota_maxima" type=text size="5" maxlength="5" value="<?echo($nota_maxima);?>">
       </td>
     </tr>
     <tr>
@@ -182,3 +183,4 @@ $dt_inicio_aula = InvData($dt_inicio_aula);
 </form>
 </body>
 </html>
+

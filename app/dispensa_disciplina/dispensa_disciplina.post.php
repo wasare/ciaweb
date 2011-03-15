@@ -5,6 +5,7 @@ header("Cache-Control: no-cache");
 //-- ARQUIVO CONFIGURACAO E BIBLIOTECAS
 require_once('../setup.php');
 require_once($BASE_DIR .'core/web_diario.php');
+require_once($BASE_DIR .'core/situacao_academica.php');
 
 $conn = new connection_factory($param_conn);//,TRUE,TRUE);
 
@@ -13,6 +14,10 @@ if ( $_POST['second'] != 1 )
 	die;
 
 $flag_processa = 1;
+
+$NOTAS = mediaPeriodo($_POST['periodo_id']);
+$MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
+$NOTA_MAXIMA = $NOTAS['nota_maxima'];
 
 require_once('dispensa_valida.php');
 
@@ -32,7 +37,6 @@ $curso_id    = $_POST['curso_id'];
 $aluno_id    = $_POST['aluno_id'];
 $id_contrato = $_POST['id_contrato'];
 $ref_campus  = $_POST['ref_campus'];
-
 
 // PARAMETROS SQL
 
@@ -70,37 +74,37 @@ $sqlInsereDispensa = ""; //-- Variavel com a sql de insercao da dispensa
 
 	//-- Verifica se o aluno ja esta matriculado nesta disciplina oferecida
 	$sqlDispensado = "
-  	SELECT 
+  	SELECT
     	count(ref_disciplina_ofer)
-  	FROM 
+  	FROM
     	matricula
-  	WHERE 
+  	WHERE
     	ref_disciplina_ofer = '$diario_id' AND
     	ref_periodo = '$periodo_id' AND
     	ref_pessoa  = '$aluno_id'";
-	
+
 	$Result1 = $conn->get_one($sqlDispensado);
-         	
+
 	if($Result1 == 0){
-	
+
 		//-- Informacoes da disciplina
 		$sqlDisciplina = "
-		SELECT 
+		SELECT
 	  		descricao_disciplina(ref_disciplina),
 	  		ref_disciplina,
 	  		ref_campus
-		FROM 
-	  		disciplinas_ofer 
-		WHERE 
+		FROM
+	  		disciplinas_ofer
+		WHERE
 	  		id = $diario_id";
-		
+
 		$disciplina = $conn->get_row($sqlDisciplina);
-		
+
 		$disciplina_descricao = $disciplina['descricao_disciplina'];
 		$disciplina_id = $disciplina['ref_disciplina'];
 		$ref_campus_ofer = $disciplina['ref_campus'];
-		
-		
+
+
 		//-- Verifica se tem vaga
     	$sqlVerificaVagas = "
 		SELECT
@@ -112,9 +116,9 @@ $sqlInsereDispensa = ""; //-- Variavel com a sql de insercao da dispensa
 	    WHERE
     	  ref_disciplina_ofer = '$diario_id' AND
 	      dt_cancelamento is null";
-	  
+
 		$verifica_vagas = $conn->get_row($sqlVerificaVagas);
-	
+
 	    if ($verifica_vagas['total_matriculas'] > 0)
     	{
         	$num_matriculados = $verifica_vagas['total_matriculas'];
@@ -126,7 +130,7 @@ $sqlInsereDispensa = ""; //-- Variavel com a sql de insercao da dispensa
         	$num_matriculados = 0;
 	        $numero_vagas = (int) $verifica_vagas['numero_vagas'];
     	}
-	
+
 		//-- Se o total de vagas excedeu não matricula
 		if (($num_matriculados+1) > $numero_vagas || $numero_vagas == 0)
     	{
@@ -136,14 +140,14 @@ $sqlInsereDispensa = ""; //-- Variavel com a sql de insercao da dispensa
 	    else
     	{
 			$alunos_matriculados = $num_matriculados + 1;
-			$msg .= "<p>>> <b>Di&aacute;rio: </b>$diario_id - "; 
+			$msg .= "<p>>> <b>Di&aacute;rio: </b>$diario_id - ";
 			$msg .= "<b>$disciplina_descricao</b> ($disciplina_id) - ";
 			$msg .= "<b>Matric./Vagas: </b> ". $alunos_matriculados .'/'. $numero_vagas .'</p>';
-			
+
 			//-- Informacoes da disciplina substituta --  IMPLEMENTAR
 			$ref_curso_subst = 0;
 			$ref_disciplina_subst = 0;
-		
+
 			$sqlInsereDispensa .= "
 			INSERT INTO matricula
     	    (
@@ -180,27 +184,27 @@ $sqlInsereDispensa = ""; //-- Variavel com a sql de insercao da dispensa
 	           'f'
 			   $values_sql
     	    );";
-           
+
             // Registra a dispensa no banco
-            $RsInsereDiario = $conn->Execute($sqlInsereDispensa);			
+            $RsInsereDiario = $conn->Execute($sqlInsereDispensa);
 
 		}//fim total de vagas
 	}
 	else{
 	       $msg .= "<p>>> <b><font color=\"#FF0000\">Aluno j&aacute; matriculado/dispensado no di&aacute;rio $diario_id!</font></b></p>";
 	}//fim matriculados
-	
+
 
 //echo '<pre>'. $sqlInsereDispensa .'</pre>'; die;
 
 //-- Inserindo a matricula
 //$RsInsereDiario = $conn->Execute($sqlInsereDispensa);
-			
+
 if ($RsInsereDiario == FALSE)
 {
 	$title = "<h3><font color=\"#FF0000\">Erro ao efetuar a dispensa!</font></h3>";
 	$msg .= ">> Di&aacute;rio: $diario_id<br>";
-    
+
 	//$msg .= "<p><b>Informa&ccedil;&otilde;es adicionais:</b>".$Conexao->ErrorMsg."</p>";
 }
 else
@@ -237,3 +241,4 @@ $cabecalho .= ">> <strong>Curso</strong>: $curso_id  - <strong>Per&iacute;odo</s
   <a href="dispensa_aluno.php">Nova Dispensa</a> <a href="<?=$BASE_URL .'app/index.php'?>">P&aacute;gina inicial</a> </div>
 </body>
 </html>
+

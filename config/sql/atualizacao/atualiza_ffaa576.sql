@@ -40,3 +40,5 @@ UPDATE url SET url = '/app/sagu/academico/post/altera_disciplinas_equivalentes.p
 UPDATE url SET url = '/app/sagu/academico/post/disciplinas_equivalentes_exclui.php' WHERE url_id = 28;
 UPDATE url SET url = '/app/sagu/academico/post/inclui_disciplinas_equivalentes.php' WHERE url_id  = 29;
 
+ALTER TABLE periodos RENAME COLUMN media TO nota_maxima;
+

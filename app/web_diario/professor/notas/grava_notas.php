@@ -2,6 +2,7 @@
 require_once(dirname(__FILE__) .'/../../../setup.php');
 require_once($BASE_DIR .'core/web_diario.php');
 require_once($BASE_DIR .'core/number.php');
+require_once($BASE_DIR .'core/situacao_academica.php');
 
 // CONEXAO ABERTA PARA TRABALHAR COM TRANSACAO (NÃO PERSISTENTE)
 $conexao = new connection_factory($param_conn, FALSE);
@@ -16,7 +17,7 @@ $nota_distribuida = number::decimal_br2numeric($valor_avaliacao,1);
 // VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR
 if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 
-    exit('<script language="javascript" type="text/javascript"> 
+    exit('<script language="javascript" type="text/javascript">
             alert(\'Você não tem direito de acesso a estas informações!\');
             window.close();</script>');
 }
@@ -36,6 +37,11 @@ $periodo = $_SESSION['web_diario_periodo_id'];
 $notas = (array) $_POST['notas'];
 $matriculas = (array) $_POST['matricula'];
 $prova = $_POST['codprova'];
+
+$NOTAS = mediaPeriodo($periodo);
+$MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
+$NOTA_MAXIMA = $NOTAS['nota_maxima'];
+
 
 $msg_registros = '';
 
@@ -110,7 +116,7 @@ $sql12 .= "SELECT DISTINCT
                matricula INNER JOIN
                pessoas ON (matricula.ref_pessoa = pessoas.id) INNER JOIN
                diario_notas d ON (id_ref_pessoas = pessoas.id AND
-                                 d.id_ref_pessoas = matricula.ref_pessoa AND d.id_ref_periodos = '$periodo' AND 
+                                 d.id_ref_pessoas = matricula.ref_pessoa AND d.id_ref_periodos = '$periodo' AND
 								 d.d_ref_disciplina_ofer = $diario_id AND d.ref_diario_avaliacao = '$prova')
             WHERE
                (matricula.ref_disciplina_ofer = $diario_id) AND (matricula.dt_cancelamento is null) AND (matricula.ref_motivo_matricula = 0)";
@@ -125,8 +131,8 @@ $sql12 .= "SELECT DISTINCT
                matricula INNER JOIN
                pessoas ON (matricula.ref_pessoa = pessoas.id) INNER JOIN
                diario_notas d ON (id_ref_pessoas = pessoas.id AND
-                                 d.id_ref_pessoas = matricula.ref_pessoa AND 
-								 d.id_ref_periodos = '$periodo' AND 
+                                 d.id_ref_pessoas = matricula.ref_pessoa AND
+								 d.id_ref_periodos = '$periodo' AND
 								 d.d_ref_disciplina_ofer = $diario_id AND d.ref_diario_avaliacao = '7')
             WHERE
                (matricula.ref_disciplina_ofer = $diario_id) AND (matricula.dt_cancelamento is null) AND (matricula.ref_motivo_matricula = 0)";
@@ -157,19 +163,19 @@ $nota_distribuida_parcial = $conexao->get_one($sql_total);
 
 $total_nota_distribuida = $nota_distribuida_parcial + $nota_distribuida;
 
-if($total_nota_distribuida > 100) {
-  $msg_registros .= '<font color="red"><b>Erro: Não foi possível gravar, resultado do somatório das notas distribuídas superior a 100!</b></font>';
+if($total_nota_distribuida > $NOTA_MAXIMA) {
+  $msg_registros .= '<font color="red"><b>Erro: Não foi possível gravar, resultado do somatório das notas distribuídas superior a '. $NOTA_MAXIMA .'!</b></font>';
   $flag_nota_distribuida_maior = 1;
 }
-else {  
+else {
   $flag_nota_distribuida_maior = 0;
-}  
+}
 /* FIM NOTA DISTRIBUIDA*/
 
 $flag_elimina_notas = (array_sum($notas) == 0 && $nota_distribuida == 0) ? 1 : 0;
 
 // SOMENTE PROCESSA AS NOTAS SE A NOTA DISTRIBUÍDA FOR VÁLIDA
-// E O SOMATÓRIO DAS NOTAS DISTRIBUÍDAS NÃO PASSAR DE 100
+// E O SOMATÓRIO DAS NOTAS DISTRIBUÍDAS NÃO PASSAR DE $NOTA_MAXIMA
 if(($flag_nota_distribuida == 0 && $flag_nota_distribuida_maior == 0) || $flag_elimina_notas == 1) {
 
    // SQL NOTA DISTRIBUIDA
@@ -205,68 +211,68 @@ if(($flag_nota_distribuida == 0 && $flag_nota_distribuida_maior == 0) || $flag_e
 
     // NOTA MAIOR QUE NOTA DISTRIBUIDA
     if($nota > $nota_distribuida) { $flag_nota_distribuida_maior = 1;} else { $flag_nota_distribuida_maior = 0; }
-    
+
 	 // NOTA EXTRA
     if($nota_extra > -1) { $flag_extra = 1; } else { $flag_extra = 0; }
 
     // NOTA DIFERENTE
-	if($nota != $nota_atual) { $flag_diff = 1; } else { $flag_diff = 0; } 
+	if($nota != $nota_atual) { $flag_diff = 1; } else { $flag_diff = 0; }
 
-   if($flag_diff == 1) { 
+   if($flag_diff == 1) {
         $NotaFinal = ($nota_parcial + $nota);
    }
-   else {		
+   else {
 		$NotaFinal = ($nota_parcial + $nota_atual);
    }
 
-   if($NotaFinal > 100) { $flag_maior = 1;} else { $flag_maior = 0; }
-	  
-   $NotaReal = number::numeric2decimal_br($nota,1);  
+   if($NotaFinal > $NOTA_MAXIMA) { $flag_maior = 1;} else { $flag_maior = 0; }
+
+   $NotaReal = number::numeric2decimal_br($nota,1);
 
 		// SE NOTA EXTRA NÃO FOI LANCADA,
-		// E A NOTA FOR DIFERENTE DA ANTERIOR E NÃO FOR MAIOR QUE 100 GRAVA
-        // E O SOMATÓRIO DAS NOTAS DISTRIBUIDA É MENOR/IGUAL A 100
+		// E A NOTA FOR DIFERENTE DA ANTERIOR E NÃO FOR MAIOR QUE $NOTA_MAXIMA GRAVA
+        // E O SOMATÓRIO DAS NOTAS DISTRIBUIDA É MENOR/IGUAL A $NOTA_MAXIMA
         // E A NOTA É MENOR/IGUAL O VALOR DA NOTA DISTRIBUIDA
 		if($flag_extra == 0 && $flag_diff == 1 && $flag_maior == 0 && $flag_nota_distribuida_maior == 0) {
-				$flag_grava = 1; 
+				$flag_grava = 1;
 		}
 		else {  $flag_grava = 0; }
-		
+
       // GRAVA AS NOTAS NO BANCO DE DADOS
-      // SO ATUALIZA A NOTA SE NAO EXISTIR A NOTA EXTRA E A SOMA FOR MENOR OU IGUAL A 100
+      // SO ATUALIZA A NOTA SE NAO EXISTIR A NOTA EXTRA E A SOMA FOR MENOR OU IGUAL A $NOTA_MAXIMA
 	  if($flag_grava == 1) {
 
         	$sql_update .= "UPDATE matricula
-                             SET 
-							nota_final = $NotaFinal 
-                          WHERE 
+                             SET
+							nota_final = $NotaFinal
+                          WHERE
                              ref_pessoa = $aluno_id AND
-                             ref_disciplina_ofer = $diario_id AND 
+                             ref_disciplina_ofer = $diario_id AND
                              ref_periodo = '$periodo' AND
                              ref_motivo_matricula = 0; ";
-		// AND ref_disciplina = '$getdisciplina' 
-         	$sql_update .= "UPDATE 
-                     diario_notas 
-                  SET 
-                     nota = $nota 
-                  WHERE 
+		// AND ref_disciplina = '$getdisciplina'
+         	$sql_update .= "UPDATE
+                     diario_notas
+                  SET
+                     nota = $nota
+                  WHERE
 				     d_ref_disciplina_ofer = $diario_id AND
-                     ref_diario_avaliacao = '$prova' AND 
+                     ref_diario_avaliacao = '$prova' AND
                      ra_cnec = '$aluno_id';";
 				// rel_diario_formulas_grupo = '$grupo' AND
-					 
-					 
+
+
 			$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">Nota <font color=\"#FF0000\"><strong>$NotaReal</strong></font> registrada para o aluno(a) <strong>$nome_aluno</strong>($aluno_id)<br></font>";
       }
       else {
 		    if($flag_extra == 1) {
 
-					$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota $NotaReal n&atilde;o registrada, motivo: </strong></font><font color=\"#FF0000\"><strong>NOTA EXTRA J&Aacute; LAN&Ccedil;ADA!</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";	
+					$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota $NotaReal n&atilde;o registrada, motivo: </strong></font><font color=\"#FF0000\"><strong>NOTA EXTRA J&Aacute; LAN&Ccedil;ADA!</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
 			}
 			else {
 				if($flag_maior == 1) {
-				
-					$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota $NotaReal n&atilde;o registrada, causa: </strong></font><font color=\"#FF0000\"><strong>M&Eacute;DIA > 100 pontos</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";				
+
+					$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota $NotaReal n&atilde;o registrada, causa: </strong></font><font color=\"#FF0000\"><strong>M&Eacute;DIA > $NOTA_MAXIMA pontos</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
 				}
 				else {
 
@@ -275,9 +281,9 @@ if(($flag_nota_distribuida == 0 && $flag_nota_distribuida_maior == 0) || $flag_e
 					}
                     elseif($flag_diff == 0) {
                   		$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota $NotaReal Mantida</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
-					}				
+					}
         		}
-      		}               
+      		}
 
 	  }
       // print ($sqlupdatematricula."<BR>");
@@ -294,7 +300,7 @@ $conexao->Execute($sql_update);
 
 echo $msg_registros;
 
-// GRAVA LOG                  
+// GRAVA LOG
 $ip = $_SERVER["REMOTE_ADDR"];
 $pagina = $_SERVER["PHP_SELF"];
 $status = "NOTA REGISTRADA";
@@ -315,3 +321,4 @@ $conexao->Execute($sqllog);
 </div>
 </body>
 </html>
+

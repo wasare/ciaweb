@@ -2927,3 +2927,5 @@ ALTER TABLE disciplinas ADD COLUMN abreviatura character varying(20);
 ALTER TABLE disciplinas ALTER COLUMN abreviatura SET NOT NULL;
 ALTER TABLE disciplinas ADD CONSTRAINT abreviatura_unq UNIQUE (abreviatura);
 
+ALTER TABLE periodos RENAME COLUMN media TO nota_maxima;
+

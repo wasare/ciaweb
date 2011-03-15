@@ -32,20 +32,20 @@ $sql_disciplinas_aprovadas = "
                 m.ref_curso = $curso_id AND
                 o.is_cancelada = '0' AND
                 m.dt_cancelamento IS NULL AND
-                ( 
-                    ( m.nota_final >= 60 AND 
+                (
+                    ( m.nota_final >= $MEDIA_FINAL_APROVACAO AND
                       o.fl_finalizada = 't' AND
                       ( m.num_faltas <= ( get_carga_horaria_realizada(o.id) ) * 0.25 ) ) OR
                     ref_motivo_matricula IN (2,3,4)
                 ); ";
 
-     
+
 $disciplinas_curso = (array) $conn->get_col($sql_disciplinas_curso);
 
 $disciplinas_aprovadas = (array) $conn->get_col($sql_disciplinas_aprovadas);
 
 $disciplinas_nao_cursadas = array_diff($disciplinas_curso, $disciplinas_aprovadas);
-$disciplinas_cursadas_fora_da_matriz = array_diff($disciplinas_aprovadas, $disciplinas_curso);     
+$disciplinas_cursadas_fora_da_matriz = array_diff($disciplinas_aprovadas, $disciplinas_curso);
 
 /*
 $cursadas = array("green", "red", "blue");
@@ -70,14 +70,14 @@ elseif (count($disciplinas_cursadas_fora_da_matriz) > 0) {
                                       WHERE
                                           ref_curso = $curso_id AND
                                           ref_disciplina_equivalente IN (". implode(",", $disciplinas_cursadas_fora_da_matriz) .");";
-        
+
   $disciplinas_equivalentes_cursadas = (array) $conn->get_col($sql_disciplinas_equivalentes);
 
   $disciplinas_nao_cursadas_como_equivalentes = array_diff($disciplinas_nao_cursadas, $disciplinas_equivalentes_cursadas);
 
   // array_diff       Returns an array containing all the entries from array1  that are not present in any of the other arrays.
   // array_intersect Returns an array containing all of the values in array1  whose values exist in all of the parameters.
-        
+
   if (count($disciplinas_nao_cursadas_como_equivalentes) == 0) {
     $fl_integralizado = TRUE;
   }
@@ -143,10 +143,10 @@ if (count($disciplinas_nao_cursadas) > 0) {
 
                 $carga_nao_integralizada += ($disc['curriculo'] == 'M') ? $carga_prevista : 0;
 
-	
+
                 $st = ($st == '#F3F3F3') ? '#FFFFFF' : '#F3F3F3';
       ?>
-	
+
               <tr bgcolor="<?=$st?>">
                 <td>&nbsp;&nbsp;<?=$nome_disciplina?></td>
                 <td align="center"><?=$carga_prevista?></td>
@@ -159,9 +159,9 @@ if (count($disciplinas_nao_cursadas) > 0) {
               </table>
             <span style="font-size: 0.7em;">
               * Carga hor&aacute;ria n&atilde;o integralizada no curr&iacute;culo m&iacute;nimo: <strong><?=$carga_nao_integralizada?></strong>
-            </span>            
+            </span>
     <?php
-        endif; 
+        endif;
      ?>
 
     <br /><br />
@@ -176,3 +176,4 @@ if (count($disciplinas_nao_cursadas) > 0) {
     </span>
     <br /><br />
     </div>
+

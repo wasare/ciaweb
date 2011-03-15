@@ -13,7 +13,7 @@ $origem               = $_POST['origem'];
 $ref_local            = $_POST['ref_local'];
 $dt_inicial           = $_POST['dt_inicial'];
 $dt_final             = $_POST['dt_final'];
-$media                = $_POST['media'];
+$nota_maxima          = $_POST['nota_maxima'];
 $media_final          = $_POST['media_final'];
 $dt_inicio_aula       = $_POST['dt_inicio_aula'];
 $tx_acresc            = $_POST['tx_acresc'];
@@ -24,7 +24,7 @@ CheckFormParameters(array("id",
                           "descricao",
                           "dt_inicial",
                           "dt_final",
-                          "media",
+                          "nota_maxima",
                           "media_final",
                           "dt_inicio_aula"));
 
@@ -52,7 +52,7 @@ INSERT INTO periodos (
     dt_final,
     ref_status_vest,
     fl_livro_matricula,
-    media,
+    nota_maxima,
     media_final,
     dt_inicio_aula,
     ref_historico,
@@ -65,7 +65,7 @@ INSERT INTO periodos (
     '$dt_final',
     '$ref_status_vest',
     '$fl_livro_matricula',
-    '$media',
+    '$nota_maxima',
     '$media_final',
     '$dt_inicio_aula',
     '1',
@@ -79,7 +79,7 @@ $err= $conn->GetError();
 $conn->Finish();
 $conn->Close();
 
-SaguAssert($ok,"Não foi possível inserir o registro!<BR><BR>$err");
+SaguAssert($ok,"Não foi possível inserir o registro!<br /><br />$err");
 
 SuccessPage("Inclusão de Período",
             "location='../periodos.php'",
@@ -88,6 +88,8 @@ SuccessPage("Inclusão de Período",
 ?>
 <html>
 <head>
-</HEAD>
-<BODY></BODY>
-</HTML>
+  <?=$DOC_TYPE?>
+</head>
+<body></body>
+</html>
+

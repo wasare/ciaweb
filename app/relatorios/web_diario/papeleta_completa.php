@@ -5,6 +5,7 @@ require_once($BASE_DIR .'core/web_diario.php');
 require_once($BASE_DIR .'core/number.php');
 require_once($BASE_DIR .'core/reports/header.php');
 require_once($BASE_DIR .'core/web_diario.php');
+require_once($BASE_DIR .'core/situacao_academica.php');
 
 $conn = new connection_factory($param_conn);
 $header  = new header($param_conn);
@@ -26,13 +27,13 @@ if(isset($_SESSION['sa_modulo']) && $_SESSION['sa_modulo'] == 'web_diario_login'
 }
 
 //  INICIALIZA O DIARIO CASO NECESSARIO
-if(!is_inicializado($diario_id)) 
+if(!is_inicializado($diario_id))
 {
     if(!ini_diario($diario_id))
     {
         echo '<script type="text/javascript">  window.alert("Falha ao inicializar o diário!!!!!!!"); </script>';
         envia_erro('Falha ao inicializar o diário '. $diario_id .'!!!!!!!');
-        exit; 
+        exit;
     }
 }
 //^  INICIALIZA O DIARIO CASO NECESSARIO ^ //
@@ -76,18 +77,22 @@ if (!existe_matricula($diario_id)) {
   exit('<script language="javascript">window.alert("Este diário ainda não possue alunos matriculados!"); javascript:window.close(); </script>');
 }
 
-$sql3 = 'SELECT 
-            b.nome, b.ra_cnec, a.ordem_chamada, a.nota_final, c.ref_diario_avaliacao, c.nota, a.num_faltas 
-        FROM 
-            matricula a, pessoas b, diario_notas c 
-        WHERE    
-            (a.dt_cancelamento is null) AND 
-            a.ref_disciplina_ofer = '. $diario_id .' AND 
-            a.ref_pessoa = b.id AND 
-            b.ra_cnec = c.ra_cnec AND 
-            c.d_ref_disciplina_ofer = a.ref_disciplina_ofer AND 
-            a.ref_motivo_matricula = 0 
-        ORDER BY 
+$NOTAS = mediaPeriodo($conn->get_one('SELECT periodo_disciplina_ofer('. $diario_id .');'));
+$MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
+
+
+$sql3 = 'SELECT
+            b.nome, b.ra_cnec, a.ordem_chamada, a.nota_final, c.ref_diario_avaliacao, c.nota, a.num_faltas
+        FROM
+            matricula a, pessoas b, diario_notas c
+        WHERE
+            (a.dt_cancelamento is null) AND
+            a.ref_disciplina_ofer = '. $diario_id .' AND
+            a.ref_pessoa = b.id AND
+            b.ra_cnec = c.ra_cnec AND
+            c.d_ref_disciplina_ofer = a.ref_disciplina_ofer AND
+            a.ref_motivo_matricula = 0
+        ORDER BY
             lower(to_ascii(nome,\'LATIN1\')), ref_diario_avaliacao;';
 
 
@@ -115,12 +120,12 @@ $fl_digitada = $qry5['fl_digitada'];
 // EDUCACAO FISICA 4
 $msg_dispensa = '';
 
-$sql_dispensas = "SELECT COUNT(*) 
-                    FROM 
+$sql_dispensas = "SELECT COUNT(*)
+                    FROM
                         matricula a, pessoas b
-                    WHERE 
-            
-                    (a.dt_cancelamento is null) AND            
+                    WHERE
+
+                    (a.dt_cancelamento is null) AND
                     a.ref_disciplina_ofer = $diario_id AND
                     a.ref_pessoa = b.id AND
                     a.ref_motivo_matricula IN (2,3,4) ;" ;
@@ -202,8 +207,8 @@ if( $fl_finalizada == 'f') {
 
 }
 
-$sql_quantidade_notas = "SELECT quantidade_notas_diario 
-								FROM tipos_curso 
+$sql_quantidade_notas = "SELECT quantidade_notas_diario
+								FROM tipos_curso
 								WHERE id = get_tipo_curso((SELECT ref_curso FROM disciplinas_ofer WHERE id = $diario_id));";
 $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 
@@ -253,28 +258,28 @@ foreach($matriculas as $row3)
 		$racnec = $row3["ra_cnec"];
 		$racnec = str_pad($racnec, 5, "0", STR_PAD_LEFT) ;
 		$num = $row3["ordem_chamada"];
-   
+
 		if ($row3["num_faltas"] > 0)
 			$falta = $row3["num_faltas"];
 		else
 			$falta = '0';
-		
+
 		if($falta > $FaltaMax) $falta = "<font color=\"red\"><b>$falta</b></font>";
-		
+
 		if($row3['nota_final'] != 0)
-		{    
+		{
 			$nota = number::numeric2decimal_br($row3['nota_final'],1);
 		}
-		else 
-		{ 
+		else
+		{
 			$nota = $row3['nota_final'];
 		}
 
-		if ($nota < 60)
+		if ($nota < $MEDIA_FINAL_APROVACAO)
 		{
 			$nota = "<font color=\"red\"><b>$nota</b></font>";
 		}
-   
+
 		if ( ($i % 2) == 0)
 		{
 			$rcolor = $r1;
@@ -283,23 +288,23 @@ foreach($matriculas as $row3)
 		{
 			$rcolor = $r2;
 		}
-   	
+
 		print  ("<tr bgcolor=\"$rcolor\">\n");
 		print ("<td align=\"center\">".$No++."</td>\n ");
-		print (" <td align=\"center\">$racnec</td>\n <td>$nome_f</td>\n "); 
+		print (" <td align=\"center\">$racnec</td>\n <td>$nome_f</td>\n ");
 
 		$total_nota_webdiario = 0;
 	}
-		
+
 	$N = $row3['nota'];
-    
+
     if($N < 0)
     {
       $N = '-';
     }
-   
-    if($N > 0) 
-	{ 
+
+    if($N > 0)
+	{
 		$N = number::numeric2decimal_br($N,1);
     }
     //somatorio nota web diario
@@ -307,22 +312,22 @@ foreach($matriculas as $row3)
 
     if ($row3['ref_diario_avaliacao'] <= $quantidade_notas_diario || $row3['ref_diario_avaliacao'] == 7)
 		print ("<td align=\"center\">$N</td>\n ");
-	//else	
+	//else
 
     $i++;
     if ($row3['ref_diario_avaliacao'] != 7)
         continue;
-	//if ($row3['ref_diario_avaliacao'] == 7) 
+	//if ($row3['ref_diario_avaliacao'] == 7)
 //	{
 		print ("<td align=\"center\">$nota</td>\n ");
 		print ("<td align=\"center\">$falta</td>\n ");
-   
+
 		print ("</tr>\n ");
 //	}
   //  else
 	//	if ($row3['ref_diario_avaliacao'] <= $quantidade_notas_diario)
 	//		print ("<td align=\"center\">$N</td>\n ");
-   
+
    	//$i++;
 }
 
@@ -339,7 +344,7 @@ foreach($matriculas as $row3)
 	print("Aulas dadas: <b>$ch_realizada</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 	print("Aulas previstas: <b>$ch_prevista</b> <br />");
 	print("<br />ASSINATURA(S):");
-	
+
     echo '<br /><br />';
 
     $i = 0;
@@ -385,18 +390,18 @@ foreach($matriculas as $row3)
 <?php
 
     if (!empty($msg_dispensa)) {
-	
-		$sql_dispensas = "SELECT 
-         b.nome, b.id AS ra_cnec, a.ordem_chamada, a.nota_final, a.num_faltas, a.ref_motivo_matricula 
+
+		$sql_dispensas = "SELECT
+         b.nome, b.id AS ra_cnec, a.ordem_chamada, a.nota_final, a.num_faltas, a.ref_motivo_matricula
          FROM matricula a, pessoas b
-         WHERE 
-            
-            (a.dt_cancelamento is null) AND         
+         WHERE
+
+            (a.dt_cancelamento is null) AND
             a.ref_disciplina_ofer = $diario_id AND
-            a.ref_pessoa = b.id AND 
+            a.ref_pessoa = b.id AND
             a.ref_motivo_matricula IN (2,3,4)
          	ORDER BY lower(to_ascii(nome,'LATIN1'));" ;
-	   
+
 		$qry_dispensas = $conn->adodb->getAll($sql_dispensas);
 
 ?>
@@ -411,7 +416,7 @@ foreach($matriculas as $row3)
 		</tr>
 
 <?php
-	
+
 
 	foreach($qry_dispensas as $row3)
 	{
@@ -474,3 +479,4 @@ foreach($matriculas as $row3)
 <br /><br />
 </body>
 </html>
+

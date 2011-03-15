@@ -43,7 +43,7 @@ if($_POST['second'] == 1)
   if($_POST['dispensa_tipo'] == 3)
   {
 
-    if (!is_numeric($_POST['nota_final']) OR  $_POST['nota_final'] < 60 OR $_POST['nota_final'] > 100 )
+    if (!is_numeric($_POST['nota_final']) OR  $_POST['nota_final'] < $MEDIA_FINAL_APROVACAO OR $_POST['nota_final'] > $NOTA_MAXIMA )
     {
         $erro_valida .= 'Nota obtida na disciplina é inválida'."\n";
         $flag_erro = TRUE;
@@ -67,7 +67,7 @@ if($_POST['second'] == 1)
 
 		exit();
 	}
-	else 
+	else
 	{
 		if ( $flag_erro )
 		{
@@ -77,3 +77,4 @@ if($_POST['second'] == 1)
 }
 
 ?>
+

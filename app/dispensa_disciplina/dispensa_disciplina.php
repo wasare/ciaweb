@@ -9,36 +9,40 @@
 
 //Arquivos de configuracao e biblioteca
 header("Cache-Control: no-cache");
-require_once('../../app/setup.php');
+require_once(dirname(__FILE__) .'/../../setup.php');
+require_once($BASE_DIR .'core/situacao_academica.php');
 
 
 $conn = new connection_factory($param_conn);
 
 /**
- * @var string 
+ * @var string
  */
 $sa_periodo_id = $_POST['periodo_id'];
 /**
- * @var string 
+ * @var string
  */
 $aluno_id = $_POST['codigo_pessoa'];
 /**
- * @var string 
+ * @var string
  */
 $id_contrato = $_POST['id_contrato'];
 /**
- * @var string 
+ * @var string
  */
 $first = $_POST['first'];
 /**
- * @var integer   
+ * @var integer
  */
 $checar_turma = $_POST['checar_turma'];
 
 $_SESSION['sa_periodo_id'] = $sa_periodo_id;
 
+$NOTAS = mediaPeriodo($sa_periodo_id);
+$MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
+
 $sqlCurso = "
-SELECT 
+SELECT
   cursos.id,
   cursos.descricao,
   contratos.ref_campus,
@@ -58,15 +62,15 @@ $curso = $conn->get_row($sqlCurso);
  */
 $curso_id   = $curso['id'];
 /**
- * @var string   
+ * @var string
  */
 $curso_nome = $curso['descricao'];
 /**
- * @var integer   
+ * @var integer
  */
 $ref_campus = $curso['ref_campus'];
 /**
- * @var string   
+ * @var string
  */
 $turma = $curso['turma'];
 
@@ -105,9 +109,9 @@ SELECT DISTINCT
                 o.is_cancelada = '0' AND
                 s.id = o.ref_periodo AND
                 o.ref_campus = '$ref_campus' AND
-                o.id IN 
-        (            
-SELECT 
+                o.id IN
+        (
+SELECT
  DISTINCT
  id FROM
  (";
@@ -129,10 +133,10 @@ SELECT DISTINCT
                         from cursos_disciplinas
                         where ref_curso = $curso_id
                 ) AND
-                ( m.nota_final < 60 OR
-                m.num_faltas > ( d.carga_horaria * 0.25) ) 
+                ( m.nota_final < $MEDIA_FINAL_APROVACAO OR
+                m.num_faltas > ( d.carga_horaria * 0.25) )
 				) AS T1
-                
+
 FULL OUTER JOIN (";
 
 //-- seleciona todas as ofertas de disciplinas em aberto do curriculo aluno, mas sem matricula feita e sem aprovação
@@ -154,7 +158,7 @@ SELECT DISTINCT
                         where ref_curso = $curso_id
                 ) AND
 				d.id NOT IN (
-                    select distinct o.ref_disciplina from 
+                    select distinct o.ref_disciplina from
 						disciplinas_ofer o where
 						   o.id IN (
 									select distinct ref_disciplina_ofer
@@ -165,7 +169,7 @@ SELECT DISTINCT
 				)
 
 ) AS T2 USING (ref_disciplina)
-WHERE matriculada is null 
+WHERE matriculada is null
 ) ORDER BY 2, 4 DESC, 3; ";
 
 // -- o.fl_finalizada = 'f' AND -- somente em diario aberto/finalizado
@@ -189,7 +193,7 @@ WHERE matriculada is null
 			$DisciplinasNaoCursadas .= "<strong>$ref_disciplina_ofer - $descricao_disciplina</strong> - $ref_curso - $turma_ofer($ref_periodo) <br />";
 
 			$RsDisciplinas->MoveNext();
-	
+
         $code++;
 
     }
@@ -257,3 +261,4 @@ if ( $count == 0 ) {
 </div>
 </body>
 </html>
+

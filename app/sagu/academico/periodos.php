@@ -12,6 +12,7 @@ $sql = "select substr(nome_campus,1,25),id from campus order by nome_campus";
 ?>
 <html>
     <head>
+    <?=$DOC_TYPE?>
     <link rel="stylesheet" href="<?=$BASE_URL .'public/styles/required.css'?>" type="text/css">
         <script language="JavaScript">
             function _init()
@@ -82,9 +83,9 @@ $sql = "select substr(nome_campus,1,25),id from campus order by nome_campus";
                     <tr>
                         <td bgcolor="#CCCCFF"><font
                                 face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;C&oacute;digo&nbsp;<span class="required">*</span>&nbsp;</font></td>
-                        <td><input name="id" type=text size="12"></td><td>                   
+                        <td><input name="id" type=text size="12"></td><td>
                     </tr>
-                    
+
                     <tr>
                         <td bgcolor="#CCCCFF"><font
                                 face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Descri&ccedil;&atilde;o&nbsp;<span class="required">*</span>&nbsp;</font></td>
@@ -121,9 +122,8 @@ $sql = "select substr(nome_campus,1,25),id from campus order by nome_campus";
                     </tr>
                     <tr>
                         <td bgcolor="#CCCCFF"><font
-                                face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;M&eacute;dia
-		Aprova&ccedil;&atilde;o sem Exame&nbsp;<span class="required">*</span>&nbsp;</font></td>
-                        <td><input name="media" type="text" size="5" maxlength="5" value="60">
+                                face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Nota M&aacute;xima<span class="required">*</span>&nbsp;</font></td>
+                        <td><input name="nota_maxima" type="text" size="5" maxlength="5" value="100">
                         </td>
                     </tr>
                     <tr>
@@ -162,3 +162,4 @@ $sql = "select substr(nome_campus,1,25),id from campus order by nome_campus";
         </form>
     </body>
 </html>
+

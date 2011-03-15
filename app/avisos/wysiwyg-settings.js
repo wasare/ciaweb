@@ -15,10 +15,10 @@ var full = new WYSIWYG.Settings();
 //full.PopupsDir = "openwysiwyg_v1.4.7/popups/";
 //full.CSSFile = "openwysiwyg_v1.4.7/styles/wysiwyg.css";
 
-full.Width = "85%"; 
+full.Width = "85%";
 full.Height = "250px";
 // customize toolbar buttons
-full.addToolbarElement("font", 3, 1); 
+full.addToolbarElement("font", 3, 1);
 full.addToolbarElement("fontsize", 3, 2);
 full.addToolbarElement("headings", 3, 3);
 // openImageLibrary addon implementation
@@ -41,21 +41,23 @@ small.StatusBarEnabled = false;
 
 
 /*
-* CEFETSMALL - EDITOR PEQUENO COM POUCAS OPCOES 
+* AVISO  - EDITOR PEQUENO COM POUCAS OPCOES
 * Santiago Silva Pereira em 15/07/2008
+* Alterado por Wanderson S Reis em 15/03/2011
 */
 
-var cefetsmall = new WYSIWYG.Settings();
+var AVISO = new WYSIWYG.Settings();
 
-cefetsmall.ImagesDir = "openwysiwyg_v1.4.7/images/";
-cefetsmall.PopupsDir = "openwysiwyg_v1.4.7/popups/";
-cefetsmall.CSSFile = "openwysiwyg_v1.4.7/styles/wysiwyg.css";
+AVISO.ImagesDir = "../../lib/openwysiwyg/images/";
+AVISO.PopupsDir = "../../lib/openwysiwyg/popups/";
+AVISO.CSSFile = "../../lib/openwysiwyg/styles/wysiwyg.css";
 
-cefetsmall.Width = "500"; 
-cefetsmall.Height = "250px";
+AVISO.Width = "500";
+AVISO.Height = "250px";
 /*
 font, fontsize,	bold, italic, underline, forecolor, backcolor, justifyleft, justifycenter, justifyright, unorderedlist, orderedlist, outdent, indent, subscript, superscript, cut, copy, paste, removeformat, undo, redo, inserttable, insertimage, createlink, seperator, undo, redo, seperator, preview, print, viewSource, help
 */
-cefetsmall.Toolbar[0] = new Array("font","fontsize", "bold","italic","underline","forecolor")
-cefetsmall.Toolbar[1] = "";
-cefetsmall.StatusBarEnabled = false;
+AVISO.Toolbar[0] = new Array("font","fontsize", "bold","italic","underline","forecolor")
+AVISO.Toolbar[1] = "";
+AVISO.StatusBarEnabled = false;
+

@@ -4,6 +4,7 @@ require_once(dirname(__FILE__). '/../../setup.php');
 require_once($BASE_DIR .'core/web_diario.php');
 require_once($BASE_DIR .'core/reports/header.php');
 require_once($BASE_DIR .'core/number.php');
+require_once($BASE_DIR .'core/situacao_academica.php');
 
 $conn = new connection_factory($param_conn);
 $header  = new header($param_conn);
@@ -20,7 +21,7 @@ if(isset($_SESSION['sa_modulo']) && $_SESSION['sa_modulo'] == 'web_diario_login'
     exit('<script language="javascript" type="text/javascript">
             alert(\'Você não tem direito de acesso a estas informações!\');
             window.close();</script>');
-  }  
+  }
 }
 // ^ VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR ^ //
 
@@ -28,16 +29,18 @@ if (!existe_matricula($diario_id)) {
   exit('<script language="javascript">window.alert("Este diário ainda não possue alunos matriculados!"); javascript:window.close(); </script>');
 }
 
+$NOTAS = mediaPeriodo($conn->get_one('SELECT periodo_disciplina_ofer('. $diario_id .');'));
+$MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
 
-$sql3 = "SELECT 
-         b.nome, b.id AS ra_cnec, a.ordem_chamada, a.nota_final, a.num_faltas 
+$sql3 = "SELECT
+         b.nome, b.id AS ra_cnec, a.ordem_chamada, a.nota_final, a.num_faltas
          FROM matricula a, pessoas b
-         WHERE 
+         WHERE
             (a.dt_cancelamento is null) AND
             a.ref_disciplina_ofer = $diario_id AND
-            a.ref_pessoa = b.id AND 
+            a.ref_pessoa = b.id AND
             a.ref_motivo_matricula = 0
-            
+
          ORDER BY lower(to_ascii(nome,'LATIN1'));" ;
 
 
@@ -50,7 +53,7 @@ $sql5 = " SELECT fl_finalizada, fl_digitada
                 disciplinas_ofer
             WHERE
                id = $diario_id;";
-		   
+
 $qry5 = $conn->get_row($sql5);
 
 $fl_finalizada = $qry5['fl_finalizada'];
@@ -61,14 +64,14 @@ $fl_digitada = $qry5['fl_digitada'];
 // EDUCACAO FISICA 4
 $msg_dispensa = '';
 
-$sql_dispensas = "SELECT COUNT(*) 
-         			FROM 
+$sql_dispensas = "SELECT COUNT(*)
+         			FROM
 						matricula a, pessoas b
-         			WHERE 
-            
-            		(a.dt_cancelamento is null) AND            
+         			WHERE
+
+            		(a.dt_cancelamento is null) AND
             		a.ref_disciplina_ofer = $diario_id AND
-            		a.ref_pessoa = b.id AND 
+            		a.ref_pessoa = b.id AND
             		a.ref_motivo_matricula IN (2,3,4) ;" ;
 
 $dispensas = $conn->get_one($sql_dispensas);
@@ -159,8 +162,8 @@ if( $fl_finalizada == 'f') {
 
 <?php
 
-    
-$sql_carga_horaria = "SELECT get_carga_horaria_realizada($diario_id), get_carga_horaria(get_disciplina_de_disciplina_of($diario_id));"; 
+
+$sql_carga_horaria = "SELECT get_carga_horaria_realizada($diario_id), get_carga_horaria(get_disciplina_de_disciplina_of($diario_id));";
 
 $carga_horaria = $conn->get_row($sql_carga_horaria);
 
@@ -176,13 +179,13 @@ $r1 = '#FFFFFF';
 $r2 = '#FFFFCC';
 
 
-foreach($qry3 as $row3) 
+foreach($qry3 as $row3)
 {
    $nome_f = $row3['nome'];
    $racnec = $row3['ra_cnec'];
    $racnec = str_pad($racnec, 5, "0", STR_PAD_LEFT) ;
    $num = $row3['ordem_chamada'];
-   
+
    if ($row3['num_faltas'] > 0){
       $falta = $row3['num_faltas'];
    }
@@ -191,20 +194,20 @@ foreach($qry3 as $row3)
    }
 
    if($falta > $FaltaMax) $falta = "<font color=\"red\"><b>$falta</b></font>";
-   
-    if($row3['nota_final'] != 0) { 
+
+    if($row3['nota_final'] != 0) {
 		$nota = number::numeric2decimal_br($row3['nota_final'],1);
 	}
-	else { 
+	else {
 		$nota = $row3['nota_final'];
 	}
- 
-	 
-   if ($nota < 60) 
+
+
+   if ($nota < $MEDIA_FINAL_APROVACAO)
    {
       $nota = "<font color=\"red\"><b>$nota</b></font>";
    }
-   
+
    if ( ($i % 2) == 0)
    {
       $rcolor = $r1;
@@ -213,12 +216,12 @@ foreach($qry3 as $row3)
    {
       $rcolor = $r2;
    }
-   print("<tr bgcolor=\"$rcolor\">\n"); 
-   print(" <td align=\"center\" >". $N++ ."</td>\n <td align=\"center\" >$racnec</td>\n <td>$nome_f</td>\n "); 
+   print("<tr bgcolor=\"$rcolor\">\n");
+   print(" <td align=\"center\" >". $N++ ."</td>\n <td align=\"center\" >$racnec</td>\n <td>$nome_f</td>\n ");
    print ("<td align=\"center\">$nota</td>\n ");
    print ("<td align=\"center\">$falta</td>\n ");
    print("</tr>\n ");
-   
+
    $i++;
 }
 
@@ -232,7 +235,7 @@ foreach($qry3 as $row3)
 <hr width="60%" size="1" align="left" color="#FFFFFF">
 
 <?php
-	
+
 print("Aulas dadas: <b>$ch_realizada</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 print("Aulas previstas: <b>$ch_prevista</b> <br />");
 print("<br />ASSINATURA(S):");
@@ -248,3 +251,4 @@ print("<br />ASSINATURA(S):");
 <br /><br />
 </body>
 </html>
+
