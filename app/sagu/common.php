@@ -9,7 +9,7 @@ $LoginPWD    = $password;
 $LoginPort   = $port;
 
 $ErrorURL   	  = $BASE_DIR . 'app/sagu/fatalerror.php';
-$SuccessURL 	  = $BASE_DIR . 'app/sagu/modelos/modelo_exito.phtml';
+$SuccessURL 	  = $BASE_DIR . 'app/sagu/modelos/modelo_exito.php';
 $PATH_SAGU_IMAGES = $BASE_URL .'app/sagu/images/';
 $LoginACL  		  = $BASE_DIR .'app/sagu/users.acl';
 $SQL_LogFile 	  = $BASE_DIR .'app/sagu/logs/sql.log';

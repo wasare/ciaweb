@@ -1,10 +1,10 @@
 <?php
 
 require("../../common.php");
-require("../../lib/CheckUnique.php3");
+require("../../lib/CheckUnique.php");
 require("../../properties.php");
-require("../../lib/GetField.php3");
-require("../../lib/InvData.php3");
+require("../../lib/GetField.php");
+require("../../lib/InvData.php");
 
 
 
@@ -233,9 +233,9 @@ SaguAssert($ok,"Nao foi possivel inserir o registro!");
 
 
 SuccessPage("Inclusão de Contrato",
-               "location='../novo_contrato.phtml'",
+               "location='../novo_contrato.php'",
                "Contrato incluído com sucesso!!!",
-               "location='../consulta_inclui_contratos.phtml'");
+               "location='../consulta_inclui_contratos.php'");
 
 ?>
 <html>

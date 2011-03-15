@@ -1,0 +1,166 @@
+<?php
+
+require("../common.php");
+require("../lib/InvData.php");
+
+$id = $_GET['id'];
+
+?>
+<html>
+<head>
+<script language="JavaScript">
+
+function buscaProfessor()
+{
+  tipo_busca = 1;
+
+  var url = "../generico/post/lista_pessoas.php" +
+            "?pnome=" + escape(document.myform.professor.value);
+
+  var wnd = window.open(url,'busca','toolbar=no,width=530,height=350,scrollbars=yes');
+}
+
+function buscaDepartamento()
+{
+  tipo_busca = 2;
+  url = '../generico/post/lista_departamentos.php' +
+         '?id=' + escape(document.myform.ref_departamento.value) +
+         '&desc=' + escape(document.myform.nome_departamento.value);
+
+  window.open(url,"busca","toolbar=no,width=530,height=320,top=80,left=55,directories=no,menubar=no,scrollbars=yes");
+}
+
+function setResult(arg1,arg2)
+{
+    if (tipo_busca == '1')
+    {
+        document.myform.ref_professor.value = arg1;
+        document.myform.professor.value = arg2;
+    }
+    else if (tipo_busca == '2')
+    {
+        document.myform.ref_departamento.value = arg1;
+        document.myform.nome_departamento.value = arg2;
+    }
+}
+
+function _init()
+{
+  document.myform.ref_professor.focus();
+}
+
+</script>
+
+<?php
+
+CheckFormParameters(array("id"));
+
+$conn = new Connection;
+
+$conn->Open();
+
+$sql = "select A.id, " .
+       "       A.ref_professor," .
+       "       B.nome, " .
+       "       A.ref_departamento, " .
+       "       descricao_departamento(A.ref_departamento), " .
+       "       A.dt_ingresso " .
+       "  from professores A, pessoas B " .
+       "  where A.ref_professor = B.id and " .
+       "        A.id = '$id';";
+
+$query = $conn->CreateQuery($sql);
+
+SaguAssert($query && $query->MoveNext(),"Registro não encontrado!");
+
+list ( $id,
+$ref_professor,
+$professor,
+$ref_departamento,
+$nome_departamento,
+$dt_ingresso) = $query->GetRowValues();
+
+$dt_ingresso = InvData($dt_ingresso);
+
+$query->Close();
+
+$conn->Close();
+
+?>
+</head>
+<body bgcolor="#FFFFFF" marginwidth="20" marginheight="20">
+<form method="post" action="post/professores_edita.php" name="myform">
+<div align="center">
+<TABLE width="90%">
+	<tr>
+		<td bgcolor="#000099" colspan="2" height="28" align="center"><font
+			size="3" face="Verdana, Arial, Helvetica, sans-serif" color="#CCCCFF"><b>&nbsp;Altera&ccedil;&atilde;o
+		de Professores</b></font></td>
+	</tr>
+	<tr>
+		<td bgcolor="#CCCCFF"><font
+			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;C&oacute;digo&nbsp;</font></td>
+		<td><font face="Verdana, Arial, Helvetica, sans-serif" size="2"
+			color="#0000FF"><? echo($id) ?> <input type="hidden" name="id"
+			value="<? echo($id); ?>"> </font></td>
+	</tr>
+	<tr>
+		<td bgcolor="#CCCCFF"><font
+			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="00009C">&nbsp;Professor</font></td>
+		<td>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><font color="#000000"> <input name="ref_professor" type=text
+					size="6" value="<?=$ref_professor?>"> </font></td>
+				<td><font color="#000000"> <input type="text" name="professor"
+					size="35" value="<?=$professor?>"> </font></td>
+				<td>
+				<div align="right"><input type="button" value="..."
+					onClick="buscaProfessor()" name="button2"></div>
+				</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#CCCCFF"><font
+			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Departamento</font></td>
+		<td>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><input name="ref_departamento" type=text size="6"
+					onChange="ChangeCode('ref_departamento','op1')"
+					value="<?=$ref_departamento?>"></td>
+				<td><input type="text" name="nome_departamento" size="35"
+					value="<?=$nome_departamento?>"></td>
+				<td>
+				<div align="right"><input type="button" name="Submit3" value="..."
+					onClick="buscaDepartamento()"></div>
+				</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#CCCCFF"><font
+			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Data
+		de Ingresso na Instituição<br>
+		&nbsp;(dd-mm-aaaa)</font></td>
+		<td><input type="text" name="dt_ingresso" size="10" maxlength="10"
+			value="<?=$dt_ingresso?>"></td>
+	</tr>
+	<tr>
+		<TD colspan="2">
+		<hr>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center"><input type="submit" name="Submit"
+			value=" Salvar "> <input type="button" name="Submit2"
+			value=" Voltar " onClick="history.go(-1)"></td>
+	</tr>
+</table>
+</div>
+</form>
+</body>
+</html>

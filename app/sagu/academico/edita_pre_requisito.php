@@ -1,0 +1,220 @@
+<?php 
+
+require("../common.php");
+require("../lib/InvData.php");
+require("../lib/GetField.php");
+
+
+$id = $_GET['id'];
+
+CheckFormParameters(array("id"));
+
+$conn = new Connection;
+
+$conn->Open();
+
+$sql = "select id, " .
+       "       ref_curso," .
+       "       curso_desc(ref_curso), " .
+       "       ref_disciplina, " .
+       "       descricao_disciplina(ref_disciplina), " .
+       "       ref_disciplina_pre, " .
+       "       descricao_disciplina(ref_disciplina_pre), " .
+       "       ref_area," .
+       "       horas_area," .
+       "       tipo" .
+       "  from pre_requisitos" .
+       "  where id = '$id'" ;
+
+$query = $conn->CreateQuery($sql);
+
+SaguAssert($query && $query->MoveNext(),"Registro n&atilde;o encontrado!");
+
+list ( $id,
+       $ref_curso,
+       $curso,
+       $ref_disciplina,
+       $disciplina,
+       $ref_disciplina_pre,
+       $disciplina_pre,
+       $ref_area,
+       $horas_area,
+       $tipo) = $query->GetRowValues();
+
+$query->Close();
+
+$conn->Close();
+
+$area = GetField($ref_area, "area", "areas_ensino", true);
+
+?>
+<html>
+<head>
+<link rel="stylesheet" href="<?=$BASE_URL .'public/styles/required.css'?>" type="text/css">
+<script language="JavaScript">
+function buscaOpcao(pf_opcao)
+{
+  tipo_busca=pf_opcao;
+  if (tipo_busca == 1)
+  {
+    var url = "../generico/post/lista_areas_ensino.php" +
+              "?id=" + escape(document.myform.ref_area.value) +
+              "&area=" + escape(document.myform.area.value);
+  }
+  else if (tipo_busca == 2)
+  {
+    var url = "../generico/post/lista_proficiencias.php" +
+              "?id=" + escape(document.myform.ref_proficiencia.value) +
+              "&area=" + escape(document.myform.proficiencia.value);
+  }
+  else if (tipo_busca == 3)
+  {
+    var url = "../generico/post/lista_cursos_nome.php" +
+              "?id=" + escape(document.myform.ref_curso.value) +
+              "&curso=" + escape(document.myform.curso.value);
+  }
+  else if (tipo_busca == 4)
+  {
+     url = "../generico/post/lista_disciplinas_todas.php" +
+           "?desc=" + escape(document.myform.ref_disciplina.value);
+  }
+  else
+  {
+     url = "../generico/post/lista_disciplinas_todas.php" +
+           "?desc=" + escape(document.myform.ref_disciplina_pre.value);
+  }
+
+ var wnd = window.open(url,'busca','toolbar=no,width=550,height=350,scrollbars=yes');
+}
+
+function setResult(id,nome)
+{
+   if (tipo_busca == 1)
+   {
+      document.myform.ref_area.value = id;
+      document.myform.area.value = nome;
+   }
+   else if (tipo_busca == 2)
+   {
+      document.myform.ref_proficiencia.value = id;
+      document.myform.proficiencia.value = nome;
+   }
+   else if (tipo_busca == 3)
+   {
+      document.myform.ref_curso.value = id;
+      document.myform.curso.value = nome;
+   }
+   else if (tipo_busca == 4)
+   {
+      document.myform.ref_disciplina.value = id;
+      document.myform.disciplina.value = nome;
+   }
+   else
+   {
+      document.myform.ref_disciplina_pre.value = id;
+      document.myform.disciplina_pre.value = nome;
+   }
+}
+
+</script>
+</head>
+<body bgcolor="#FFFFFF">
+<form method="post" action="post/edita_pre_requisito.php" name="myform">
+<br>
+<div align="center">
+<TABLE width="90%">
+    <tr>
+      <td bgcolor="#000099" colspan="2" height="28" align="center"> <font size="3" face="Verdana, Arial, Helvetica, sans-serif" color="#CCCCFF"><b>&nbsp;Altera&ccedil;&atilde;o de Pr&eacute;-Requisito</b></font></td>
+    </tr>
+       <input name="id" type="hidden" value="<?echo($id);?>">
+    <tr>
+      <td bgcolor="#CCCCFF" width="30%"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Curso&nbsp;<span class="required">*</span> </font></td>
+      <td colspan="2" width="70%">
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+         <td width="10%">
+            <input name="ref_curso" type=text size="6" value="<?echo($ref_curso);?>" maxlength="10">
+         </td>
+         <td width="100%">
+            <input type="text" name="curso" value="<?echo($curso);?>" size="30">&nbsp;&nbsp;
+            <input type="button" value="..." onClick="buscaOpcao(3)" name="button22">
+        </tr>
+       </table>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor="#CCCCFF" width="30%"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;C&oacute;digo da Disciplina&nbsp;<span class="required">*</span> </font></td>
+      <td colspan="2" width="70%">
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+         <td width="10%">
+            <input name="ref_disciplina" type=text size="6" value="<?echo($ref_disciplina);?>" maxlength="10">
+         </td>
+         <td width="100%">
+            <input type="text" name="disciplina" value="<?echo($disciplina);?>" size="30">&nbsp;&nbsp;
+            <input type="button" value="..." onClick="buscaOpcao(4)" name="button22">
+         </td>
+        </tr>
+       </table>
+      </td>
+    </tr>
+     <tr>
+      <td bgcolor="#CCCCFF" width="30%"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;C&oacute;digo da Disciplina Pr&eacute;-Requisito &nbsp;<span class="required">*</span><!--ou<br>&nbsp;C&oacute;digo da Disciplina Co-Requisito ou<br>&nbsp;C&oacute;digo da Disciplina Profici&ecirc;ncia&nbsp;--></font></td>
+      <td colspan="2" width="70%">
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+         <td width="10%">
+            <input name="ref_disciplina_pre" type=text size="6" value="<?echo($ref_disciplina_pre);?>" maxlength="10">
+         </td>
+         <td width="100%">
+            <input type="text" name="disciplina_pre" value="<?echo($disciplina_pre);?>" size="30">&nbsp;&nbsp;
+            <input type="button" value="..." onClick="buscaOpcao(5)" name="button22">
+         </td>
+        </tr>
+       </table>
+      </td>
+    </tr>
+
+    <input type="hidden" id="tipo" name="tipo" value="<?php echo $tipo;?>" />
+    <!--<tr>
+      <TD colspan="2"><hr></td>
+    </tr>
+
+    <tr>
+      <td bgcolor="#CCCCFF" width="30%"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;C&oacute;digo da &Aacute;rea Pr&eacute;-Requisito&nbsp;</font></td>
+      <td colspan="3" width="70%">
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+         <td width="10%">-->
+            <input type="hidden" name="ref_area" size="6" value="<?echo($ref_area);?>" maxlength="10">
+         <!--</td>
+         <td width="100%"><font color="#000000">-->
+            <input type="hidden" name="area" value="<?echo($area);?>" size="30"><!--</font>
+	 </td>
+	 <td><font color="#000000">
+	    <input type="button" value="..." onClick="buscaOpcao(1)" name="button">
+         </font></td>
+        </tr>
+       </table>
+      </td>
+    </tr>
+    <tr> 
+      <td bgcolor="#CCCCFF" width="30%"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;N� de Horas Pr&eacute;-Requisito &Aacute;rea&nbsp;</font></td>
+      <td width="70%">-->
+        <input name="horas_area" type="hidden" size="6" value="<?echo($horas_area);?>" maxlength="6">
+      <!--</td>
+    </tr>-->
+    <tr>
+      <TD colspan="2"><hr></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        <input type="submit"  name="Submit"  value=" Salvar ">
+        <input type="button"  name="Submit2" value=" Voltar " onClick="history.go(-1)">
+      </td>
+    </tr>
+</table>
+</div>
+</form>
+</body>
+</html>

@@ -44,7 +44,7 @@ $conn->Close();
 
 SaguAssert($ok,"Nao foi possivel inserir o registro!");
 SuccessPage("Inclusão de Campus",
-            "location='../campus_inclui.phtml'",
+            "location='../campus_inclui.php'",
             "O código do campus é <b>$id_campus</b>.");
 ?>
 <html>

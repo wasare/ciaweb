@@ -1,0 +1,564 @@
+<?php
+
+require_once(dirname(__FILE__) .'/../../common.php');
+require("../../lib/GetPais.php");
+require("../../lib/GetCidade.php"); 
+require("../../lib/GetEscola.php"); 
+require("../../lib/GetFiliacao.php");
+require("../../lib/GetCursoExterno.php");
+require("../../lib/ValidaCpf.php");
+
+
+
+$nome                   = $_POST['nome'];
+$rua                    = $_POST['rua'];
+$complemento            = $_POST['complemento'];
+$bairro                 = $_POST['bairro'];
+$cep                    = $_POST['cep'];
+$ref_cidade             = $_POST['ref_cidade'];
+$fone_particular        = $_POST['fone_particular'];
+$fone_profissional      = $_POST['fone_profissional'];
+$fone_celular           = $_POST['fone_celular'];
+$fone_recado            = $_POST['fone_recado'];
+$email                  = $_POST['email'];
+$email_alt              = $_POST['email_alt'];
+$estado_civil           = $_POST['estado_civil'];
+$dt_cadastro            = $_POST['dt_cadastro'];
+$dt_nascimento          = $_POST['dt_nascimento'];
+$rg_data                = $_POST['rg_data'];
+$sexo                   = $_POST['sexo'];
+$rg_numero              = $_POST['rg_numero'];
+$rg_orgao               = $_POST['rg_orgao'];
+$rg_cidade              = $_POST['rg_cidade'];
+$ref_filiacao           = $_POST['ref_filiacao'];
+$ref_naturalidade       = $_POST['ref_naturalidade'];
+$ref_nacionalidade      = $_POST['ref_nacionalidade'];
+$cod_cpf_cgc            = $_POST['cod_cpf_cgc'];
+$titulo_eleitor         = $_POST['titulo_eleitor'];
+$placa_carro            = $_POST['placa_carro'];
+$fl_dados_pessoais      = $_POST['fl_dados_pessoais'];
+$rg_num                 = $_POST['rg_num'];
+$cpf                    = $_POST['cpf'];
+$titulo_eleitord        = $_POST['titulo_eleitord'];
+$quitacao_eleitoral     = $_POST['quitacao_eleitoral'];
+$hist_original          = $_POST['hist_original'];
+$hist_escolar           = $_POST['hist_escolar'];
+$doc_militar            = $_POST['doc_militar'];
+$foto                   = $_POST['foto'];
+$atestado_medico        = $_POST['atestado_medico'];
+$diploma_autenticado    = $_POST['diploma_autenticado'];
+$solteiro_emancipado    = $_POST['solteiro_emancipado'];
+$ano_2g                 = $_POST['ano_2g'];
+$ref_escola_2g          = $_POST['ref_escola_2g'];
+$cidade_2g              = $_POST['cidade_2g'];
+$ref_curso_2g           = $_POST['ref_curso_2g'];
+$cod_passivo            = $_POST['cod_passivo'];
+$obs                    = $_POST['obs'];
+$deficiencia            = $_POST['deficiencia'];
+$cod_externo            = $_POST['cod_externo'];
+$fl_cartao              = $_POST['fl_cartao'];
+
+
+$ok = ValidaCpf($cod_cpf_cgc);
+SaguAssert($ok,"Número de CPF inválido!");
+
+CheckFormParameters(array("nome",
+                          "cep",
+                          "ref_cidade",
+                          "dt_cadastro",
+                          "dt_nascimento",
+                          "sexo",
+                          "fl_dados_pessoais",
+                   ""));
+
+if ( $ref_cidade )
+$ref_cidade_ = GetCidade($ref_cidade,true);
+
+if ( $rg_cidade )
+$rg_cidade_ = GetCidade($rg_cidade,true);
+
+if ( $ref_naturalidade )
+$ref_naturalidade_ = GetCidade($ref_naturalidade,true);
+
+if ( $cidade_1g )
+$d_cidade_1g = GetCidade($cidade_1g,true);
+
+if ( $cidade_2g )
+$d_cidade_2g = GetCidade($cidade_2g,true);
+
+if ( $ref_escola_2g )
+$d_ref_escola_2g = GetEscola($ref_escola_2g,true);
+
+if ( $ref_curso_2g )
+$d_ref_curso_2g = GetCursoExterno($ref_curso_2g,true);
+
+if ( $ref_nacionalidade )
+$ref_nacionalidade_ = GetPais($ref_nacionalidade,true);
+
+if ( $ref_segurado )
+list ( $ref_segurado_, $tmp1, $tmp2 ) = GetPessoaNome($ref_segurado,true);
+
+if ( $ref_filiacao )
+list ( $nome_pai, $nome_mae ) = GetFiliacao($ref_filiacao,true);
+
+?>
+<html>
+    <head>
+    </head>
+    <body bgcolor="#FFFFFF" marginwidth="20" marginheight="20">
+        <form method="post" action="pessoaf_inclui.php" name="myform">
+            <table width="90%" align="center" border="0" cellpadding="2" cellspacing="2" height="937">
+
+                <tr bgcolor="#000099">
+                    <td height="35" colspan="2">
+                        <div align="center"><font size="3" face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#CCCCFF">Confirme a Opera&ccedil;&atilde;o</font></b></font><font size="4" face="Verdana, Arial, Helvetica, sans-serif"><b></b></font></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" height="53" valign="bottom">
+                        <div align="right"><font color="#FF0000" face="Verdana, Arial, Helvetica, sans-serif" size="3"><b>Inclus&atilde;o
+                        de Aluno</b></font> </div>
+                        <hr size="1">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">Verifique se os dados est&atilde;o corretos.</font></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p>&nbsp;</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Nome</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($nome);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Rua</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($rua);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Complemento</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($complemento);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Bairro</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($bairro);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Cidade
+                    </font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($ref_cidade . " " . $ref_cidade_);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Cep</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($cep);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Fone
+                    Particular</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($fone_particular);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Fone
+                    Profissional</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($fone_profissional);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Fone
+                    Celular</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($fone_celular);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Fone
+                    Recado</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($fone_recado);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;E-mail
+                    Principal</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($email);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;E-mail
+                    Alternativo</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($email_alt);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Estado
+                    Civil</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($estados_civis[$estado_civil]);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Data
+                    de Cadastro</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($dt_cadastro);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Data
+                    de Nascimento</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($dt_nascimento);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Sexo</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+					<?php
+						if($sexo == 'M') echo 'Masculino';
+						if($sexo == 'F') echo 'Feminino';
+					?>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Deficiência</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <?
+                                if ( $deficiencia == '0' )
+                                { echo 'Não'; }
+                                else
+                                { echo 'Sim: ' . $deficiencia_desc; }
+                                ?>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;N&uacute;mero
+                    RG </font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($rg_numero);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;&Oacute;rgao
+                    RG </font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($rg_orgao);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Cidade
+                    RG </font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($rg_cidade . " " . $rg_cidade_);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Data
+                    RG </font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($rg_data);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Filia&ccedil;&atilde;o
+                    </font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($ref_filiacao . "    Pai: " . $nome_pai . "    Mãe: " . $nome_mae);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Naturalidade
+                    </font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($ref_naturalidade . " " . $ref_naturalidade_);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Nacionalidade
+                    </font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($ref_nacionalidade . " " . $ref_nacionalidade_);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;N&ordm;
+                    do CPF</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($cod_cpf_cgc);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;T&iacute;tulo
+                    de Eleitor</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($titulo_eleitor);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Placa do Carro</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($placa_carro);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Carteirinha</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($opcoes[$fl_cartao]);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Permite Divulgação<br>&nbsp;dos Dados Pessoais</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($opcoes[$fl_dados_pessoais]);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                    <td colspan="2"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">Documentação</font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Cópia do RG</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($opcoes[$rg_num]);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Cópia do CPF</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($opcoes[$cpf]);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Cópia do Título de Eleitor</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($opcoes[$titulo_eleitord]);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Quita&ccedil;&atilde;o Eleitoral</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($opcoes[$quitacao_eleitoral]);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Histórico Original</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($opcoes[$hist_original]);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Cópia do Histórico</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($opcoes[$hist_escolar]);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Documenta&ccedil;&atilde;o Militar</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($opcoes[$doc_militar]);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Foto</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($opcoes[$foto]);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Atestado Médico</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($opcoes[$atestado_medico]);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Diploma Autenticado</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($opcoes[$diploma_autenticado]);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Solteiro Emancipado</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($opcoes[$solteiro_emancipado]);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                    <td colspan="2"><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">Informações do Ensino Médio</font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Ano de conclusão</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($ano_2g);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Escola</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($ref_escola_2g . " " . $d_ref_escola_2g);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Cidade</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">
+echo($cidade_2g . " " . $d_cidade_2g);
+                                </script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Curso</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($ref_curso_2g . " " . $d_ref_curso_2g);</script>
+                    </b></font></td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;C&oacute;digo Passivo</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($cod_passivo);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;C&oacute;digo
+                    Externo</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($cod_externo);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EFEFFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Observa&ccedil;&atilde;o</font></td>
+                    <td bgcolor="#FFFFEF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C"><b>&nbsp;
+                                <script language="PHP">echo($obs);</script>
+                    </b></font></td>
+                </tr>
+                <tr>
+                    <td colspan="2" height="22">
+                        <hr size="1">
+                    </td>
+                </tr>
+                <tr>
+                    <td height="15">
+                        <input type="hidden" name="nome" value="<?php echo($nome);?>">
+                        <input type="hidden" name="rua" value="<?php echo($rua);?>">
+                        <input type="hidden" name="complemento" value="<?php echo($complemento);?>">
+                        <input type="hidden" name="bairro" value="<?php echo($bairro);?>">
+                        <input type="hidden" name="cep" value="<?echo($cep);?>">
+                        <input type="hidden" name="ref_cidade" value="<?echo($ref_cidade);?>">
+                        <input type="hidden" name="fone_particular" value="<?echo($fone_particular);?>">
+                        <input type="hidden" name="fone_profissional" value="<?echo($fone_profissional);?>">
+                        <input type="hidden" name="fone_celular" value="<?echo($fone_celular);?>">
+                        <input type="hidden" name="fone_recado" value="<?echo($fone_recado);?>">
+                        <input type="hidden" name="email" value="<?echo($email);?>">
+                        <input type="hidden" name="email_alt" value="<?echo($email_alt);?>">
+                        <input type="hidden" name="estado_civil" value="<?echo($estado_civil);?>">
+                        <input type="hidden" name="dt_cadastro" value="<?echo($dt_cadastro);?>">
+                        <input type="hidden" name="dt_nascimento" value="<?echo($dt_nascimento);?>">
+                        <input type="hidden" name="sexo" value="<?echo($sexo);?>">
+                        <input type="hidden" name="deficiencia" value="<?echo($deficiencia);?>">
+                        <input type="hidden" name="deficiencia_desc" value="<?echo($deficiencia_desc);?>">
+                        <input type="hidden" name="rg_numero" value="<?echo($rg_numero);?>">
+                        <input type="hidden" name="rg_orgao" value="<?echo($rg_orgao);?>">
+                        <input type="hidden" name="rg_cidade" value="<?echo($rg_cidade);?>">
+                        <input type="hidden" name="rg_data" value="<?echo($rg_data);?>">
+                        <input type="hidden" name="ref_filiacao" value="<?echo($ref_filiacao);?>">
+                        <input type="hidden" name="ref_naturalidade" value="<?echo($ref_naturalidade);?>">
+                        <input type="hidden" name="ref_nacionalidade" value="<?echo($ref_nacionalidade);?>">
+                        <input type="hidden" name="cod_cpf_cgc" value="<?echo($cod_cpf_cgc);?>">
+                        <input type="hidden" name="titulo_eleitor" value="<?echo($titulo_eleitor);?>">
+                        <input type="hidden" name="placa_carro" value="<?echo($placa_carro);?>">
+                        <input type="hidden" name="fl_cartao" value="<?echo($fl_cartao);?>">
+                        <input type="hidden" name="fl_dados_pessoais" value="<?echo($fl_dados_pessoais);?>">
+
+                        <input type="hidden" name="rg_num" value="<?echo($rg_num);?>">
+                        <input type="hidden" name="cpf" value="<?echo($cpf);?>">
+                        <input type="hidden" name="titulo_eleitord" value="<?echo($titulo_eleitord);?>">
+                        <input type="hidden" name="quitacao_eleitoral" value="<?echo($quitacao_eleitoral);?>">
+                        <input type="hidden" name="hist_original" value="<?echo($hist_original);?>">
+                        <input type="hidden" name="hist_escolar" value="<?echo($hist_escolar);?>">
+                        <input type="hidden" name="doc_militar" value="<?echo($doc_militar);?>">
+                        <input type="hidden" name="foto" value="<?echo($foto);?>">
+                        <input type="hidden" name="atestado_medico" value="<?echo($atestado_medico);?>">
+                        <input type="hidden" name="diploma_autenticado" value="<?echo($diploma_autenticado);?>">
+                        <input type="hidden" name="solteiro_emancipado" value="<?echo($solteiro_emancipado);?>">
+
+                        <input type="hidden" name="ano_2g" value="<?echo($ano_2g);?>">
+                        <input type="hidden" name="ref_escola_2g" value="<?echo($ref_escola_2g);?>">
+                        <input type="hidden" name="cidade_2g" value="<?echo($cidade_2g);?>">
+                        <input type="hidden" name="ref_curso_2g" value="<?echo($ref_curso_2g);?>">
+                        <input type="hidden" name="cod_passivo" value="<?echo($cod_passivo);?>">
+                        <input type="hidden" name="cod_externo" value="<?echo($cod_externo);?>">
+                        <input type="hidden" name="obs" value="<?echo($obs);?>">
+                    </td>
+                    <td height="3">&nbsp; </td>
+                </tr>
+            </table>
+            <div align="center">
+                <input type="submit" name="Submit"  value=" Salvar ">
+                <input type="button"  name="Submit2" value=" Alterar " onClick="history.go(-1)">
+            </div>
+        </form>
+    </body>
+</html>
+
+

@@ -90,12 +90,12 @@ $avisos[0] = $Result1->fields[0];
 <map name="Map" id="Map">
   <area shape="rect" coords="406,40,582,58" href="matricula/matricula_aluno.php" alt="Matr&iacute;cula individual" />
   <area shape="rect" coords="406,85,557,102" href="matricula/remover_matricula/filtro.php" alt="Remover matr&iacute;cula" />
-  <area shape="rect" coords="230,37,348,87" href="sagu/academico/consulta_inclui_contratos.phtml" alt="Contratos" />
-  <area shape="rect" coords="16,31,158,89" href="sagu/academico/consulta_inclui_pessoa.phtml" alt="Pessoa f&iacute;sica" />
-  <area shape="rect" coords="229,212,323,246" href="sagu/academico/consulta_inclui_professores.phtml" alt="professores" />
-  <area shape="rect" coords="412,163,567,223" href="sagu/academico/disciplina_ofer.phtml" alt="Disciplinas oferecidas" />
-  <area shape="rect" coords="425,277,546,325" href="sagu/academico/consulta_inclui_cursos_disciplinas.phtml" alt="cursos / disciplinas" />
-  <area shape="rect" coords="227,140,323,175" href="sagu/academico/coordenadores.phtml" alt="coordenadores" />
+  <area shape="rect" coords="230,37,348,87" href="sagu/academico/consulta_inclui_contratos.php" alt="Contratos" />
+  <area shape="rect" coords="16,31,158,89" href="sagu/academico/consulta_inclui_pessoa.php" alt="Pessoa f&iacute;sica" />
+  <area shape="rect" coords="229,212,323,246" href="sagu/academico/consulta_inclui_professores.php" alt="professores" />
+  <area shape="rect" coords="412,163,567,223" href="sagu/academico/disciplina_ofer.php" alt="Disciplinas oferecidas" />
+  <area shape="rect" coords="425,277,546,325" href="sagu/academico/consulta_inclui_cursos_disciplinas.php" alt="cursos / disciplinas" />
+  <area shape="rect" coords="227,140,323,175" href="sagu/academico/coordenadores.php" alt="coordenadores" />
   <area shape="rect" coords="585,270,648,330" href="relatorios/menu.php" alt="Listar relat&oacute;rios" />
   <area shape="rect" coords="404,61,583,82" alt="Dispensa de disciplina" href="dispensa_disciplina/dispensa_aluno.php" />
 </map>

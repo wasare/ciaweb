@@ -31,7 +31,7 @@ SaguAssert($ok,"Erro ao excluir usuário no banco de dados!");
 SaguAssert($ok2,"Erro ao excluir o usuário!");
 
 SuccessPage("$mensagem",
-            "location='../consulta_inclui_usuarios.phtml'",
+            "location='../consulta_inclui_usuarios.php'",
             "O usuário <b>$nome</b> foi excluído com sucesso!!!");
 
 ?>

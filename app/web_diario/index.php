@@ -110,10 +110,10 @@ $class_diarios = ($is_professor) ? ' class="active"' : '';
        </a>&nbsp;&nbsp;
      </td>
         <?php
-              if ($host != '127.0.0.1' || $host != 'localhost') {
-				echo '<td>';
-				echo '&nbsp;&nbsp;&nbsp;&nbsp;<strong>Servidor de BD: </strong>'. $host;
-				echo '</td>';
+	   if ($_SERVER['HTTP_HOST'] == 'localhost' || $host != '127.0.0.1' && $host != 'localhost') {
+		echo '<td>';
+		echo '&nbsp;&nbsp;&nbsp;&nbsp;<strong>Servidor de BD: </strong>'. $host;
+		echo '</td>';
             }
         ?>
 

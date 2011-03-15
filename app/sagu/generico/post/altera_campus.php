@@ -32,7 +32,7 @@ $conn->Close();
 SaguAssert($ok,"Nao foi possivel de atualizar o registro!");
 
 SuccessPage("Alteração de Campus",
-	        "location='../campus_inclui.phtml'",
+	        "location='../campus_inclui.php'",
 	        "As informações do campus <b>$nome</b> foram atualizadas com sucesso.");
 ?>
 <html>

@@ -65,7 +65,7 @@ SaguAssert($ok,"Erro ao criar usuário!");
 SaguAssert($ok2,"Nao foi possivel inserir o registro!");
 
 SuccessPage("$mensagem",
-            "location='../usuarios/consulta_inclui_usuarios.phtml'",
+            "location='../usuarios/consulta_inclui_usuarios.php'",
             "O login do usuário é <b> $nome </b>.");
 
 ?>

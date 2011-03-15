@@ -52,7 +52,7 @@ function send(id,descricao){
 <?php 
   require_once('../../../config/configuracao.php');
 ?>
-<a href="<?=$BASE_URL .'app/sagu/generico/inclui_instituicao.phtml'?>"> Incluir institui&ccedil;&atilde;o</a>
+<a href="<?=$BASE_URL .'app/sagu/generico/inclui_instituicao.php'?>"> Incluir institui&ccedil;&atilde;o</a>
 <br />
 </body>
 </html>

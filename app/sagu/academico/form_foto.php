@@ -148,7 +148,7 @@ if(@isset($_FILES['imgfile']) && @$err_num == 0) {
 
 	  echo '<img title="Foto Pessoa" src="foto.php?id='. $id_foto.'" alt="Foto Pessoa" border="1" width="120" />';
 	  echo '<br /><br /><font size="2" color="red"> Somente &eacute; exibida uma foto diferente quando nova ou substitu&iacute;da!</font> <br /> <br />';
-      echo '<a href="consulta_inclui_pessoa.phtml">Voltar</a>';
+      echo '<a href="consulta_inclui_pessoa.php">Voltar</a>';
 	  exit;
 }
 

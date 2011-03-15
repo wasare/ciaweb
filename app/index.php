@@ -71,7 +71,7 @@ if (!$acl->has_role($sa_ref_pessoa, $PAPEIS_SA, $conn)) {
                                              alt="IFSP - Campus Caraguatatuba"
                                              title="IFSP - Campus Caraguatatuba" /></a>&nbsp;&nbsp;
                                          <?php
-                                         if ($_SERVER['HTTP_HOST'] != 'localhost' || $host != '127.0.0.1')
+                                         if ($_SERVER['HTTP_HOST'] == 'localhost' || $host != '127.0.0.1' && $host != 'localhost')
                                              echo '&nbsp;&nbsp;&nbsp;&nbsp;<strong>Servidor de BD: </strong>'. $host;
                                          ?>
                                 </td>
@@ -104,15 +104,15 @@ if (!$acl->has_role($sa_ref_pessoa, $PAPEIS_SA, $conn)) {
                                         <a href="#" class="MenuBarItemSubmenu">Configura&ccedil;&otilde;es</a>
                                         <ul>
                                             <li>
-                                                <a href="sagu/academico/consulta_periodos.phtml"
+                                                <a href="sagu/academico/consulta_periodos.php"
                                                    target="frame2">Per&iacute;odos</a>
                                             </li>
                                             <li>
-                                                <a href="sagu/academico/consulta_inclui_departamentos.phtml"
+                                                <a href="sagu/academico/consulta_inclui_departamentos.php"
                                                    target="frame2">Departamentos</a>
                                             </li>
                                             <li>
-                                                <a href="sagu/academico/areas_ensino.phtml"
+                                                <a href="sagu/academico/areas_ensino.php"
                                                    target="frame2">&Aacute;rea de ensino</a>
                                             </li>
                                             <li>
@@ -120,15 +120,15 @@ if (!$acl->has_role($sa_ref_pessoa, $PAPEIS_SA, $conn)) {
                                                    target="frame2">&Aacute;rea do aluno</a>
                                             </li>
                                             <li>
-                                                <a href="sagu/academico/carimbos.phtml"
+                                                <a href="sagu/academico/carimbos.php"
                                                    target="frame2">Carimbos</a>
                                             </li>
                                              <li>
-                                                <a href="sagu/generico/configuracao_empresa.phtml"
+                                                <a href="sagu/generico/configuracao_empresa.php"
                                                    target="frame2">Empresas</a>
                                             </li>
                                             <li>
-                                                <a href="sagu/generico/campus_inclui.phtml"
+                                                <a href="sagu/generico/campus_inclui.php"
                                                    target="frame2">Campus</a>
                                             </li> 
                                             <?php if($acl->has_access(dirname(__FILE__).'/usuarios/index.php', $conn)) : ?>
@@ -155,29 +155,29 @@ if (!$acl->has_role($sa_ref_pessoa, $PAPEIS_SA, $conn)) {
                                         <a href="#" class="MenuBarItemSubmenu">Gen&eacute;rico</a>
                                         <ul>
                                             <li>
-                                                <a href="sagu/generico/paises_inclui.phtml"
+                                                <a href="sagu/generico/paises_inclui.php"
                                                    target="frame2">Pa&iacute;ses</a>
                                             </li>
                                             <li>
-                                                <a href="sagu/generico/consulta_inclui_estados.phtml"
+                                                <a href="sagu/generico/consulta_inclui_estados.php"
                                                    target="frame2">Estados</a>
                                             </li>
                                             <li>
-                                                <a href="sagu/generico/consulta_cidades.phtml"
+                                                <a href="sagu/generico/consulta_cidades.php"
                                                    target="frame2">Cidades</a>
                                             </li>
                                             <li>
-                                                <a href="sagu/generico/consulta_inclui_instituicoes.phtml"
+                                                <a href="sagu/generico/consulta_inclui_instituicoes.php"
                                                    target="frame2">Institui&ccedil;&otilde;es</a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="sagu/academico/consulta_inclui_pessoa.phtml"
+                                        <a href="sagu/academico/consulta_inclui_pessoa.php"
                                            target="frame2">Pessoas F&iacute;sicas</a>
                                     </li>
                                     <li>
-                                        <a href="sagu/academico/consulta_inclui_contratos.phtml"
+                                        <a href="sagu/academico/consulta_inclui_contratos.php"
                                            target="frame2">Contratos</a>
                                     </li>
                                     <li>
@@ -189,7 +189,7 @@ if (!$acl->has_role($sa_ref_pessoa, $PAPEIS_SA, $conn)) {
                                            target="frame2">Professores</a>
                                     </li>
                                     <li>
-                                        <a href="sagu/academico/coordenadores.phtml"
+                                        <a href="sagu/academico/coordenadores.php"
                                            target="frame2">Coordenadores</a>
                                     </li>
                                     <li>
@@ -214,22 +214,22 @@ if (!$acl->has_role($sa_ref_pessoa, $PAPEIS_SA, $conn)) {
                                 <a href="#" class="MenuBarItemSubmenu">Matrizes</a>
                                 <ul>
                                     <li>
-                                        <a href="sagu/academico/consulta_cursos.phtml" target="frame2">Cursos</a>
+                                        <a href="sagu/academico/consulta_cursos.php" target="frame2">Cursos</a>
                                     </li>
                                     <li>
-                                        <a href="sagu/academico/consulta_disciplinas.phtml"
+                                        <a href="sagu/academico/consulta_disciplinas.php"
                                            target="frame2">Disciplinas</a>
                                     </li>
                                     <li>
-                                        <a href="sagu/academico/consulta_inclui_cursos_disciplinas.phtml"
+                                        <a href="sagu/academico/consulta_inclui_cursos_disciplinas.php"
                                            target="frame2">Cursos / Disciplinas</a>
                                     </li>
                                     <li>
-                                        <a href="sagu/academico/consulta_inclui_pre_requisito.phtml"
+                                        <a href="sagu/academico/consulta_inclui_pre_requisito.php"
                                            target="frame2">Pr&eacute;-requisitos</a>
                                     </li>
                                     <li>
-                                        <a href="sagu/academico/consulta_disciplinas_equivalentes.phtml"
+                                        <a href="sagu/academico/consulta_disciplinas_equivalentes.php"
                                            target="frame2">Disciplinas Equivalentes</a>
                                     </li>
                                 </ul>
@@ -237,7 +237,7 @@ if (!$acl->has_role($sa_ref_pessoa, $PAPEIS_SA, $conn)) {
                             <li><a href="#" class="MenuBarItemSubmenu">Matr&iacute;culas</a>
                                 <ul>
                                     <li>
-                                        <a href="sagu/academico/disciplina_ofer.phtml"
+                                        <a href="sagu/academico/disciplina_ofer.php"
                                            target="frame2">Disciplinas Oferecidas</a>
                                     </li>
                                     <li>

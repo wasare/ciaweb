@@ -1,5 +1,5 @@
 <?php
-  // Properties.php3 implements a mecanism to store session related data
+  // Properties.php implements a mecanism to store session related data
   // in a file based on client IP addresses. The properties are maintained
   // only for registered IP addresses.
   //

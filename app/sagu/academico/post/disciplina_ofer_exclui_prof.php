@@ -18,6 +18,6 @@ $conn->Close();
 SaguAssert($ok,"Não foi possível de excluir o registro!");
 
 SuccessPage("Registro excluído com sucesso",
-            "location='../atualiza_disciplina_ofer.phtml?id=$ref_disciplina_ofer'");
+            "location='../atualiza_disciplina_ofer.php?id=$ref_disciplina_ofer'");
 
 ?>
