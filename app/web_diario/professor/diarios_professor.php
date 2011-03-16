@@ -23,7 +23,7 @@ if(isset($_GET['id']) AND ( !is_numeric($diario['0']) OR !is_numeric($diario['1'
 else {
 
 	if($diario['2'] === '1' && in_array($_GET['acao'], $Movimento) ) {
- 
+
      exit('<script language="javascript" type="text/javascript">
             window.alert("ERRO! Este diário está fechado e não pode ser alterado!"); javascript:window.history.back(1);
      </script>');
@@ -69,7 +69,7 @@ $sql3 = 'SELECT DISTINCT
                 o.id = f.ref_disciplina_ofer AND
                 o.ref_periodo = \''.$_SESSION['web_diario_periodo_id'].'\' AND
                 o.is_cancelada = \'0\' AND
-                d.id = o.ref_disciplina;';  
+                d.id = o.ref_disciplina;';
 
 	$diarios = $conn->get_all($sql);
 
@@ -112,7 +112,7 @@ $num_levantamento = count($levantamento_docente);
 <div align="left">
 <strong>
 			<font size="4" face="Verdana, Arial, Helvetica, sans-serif">
-				Per&iacute;odo: 
+				Per&iacute;odo:
 				<font color="red" size="4" face="Verdana, Arial, Helvetica, sans-serif"><?=$periodo['descricao']?></font>
 			</font>
 </strong>
@@ -192,12 +192,12 @@ foreach($diarios as $row3) :
     $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'papeleta_completa\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Papeleta completa</a><br />';
 	$opcoes_diario .= '<a href="#" onclick="enviar_diario(\'faltas_completo\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Relat&oacute;rio de faltas completo</a><br />';
     $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'conteudo_aula\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Conte&uacute;do de aula</a><br />';
-    $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'caderno_chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Caderno de chamada</a>';
+    //$opcoes_diario .= '<a href="#" onclick="enviar_diario(\'caderno_chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Caderno de chamada</a>';
 
-    	
-	if($fl_finalizada == 'f' && $fl_digitada == 'f') {  
-		$fl_situacao = '<font color="green"><b>Aberto</b></font>';  
-	} 
+
+	if($fl_finalizada == 'f' && $fl_digitada == 'f') {
+		$fl_situacao = '<font color="green"><b>Aberto</b></font>';
+	}
 	else {
 
         $opcoes_diario .= '<br />';
@@ -231,7 +231,7 @@ foreach($diarios as $row3) :
         <div id="diario_<?=$diario_id?>_pane" style="display:none; margin: 1.2em; padding: 1em; background-color: <?=$op_color?>" class="opcoes_web_diario">
             <?=$sem_opcoes . $opcoes_diario?>
         </div>
-        <!-- panel com as opções do diário \\ fim \\ -->       
+        <!-- panel com as opções do diário \\ fim \\ -->
       </td>
 
     </tr>
@@ -290,3 +290,4 @@ foreach($diarios as $row3) :
 
 </body>
 </html>
+

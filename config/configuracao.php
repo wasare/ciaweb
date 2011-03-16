@@ -11,7 +11,7 @@ date_default_timezone_set('America/Sao_Paulo');
 $host     = '127.0.0.1';
 $database = 'academico_campuscar';
 $user     = 'academico_user';
-$password = 'u0sodQFhArqOELlBNKxJ';
+$password = '3294gIwLMzprWQDfncEl';
 $port     = 5432;
 
 /**
@@ -29,7 +29,7 @@ $param_conn['port']     = $port;
 $param_conn_aluno['host']     = $param_conn['host'];
 $param_conn_aluno['database'] = $param_conn['database'];
 $param_conn_aluno['user']     = 'aluno';
-$param_conn_aluno['password'] = 'eokQdfaBO9M8CY6snUzy';
+$param_conn_aluno['password'] = 'uaRecT3lSAk7xZvWCir2';
 $param_conn_aluno['port']     = $port;
 
 /**
@@ -57,7 +57,8 @@ $SESS_TABLE     = 'sessao';
 $PAPEIS_SA = array('secretaria' => 1, 'administrador' => 2);
 $PAPEIS_WEB_DIARIO = array('professor' => 3, 'coordenador' => 0);
 $PAPEIS_ADMINISTRADOR = array('administrador' => 2);
-$EMAIL_ADMIN = 'gti.bambui@ifmg.edu.br';
+$EMAIL_ADMIN = 'wanderson@cefetsp.br';
+$USUARIO_ALTERA_SENHA = 1;
 
 /*
    ALGUNS PARAMETROS DO SISTEMA ACADEMICO
@@ -66,13 +67,13 @@ $EMAIL_ADMIN = 'gti.bambui@ifmg.edu.br';
 
 // app/diagrama.php
 // public/help.php
-$IEnome     = 'Instituto Federal Minas Gerais';
+$IEnome     = 'Instituto Federal São Paulo - Caraguatatuba';
 
 // app/index.php
 // public/help.php
-$IEurl      = 'http://www.ifmg.edu.br/bambui';
+$IEurl      = 'http://www.ifspcaraguatatuba.edu.br/';
 
-// app/sagu/academico/cursos_disciplinas_edita.phtm
+// app/sagu/academico/cursos_disciplinas_edita.php
 // app/relatorios/integralizacao_curso/lista_integralizacao_curso.php
 $curriculos["M"] = "M&iacute;nimo";
 $curriculos["C"] = "Complementar";
@@ -80,23 +81,23 @@ $curriculos["O"] = "Optativa";
 $curriculos["P"] = "Profici&ecirc;ncia";
 $curriculos["A"] = "Atividade complementar";
 
-// app/sagu/academico/cursos_disciplinas_edita.phtm
+// app/sagu/academico/cursos_disciplinas_edita.php
 $historico["S"]  = "Sim";
 $historico["N"]  = "N&atilde;o";
 
-// app/sagu/academico/curso_altera.phtml
-// app/sagu/academico/lista_disciplinas_ofer.phtml
+// app/sagu/academico/curso_altera.php
+// app/sagu/academico/lista_disciplinas_ofer.php
 $status["1"]     = "Sim";
 $status["0"]     = "N&atilde;o";
 
-// app/sagu/academico/pessoaf_edita.phtml
-// app/sagu/academico/documentos_edita.phtml
-// app/sagu/academico/post/confirm_pessoaf_inclui.phtml
+// app/sagu/academico/pessoaf_edita.php
+// app/sagu/academico/documentos_edita.php
+// app/sagu/academico/post/confirm_pessoaf_inclui.php
 $opcoes["t"]     = "Sim";
 $opcoes["f"]     = "N&atilde;o";
 
-// app/sagu/academico/pessoaf_edita.phtml
-// app/sagu/academico/post/confirm_pessoaf_inclui.phtml
+// app/sagu/academico/pessoaf_edita.php
+// app/sagu/academico/post/confirm_pessoaf_inclui.php
 $estados_civis["S"] = "Solteiro";
 $estados_civis["C"] = "Casado";
 $estados_civis["V"] = "Vi&uacute;vo";
@@ -104,22 +105,22 @@ $estados_civis["D"] = "Desquitado";
 $estados_civis["U"] = "Uni&atilde;o est&aacute;vel";
 $estados_civis["E"] = "Solteiro emancipado";
 
-// app/sagu/generico/post/lista_areas_ensino.php3
-// app/sagu/generico/post/lista_cidades.php3
-// app/sagu/generico/post/lista_escolas.php3
-// app/sagu/generico/post/lista_professores.php3
-// app/sagu/generico/post/lista_pessoas.php3
-// app/sagu/generico/post/lista_sql.php3
-// app/sagu/academico/consulta_disciplinas_equivalentes.phtml
+// app/sagu/generico/post/lista_areas_ensino.php
+// app/sagu/generico/post/lista_cidades.php
+// app/sagu/generico/post/lista_escolas.php
+// app/sagu/generico/post/lista_professores.php
+// app/sagu/generico/post/lista_pessoas.php
+// app/sagu/generico/post/lista_sql.php
+// app/sagu/academico/consulta_disciplinas_equivalentes.php
 $limite_list        = 25;
 
 
-// app/sagu/academico/periodos_altera.phtml
-// app/sagu/academico/novo_contrato.phtml
-// app/sagu/academico/periodos.phtml
-// app/sagu/academico/alterar_contrato.phtml
-// app/sagu/academico/atualiza_disciplina_ofer.phtml
-// app/sagu/academico/disciplina_ofer.phtml
+// app/sagu/academico/periodos_altera.php
+// app/sagu/academico/novo_contrato.php
+// app/sagu/academico/periodos.php
+// app/sagu/academico/alterar_contrato.php
+// app/sagu/academico/atualiza_disciplina_ofer.php
+// app/sagu/academico/disciplina_ofer.php
 $sql_periodos_academico    = "
 SELECT 'Selecione o Periodo',
     '' union all select id||' / '||substr(descricao, 0, 25) as d,

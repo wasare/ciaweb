@@ -130,7 +130,7 @@ if (!$acl->has_role($sa_ref_pessoa, $PAPEIS_SA, $conn)) {
                                             <li>
                                                 <a href="sagu/generico/campus_inclui.php"
                                                    target="frame2">Campus</a>
-                                            </li> 
+                                            </li>
                                             <?php if($acl->has_access(dirname(__FILE__).'/usuarios/index.php', $conn)) : ?>
                                             <li>
                                                 <a href="usuarios/index.php"
@@ -273,7 +273,9 @@ if (!$acl->has_role($sa_ref_pessoa, $PAPEIS_SA, $conn)) {
                             <img src="../public/images/icons/bola_verde.gif" width="10" height="10" />
                             <strong><?=$sa_usuario?></strong>&nbsp;&nbsp;
                         </span>
-                        <a href="usuarios/alterar_senha.php" target="frame2">Alterar senha</a>
+                        <?php if($USUARIO_ALTERA_SENHA == 1) : ?>
+                          <a href="usuarios/alterar_senha.php" target="frame2">Alterar senha</a>
+                        <?php endif; ?>
                     </td>
                 </tr>
             </table>
@@ -291,3 +293,4 @@ if (!$acl->has_role($sa_ref_pessoa, $PAPEIS_SA, $conn)) {
         </script>
     </body>
 </html>
+

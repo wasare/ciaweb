@@ -48,11 +48,12 @@ if (count(array_intersect($papeis, $PAPEIS_WEB_DIARIO)) == 0) {
 </div>
 <br />
 <br />
-
-<span><a href="#" id="trocar_senha" onclick="abrir('<?=$IEnome?>' + '- web diário', 'requisita.php?do=troca_senha');">Alterar senha de acesso</a></span>
-&nbsp;&nbsp;
-<br />
-<br />
+<?php if($USUARIO_ALTERA_SENHA == 1) : ?>
+  <span><a href="#" id="trocar_senha" onclick="abrir('<?=$IEnome?>' + '- web diário', 'requisita.php?do=troca_senha');">Alterar senha de acesso</a></span>
+  &nbsp;&nbsp;
+  <br />
+  <br />
+<?php endif; ?>
 
 <span><a href="#" title="log de acesso" id="log_acesso">Log de acessos</a></span>
 &nbsp;&nbsp;
@@ -109,7 +110,7 @@ if (count(array_intersect($papeis, $PAPEIS_WEB_DIARIO)) == 0) {
 <br />
 <br />
 
-<span><a href="#" title="acesso aos programas" id="acessa_programas">Programas</a></span>
+<!--<span><a href="#" title="acesso aos programas" id="acessa_programas">Programas</a></span>
 &nbsp;&nbsp;
 <div id="programas_pane" style="display:none; text-align:left; font-size: 0.85em;">
 <br />
@@ -120,11 +121,11 @@ if (count(array_intersect($papeis, $PAPEIS_WEB_DIARIO)) == 0) {
 <h5><a href="<?=$BASE_URL .'public/programas/gsv48w32.exe'?>">2 - GhostView</a></h5>
 <br />
 <br />
-</div>
+</div>-->
 <br /><br />
 <br /><br />
 </div>
-  
+
 <script language="javascript" type="text/javascript">
     $('consulta_aluno').observe('click', function() { $('consulta_aluno_pane').toggle(); });
     $('log_acesso').observe('click', function() { $('log_acesso_pane').toggle(); });

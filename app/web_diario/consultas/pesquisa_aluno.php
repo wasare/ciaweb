@@ -53,7 +53,7 @@ if (is_array($_SESSION['web_diario_cursos_coordenacao'])) {
 
 // filtro se professor
 if (isset($_SESSION['web_diario_periodo_id'])) {
-  
+
   $sql_professor = 'SELECT DISTINCT
                                     o.id
                               FROM
@@ -100,8 +100,8 @@ $sql .= '                   ORDER BY a.ref_pessoa
 	}
 
     $qtde_alunos = $conn->get_one('SELECT COUNT(*)  FROM (' .$sql .') AS T1 ;');
-    
-	$sql .= " ORDER BY a.nome LIMIT 15 OFFSET -1;";
+
+	$sql .= " ORDER BY a.nome LIMIT 15 OFFSET 1;";
 
 	$alunos = $conn->get_all($sql);
 
@@ -148,7 +148,7 @@ $sql .= '                   ORDER BY a.ref_pessoa
    else:
      echo '<br /><span class="obrigatorio" style="background: yellow;">Nenhum aluno encontrado para o crit&eacute;rio informado!</span>';
   endif;
-	
+
 ?>
 <br />
 <br />
@@ -166,3 +166,4 @@ $sql .= '                   ORDER BY a.ref_pessoa
 
 </body>
 </html>
+

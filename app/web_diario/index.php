@@ -48,7 +48,7 @@ if(count($periodo_coordenacao) > 0) {
 }
 
 if ($is_coordenador) {
-	
+
 	// ^ RECUPERA INFORMACOES SOBRE OS PERIODOS DO COORDENADOR ^ //
 
 	// RECUPERA INFORMACOES SOBRE OS CURSOS DO COORDENADOR
@@ -61,7 +61,7 @@ if ($is_coordenador) {
 
 	if(count($cursos_coordenacao) > 0) 	{
 		$is_coordenador = TRUE;
-		$_SESSION['web_diario_cursos_coordenacao'] = $cursos_coordenacao;	
+		$_SESSION['web_diario_cursos_coordenacao'] = $cursos_coordenacao;
 	}
 
 	// ^ RECUPERA INFORMACOES SOBRE OS PERIODOS E CURSOS DO COORDENADOR ^ //
@@ -103,7 +103,7 @@ $class_diarios = ($is_professor) ? ' class="active"' : '';
         <div align="right" style="font-size: 0.8em;">
           &nbsp;
         </div>
-     </td>    
+     </td>
      <td valign="middle">&nbsp;
        <a href="<?=$IEurl?>" target="_blank">
         <img src="<?=$BASE_URL .'public/images/if.jpg'?>" alt="IFSP - Campus Caraguatatuba" title="IFSP - Campus Caraguatatuba" border="0" />
@@ -124,7 +124,7 @@ $class_diarios = ($is_professor) ? ' class="active"' : '';
     <ol class="guias">
       <li style="font-size: 0.65em;">
         <a href="index.php">
-          <img src="<?=$BASE_URL .'public/images/home_icon.gif'?>" border="0" alt="P&aacute;gina inicial" title="P&aacute;gina inicial" />
+          <img src="<?=$BASE_URL .'public/images/home_icon.gif'?>" height="18" border="0" alt="P&aacute;gina inicial" title="P&aacute;gina inicial" />
         </a>
       </li>
 		<?php
@@ -134,7 +134,7 @@ $class_diarios = ($is_professor) ? ' class="active"' : '';
             if ($is_coordenador)
                 echo '<li><a href="#" '. $class_coordenacao .' id="pane_coordenacao">Coordena&ccedil;&atilde;o</a></li>';
         ?>
-        
+
 		<li><a href="#" id="pane_ferramentas">Ferramentas</a></li>
         <li><a href="<?=$BASE_URL .'index.php'?>">Sair</a></li>
         <li>&nbsp;&nbsp;&nbsp;
@@ -142,7 +142,7 @@ $class_diarios = ($is_professor) ? ' class="active"' : '';
           <?=$sa_usuario?>
         </li>
     </ol>
-   
+
     <div id="pane_container" class="tabbed-container">
         <div id="pane_overlay" class="overlay" style="display: none">
             <h2> <img src="<?=$BASE_URL .'public/images/carregando.gif'?>" alt="carregando..." /> &nbsp;&nbsp; carregando&#8230; </h2>
@@ -171,11 +171,11 @@ var thePane = new TabbedPane('web_guias',
         onClick: function(e) {
             $('pane_overlay').show();
         },
-       
+
         onSuccess: function(e) {
             $('pane_overlay').hide();
             e = unescape(e.responseText);
-            
+
         },
         contentType: 'text/html',
         encoding: 	'UTF-8'
@@ -185,3 +185,4 @@ var thePane = new TabbedPane('web_guias',
 
 </body>
 </html>
+

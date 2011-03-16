@@ -206,10 +206,10 @@ foreach($diarios as $row3) :
     $fl_encerrado = ($fl_finalizada == 't')  ? 1 : 0;
 
     $opcoes_diario = '';
-    
+
 	$fl_professor = TRUE;
 	if ( preg_match('/sem professor/i', $professor) )
-		$fl_professor = FALSE;    
+		$fl_professor = FALSE;
 
 	$fl_opcoes = 0;
 
@@ -227,7 +227,7 @@ foreach($diarios as $row3) :
             $fl_encerrado = 1;
 			$fl_opcoes = 1;
         }
-        else {				
+        else {
           $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'marca_finalizado\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">finaliza para lan&ccedil;amentos</a><br /><br />';
           $fl_opcoes = 1;
 		}
@@ -239,7 +239,7 @@ foreach($diarios as $row3) :
       $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'papeleta_completa\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">papeleta completa</a><br />';
       $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'faltas_completo\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">relat&oacute;rio de faltas completo</a><br />';
       $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'conteudo_aula\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">conte&uacute;do de aula</a><br />';
-      $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'caderno_chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">caderno de chamada</a>';
+      //$opcoes_diario .= '<a href="#" onclick="enviar_diario(\'caderno_chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">caderno de chamada</a>';
 	  $fl_opcoes = 1;
 	}
 
@@ -300,3 +300,4 @@ foreach($diarios as $row3) :
 </body>
 </head>
 </html>
+

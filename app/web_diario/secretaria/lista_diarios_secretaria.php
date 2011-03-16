@@ -51,7 +51,7 @@ $periodo = $conn->get_row($qryPeriodo);
 
 if (is_numeric($professor_id) && $professor_id != 0) {
 
-    $sql =  " SELECT DISTINCT A.id as idof, " . 
+    $sql =  " SELECT DISTINCT A.id as idof, " .
             "        A.ref_campus, " .
             "        get_campus(A.ref_campus), " .
             "        A.ref_curso, " .
@@ -68,7 +68,7 @@ if (is_numeric($professor_id) && $professor_id != 0) {
             " FROM disciplinas_ofer A FULL OUTER JOIN disciplinas_ofer_prof B ON (A.id = B.ref_disciplina_ofer) " .
             " WHERE A.is_cancelada = '0' ";
 } else {
-    
+
     $sql =  " SELECT DISTINCT A.id as idof, " .
             "        A.ref_campus, " .
             "        get_campus(A.ref_campus), " .
@@ -228,7 +228,7 @@ if (count($diarios) == 0) {
                             $opcoes_diario .= "<a href=\"#\" onclick=\"abrir('$IEnome','../requisita.php?do=papeleta_completa&id=$diario_id');\">papeleta completa</a><br />";
                             $opcoes_diario .= "<a href=\"#\" onclick=\"abrir('$IEnome','../requisita.php?do=faltas_completo&id=$diario_id');\">relat&oacute;rio de faltas completo</a><br />";
                             $opcoes_diario .= "<a href=\"#\" onclick=\"abrir('$IEnome','../requisita.php?do=conteudo_aula&id=$diario_id');\">conte&uacute;do de aula</a><br />";
-                            $opcoes_diario .= "<a href=\"#\" onclick=\"abrir('$IEnome','../requisita.php?do=caderno_chamada&id=$diario_id');\">caderno de chamada</a>";
+                            //$opcoes_diario .= "<a href=\"#\" onclick=\"abrir('$IEnome','../requisita.php?do=caderno_chamada&id=$diario_id');\">caderno de chamada</a>";
                             $fl_opcoes = 1;
                         }
 
@@ -286,3 +286,4 @@ endforeach;
     </body>
 </head>
 </html>
+
