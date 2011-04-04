@@ -31,7 +31,8 @@ if (!existe_chamada($diario_id)) {
 $sql1 ="SELECT id,
                dia,
                conteudo,
-           flag
+               flag,
+               atividades
                FROM
                diario_seq_faltas
                WHERE
@@ -80,25 +81,27 @@ $fl_finalizado = is_finalizado($diario_id);
 
 
 <table cellspacing="0" cellpadding="0" class="papeleta" width="60%">
-  <tr bgcolor="#666666"> 
+  <tr bgcolor="#666666">
     <th align="center">
     	<div align="center"><font color="#FFFFFF">&nbsp;</font><b><font color="#FFFFFF">Data</font></b></div>
     </th>
     <th align="center"><font color="#FFFFFF"><b>Aulas</b></font></th>
-    <th><font color="#FFFFFF"><b>Conte&uacute;do</b></font></th>
+    <th><font color="#FFFFFF"><b>Bases e conhecimentos</b></font></th>
+    <th><font color="#FFFFFF"><b>Atividades e avalia&ccedil;&otilde;es</b></font></th>
   </tr>
-<?php 
+<?php
 
 $st = '';
-	
+
 foreach($conteudos as $linha1) :
-  
+
 	$data_chamada = $linha1["dia"];
 	$conteudo = $linha1["conteudo"];
 	$chamada_id = $linha1["id"];
 	$aulas = $linha1["flag"];
+	$atividades = $linha1["atividades"];
 
-	if ( $st == '#F3F3F3') $st = '#E3E3E3'; else  $st ='#F3F3F3'; 
+	if ( $st == '#F3F3F3') $st = '#E3E3E3'; else  $st ='#F3F3F3';
 ?>
 
   <tr bgcolor="<?=$st?>">
@@ -115,6 +118,7 @@ foreach($conteudos as $linha1) :
     </td>
     <td align="center"><?=$aulas?></td>
 	<td><?=$conteudo?></td>
+	<td><?=$atividades?></td>
   </tr>
 
 <?php
@@ -128,3 +132,4 @@ foreach($conteudos as $linha1) :
 <a href="#" onclick="javascript:window.close();">Fechar</a>
 </body>
 </html>
+

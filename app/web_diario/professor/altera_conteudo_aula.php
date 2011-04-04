@@ -30,9 +30,18 @@ if ($_SESSION['sa_modulo'] == 'web_diario_login') {
 
 
 if(isset($_POST['ok']) && $_POST['ok'] == 'OK1') {
-    
-	$sql1 = 'UPDATE diario_seq_faltas SET conteudo = \''.$_POST['texto'].'\' WHERE id = '.$_POST['flag'].';';
-   
+
+  $atividades = $_POST['atividades'];
+  $conteudo = addslashes($_POST['texto']);
+
+  if ($atividades[count($atividades) - 1] == "Outros")
+    $atividades[count($atividades) - 1] = trim($_POST['outros']);
+
+  $atividades = addslashes(implode('; ', $atividades));
+
+	$sql1 = 'UPDATE diario_seq_faltas SET conteudo = \''. $conteudo .'\',';
+	$sql1 .= ' atividades = \''. $atividades .'\' WHERE id = '.$_POST['flag'].';';
+
 	$q = $conn->Execute($sql1);
 
 	echo '<script type="text/javascript">  window.alert("Conteudo de aula alterado com sucesso! ");';
@@ -40,23 +49,23 @@ if(isset($_POST['ok']) && $_POST['ok'] == 'OK1') {
 		echo 'self.location.href = "'. $BASE_URL .'app/web_diario/requisita.php?do='. $_SESSION['web_diario_do'] .'&id='.$_POST['diario_id'];
 	else
 		echo 'self.location.href = "'. $BASE_URL .'app/relatorios/web_diario/conteudo_aula.php?diario_id='.$_POST['diario_id'];
-	
+
 	echo '"</script>';
 }
 else
 {
-	$sql1 = "SELECT 
+	$sql1 = "SELECT
 		conteudo
                FROM
                diario_seq_faltas
                WHERE
                id = $flag;";
-			   
+
 	$conteudo = $conn->get_one($sql1);
 }
 
 ?>
-	
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN\">
 <html>
 <head>
@@ -93,6 +102,34 @@ else
       </td>
   </tr>
   <tr>
+    <td colspan="3">
+         Atividades e avaliações da(s) aula(s):<br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade1" value="Aula expositiva" /> Aula expositiva
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade2" value="Aula prática / laboratório" /> Aula pr&aacute;tica / laborat&oacute;rio
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade3" value="Exercícios" /> Exerc&iacute;cios
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade4" value="Trabalho em grupos" /> Trabalho em grupos
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade5" value="Pesquisa" /> Pesquisa
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade6" value="Análise de situação problema" /> An&aacute;lise de situa&ccedil;&atilde;o problema
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade7" value="Seminário" /> Semin&aacute;rio
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade8" value="Visita técnica" /> Visita t&eacute;cnica
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade9" value="Avaliação" /> Avalia&ccedil;&atilde;o
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade10" value="Outros" /> Outros - especificar &nbsp;&nbsp;
+            <input type="text" size="22" maxlength="120" name="outros" id="atividade11" value="" />
+            <br />
+            <br />
+        </td>
+  </tr>
+
+  <tr>
     <td>&nbsp;</td>
     <td>
         <div align="center">
@@ -107,3 +144,4 @@ else
 </form>
 </body>
 </html>
+

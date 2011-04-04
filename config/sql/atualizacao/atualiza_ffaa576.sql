@@ -42,3 +42,5 @@ UPDATE url SET url = '/app/sagu/academico/post/inclui_disciplinas_equivalentes.p
 
 ALTER TABLE periodos RENAME COLUMN media TO nota_maxima;
 
+ALTER TABLE diario_seq_faltas ADD COLUMN atividades text;
+

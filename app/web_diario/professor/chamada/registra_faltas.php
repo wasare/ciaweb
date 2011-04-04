@@ -4,7 +4,7 @@ require_once(dirname(__FILE__) .'/../../../setup.php');
 require_once($BASE_DIR .'core/web_diario.php');
 require_once($BASE_DIR .'core/date.php');
 
-// CONEXAO ABERTA PARA TRABALHAR COM TRANSACAO (NÃƒO PERSISTENTE)
+// CONEXAO ABERTA PARA TRABALHAR COM TRANSACAO (NÃO PERSISTENTE)
 $conn = new connection_factory($param_conn,FALSE);
 
 $diario_id = (int) $_POST['diario_id'];
@@ -38,6 +38,9 @@ else
   $num_aulas = $_POST['num_aulas'];
 
 $alunos_faltas = (isset($_POST['faltas'])) ? $_POST['faltas'] : '';
+
+$atividades = (isset($_POST['atividades_chamada'])) ? $_POST['atividades_chamada'] : $atividades;
+
 /*
 if(!isset($_POST['data_chamada']) || empty($_POST['data_chamada'])) {
 
@@ -75,29 +78,29 @@ $curso = get_curso($diario_id);
 $disciplina = get_disciplina($diario_id);
 
 function processa_chamada($alunos_faltas, $num_aulas, $sql_chamada) {
-  
+
   global $conn, $data_chamada, $sa_ref_pessoa, $periodo, $diario_id, $sem_faltas;
 
   // registra a chamada no banco de dados
   $conn->Execute($sql_chamada);
 
   $resposta .= $sem_faltas;
-	
+
   if(is_array($alunos_faltas)  && count($alunos_faltas) > 0) {
 
     reset($alunos_faltas);
-	
+
     foreach($alunos_faltas as $reg_aluno => $num_faltas) {
 
 	  $sqlFaltas = 'BEGIN;';
-     
+
 	  if($num_faltas > 0 && $num_faltas <= $num_aulas) {
 
         $aluno = $conn->get_one("SELECT nome FROM pessoas WHERE id = $reg_aluno;");
         $aluno = '<font color="red"><b>'. $aluno .' ('. $reg_aluno .')</b></font>';
 
         if(registra_faltas($reg_aluno, $diario_id, abs($num_faltas), $data_chamada, $sa_ref_pessoa) === TRUE)
-            $resposta .= '<strong>'. $num_faltas . '</strong> Falta(s) registrada(s) para '. $aluno .' no dia '. $data_chamada .'<br />';        
+            $resposta .= '<strong>'. $num_faltas . '</strong> Falta(s) registrada(s) para '. $aluno .' no dia '. $data_chamada .'<br />';
 	  }
     }
   }
@@ -107,8 +110,8 @@ function processa_chamada($alunos_faltas, $num_aulas, $sql_chamada) {
 
 $datadehoje = date ("d/m/Y");
 
-$sql_chamada = 'BEGIN; INSERT INTO diario_seq_faltas (id_prof, periodo, curso, disciplina, dia, conteudo, flag, ref_disciplina_ofer) VALUES ';
-$sql_chamada .= " ('$sa_ref_pessoa','$periodo','$curso','$disciplina','$data_chamada','$conteudo', '$num_aulas', $diario_id);COMMIT;";
+$sql_chamada = 'BEGIN; INSERT INTO diario_seq_faltas (id_prof, periodo, curso, disciplina, dia, conteudo, flag, ref_disciplina_ofer, atividades) VALUES ';
+$sql_chamada .= " ('$sa_ref_pessoa','$periodo','$curso','$disciplina','$data_chamada','$conteudo', '$num_aulas', $diario_id, '$atividades');COMMIT;";
 
 $status = 'FALTA REGISTRADA ';
 
@@ -127,7 +130,7 @@ $status .= $aula_tipo;
 <div align="left" class="titulo1">
   Lan&ccedil;amento de Chamada / Faltas
 </div>
-  
+
 <br /><br />
 
 <?=papeleta_header($diario_id)?>
@@ -144,3 +147,4 @@ $status .= $aula_tipo;
 <br /><br />
 </body>
 </html>
+

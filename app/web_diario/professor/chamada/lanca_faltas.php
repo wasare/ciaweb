@@ -7,6 +7,7 @@ $conn = new connection_factory($param_conn);
 
 $diario_id = (int) $_POST['diario_id'];
 $operacao  = $_POST['operacao'];
+print_r($_POST['atividades']);
 
 //  VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR
 if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
@@ -35,9 +36,16 @@ $_SESSION['flag_falta'] = $flag_falta;
 
 $aula_tipo = $_POST['aula_tipo'];
 $conteudo = trim($_POST['conteudo']);
+$atividades = $_POST['atividades'];
 
 $_SESSION['conteudo'] = $conteudo;
 $conteudo = addslashes($conteudo);
+
+if ($atividades[count($atividades) - 1] == "Outros")
+    $atividades[count($atividades) - 1] = trim($_POST['outros']);
+
+$atividades = addslashes(implode('; ', $atividades));
+
 
 $_SESSION['aula_tipo'] = $aula_tipo;
 
@@ -75,9 +83,9 @@ $data_chamada = $_POST['data_chamada'];
 
 
 
-// VALIDAR CONTEUDO AQUI
-if(empty($conteudo))
-  die('<script language="javascript" type="text/javascript"> window.alert("Você não informou o conteúdo da(s) aula(s)!");window.history.back(1); </script>');
+// VALIDAR CONTEUDO E ATIVIDADES AQUI
+if(empty($conteudo) || empty($atividades))
+  die('<script language="javascript" type="text/javascript"> window.alert("Você não informou o conteúdo e/ou as atividades da(s) aula(s)!");window.history.back(1); </script>');
 
 // VERIFICA SE EXISTE CHAMADA NESTA DATA
 if(existe_chamada($diario_id, $data_chamada))
@@ -90,8 +98,8 @@ if($flag_falta === 'F') {
 	exit;
 }
 
-	
-// PREPARA FORMULARIO PARA LANCAMENTO DE FALTAS               
+
+// PREPARA FORMULARIO PARA LANCAMENTO DE FALTAS
 $sql1 = "SELECT
   matricula.ordem_chamada,
   pessoas.nome,
@@ -102,12 +110,12 @@ FROM
   INNER JOIN pessoas ON (matricula.ref_pessoa = pessoas.id)
 WHERE
   (matricula.ref_periodo = '$periodo') AND
-  (matricula.ref_disciplina_ofer = $diario_id) AND 
+  (matricula.ref_disciplina_ofer = $diario_id) AND
   (matricula.dt_cancelamento is null) AND
   (matricula.ref_motivo_matricula = 0)
 ORDER BY
-   lower(to_ascii(pessoas.nome,'LATIN1'));"; 
-  
+   lower(to_ascii(pessoas.nome,'LATIN1'));";
+
 
 $alunos = $conn->get_all($sql1);
 $curso = get_curso($diario_id);
@@ -127,7 +135,7 @@ function validate(field, total) {
 	if (field.value > total || field.value < 0) {
 		alert("Você não pode lançar " + field.value + " faltas para uma chamada de " + total + " aulas !");
         field.focus();
-		field.value = total;	
+		field.value = total;
    }
 }
 
@@ -162,7 +170,7 @@ function autoTab(input,len, e) {
 
         return true;
 
-        /* 
+        /*
 			Usando no formulario
 				<input onKeyUp="return autoTab(this, 3, event);" size="4" maxlength="3">
         */
@@ -182,9 +190,10 @@ function autoTab(input,len, e) {
 <form name="envia_faltas" id="envia_faltas" method="post" action="<?=$BASE_URL .'app/web_diario/professor/chamada/registra_faltas.php'?>">
     <input type="hidden" name="diario_id" id="diario_id" value="<?=$diario_id?>">
     <input type="hidden" name="operacao" id="operacao" value="<?=$operacao?>">
-	<input type="hidden" name="aula_tipo" id="aula_tipo" value="<?=$aula_tipo?>">
+    <input type="hidden" name="aula_tipo" id="aula_tipo" value="<?=$aula_tipo?>">
     <input type="hidden" name="num_aulas" id="num_aulas" value="<?=$num_aulas?>">
     <input type="hidden" name="data_chamada" id="data_chamada" value="<?=$data_chamada?>">
+    <input type="hidden" name="atividades_chamada" id="atividades_chamada" value="<?=$atividades?>">
 
   <h3>
     Data da Chamada:&nbsp;<font color="blue"><?=$data_chamada?></font>
@@ -197,32 +206,32 @@ function autoTab(input,len, e) {
 
 <table cellspacing="0" cellpadding="0" class="papeleta">
   <tr bgcolor="#cccccc">
-    
-	<td align="center"><b>N&ordm; ordem</b></td>                                      
+
+	<td align="center"><b>N&ordm; ordem</b></td>
     <td align="center"><strong>Faltas</strong></td>
     <td align="center"><b>&nbsp;Matr&iacute;cula</b></td>
     <td><b>&nbsp;Nome do aluno</b></td>
   </tr>
-  
-<?php 
+
+<?php
 
 $st = '';
 
 $ordem = 1;
-	
+
 	foreach($alunos as $aluno) :
 
 		$matricula = $aluno['ref_pessoa'];
 		$nome = $aluno['nome'];
-   
-		$st = ($st == '#F3F3F3') ? '#E3E3E3' : '#F3F3F3'; 
+
+		$st = ($st == '#F3F3F3') ? '#E3E3E3' : '#F3F3F3';
 ?>
 	<tr bgcolor="<?=$st?>">
 		<td align="center"><?=$ordem?></td>
 		<td align="center">
 <?php
 		if ($num_aulas != 10) :
-?>  
+?>
         <input type="text" name="faltas[<?=$matricula?>]" value="" maxlength="1" size="1" onblur="validate(this, <?=$num_aulas?>);" onkeyup="return autoTab(this, 1, event);"/>
 <?php
 		else :
@@ -250,6 +259,7 @@ $ordem = 1;
     <a href="#" onclick="javascript:window.close();">cancelar chamada</a>
   <input type="hidden" name="faltas_ok" value="<?=$_SESSION['flag_falta']?>" />
 </form>
-<br />      
+<br />
 </body>
 </html>
+

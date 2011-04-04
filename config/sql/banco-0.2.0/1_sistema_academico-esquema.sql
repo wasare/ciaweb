@@ -2929,3 +2929,5 @@ ALTER TABLE disciplinas ADD CONSTRAINT abreviatura_unq UNIQUE (abreviatura);
 
 ALTER TABLE periodos RENAME COLUMN media TO nota_maxima;
 
+ALTER TABLE diario_seq_faltas ADD COLUMN atividades text;
+

@@ -81,7 +81,7 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
             </span>
             <br />
             <br />
-            Selecione quantas aulas ser&aacute; efetuada a chamada:
+            Selecione a quantidade de aulas desta chamada:
             <br />
             <select name="aula_tipo" id="aula_tipo" style="width:400px">
                 <option>--- quantidade de aulas ---</option>
@@ -97,23 +97,36 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
                 <option value="1234" <?php if($_SESSION['aula_tipo'] == "1234") {
                     echo 'selected="selected"';
                         } ?>>4 Aulas (Aula Qu&aacute;drupla)</option>
-                <option value="12345" <?php if($_SESSION['aula_tipo'] == "12345") {
-                    echo 'selected="selected"';
-                        } ?>>5 Aulas (5 Aulas seguidas)</option>
-                <option value="123456" <?php if($_SESSION['aula_tipo'] == "123456") {
-                    echo 'selected="selected"';
-                        } ?>>6 Aulas (6 Aulas seguidas)</option>
-                <option value="12345678" <?php if($_SESSION['aula_tipo'] == "12345678") {
-                    echo 'selected="selected"';
-                        } ?>>8 Aulas (8 Aulas seguidas)</option>
-               <option value="1234567890" <?php if($_SESSION['aula_tipo'] == "1234567890") {
-                    echo 'selected="selected"';
-                        } ?>>10 Aulas (10 Aulas seguidas)</option> 
             </select>
             <br />
             <br />
-            Conte&uacute;do dado na(s) aula(s):<br />
+            Bases e conhecimentos desenvolvidos na(s) aula(s):<br />
             <textarea name="conteudo" cols="70" rows="5"><?=$_SESSION['conteudo']?></textarea>
+            <br />
+            <br />
+            Atividades e avaliações da(s) aula(s):<br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade1" value="Aula expositiva" /> Aula expositiva
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade2" value="Aula prática / laboratório" /> Aula pr&aacute;tica / laborat&oacute;rio
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade3" value="Exercícios" /> Exerc&iacute;cios
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade4" value="Trabalho em grupos" /> Trabalho em grupos
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade5" value="Pesquisa" /> Pesquisa
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade6" value="Análise de situação problema" /> An&aacute;lise de situa&ccedil;&atilde;o problema
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade7" value="Seminário" /> Semin&aacute;rio
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade8" value="Visita técnica" /> Visita t&eacute;cnica
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade9" value="Avaliação" /> Avalia&ccedil;&atilde;o
+            <br />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade10" value="Outros" /> Outros - especificar &nbsp;&nbsp;
+            <input type="text" size="22" maxlength="120" name="outros" id="atividade11" value="" />
+            <br />
+            <br />
             <br />
             <input type="checkbox" class="checkbox" name="flag_falta" id="flag_falta" value="F" />
             <font color="brown">
@@ -144,3 +157,4 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
         </div>
     </body>
 </html>
+

@@ -85,7 +85,6 @@ function verificaAprovacao($aluno_id,$curso_id,$diario_id)
     $MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
 
       // -- Verifica se foi aprovado neste diário / disciplina
-      // FIXME: obter média / nota para aprovação da tabela "periodos"
         $sqlDisciplina = "
         SELECT DISTINCT
             o.id AS diario
