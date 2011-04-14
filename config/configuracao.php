@@ -9,9 +9,9 @@ date_default_timezone_set('America/Sao_Paulo');
  * Banco de dados
  */
 $host     = '127.0.0.1';
-$database = 'academico_campuscar';
-$user     = 'academico_user';
-$password = '3294gIwLMzprWQDfncEl';
+$database = 'ciaweb';
+$user     = 'ciaweb_user';
+$password = 'u0sodQFhArqOELlBNKxJ';
 $port     = 5432;
 
 /**
@@ -29,7 +29,7 @@ $param_conn['port']     = $port;
 $param_conn_aluno['host']     = $param_conn['host'];
 $param_conn_aluno['database'] = $param_conn['database'];
 $param_conn_aluno['user']     = 'aluno';
-$param_conn_aluno['password'] = 'uaRecT3lSAk7xZvWCir2';
+$param_conn_aluno['password'] = 'eokQdfaBO9M8CY6snUzy';
 $param_conn_aluno['port']     = $port;
 
 /**
@@ -58,12 +58,25 @@ $PAPEIS_SA = array('secretaria' => 1, 'administrador' => 2);
 $PAPEIS_WEB_DIARIO = array('professor' => 3, 'coordenador' => 0);
 $PAPEIS_ADMINISTRADOR = array('administrador' => 2);
 $EMAIL_ADMIN = 'wanderson@cefetsp.br';
-$USUARIO_ALTERA_SENHA = 1;
+$USUARIO_ALTERA_SENHA = 0;
 
 /*
    ALGUNS PARAMETROS DO SISTEMA ACADEMICO
    ** acima de cada parametro os respectivos arquivos onde sao utilizados **
 */
+
+// atividades de aula
+$ATIVIDADES_AULA[0] = 'Aula expositiva';
+$ATIVIDADES_AULA[1] = 'Aula prática / laboratório';
+$ATIVIDADES_AULA[2] = 'Exercícios';
+$ATIVIDADES_AULA[3] = 'Trabalho em grupos';
+$ATIVIDADES_AULA[4] = 'Pesquisa';
+$ATIVIDADES_AULA[5] = 'Análise de situação problema';
+$ATIVIDADES_AULA[6] = 'Seminário';
+$ATIVIDADES_AULA[7] = 'Visita técnica';
+$ATIVIDADES_AULA[8] = 'Avaliação';
+
+
 
 // app/diagrama.php
 // public/help.php

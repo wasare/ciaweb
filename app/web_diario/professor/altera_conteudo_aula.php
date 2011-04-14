@@ -34,8 +34,8 @@ if(isset($_POST['ok']) && $_POST['ok'] == 'OK1') {
   $atividades = $_POST['atividades'];
   $conteudo = addslashes($_POST['texto']);
 
-  if ($atividades[count($atividades) - 1] == "Outros")
-    $atividades[count($atividades) - 1] = trim($_POST['outros']);
+  if ($atividades[count($atividades) - 1] == "Outras")
+    $atividades[count($atividades) - 1] = trim($_POST['Outras']);
 
   $atividades = addslashes(implode('; ', $atividades));
 
@@ -55,13 +55,22 @@ if(isset($_POST['ok']) && $_POST['ok'] == 'OK1') {
 else
 {
 	$sql1 = "SELECT
-		conteudo
+            conteudo,
+            atividades
                FROM
                diario_seq_faltas
                WHERE
                id = $flag;";
 
-	$conteudo = $conn->get_one($sql1);
+  $conteudos = $conn->get_row($sql1);
+
+  $conteudo = $conteudos['conteudo'];
+  $atividades = $conteudos['atividades'];
+
+  $atividades = explode("; ", $atividades);
+
+  $atividades_registradas = array_map('trim', $atividades);
+
 }
 
 ?>
@@ -103,29 +112,38 @@ else
   </tr>
   <tr>
     <td colspan="3">
+         <br />
          Atividades e avaliações da(s) aula(s):<br />
-            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade1" value="Aula expositiva" /> Aula expositiva
+             <?php
+
+                foreach($ATIVIDADES_AULA as $atividade) :
+                  $checked = '';
+                  if (in_array($atividade, $atividades_registradas)) :
+                     $checked = ' checked="checked" ';
+                  endif;
+              ?>
+                  <br />
+                  <input type="checkbox" class="checkbox" name="atividades[]" value="<?=$atividade?>" <?=$checked?> /> <?=$atividade?>
+
+              <?php
+                endforeach;
+
+                $outra_atividade = array_pop($atividades_registradas);
+
+                if (in_array($outra_atividade, $ATIVIDADES_AULA)) :
+                  $outra_atividade = '';
+                endif;
+
+              ?>
+                 <br />
+                 <input type="checkbox" class="checkbox" name="atividades[]" value="Outras" <?php if(!empty($outra_atividade)) echo ' checked="checked" '; ?> /> Outras - especificar
+                 &nbsp;&nbsp;
+                 <input type="text" size="22" maxlength="120" name="Outras" value="<?=$outra_atividade?>" />
             <br />
-            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade2" value="Aula prática / laboratório" /> Aula pr&aacute;tica / laborat&oacute;rio
             <br />
-            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade3" value="Exercícios" /> Exerc&iacute;cios
-            <br />
-            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade4" value="Trabalho em grupos" /> Trabalho em grupos
-            <br />
-            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade5" value="Pesquisa" /> Pesquisa
-            <br />
-            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade6" value="Análise de situação problema" /> An&aacute;lise de situa&ccedil;&atilde;o problema
-            <br />
-            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade7" value="Seminário" /> Semin&aacute;rio
-            <br />
-            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade8" value="Visita técnica" /> Visita t&eacute;cnica
-            <br />
-            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade9" value="Avaliação" /> Avalia&ccedil;&atilde;o
-            <br />
-            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade10" value="Outros" /> Outros - especificar &nbsp;&nbsp;
-            <input type="text" size="22" maxlength="120" name="outros" id="atividade11" value="" />
-            <br />
-            <br />
+
+            <?php echo $outra_atividade;?>
+
         </td>
   </tr>
 
@@ -135,7 +153,7 @@ else
         <div align="center">
           <input type="submit" name="atualizar" id="atualizar" value="Atualizar">
 		  &nbsp;&nbsp;&nbsp;
-          <a href="#" onclick="javascript:history.back();">Cancelar</a>
+          <a href="#" onclick="javascript:window.close();">Cancelar</a>
         </div>
       </td>
     <td>&nbsp;</td>

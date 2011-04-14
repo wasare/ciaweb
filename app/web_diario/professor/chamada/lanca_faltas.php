@@ -7,7 +7,6 @@ $conn = new connection_factory($param_conn);
 
 $diario_id = (int) $_POST['diario_id'];
 $operacao  = $_POST['operacao'];
-print_r($_POST['atividades']);
 
 //  VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR
 if(!acessa_diario($diario_id,$sa_ref_pessoa)) {

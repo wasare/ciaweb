@@ -33,7 +33,8 @@ if (is_finalizado($diario_id)){
 $sql1 = "SELECT id,
                dia,
                conteudo,
-			   flag
+               flag,
+               atividades
             FROM
                diario_seq_faltas
                WHERE
@@ -66,25 +67,28 @@ $chamadas = $conn->get_all($sql1);
 <br />
 <br />
 <table cellspacing="0" cellpadding="0" class="papeleta">
-  <tr bgcolor="#666666"> 
+  <tr bgcolor="#666666">
     <td align="center">
     	<div align="center"><font color="#FFFFFF">&nbsp;</font><b><font color="#FFFFFF">DATA</font></b></div>
     </td>
     <td align="center"><font color="#FFFFFF"><b>AULAS</b></font></td>
-    <td align="center"><font color="#FFFFFF"><b>CONTE&Uacute;DO DE AULA</b></font></td>
+    <td align="center"><font color="#FFFFFF"><b>Bases e conhecimentos</b></font></td>
+    <th><font color="#FFFFFF"><b>Atividades e avalia&ccedil;&otilde;es</b></font></th>
     <td align="center"><font color="#FFFFFF"><b>&nbsp;&nbsp;A&Ccedil;&Atilde;O</b></font></td>
+
   </tr>
-<?php 
+<?php
 
 $st = '';
-	
+
   foreach( $chamadas as $aula ) :
 
 	$data_chamada = $aula["dia"];
     $conteudo = $aula["conteudo"];
     $chamada_id = $aula["id"];
     $aulas = $aula["flag"];
-	
+    $atividades = $aula["atividades"];
+
 	if ( $st == '#F3F3F3') $st = '#E3E3E3'; else $st ='#F3F3F3';
   ?>
 
@@ -92,7 +96,8 @@ $st = '';
     <td align="center"><?=date::convert_date($data_chamada)?></td>
 	<td align="center"><?=$aulas?></td>
     <td align="left"><?=$conteudo?></td>
-	<td> 
+    <td><?=$atividades?></td>
+	<td>
       <a href="<?=$BASE_URL .'app/web_diario/professor/chamada/altera_faltas.php?chamada='. $chamada_id .'&flag='. $aulas .'&diario_id='. $diario_id?>">Alterar faltas</a>
     </td>
   </tr>
@@ -111,3 +116,4 @@ $st = '';
 <br /><br />
 </body>
 </html>
+

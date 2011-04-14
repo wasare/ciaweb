@@ -19,9 +19,10 @@ TODO: incluir a informação ref_campus, ref_periodo e ref_periodo_turma no arqu
 Formato do CSV
 ===============
 
-curso|disciplina abrv|disciplina abrv|turma|course1|prontuario|aluno
-ADS|COEA1|COEA1|1|2011-1-ADS-1N-COEA1|1105001|CLEBER ANTONIO DA SILVA
-ADS|INGA1|INGA1|1|2011-1-ADS-1N-INGA1|1105001|CLEBER ANTONIO DA SILVA
+curso|disciplina abrv|turma|prontuario
+ADS|COEA1|1|1105001
+ADS|INGA1|1|1105001
+ADS|INTA1|1|1105001
 
 */
 $csv = dirname(__FILE__).'/csv/matriculas_em_disciplinas_tecnico_111.csv';

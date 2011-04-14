@@ -119,7 +119,7 @@ function _alunos_importa($memory_limit, $csv_file) {
       set_time_limit(60);
 
       $curso_sigla = trim($line[0]);
-      $prontuario = mb_strtoupper(trim($line[3]), 'UTF-8');
+      $prontuario = mb_strtoupper(trim($line[1]), 'UTF-8');
 
       //$nome = addslashes(uc_first_names(trim($line[1])));
       //$nome = $trans->mixed_to_utf8($nome);
