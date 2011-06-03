@@ -89,7 +89,7 @@ class  Boletim extends PDF {
 				$Texto = $Dados[$j][0];
 				$this->Write(5,utf8_decode($Texto));
 				$this->SetFont('Arial','B',10);
-				$Texto = "               Identificação Única: ";
+				$Texto = "               Matrícula: ";
 				$this->Write(5,utf8_decode($Texto));
 				$this->SetFont('Arial','',11);
 				$Texto = str_pad($Dados[$j][1], 5, "0", STR_PAD_LEFT);

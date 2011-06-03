@@ -2931,3 +2931,9 @@ ALTER TABLE periodos RENAME COLUMN media TO nota_maxima;
 
 ALTER TABLE diario_seq_faltas ADD COLUMN atividades text;
 
+
+-- git commit 2527ec6
+ALTER TABLE disciplinas_ofer ADD CONSTRAINT ref_disciplina_unq UNIQUE (ref_disciplina, turma);
+
+ALTER TABLE pessoas ADD CONSTRAINT cod_cpf_cgc_unq UNIQUE (cod_cpf_cgc);
+

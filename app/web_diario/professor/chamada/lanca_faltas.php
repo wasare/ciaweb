@@ -2,6 +2,7 @@
 
 require_once(dirname(__FILE__) .'/../../../setup.php');
 require_once($BASE_DIR .'core/web_diario.php');
+require_once($BASE_DIR .'core/number.php');
 
 $conn = new connection_factory($param_conn);
 
@@ -55,31 +56,7 @@ if(!is_numeric($aula_tipo) || (strlen($aula_tipo) < 1 || strlen($aula_tipo) > 10
    die('<script language="javascript" type="text/javascript"> window.alert("Você deverá selecionar a quantidade de aulas para esta chamada."); window.history.back(1);</script>');
 
 
-/*
- * Recebe a data
-
-
-if(empty($_POST['select_dia']))
-  die('<font size=2><b>Voc&ecirc; n&atilde;o selecionou o DIA ! <a href="javascript:history.go(-1);">Voltar</a>!</b></font>');
-else
-  $select_dia = $_POST['select_dia'];
-
-if(empty($_POST['select_mes']))
-  die('<font size=2><b>Voc&ecir;  n&atilde;o selecionou o M&Ecirc;S ! <a href="javascript:history.go(-1);">Voltar</a>!</b></font>');
-else
-  $select_mes = $_POST['select_mes'];
-
-
-if(empty($_POST['select_ano']))
-  die('<font size=2><b>Voc&ecirc; n&atilde;o selecionou o ANO ! <a href"javascript:history.go(-1);">Voltar</a>!</b></font>');
-else
-  $select_ano = $_POST['select_ano'];
-
-$data_chamada = $select_dia . "/" . $select_mes . '/'. $select_ano;
- */
-
 $data_chamada = $_POST['data_chamada'];
-
 
 
 // VALIDAR CONTEUDO E ATIVIDADES AQUI
@@ -101,6 +78,7 @@ if($flag_falta === 'F') {
 // PREPARA FORMULARIO PARA LANCAMENTO DE FALTAS
 $sql1 = "SELECT
   matricula.ordem_chamada,
+	matricula.num_faltas,
   pessoas.nome,
   pessoas.id,
   matricula.ref_pessoa
@@ -118,6 +96,9 @@ ORDER BY
 
 $alunos = $conn->get_all($sql1);
 $curso = get_curso($diario_id);
+
+$sql_carga_horaria = "SELECT get_carga_horaria_realizada($diario_id);";
+$carga_horaria_realizada = $conn->get_one($sql_carga_horaria);
 
 ?>
 
@@ -206,10 +187,11 @@ function autoTab(input,len, e) {
 <table cellspacing="0" cellpadding="0" class="papeleta">
   <tr bgcolor="#cccccc">
 
-	<td align="center"><b>N&ordm; ordem</b></td>
+	<td align="center"><b>Ordem</b></td>
     <td align="center"><strong>Faltas</strong></td>
     <td align="center"><b>&nbsp;Matr&iacute;cula</b></td>
     <td><b>&nbsp;Nome do aluno</b></td>
+		<td><b>&nbsp;% Faltas atual</b></td>
   </tr>
 
 <?php
@@ -222,8 +204,13 @@ $ordem = 1;
 
 		$matricula = $aluno['ref_pessoa'];
 		$nome = $aluno['nome'];
+		$faltas = $aluno['num_faltas'];
 
 		$st = ($st == '#F3F3F3') ? '#E3E3E3' : '#F3F3F3';
+		
+		$percentual_faltas_atual = round($faltas / $carga_horaria_realizada * 100, 2);
+		
+		$destaque_faltas = ($percentual_faltas_atual > 25) ? 'red' : 'black';
 ?>
 	<tr bgcolor="<?=$st?>">
 		<td align="center"><?=$ordem?></td>
@@ -243,6 +230,7 @@ $ordem = 1;
         </td>
         <td align="center"><?=$matricula?></td>
         <td><?=$nome?></td>
+				<td align="center"><font color="<?=$destaque_faltas?>"><?=number::numeric2decimal_br($percentual_faltas_atual,2);?></font></td>				
         </tr>
 <?php
 		$ordem++;

@@ -90,6 +90,18 @@ else {
 <title><?=$IEnome?> - relat&oacute;rio de faltas</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="<?=$BASE_URL .'public/styles/web_diario.css'?>" type="text/css">
+<script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery-1.6.1.min.js'?>"></script>
+<script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.floatheader.min.js'?>"></script>
+<script type="text/javascript">
+	<!--
+		jQuery(document).ready(function() {
+			jQuery('#faltas_completo').floatHeader({
+				fadeIn: 250, 
+				fadeOut: 250
+			});
+		});
+	//-->
+</script>
 </head>
 
 <div align="left" class="titulo1">
@@ -100,20 +112,25 @@ else {
 <?=papeleta_header($diario_id)?>
 
 <br />
-<table cellspacing="0" cellpadding="0" class="papeleta">
-	<tr bgcolor="#cccccc">
+<table cellspacing="0" cellpadding="0" class="papeleta" id="faltas_completo">
+	<thead>
+	<tr bgcolor="#cccccc" class="header">
 		<th><strong>Ordem</strong></th>
 		<th><strong>Matr&iacute;cula</strong></th>
 		<th><strong>Nome</strong></th>
         <?php
 
 			foreach($num_chamadas as $d) {
-				echo '<th align="center"><strong>'. date::convert_date($d['dia']) .'</strong></th>';
+				list($dia, $mes, $ano) = explode ("/", date::convert_date($d['dia']));
+				echo '<th align="center"><strong>'. $dia .'<br /><hr />'. $mes  .'</strong></th>';
 			}
 
 		?>
-		<td align="center">Total</td>
+		<td align="center"><strong>Total</strong></td>
 	</tr>
+	</thead>
+	<tbody>
+
 <?php
 
 
@@ -148,8 +165,7 @@ foreach($alunos_diario as $row3) {
    }
    else {
 	   if($falta_total > 0) {
-
-		          $falta_total = "<font size=\"3\"><b>$falta_total</b></font>";
+		    $falta_total = "<font size=\"3\"><b>$falta_total</b></font>";
 	   }
    }
 
@@ -196,7 +212,7 @@ foreach($alunos_diario as $row3) {
 
 ?>
 
-
+	</tbody>
 </table>
 <hr width="60%" size="1" align="left" color="#FFFFFF">
 

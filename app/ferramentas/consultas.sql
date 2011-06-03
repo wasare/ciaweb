@@ -38,6 +38,30 @@ from pessoas p1, pessoas p2, pessoa_prontuario_campus pr1, pessoa_prontuario_cam
 where  p1.id != p2.id and p1.id = pr1.ref_pessoa and p2.id = pr2.ref_pessoa and lower(to_ascii(p1.nome,'LATIN1')) = lower(to_ascii(p2.nome,'LATIN1')) and p1.nome = lower(to_ascii('Wanderson Santiago dos Reis','LATIN1'))
 
 
+
+-- falas parciais do aluno por dia de ocorrência
+SELECT dia, CASE 
+                        WHEN faltas IS NULL THEN '0' 
+                        ELSE faltas
+                    END AS faltas
+FROM
+(
+SELECT DISTINCT
+          c.ra_cnec, data_chamada, count(CAST(c.ra_cnec AS INTEGER)) as faltas          
+		FROM diario_chamadas c
+         WHERE
+           c.ref_disciplina_ofer = 82 AND
+           CAST(c.ra_cnec AS INTEGER) = 91
+        GROUP BY c.ra_cnec, data_chamada
+) AS T1
+FULL OUTER JOIN
+(
+SELECT DISTINCT dia FROM diario_seq_faltas WHERE ref_disciplina_ofer = 82 ORDER BY dia
+) AS T2 ON (data_chamada = dia)
+
+ORDER BY dia;
+
+
 -- professor que mais lancou chamadas
 
 

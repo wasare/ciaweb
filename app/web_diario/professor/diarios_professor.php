@@ -166,44 +166,23 @@ $r2 = '#FFFFFF';
 
 foreach($diarios as $row3) :
 
-    $descricao_disciplina = $row3["descricao_extenso"];
-    $disciplina_id = $row3["idof"];
-    $diario_id = $row3["idof"];
+  $descricao_disciplina = $row3["descricao_extenso"];
+  $disciplina_id = $row3["idof"];
+  $diario_id = $row3["idof"];
 	$fl_finalizada = $row3['fl_finalizada'];
-    $fl_digitada = $row3['fl_digitada'];
+  $fl_digitada = $row3['fl_digitada'];
 	$qtde_alunos = (!empty($row3['qtde_alunos'])) ? $row3['qtde_alunos'] : '-';
 	$turma = (!empty($row3['turma'])) ? $row3['turma'] : '-';
 
-
-    $fl_encerrado = ($fl_finalizada == 't')  ? 1 : 0;
-
-    $opcoes_diario = '';
-    if ($fl_encerrado == 0) {
-      $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'notas\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Nota</a><br />';
-      $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Chamada</a><br />';
-      $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'altera_chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Altera faltas nas chamadas</a><br />';
-      $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'exclui_chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Exclui chamada</a><br />';
-      $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'marca_diario\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Marca / desmarca conclu&iacute;do</a><br />';
-      $opcoes_diario .= '<br />';
-    }
-
-    $opcoes_diario .= '<strong>Relat&oacute;rios</strong><hr />';
-    $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'papeleta\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Papeleta</a><br />';
-    $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'papeleta_completa\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Papeleta completa</a><br />';
-	$opcoes_diario .= '<a href="#" onclick="enviar_diario(\'faltas_completo\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Relat&oacute;rio de faltas completo</a><br />';
-    $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'conteudo_aula\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Conte&uacute;do de aula</a><br />';
-    //$opcoes_diario .= '<a href="#" onclick="enviar_diario(\'caderno_chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Caderno de chamada</a>';
-
-
 	if($fl_finalizada == 'f' && $fl_digitada == 'f') {
 		$fl_situacao = '<font color="green"><b>Aberto</b></font>';
+		$acao_situacao = 'Marcar';
 	}
 	else {
 
-        $opcoes_diario .= '<br />';
-
 		if($fl_digitada == 't') {
         	$fl_situacao = '<font color="blue"><b>Conclu&iacute;do</b></font>';
+					$acao_situacao = 'Desmarcar';
     	}
 
 		if($fl_finalizada == 't') {
@@ -211,6 +190,26 @@ foreach($diarios as $row3) :
         }
 
 	}
+
+    $fl_encerrado = ($fl_finalizada == 't')  ? 1 : 0;
+
+    $opcoes_diario = '';
+    if ($fl_encerrado == 0) {
+      $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'notas\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Nota</a><br />';
+      $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Chamada</a><br />';
+      $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'altera_chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Editar faltas</a><br />';
+      $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'exclui_chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Excluir chamada</a><br />';
+      $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'marca_diario\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">'. $acao_situacao .' conclu&iacute;do</a><br />';
+      $opcoes_diario .= '<br />';
+    }
+
+    $opcoes_diario .= '<strong>Relat&oacute;rios</strong><hr />';
+    $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'papeleta\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Papeleta</a><br />';
+    $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'papeleta_completa\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Papeleta completa</a><br />';
+    $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'faltas_completo\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Faltas detalhado</a><br />';
+    $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'conteudo_aula\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Conte&uacute;do de aula</a><br />';
+    //$opcoes_diario .= '<a href="#" onclick="enviar_diario(\'caderno_chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Caderno de chamada</a>';
+
 
     $rcolor = (($i % 2) == 0) ? $r1 : $r2;
     $op_color = ($rcolor == $r2) ? $r1 : $r2;
