@@ -370,17 +370,19 @@ foreach($matriculas as $row3)
         <?php
 			$total_distribuido = 0;
             $count = 1;
-            foreach($notas_distribuidas as $nota)
-			{
-				$nota_d = number::numeric2decimal_br($nota['nota_distribuida'],'1');
-				if($nota_d == 0 || empty($nota_d))
-					$nota_d = '-';
+            foreach($notas_distribuidas as $nota) {
+		$nota_d = number::numeric2decimal_br($nota['nota_distribuida'],'1');
+		if($nota['nota_distribuida'] == 0 || empty($nota['nota_distribuida']))
+		   $nota_d = '-';
+
                 if ($count <= $quantidade_notas_diario)
-					echo '<td align="center">'. $nota_d .'</td>';
-				$total_distribuido += $nota['nota_distribuida'];
-				$count++;
-			}
-			echo '<td align="center">'. number::numeric2decimal_br($total_distribuido,1) .'</td>';
+	            echo '<td align="center">'. $nota_d .'</td>';
+				
+		$total_distribuido += $nota['nota_distribuida'];
+		$count++;
+	    }
+	
+	    echo '<td align="center">'. number::numeric2decimal_br($total_distribuido,1) .'</td>';
         ?>
     </tr>
 </table>

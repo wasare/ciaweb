@@ -1,6 +1,5 @@
 <?php
 
-
 require_once(dirname(__FILE__) .'/../../setup.php');
 require_once($BASE_DIR .'core/web_diario.php');
 
@@ -14,6 +13,7 @@ if (!is_diario($diario_id))
 
 // @fixme nao fechar diarios sem prefessor
 // @fixme verificar direito de acesso: professor ou secretaria
+
 // MARCA O DIARIO COMO CONCLUIDO
 $sql = "SELECT COUNT(*) 
 			FROM
@@ -22,7 +22,7 @@ $sql = "SELECT COUNT(*)
             fl_digitada = 't' AND
             fl_finalizada = 'f' AND
             ref_curso = ". get_curso($diario_id) ." AND
-			ref_periodo = periodo_disciplina_ofer($diario_id) AND
+						ref_periodo = periodo_disciplina_ofer($diario_id) AND
             is_cancelada = '0';";
 
 
@@ -37,11 +37,11 @@ else {
          SET
             fl_finalizada = 't' 
          WHERE  
-		    fl_digitada = 't' AND
-            fl_finalizada = 'f' AND
-			ref_curso = ". get_curso($diario_id) ." AND
-            ref_periodo = periodo_disciplina_ofer($diario_id) AND
-            is_cancelada = '0';";
+					fl_digitada = 't' AND
+          fl_finalizada = 'f' AND
+					ref_curso = ". get_curso($diario_id) ." AND
+          ref_periodo = periodo_disciplina_ofer($diario_id) AND
+          is_cancelada = '0';";
 
   $conn->Execute($sql1);
 

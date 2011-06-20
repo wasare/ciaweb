@@ -52,9 +52,9 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
         </script>
         <script src="../../lib/tigra_calendar/calendar_br.js"  type="text/javascript" language="JavaScript" ></script>
         <link href="../../lib/tigra_calendar/calendar.css" rel="stylesheet" type="text/css" />
+        <style type="text/css">@import "<?=$BASE_URL .'public/styles/jquery.maxlength.css'?>";</style>
     </head>
-    <body>
-        <script type="text/javascript" src="<?=$BASE_URL .'lib/wz_tooltip.js'?>"> </script>
+    <body>        
         <div align="left" class="titulo1">
             Lan&ccedil;amento de chamadas
         </div>
@@ -70,12 +70,12 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
             Data da chamada:<br />
             <span id="date1">
                 <input type="text" name="data_chamada" id="data_chamada" />
-                <script language="JavaScript">
-                    new tcal ({
-                        'formname': 'envia_chamada',
-                        'controlname': 'data_chamada'
-                    });
-                </script>
+                    <script type="text/javascript">
+                        new tcal ({
+                            'formname': 'envia_chamada',
+                            'controlname': 'data_chamada'
+                        });
+                    </script>
                 <span class="textfieldRequiredMsg">Valor obrigat&oacute;rio.</span>
                 <span class="textfieldInvalidFormatMsg">Formato inv&aacute;lido.</span>
             </span>
@@ -101,10 +101,12 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
             <br />
             <br />
             Bases e conhecimentos desenvolvidos na(s) aula(s):<br />
-            <textarea name="conteudo" cols="70" rows="5"><?=$_SESSION['conteudo']?></textarea>
+            <textarea name="conteudo" cols="50" rows="6" id="bases_conhecimento"><?=$_SESSION['conteudo']?></textarea>
+            <br /><span class="maxlength-feedback" id="targetFeedback1"></span> <br />
             <br />
             <br />
             Atividades e avaliações da(s) aula(s):<br />
+            
             <input type="checkbox" class="checkbox" name="atividades[]" id="atividade1" value="Aula expositiva" /> Aula expositiva
             <br />
             <input type="checkbox" class="checkbox" name="atividades[]" id="atividade2" value="Aula prática / laboratório" /> Aula pr&aacute;tica / laborat&oacute;rio
@@ -123,8 +125,9 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
             <br />
             <input type="checkbox" class="checkbox" name="atividades[]" id="atividade9" value="Avaliação" /> Avalia&ccedil;&atilde;o
             <br />
-            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade10" value="Outros" /> Outros - especificar &nbsp;&nbsp;
-            <input type="text" size="22" maxlength="120" name="outros" id="atividade11" value="" />
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade10" value="Outros" /> Outros (especificar abaixo) <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;<textarea name="outros" cols="48" rows="4" id="atividade11"><?=$_SESSION['conteudo']?></textarea>
+            <br /><span class="maxlength-feedback" id="targetFeedback2"></span> <br />
             <br />
             <br />
             <br />
@@ -139,7 +142,7 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
             <br />
             <input type="submit" name="Submit" value="Prosseguir">&nbsp;&nbsp;
             <a href="#" onclick="javascript:window.close();">Cancelar</a>
-            <br />
+            <br /><br />
         </form>
         <script type="text/javascript">
             <!--
@@ -155,6 +158,15 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
                 <br />
             </font>
         </div>
-    </body>
+    <script type="text/javascript" src="<?=$BASE_URL .'lib/wz_tooltip.js'?>"> </script>
+    <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.min.js'?>"></script>
+    <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.maxlength.pack.js'?>"></script>
+    <script type="text/javascript">    
+        $(function() {
+            $('#bases_conhecimento').maxlength({max: 300, feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback1'});
+            $('#atividade11').maxlength({max: 300,feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback2'});
+        });
+    </script>
+</body>
 </html>
 

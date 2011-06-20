@@ -81,6 +81,7 @@ else
 <title><?=$IEnome?> - Altera&ccedil;&atilde;o de conte&uacute;do de aula</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="<?=$BASE_URL .'public/styles/web_diario.css'?>" type="text/css">
+<style type="text/css">@import "<?=$BASE_URL .'public/styles/jquery.maxlength.css'?>";</style>
 </head>
 <body>
 
@@ -106,7 +107,8 @@ else
   <tr>
     <td colspan="3">
         <div align="center">
-          <textarea name="texto" cols="80" rows="10"><?=$conteudo?></textarea>
+					<textarea name="texto" cols="50" rows="6" id="bases_conhecimento"><?=$conteudo?></textarea>
+          <br /><span class="maxlength-feedback" id="targetFeedback1"></span> <br />
         </div>
       </td>
   </tr>
@@ -138,7 +140,9 @@ else
                  <br />
                  <input type="checkbox" class="checkbox" name="atividades[]" value="Outras" <?php if(!empty($outra_atividade)) echo ' checked="checked" '; ?> /> Outras - especificar
                  &nbsp;&nbsp;
-                 <input type="text" size="22" maxlength="120" name="Outras" value="<?=$outra_atividade?>" />
+								 <br />
+									&nbsp;&nbsp;&nbsp;&nbsp;<textarea name="text" cols="48" rows="4" id="atividade11"><?=$outra_atividade?></textarea>
+									<br /><span class="maxlength-feedback" id="targetFeedback2"></span> <br />
             <br />
             <br />
 
@@ -160,6 +164,15 @@ else
   </tr>
 </table>
 </form>
+<script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.min.js'?>"></script>
+<script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.maxlength.pack.js'?>"></script>
+<script type="text/javascript">		
+		$(function() {
+				$('#bases_conhecimento').maxlength({max: 300, feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback1'});
+				$('#atividade11').maxlength({max: 300,feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback2'});
+		});
+
+</script>
 </body>
 </html>
 

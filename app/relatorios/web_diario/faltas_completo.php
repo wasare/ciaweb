@@ -90,7 +90,7 @@ else {
 <title><?=$IEnome?> - relat&oacute;rio de faltas</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="<?=$BASE_URL .'public/styles/web_diario.css'?>" type="text/css">
-<script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery-1.6.1.min.js'?>"></script>
+<script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.min.js'?>"></script>
 <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.floatheader.min.js'?>"></script>
 <script type="text/javascript">
 	<!--

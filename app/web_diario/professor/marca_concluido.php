@@ -36,15 +36,47 @@ if($fl_digitada === 'f')
 else
 	$flag = 'f';
 
+$mensagem_concluido = '';
 
-// MARCA/DESMARCA O DIARIO COMO CONCLUIDO
-$sql2 = "UPDATE 
+// VALIDA A NOTA FINAL DO ALUNO QUE DEVE ESTAR EM INTERVALOS DE 0,5 PONTOS
+if ($flag == 't') {
+	
+	$notas_fora_do_intervalo = 0;
+	
+	$sql_notas_finais = "SELECT
+												nota_final
+											FROM
+												matricula
+											WHERE
+													ref_disciplina_ofer = $diario_id;";
+												
+	$notas_finais = $conn->get_col($sql_notas_finais);
+	
+	foreach ($notas_finais as $nota) {
+			
+			if ((abs($nota) - (int)(abs($nota)) == 0.5) || (abs($nota) - (int)(abs($nota)) == 0))
+				continue;
+			
+			$notas_fora_do_intervalo++;
+	}
+}
+
+if ($notas_fora_do_intervalo > 0 && $flag == 't') {
+	$mensagem_concluido = 'Existem '. $notas_fora_do_intervalo . ' notas fora do intervalo de 0,5 pontos.\n';
+	$mensagem_concluido .= 'Ajuste esta(s) nota(s) antes de marcá-lo como concluído.\nA operação foi cancelada!';
+}
+else {
+	// MARCA/DESMARCA O DIARIO COMO CONCLUIDO
+	$sql2 = "UPDATE 
 			disciplinas_ofer
          SET
             fl_digitada = '$flag' 
          WHERE  
             id = $diario_id;";
 
-$conn->Execute($sql2);
+	$conn->Execute($sql2);
+	
+	$mensagem_concluido = 'Diário marcado / desmarcado com sucesso!';
+}
 
 ?>

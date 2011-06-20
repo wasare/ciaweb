@@ -9,38 +9,8 @@ require_once($BASE_DIR .'core/login/auth.php');
 $sessao = new session($param_conn);
 
 // INICIA UM NOVO PROCESSO DE LOGIN
-if(isset($_POST['modulo'])) {
-
-    $conn = new connection_factory($param_conn);
-
-    // verifica usuário na base LDAP
-    $adLdap = new adLDAP($param_ldap);
-
-    $autentica = new auth($BASE_URL, $adLdap);
-    $autentica->log_file($BASE_DIR .'logs/login.log');
-
-    if($autentica->login(trim($_POST['uid']),trim($_POST['pwd']),$_POST['modulo'], $conn) === TRUE) {
-
-      // REDIRECIONA DE ACORDO COM O MODULO SELECIONADO
-      switch ($_SESSION['sa_modulo']) {
-        case 'sa_login':
-          exit(header('Location: '. $BASE_URL .'app/'));
-          break;
-        case 'web_diario_login':
-          exit(header('Location: '. $BASE_URL .'app/web_diario/'));
-          break;
-        case 'aluno_login':
-          exit(header('Location: '. $BASE_URL .'app/aluno'));
-          break;
-        default:
-          exit(header('Location: '. $BASE_URL .'index.php?sa_msg=Sessão inválida'));
-       }
-    }
-    else {
-      exit(header('Location: '. $BASE_URL .'index.php?sa_msg=Senha ou usuário inválido'));
-    }
-}
-else {
+if(!isset($_POST['uid']) || !isset($_POST['pwd'])) {
+		
 	// FAZ O PROCESSO DE LOGOUT EXCLUINDO A SESSAO DO BANCO
 	list($sa_usuario,$sa_senha,$sa_usuario_id,$sa_ref_pessoa) = explode(":",$_SESSION['sa_auth']);
     $cont = 0;
@@ -58,7 +28,7 @@ else {
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title><?=$IEnome?> - Sistema Acad&ecirc;mico</title>
+        <title><?=$IEnome?> - Controle de Informa&ccedil;&otilde;es Acad&ecirc;micas</title>
         <link href="../../public/images/favicon.ico" rel="shortcut icon" />
         <link href="../../public/styles/style.css" rel="stylesheet" type="text/css" />
         <style type="text/css">
@@ -101,27 +71,16 @@ else {
                         <img src="../../public/images/sa_icon.png" alt="logomarca SA" width="80" height="68" style="margin: 10px;" />
                     </td>
                     <td valign="top">
-                        <h3>Bem-vindo ao Sistema Acad&ecirc;mico.</h3>
-                        Para iniciar entre com os dados de sua conta e selecione um m&oacute;dulo.<br />
+                        <h3>Bem-vindo ao Controle de Informa&ccedil;&otilde;es Acad&ecirc;micas (CIAWEB).</h3>
+                        Para iniciar entre com os dados de sua conta.<br />
                         <br />
                     </td>
                 </tr>
             </table>
             <h2>Entre com sua conta</h2>
             <div id="caixa_login">
-                <form method="post" action="" name="myform">
+                <form method="post" action="<?=$BASE_URL .'app/login/seleciona_modulo.php'?>" name="myform">
                     <table border="0">
-                        <tr>
-                          <td colspan="2">
-                            <fieldset style="padding-left: 2em; padding-right: 2em; padding-bottom: 2em">
-                              <legend><strong><h3>M&oacute;dulo</h3></strong></legend>
-                              <select size="2" name="modulo" id="modulo" style="width: 110px;">
-                                <option value="sa_login">Secretaria</option>
-                                <option value="web_diario_login">Web di&aacute;rio</option>
-                              </select>
-                              </fieldset>
-                            </td>
-                        </tr>
                       <tr>
                             <td>
                               &nbsp;
@@ -173,7 +132,7 @@ else {
 			</p>
         </div>
         <!-- Mensagens -->
-        <?php if($_GET['sa_msg']) { ?>
+        <?php if($_SESSION['sa_msg']) { ?>
         <div id="alert_login">
             <table border="0">
                 <tr>
@@ -186,7 +145,7 @@ else {
                         <img src="../../public/images/alert.png" alt="Aten&c&ccedil;&ati&atilde;o" />
                     </td>
                     <td>
-                        <?php echo $_GET['sa_msg']; ?>
+                        <?=$_SESSION['sa_msg']?>
                     </td>
                 </tr>
             </table>

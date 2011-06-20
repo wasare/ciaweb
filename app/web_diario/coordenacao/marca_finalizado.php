@@ -22,24 +22,40 @@ if(isset($_SESSION['sa_modulo']) && $_SESSION['sa_modulo'] == 'web_diario_login'
   // ^ VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR ^ //
 }
 
-// MARCA O DIARIO COMO CONCLUIDO
-$sql1 = "UPDATE disciplinas_ofer
-         SET
-            fl_finalizada = 't' 
-         WHERE  
+// VERIFICA SE O DIARIO FOI PREVIAMENTE CONCLUIDO
+$sql1 = "SELECT
+            fl_digitada
+		 FROM
+			disciplinas_ofer
+         WHERE
             id = $diario_id;";
 
-$conn->Execute($sql1);
+$fl_digitada = $conn->get_one($sql1);
+
+if ($fl_digitada == 't') {
+	
+	// MARCA O DIARIO COMO CONCLUIDO
+	$sql1 = "UPDATE disciplinas_ofer
+					 SET
+							fl_finalizada = 't' 
+					 WHERE  
+							id = $diario_id;";
+	
+	$conn->Execute($sql1);
+	
+	$mensagem_finalizado = 'Diário finalizado com sucesso!';
+}
+else {
+	$mensagem_finalizado = 'Este diário ainda não foi concluído, por isso não pode ser finalizado.\n';
+	$mensagem_finalizado .= 'A operação foi cancelada!';
+}
 
 if ($_SESSION['sa_modulo'] == 'sa_login') {
 
-  exit('<script language="javascript" type="text/javascript">
-            alert(\'Diario finalizado com sucesso!\');
-			window.opener.location.reload();
-			setTimeout("self.close()",450);</script>');
-  /*exit('<script language="javascript" type="text/javascript">
-        alert(\'Diario finalizado com sucesso!\');
-	window.close();</script>');*/
+	exit('<script language="javascript" type="text/javascript">
+				alert(\''. $mensagem_finalizado .'\');
+				window.opener.location.reload();
+				setTimeout("self.close()",450); </script>');
 
 }
 	

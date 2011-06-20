@@ -42,7 +42,8 @@ class auth {
         $log_msg = $_SERVER['REMOTE_ADDR'] .' - ['. date("d/m/Y H:i:s") .'] - ';
 
         if(empty($login) || empty($senha)) {
-            exit(header('Location: '. $this->base_url .'app/login/index.php?sa_msg=Nome de usuário e senha não preenchidos.'));
+            $_SESSION['sa_msg'] = 'Nome de usuário e senha não preenchidos';
+            exit(header('Location: '. $this->base_url .'app/login/index.php'));
         }
         else {
 
@@ -128,11 +129,12 @@ class auth {
             $redirecionamento = '';
         }
         else {
-            $redirecionamento = $this->redirect_url .'app/login/index.php?sa_msg=';
+            $redirecionamento = $this->redirect_url .'app/login/index.php';
         }
 
         if(!isset($_SESSION['sa_auth']) || empty($_SESSION['sa_auth'])) {
-            exit(header('Location: '. $redirecionamento .'Sem permissão de acesso ou sessão expirada'));
+            $_SESSION['sa_msg'] = 'Sem permissão de acesso ou sessão expirada';
+            exit(header('Location: '. $redirecionamento ));
         }
         else {
             $log_msg = $_SERVER['REMOTE_ADDR'] .' - ['. date("d/m/Y H:i:s") .'] - ';

@@ -103,11 +103,10 @@ if ($_SESSION['sa_modulo'] == 'web_diario_login') {
             echo papeleta_header($diario_id);
             require_once($BASE_DIR .'app/web_diario/professor/marca_concluido.php');
             echo '<br />';
-            echo '<script language="javascript" type="text/javascript">
-			alert(\'Diario marcado / desmarcado com sucesso!\');
-			window.opener.location.reload();
-			setTimeout("self.close()",450); </script>';
-            exit;
+            exit('<script language="javascript" type="text/javascript">
+                    alert(\''. $mensagem_concluido .'\');
+                    window.opener.location.reload();
+                    setTimeout("self.close()",450); </script>');
         }
 
         if($operacao == 'troca_senha') {
@@ -122,17 +121,17 @@ if ($_SESSION['sa_modulo'] == 'web_diario_login') {
             require_once($BASE_DIR .'app/web_diario/coordenacao/marca_finalizado.php');
             echo '<br />';
             exit('<script language="javascript" type="text/javascript">
-			alert(\'Diario finalizado com sucesso!\');
-			window.opener.location.reload();
-			setTimeout("self.close()",450); </script>');
+                  alert(\''. $mensagem_finalizado .'\');
+                  window.opener.location.reload();
+                  setTimeout("self.close()",450); </script>');
         }
 
         if($operacao == 'finaliza_todos') {
             require_once($BASE_DIR .'app/web_diario/coordenacao/finaliza_todos.php');
             echo '<br />';
             exit('<script language="javascript" type="text/javascript">
-			window.opener.location.reload();
-			setTimeout("self.close()",450); </script>');
+                    window.opener.location.reload();
+                    setTimeout("self.close()",450); </script>');
         }
 
 // ^ OPERACOES COM ALTERACAO DE DADOS   ^ //
