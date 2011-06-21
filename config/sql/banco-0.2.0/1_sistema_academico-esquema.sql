@@ -2937,3 +2937,7 @@ ALTER TABLE disciplinas_ofer ADD CONSTRAINT ref_disciplina_unq UNIQUE (ref_disci
 
 ALTER TABLE pessoas ADD CONSTRAINT cod_cpf_cgc_unq UNIQUE (cod_cpf_cgc);
 
+-- git commit 0554b11
+ALTER TABLE disciplinas_ofer ADD COLUMN competencias text;
+ALTER TABLE disciplinas_ofer ADD COLUMN observacoes text;
+

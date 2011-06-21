@@ -108,6 +108,10 @@ if ($_SESSION['sa_modulo'] == 'web_diario_login') {
                     window.opener.location.reload();
                     setTimeout("self.close()",450); </script>');
         }
+        
+        if($operacao == 'competencias_observacoes') {
+            require_once($BASE_DIR .'app/web_diario/professor/competencias_e_observacoes.php');
+        }
 
         if($operacao == 'troca_senha') {
             require_once($BASE_DIR .'app/usuarios/alterar_senha.php');

@@ -63,9 +63,18 @@ if(isset($_POST['uid']) && !empty($_POST['uid']) && isset($_POST['pwd']) ) {
 		}	
 		
 		if (count($papeis) > 1)	{
+				
 				$modulos = array();
-				$modulos['sa_login'] = 'Secretaria';
-				$modulos['web_diario_login'] = 'Web di&aacute;rio';
+				
+				foreach($papeis as $p) {
+						if (in_array($p, $PAPEIS_WEB_DIARIO))
+								$modulos['web_diario_login'] = 'Professor <br />Coordenação';
+								
+						if (in_array($p, $PAPEIS_SA))
+								$modulos['sa_login'] = 'Secretaria';
+				}
+				
+				asort($modulos);
 				
 				$_SESSION['sa_uid'] = $_POST['uid'];
 				$_SESSION['sa_pwd'] = $_POST['pwd'];
@@ -75,9 +84,9 @@ if(isset($_POST['uid']) && !empty($_POST['uid']) && isset($_POST['pwd']) ) {
 
 }
 else {
-		if (isset($_SESSION['sa_uid']) && isset($_SESSION['sa_pwd']) && isset($_POST['modulo'])) {
+		if (isset($_SESSION['sa_uid']) && isset($_SESSION['sa_pwd']) && isset($_GET['do'])) {
 		
-				$_SESSION['sa_modulo'] = $_POST['modulo'];
+				$_SESSION['sa_modulo'] = $_GET['do'];
 				
 				$uid = $_SESSION['sa_uid'];
 				$pwd = $_SESSION['sa_pwd'];
@@ -132,8 +141,9 @@ else {
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title><?=$IEnome?> - Controle de Informa&ccedil;&otilde;es Acad&ecirc;micas</title>
-        <link href="../../public/images/favicon.ico" rel="shortcut icon" />
-        <link href="../../public/styles/style.css" rel="stylesheet" type="text/css" />
+        <link href="<?=$BASE_URL .'public/images/favicon.ico'?>" rel="shortcut icon" />
+        <link href="<?=$BASE_URL .'public/styles/style.css'?>" rel="stylesheet" type="text/css" />
+				<link rel="stylesheet" href="<?=$BASE_URL .'public/styles/web_diario.css'?>" type="text/css">
 				    <style type="text/css">
             #caixa_login {
                 background-color: #CEE7FF;
@@ -155,7 +165,7 @@ else {
                     </td>
                     <td valign="top">
                         <h3>Controle de Informa&ccedil;&otilde;es Acad&ecirc;micas.</h3>
-                        Selecione um m&oacute;dulo e clique em "Entrar".<br />
+                        Clique no m&oacute;dulo que deseja acessar.<br />
                         <br />
                     </td>
                 </tr>
@@ -165,21 +175,13 @@ else {
                     <table border="0">
                         <tr>
                           <td colspan="2">
-                            <fieldset style="padding-left: 2em; padding-right: 2em; padding-bottom: 2em">
-                              <legend><strong><h3>M&oacute;dulo</h3></strong></legend>
-                              <select size="2" name="modulo" id="modulo" style="width: 110px;">
+                            <fieldset style="padding-left: 2em; padding-right: 2em; padding-bottom: 2em; width: 150px; ">
+                              <legend><strong><h3>M&oacute;dulos Dispon&iacute;veis</h3></strong></legend>
 																<?php foreach($modulos as $key => $value) : ?>
-																		<option value="<?=$key?>"><?=$value?></option>																
+																		<span><a href="?do=<?=$key?>" title="<?=$value?>"><?=$value?></a></span><br />
 																<?php endforeach; ?>
-                              </select>
                               </fieldset>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" align="center">
-                                <p>
-                                    <input type="image" src="../../public/images/bt_entrar.png" />
-                                </p>
+														  <br />
                             </td>
                         </tr>
                     </table>

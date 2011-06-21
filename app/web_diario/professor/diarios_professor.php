@@ -197,6 +197,7 @@ foreach($diarios as $row3) :
     if ($fl_encerrado == 0) {
       $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'notas\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Nota</a><br />';
       $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Chamada</a><br />';
+			$opcoes_diario .= '<a href="#" onclick="enviar_diario(\'competencias_observacoes\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Compet&ecirc;ncias <br />Observa&ccedil;&otilde;es</a><br />';
       $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'altera_chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Editar faltas</a><br />';
       $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'exclui_chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Excluir chamada</a><br />';
       $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'marca_diario\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">'. $acao_situacao .' conclu&iacute;do</a><br />';

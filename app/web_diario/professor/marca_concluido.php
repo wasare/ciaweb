@@ -63,20 +63,45 @@ if ($flag == 't') {
 
 if ($notas_fora_do_intervalo > 0 && $flag == 't') {
 	$mensagem_concluido = 'Existem '. $notas_fora_do_intervalo . ' notas fora do intervalo de 0,5 pontos.\n';
-	$mensagem_concluido .= 'Ajuste esta(s) nota(s) antes de marcá-lo como concluído.\nA operação foi cancelada!';
+	$mensagem_concluido .= 'Ajuste esta(s) nota(s) antes de marcá-lo como concluído.\n';
+	$mensagem_concluido .= '\nA operação foi cancelada!';
 }
 else {
-	// MARCA/DESMARCA O DIARIO COMO CONCLUIDO
-	$sql2 = "UPDATE 
-			disciplinas_ofer
-         SET
-            fl_digitada = '$flag' 
-         WHERE  
-            id = $diario_id;";
-
-	$conn->Execute($sql2);
 	
-	$mensagem_concluido = 'Diário marcado / desmarcado com sucesso!';
+	// VERIFICA SE AS COMPETENCIAS DA DISCIPLINA FOI PREENCHIDA
+		$sql1 = "SELECT
+            competencias,
+            observacoes
+               FROM
+               disciplinas_ofer
+               WHERE
+               id = $diario_id;";
+
+  $diario_info = $conn->get_row($sql1);
+	
+	$competencias = $diario_info['competencias'];
+  $observacoes = $diario_info['observacoes'];
+	
+	if (empty($competencias)) {
+		$mensagem_concluido = 'As Competências Desenvolvidas não foram informadas no campo apropriado!\n\n';
+		$mensagem_concluido .= 'Por favor, informe as Competências Desenvolvidas da disciplina\nantes de marcar o diário como concluído.\n';
+		$mensagem_concluido .= '\nA operação foi cancelada!';		
+	}
+	else {
+	
+		// MARCA/DESMARCA O DIARIO COMO CONCLUIDO
+		$sql2 = "UPDATE 
+				disciplinas_ofer
+					 SET
+							fl_digitada = '$flag' 
+					 WHERE  
+							id = $diario_id;";
+	
+		$conn->Execute($sql2);
+		
+		$mensagem_concluido = 'Diário marcado / desmarcado com sucesso!';
+	
+	}
 }
 
 ?>

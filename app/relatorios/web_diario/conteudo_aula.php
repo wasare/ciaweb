@@ -45,12 +45,31 @@ $conteudos = $conn->get_all($sql1);
 $fl_finalizado = is_finalizado($diario_id);
 
 
+// RECUPERA COMPETENCIAS E OBSERVAÇÕES DO DIÁRIO
+$sql1 = "SELECT
+					competencias,
+					observacoes
+						 FROM
+						 disciplinas_ofer
+						 WHERE
+						 id = $diario_id;";
+
+$diario_info = $conn->get_row($sql1);
+
+$competencias = $diario_info['competencias'];
+$observacoes = $diario_info['observacoes'];
+
+
+
 ?>
 <html>
 <head>
 <title><?=$IEnome?> - conte&uacute;do de aula</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="<?=$BASE_URL .'public/styles/web_diario.css'?>" type="text/css">
+
+<script type="text/javascript" src="<?=$BASE_URL .'lib/prototype.js'?>"> </script>
+</head>
 
 <body>
 
@@ -65,7 +84,26 @@ $fl_finalizado = is_finalizado($diario_id);
 <?=papeleta_header($diario_id)?>
 
 <br />
+<br />
+<span><a href="#" title="Exibir Compet&ecirc;ncias Desenvolvidas e Observa&ccedil;&otilde;es" id="competencias_observacoes">Compet&ecirc;ncias e Observa&ccedil;&otilde;es</a></span>
+<br />
 
+<!-- panel para exibir as competências e observações do diário // inicio //-->
+<div id="competencias_observacoes_pane" style="display:none; border: 0.0015em solid; width:740px; text-align:left; text-indent: 2em;">
+<br />
+
+<h4>Compet&ecirc;ncias Desenvolvidas</h4>
+<p><?=$competencias?></p>
+<br />
+<h4>Observa&ccedil;&otilde;es</h4>
+<p><?=$observacoes?></p>
+<br />
+</div>
+<!-- panel para acesso aos relatórios de desempenho docente \\ fim \\ -->
+
+
+<br />
+<br />
 <div align="left">
   <font color="#000000" size="2" face="Verdana, Arial, Helvetica, sans-serif">
     <?php
@@ -77,8 +115,6 @@ $fl_finalizado = is_finalizado($diario_id);
     ?>
   </font>
 </div>
-
-
 
 <table cellspacing="0" cellpadding="0" class="papeleta" width="60%">
   <tr bgcolor="#666666">
@@ -130,6 +166,9 @@ foreach($conteudos as $linha1) :
 <input type="button" value="Imprimir" onClick="window.print()">
 &nbsp;&nbsp;
 <a href="#" onclick="javascript:window.close();">Fechar</a>
+<script type="text/javascript">		
+	$('competencias_observacoes').observe('click', function() { $('competencias_observacoes_pane').toggle(); });
+</script>
 </body>
 </html>
 
