@@ -262,25 +262,25 @@ if(($flag_nota_distribuida == 0 && $flag_nota_distribuida_maior == 0) || $flag_e
 				// rel_diario_formulas_grupo = '$grupo' AND
 
 
-			$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">Nota <font color=\"#FF0000\"><strong>$NotaReal</strong></font> registrada para o aluno(a) <strong>$nome_aluno</strong>($aluno_id)<br></font>";
+			$msg_registros .= "<font color=\"#000000\" size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Nota <font color=\"#FF0000\"><strong>$NotaReal</strong></font> registrada para o aluno(a) <strong>$nome_aluno</strong>($aluno_id)<br></font>";
       }
       else {
 		    if($flag_extra == 1) {
 
-					$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota $NotaReal n&atilde;o registrada, motivo: </strong></font><font color=\"#FF0000\"><strong>NOTA EXTRA J&Aacute; LAN&Ccedil;ADA!</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
+					$msg_registros .= "<font color=\"#000000\" size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota $NotaReal n&atilde;o registrada, motivo: </strong></font><font color=\"#FF0000\"><strong>NOTA EXTRA J&Aacute; LAN&Ccedil;ADA!</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
 			}
 			else {
 				if($flag_maior == 1) {
 
-					$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota $NotaReal n&atilde;o registrada, causa: </strong></font><font color=\"#FF0000\"><strong>M&Eacute;DIA > $NOTA_MAXIMA pontos</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
+					$msg_registros .= "<font color=\"#000000\" size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota $NotaReal n&atilde;o registrada, causa: </strong></font><font color=\"#FF0000\"><strong>M&Eacute;DIA > $NOTA_MAXIMA pontos</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
 				}
 				else {
 
                     if($flag_nota_distribuida_maior == 1) {
-                  		$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"#cc0000\" ><strong>Nota $NotaReal n&atilde;o registrada, causa: </strong></font><font color=\"#FF0000\"><strong>NOTA > Nota Distribuída</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
+                  		$msg_registros .= "<font color=\"#000000\" size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"#cc0000\" ><strong>Nota $NotaReal n&atilde;o registrada, causa: </strong></font><font color=\"#FF0000\"><strong>NOTA > Nota Distribuída</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
 					}
                     elseif($flag_diff == 0) {
-                  		$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota $NotaReal Mantida</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
+                  		$msg_registros .= "<font color=\"#000000\" size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota $NotaReal Mantida</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
 					}
         		}
       		}

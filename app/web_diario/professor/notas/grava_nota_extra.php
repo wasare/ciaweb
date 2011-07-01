@@ -52,6 +52,7 @@ foreach($qrynotas_parciais as $aluno)
    */
 
    $nota = $notas[$aluno['ref_pessoa']];
+	 $nota = number::decimal_br2numeric($nota,1);
 
    $aluno_id = $aluno['ref_pessoa'];
    $nota_parcial = $aluno['notaparcial'];
@@ -59,9 +60,9 @@ foreach($qrynotas_parciais as $aluno)
    $nota_extra = $aluno['notaextra'];
    $nome_aluno = $aluno['nome'];
 
-   if(!ereg("[0-9]*\.?[0-9]+$", $nota) || $nota == '') { $nota = -1; }
-   else
-		$nota = number::decimal_br2numeric($nota,1);
+   if(!is_numeric($nota) || empty($nota) || $nota == 0) { $nota = -1; }
+   //else
+	//	$nota = number::decimal_br2numeric((double) $nota,1);
 
 	 // NOTA EXTRA
     if($nota_extra > -1) { $flag_extra = 1; } else { $flag_extra = 0;}
@@ -73,9 +74,9 @@ foreach($qrynotas_parciais as $aluno)
 
    // TODO: Selecionar método de cálculo da nota final com base em parâmetros do sistema
    // SE FOR NOTA DE RECUPERACAO / REAVALIACAO CALCULA CONFORME CRITERIOS DE CADA CURSO
-   if($nota != -1) {
+   if($nota != -1 && $nota > 0) {
 
-      $NotaFinal = calcula_nota_reavaliacao($diario_id,$nota_parcial,$nota);
+      $NotaFinal = calcula_nota_extra($nota_parcial,$nota);
 
    }
    else {
@@ -86,7 +87,7 @@ foreach($qrynotas_parciais as $aluno)
 
    if($NotaFinal > $NOTA_MAXIMA || $nota > $NOTA_MAXIMA ) { $flag_maior = 1;} else { $flag_maior = 0;}
 
-    $NotaReal = number::numeric2decimal_br($nota,1);
+    $NotaReal = number::numeric2decimal_br((double) $nota,1);
 
     // VERIFICA CONDICOES PARA REGISTRAR A NOTA
 	// GRAVA AS NOTAS NO BANCO DE DADOS
@@ -101,7 +102,8 @@ foreach($qrynotas_parciais as $aluno)
 
       // GRAVA AS NOTAS NO BANCO DE DADOS
       // SO ATUALIZA A NOTA SE NAO EXISTIR A NOTA EXTRA E A SOMA FOR MENOR OU IGUAL A $NOTA_MAXIMA
-	  if($flag_grava == 1 || $nota == -1) {
+			// E SE NOTA EXTRA FOR MAIOR DO QUE 0
+	  if($flag_grava == 1 || $nota == -1 && $nota > 0) {
 
         	$sql_update .= "UPDATE matricula
                              SET
@@ -122,35 +124,35 @@ foreach($qrynotas_parciais as $aluno)
 					 d_ref_disciplina_ofer = $diario_id AND
 					 ra_cnec = '$aluno_id';";
 
-            if($nota > -1 || $flag_grava == 1 ) {
-		      		$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">Nota <font color=\"#FF0000\"><strong>$NotaReal</strong></font> registrada para o aluno(a) <strong>$nome_aluno</strong>($aluno_id)<br></font>";
+            if($nota > -1 || $flag_grava == 1 && $nota > 0) {
+		      		$msg_registros .= "<font color=\"#000000\" size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Nota <font color=\"#FF0000\"><strong>$NotaReal</strong></font> registrada para o aluno(a) <strong>$nome_aluno</strong>($aluno_id)<br></font>";
             }
 
 			if($nota == -1 && $nota_extra != -1)
 			{
-				$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota extra ". number::numeric2decimal_br($nota_extra,1) ." eliminada!</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
+				$msg_registros .= "<font color=\"#000000\" size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota extra ". number::numeric2decimal_br((double) $nota_extra,1) ." eliminada!</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
 			}
       }
       else {
 
 	      if($flag_diff == 0) {
 
-		    $msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nenhuma altera&ccedil;&atilde;o: </strong></font> aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
+		    $msg_registros .= "<font color=\"#000000\" size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nenhuma altera&ccedil;&atilde;o: </strong></font> aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
 		}
 		else {
 
-		 // A NOTA DO ALUNO ULTRAPASSOU 100 OU JA FOI LANCADA A NOTA EXTRA
+		 // A NOTA DO ALUNO ULTRAPASSOU A NOTA MÁXIMA OU JA FOI LANCADA A NOTA EXTRA
 		 if($nota != -1) {
 
         	if($flag_maior == 1 ) {
 
-				 $msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota $NotaReal n&atilde;o registrada, poss&iacute;veis causas: </strong></font><font color=\"#FF0000\"><strong>NOTA EXTRA OU M&Eacute;DIA > $NOTA_MAXIMA  pontos</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
+				 $msg_registros .= "<font color=\"#000000\" size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota $NotaReal n&atilde;o registrada, poss&iacute;veis causas: </strong></font><font color=\"#FF0000\"><strong>NOTA EXTRA OU M&Eacute;DIA > $NOTA_MAXIMA  pontos</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
 
 			}
 		    else {
 				if($flag_media == 1) {
 
-            	$msg_registros .= "<font color=\"#000000\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota $NotaReal n&atilde;o registrada, poss&iacute;veis causas: </strong></font><font color=\"#FF0000\"><strong>M&Eacute;DIA >= $MEDIA_FINAL_APROVACAO pontos</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
+            	$msg_registros .= "<font color=\"#000000\" size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><font color=\"blue\" ><strong>Nota $NotaReal n&atilde;o registrada, poss&iacute;veis causas: </strong></font><font color=\"#FF0000\"><strong>M&Eacute;DIA >= $MEDIA_FINAL_APROVACAO pontos</strong></font>: aluno(a) <strong>$nome_aluno</strong>($aluno_id) <br></font>";
 			   }
 			}
 		 }

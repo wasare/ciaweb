@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Funcoes usadas pelo web diario
  * @author Wanderson S. Reis
@@ -905,7 +906,7 @@ function lanca_nota($aluno,$nota_final,$diario_id,$codprova=1) {
 	global $conn;
 
     // FIXME: antes de gravar a nota verificar:
-    //     - se nota não é > 100
+    //     - se nota não é > NOTA MAXIMA
     //     - lançamento de nota extra, não lançar nota caso exista a extra
     $msg = '';
 
@@ -930,7 +931,11 @@ function lanca_nota($aluno,$nota_final,$diario_id,$codprova=1) {
     return $msg;
 }
 
+function calcula_nota_extra($nota_parcial,$nota_extra) {
 
+    return (double) $nota_parcial + $nota_extra;
+  
+}
 /*
  // FIXME  -- para as faltas construir a chamada a partir de uma data inicial
 function lanca_chamada($aluno,$num_faltas,$getofer,$data_inicial) {

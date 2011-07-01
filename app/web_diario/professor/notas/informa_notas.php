@@ -3,6 +3,7 @@
 require_once(dirname(__FILE__) .'/../../../setup.php');
 require_once($BASE_DIR .'core/web_diario.php');
 require_once($BASE_DIR .'core/number.php');
+require_once($BASE_DIR .'core/situacao_academica.php');
 
 $conn = new connection_factory($param_conn);
 
@@ -13,7 +14,7 @@ $operacao = $_POST['operacao'];
 //  VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR
 if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 
-    exit('<script language="javascript" type="text/javascript"> 
+    exit('<script language="javascript" type="text/javascript">
             alert(\'Você não tem direito de acesso a estas informações!\');
             window.close();</script>');
 }
@@ -39,7 +40,7 @@ else
 
 $sql12 = 'SELECT * FROM (';
 $sql12 .= "SELECT   DISTINCT
-                    matricula.ordem_chamada, pessoas.nome, pessoas.id, SUM(d.nota) AS notaparcial
+                    matricula.ordem_chamada, pessoas.nome, pessoas.id, SUM(d.nota) AS notaparcial, nota_final
             FROM
                 matricula
             INNER JOIN pessoas ON (matricula.ref_pessoa = pessoas.id)
@@ -55,7 +56,7 @@ $sql12 .= "SELECT   DISTINCT
 				(matricula.ref_motivo_matricula = 0)
 
             GROUP BY
-                     matricula.ordem_chamada, pessoas.nome, pessoas.id, d.id_ref_pessoas
+                     matricula.ordem_chamada, pessoas.nome, pessoas.id, d.id_ref_pessoas, matricula.nota_final
             ORDER BY pessoas.nome ";
 
 $sql12 .= ') AS T1 INNER JOIN (';
@@ -66,13 +67,13 @@ $sql12 .= "SELECT DISTINCT
                matricula INNER JOIN
                pessoas ON (matricula.ref_pessoa = pessoas.id) INNER JOIN
                diario_notas d ON (id_ref_pessoas = pessoas.id AND
-                                 d.id_ref_pessoas = matricula.ref_pessoa AND 
-							     d.id_ref_periodos = '$periodo' AND 
-								 d.d_ref_disciplina_ofer = $diario_id AND 
+                                 d.id_ref_pessoas = matricula.ref_pessoa AND
+							     d.id_ref_periodos = '$periodo' AND
+								 d.d_ref_disciplina_ofer = $diario_id AND
 								 d.ref_diario_avaliacao = '$prova')
             WHERE
-				(matricula.ref_disciplina_ofer = $diario_id) AND 
-				(matricula.dt_cancelamento is null) AND 
+				(matricula.ref_disciplina_ofer = $diario_id) AND
+				(matricula.dt_cancelamento is null) AND
 				(matricula.ref_motivo_matricula = 0)";
 
 
@@ -85,13 +86,13 @@ $sql12 .= "SELECT DISTINCT
                matricula INNER JOIN
                pessoas ON (matricula.ref_pessoa = pessoas.id) INNER JOIN
                diario_notas d ON (id_ref_pessoas = pessoas.id AND
-                                 d.id_ref_pessoas = matricula.ref_pessoa AND 
-								d.id_ref_periodos = '$periodo' AND 
-								d.d_ref_disciplina_ofer = $diario_id AND 
+                                 d.id_ref_pessoas = matricula.ref_pessoa AND
+								d.id_ref_periodos = '$periodo' AND
+								d.d_ref_disciplina_ofer = $diario_id AND
 								d.ref_diario_avaliacao = '7')
             WHERE
-				(matricula.ref_disciplina_ofer = $diario_id) AND 
-				(matricula.dt_cancelamento is null) AND 
+				(matricula.ref_disciplina_ofer = $diario_id) AND
+				(matricula.dt_cancelamento is null) AND
 				(matricula.ref_motivo_matricula = 0)";
 
 $sql12 .= ') AS T3 ON (T3.ref_pessoa = T2.id) ORDER BY lower(to_ascii(nome,\'LATIN1\'));';
@@ -124,10 +125,10 @@ if($prova != 7)
 	/* PROCESSO DE NOTA DISTRIBUIDA */
 
 	$sqlNotaDistribuida = "
-		SELECT nota_distribuida 
-		FROM diario_formulas 
-		WHERE 
-		grupo ILIKE '%-$diario_id' AND 
+		SELECT nota_distribuida
+		FROM diario_formulas
+		WHERE
+		grupo ILIKE '%-$diario_id' AND
 		prova = '$prova'";
 
     $nota_distribuida = $conn->get_one($sqlNotaDistribuida);
@@ -137,6 +138,15 @@ if($prova != 7)
        $nota_distribuida = '';
 }
 
+$NOTAS = mediaPeriodo($conn->get_one('SELECT periodo_disciplina_ofer('. $diario_id .');'));
+$MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
+$NOTA_MAXIMA = $NOTAS['nota_maxima'];
+
+$sql_quantidade_notas = "SELECT quantidade_notas_diario
+                                FROM tipos_curso
+                                WHERE id = get_tipo_curso(". get_curso($diario_id) .");";
+$qtde_notas = $conn->get_one($sql_quantidade_notas);
+
 ?>
 <html>
 <head>
@@ -144,8 +154,12 @@ if($prova != 7)
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="<?=$BASE_URL .'public/styles/web_diario.css'?>" type="text/css">
 <script type="text/javascript" src="<?=$BASE_URL .'lib/prototype.js'?>"> </script>
+<script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.min.js'?>"></script>
+<script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.floatheader.min.js'?>"></script>
+<script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.filter_input.min.js'?>"></script>
 
-<script language="javascript" type="text/javascript">
+
+<script type="text/javascript">
 
 function findNextElement(index) {
  if(Prototype.Browser.IE) {
@@ -200,14 +214,14 @@ function validate_nota(field) {
 <br />
 
   <div align="left" class="titulo1">
-		   Lan&ccedil;amento / Altera&ccedil;&atilde;o da 
+		   Lan&ccedil;amento / Altera&ccedil;&atilde;o da
         <?php
-		if($prova == 7) { 
-			echo '<font color="blue"> Nota Extra</font> <font color="red" size="2"><br /> Utilize apenas quando houver reavalia&ccedil;&atilde;o e/ou recupera&ccedil;&atilde;o final</font>' ;		  
+		if($prova == 7) {
+			echo '<font color="blue"> Nota Extra</font> <font color="red" size="2"><br /> Utilize apenas quando houver necessidade de arredondamento ou recupera&ccedil;&atilde;o</font>' ;
 		}
-		else{	
-			echo ' Nota<font color="blue"> P'. $prova .'</font>.'; 
-		}		
+		else{
+			echo ' Nota<font color="blue"> P'. $prova .'</font>.';
+		}
         ?>
 </div>
  <br />
@@ -219,11 +233,11 @@ function validate_nota(field) {
 	<input type="hidden" name="codprova" id="codprova" value="<?=$prova?>">
 	<input type="hidden" name="diario_id" id="diario_id" value="<?=$diario_id?>">
 	<input type="hidden" name="operacao" id="operacao" value="<?=$operacao?>">
-    
+
 <?php
 		if($prova != 7) :
-?>        
-            <span class="obrigatorio">Para eliminar todas as notas informe 0 para todas as notas.</span><br />
+?>
+    <span class="obrigatorio">Para eliminar todas as notas informe 0 para todas as notas.</span><br />
 
 			<p><strong>Nota distribu&iacute;da:</strong>
 			<input name="valor_avaliacao" type="text" id="valor_avaliacao" size="5" maxlength="4" value="<?=$nota_distribuida?>" tabindex="1" />&nbsp;
@@ -231,40 +245,45 @@ function validate_nota(field) {
 			</p>
 <?php	else : ?>
 			<p>
-            <font color="green"><strong>
-<?php 
-			$curso_tipo = get_curso_tipo($diario_id);
-			// TODO: Selecionar método de cálculo da nota final com base em parâmetros do sistema
-			if( $curso_tipo == 2 || $curso_tipo == 4 || $curso_tipo == 5 || $curso_tipo == 6 || $curso_tipo == 10 ) : ?>
-				Nota Final ser&aacute; igual  (Nota Anterior + Nota Extra) / 2		
-<?php		else : ?>
-				Nota Final ser&aacute; igual Nota Extra 
-<?php		endif; ?>
-			</strong></font></p>
-			<input name="valor_avaliacao" type="hidden" id="valor_avaliacao" size="5" maxlength="4" value="100" />
+        <font color="green"><strong>Nota Final ser&aacute; igual (Nota Parcial + Nota Extra)
+				</strong></font>
+				<br />
+		<font color="#330099">
+				* A Nota Final do aluno somente será arredondada para cima! <br />
+				* A Nota Final n&atilde;o ser&aacute; superior a <strong><?=$NOTA_MAXIMA?> pontos</strong>!<br />
+				* Lan&ccedil;ada a "Nota Extra", as notas de 1 a <?=$qtde_notas?> ficarão bloqueadas!<br />
+				* Somente eliminando a "Nota Extra" será permitido ajustar as notas de 1 a <?=$qtde_notas?>
+		</font>
+			</p>
+			<input name="valor_avaliacao" type="hidden" id="valor_avaliacao" size="5" maxlength="4" value="<?=$NOTA_MAXIMA?>" />
 <?php endif; ?>
 <br />
-<table cellspacing="0" cellpadding="0" class="papeleta">
-  <tr bgcolor="#666666">
+<table cellspacing="0" cellpadding="0" class="papeleta" id="tabela_informa_notas">
+  <thead>
+  <tr bgcolor="#666666" class="header">
 
   <td align="center"><font color="#FFFFFF"><strong>Ordem</strong></font></td>
   <td align="center"><font color="#FFFFFF"><strong>Nota <?=($prova) != 7 ? $prova : 'Extra'?></strong></font></td>
       <td><font color="#FFFFFF"><b>&nbsp;Matr&iacute;cula</b></font></td>
   <td><font color="#FFFFFF"><b>&nbsp;Nome</b></font></td>
+	<?php if($prova == 7) : ?>
+		<td><font color="#FFFFFF"><b>&nbsp;Nota Parcial</b></font></td>
+		<td><font color="#FFFFFF"><b>&nbsp;Nota Final</b></font></td>
+  <?php endif; ?>
  </tr>
+	</thead>
+  <tbody>
+
  <?php
     $st = '';
     $ordem = 1;
-  
+
    foreach($alunos as $aluno) :
-   
+
       $notaprova = $aluno['notabanco'];
-      $nota_parcial = $aluno['notaparcial'];
 
-      if($prova == 7 && $nota_parcial > 59.999) {
-
-			continue;
-	  }
+			$sem_media_parcial = ($aluno['notaparcial'] < $MEDIA_FINAL_APROVACAO && $prova == 7) ? ' color="red"' : '';
+			$sem_media_final = ($aluno['nota_final'] < $MEDIA_FINAL_APROVACAO && $prova == 7) ? ' color="red"' : '';
 
       if($notaprova < 0 )
       {
@@ -274,14 +293,10 @@ function validate_nota(field) {
       		$notaprova = number::numeric2decimal_br($notaprova,1);
       }
 
-      if($st == '#F3F3F3')
-      {
-         $st = '#E3E3E3';
-      }
-      else
-      {
-         $st ='#F3F3F3';
-      }
+      $st = $st == '#F3F3F3' ? '#E3E3E3' : '#F3F3F3';
+
+
+
 ?>
       <tr bgcolor="<?=$st?>"> <td align="center"><?=$ordem?></td>
 		<td align="center">
@@ -289,13 +304,18 @@ function validate_nota(field) {
 	  <input type="hidden" name="matricula[]" value="<?=$aluno['ref_pessoa']?>"></td>
             <td><?=$aluno['ref_pessoa']?></td>
             <td><?=$aluno['nome']?></td>
+
+						<?php if($prova == 7) : ?>
+								<td align="center"><font <?=$sem_media_parcial?>><?=number::numeric2decimal_br($aluno['notaparcial'],1)?></font></td>
+								<td align="center"><font <?=$sem_media_final?>><?=number::numeric2decimal_br($aluno['nota_final'],1)?></font></td>
+						<?php endif; ?>
             </tr>
 
-<?php   
-		$ordem++; 
-		endforeach; 
+<?php
+		$ordem++;
+		endforeach;
 ?>
- 
+ </tbody>
  </table><br>
  <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -333,6 +353,20 @@ $('informa_notas').getInputs('text').each(function(input) {
     );
 });
 </script>
+<script type="text/javascript">
+	<!--
+		jQuery.noConflict();
+		jQuery(document).ready(function() {
+			jQuery('#tabela_informa_notas').floatHeader({
+				fadeIn: 250,
+				fadeOut: 250
+			});
+			jQuery('input[name^="notas"]').filter_input({regex:'[0-9,]', live:true});
+		});
+
+	//-->
+</script>
 </body>
 </html>
 <?php } ?>
+

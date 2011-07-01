@@ -26,7 +26,7 @@ class number {
 
           list($parte_inteira,$parte_decimal) = explode('.',$val_numeric);
         
-          $val_numeric = $parte_inteira.'.'.$parte_decimal;
+          $val_numeric = (double) $parte_inteira.'.'.$parte_decimal;
         
           return number_format($val_numeric,$decimals,'.',',');
         }

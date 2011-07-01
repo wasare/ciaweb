@@ -68,7 +68,7 @@ if(isset($_POST['uid']) && !empty($_POST['uid']) && isset($_POST['pwd']) ) {
 				
 				foreach($papeis as $p) {
 						if (in_array($p, $PAPEIS_WEB_DIARIO))
-								$modulos['web_diario_login'] = 'Professor <br />Coordenação';
+								$modulos['web_diario_login'] = 'Professor <br /> <br />Coordenação';
 								
 						if (in_array($p, $PAPEIS_SA))
 								$modulos['sa_login'] = 'Secretaria';
@@ -176,9 +176,10 @@ else {
                         <tr>
                           <td colspan="2">
                             <fieldset style="padding-left: 2em; padding-right: 2em; padding-bottom: 2em; width: 150px; ">
-                              <legend><strong><h3>M&oacute;dulos Dispon&iacute;veis</h3></strong></legend>
+                              <legend><strong><h4>M&oacute;dulos Dispon&iacute;veis</h4></strong></legend>
+															  <br />
 																<?php foreach($modulos as $key => $value) : ?>
-																		<span><a href="?do=<?=$key?>" title="<?=$value?>"><?=$value?></a></span><br />
+																		<br /><span><a href="?do=<?=$key?>" title="<?=$value?>"><?=$value?></a></span><br />
 																<?php endforeach; ?>
                               </fieldset>
 														  <br />

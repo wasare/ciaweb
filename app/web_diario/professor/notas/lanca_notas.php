@@ -188,7 +188,7 @@ else
 
 * As notas (de 1 a <?=$qtde_notas?>) ser&atilde;o somadas e o total final n&atilde;o poder&aacute; exceder a <strong><?=$NOTA_MAXIMA?> pontos</strong>!
 <br />
-* Para nota de <font color="red">recupera&ccedil;&atilde;o/reavalia&ccedil;&atilde;o</font> utilize a op&ccedil;&atilde;o "Nota Extra" na lista de "Lan&ccedil;amento referente &agrave;".
+* Para lan&ccedil;ar uma nota de <font color="red">arredondamento ou reavalia&ccedil;&atilde;o</font> utilize a op&ccedil;&atilde;o "Nota Extra" na lista de "Lan&ccedil;amento referente &agrave;".
 <br />
 * <font color="red">IMPORTANTE:</font> Uma vez lan&ccedil;ada a "Nota Extra" as notas de 1 a <?=$qtde_notas?> n&atilde;o poder&atilde;o ser alteradas!
 </font>
