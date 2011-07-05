@@ -35,6 +35,14 @@ if($operacao != 'lista_diarios_coordenacao' && $operacao != 'troca_senha' && $op
 $_GET['diario_id'] = $diario_id;
 $_POST['diario_id'] = $diario_id;
 
+// IMPRIME O DIÁRIO DE CLASSE EM A3 (EVITANDO QUALQUER SAÍDA DE TELA ANTERIOR)
+if($operacao == 'diario_classe') {
+    require_once($BASE_DIR .'app/relatorios/web_diario/diario_classe/imprime_diario_classe.php');
+    exit('<script language="javascript" type="text/javascript">
+                    window.close(); </script>');
+}
+// ^ IMPRIME O DIÁRIO DE CLASSE EM A3 (EVITANDO QUALQUER SAÍDA DE TELA ANTERIOR) ^ //
+
 
 $menu_superior = '';
 
@@ -46,14 +54,11 @@ if ($_SESSION['sa_modulo'] == 'web_diario_login') {
 
     if(isset($_SESSION['web_diario_periodo_coordena_id']))
         $menu_superior .= '<a href="#" onclick="window.opener.reload_parent_pane(\'pane_coordenacao\');window.close();">Coordena&ccedil;&atilde;o</a>&nbsp;|&nbsp;';
-
-
     $menu_superior .= '<a href="#" onclick="window.opener.location.href=\''. $BASE_URL .'\';window.close();">Sair</a>&nbsp;&nbsp;&nbsp;&nbsp;';
     $menu_superior .= '<img src="'. $BASE_URL .'public/images/icons/bola_verde.gif" width="10" height="10" />&nbsp;' . $sa_usuario .'&nbsp;&nbsp;';
 
     $menu_superior .= '<br /></div>';
 }
-
 
 ?>
 
@@ -185,14 +190,6 @@ if ($_SESSION['sa_modulo'] == 'web_diario_login') {
         if($operacao == 'pesquisa_aluno') {
             require_once($BASE_DIR .'app/web_diario/consultas/pesquisa_aluno.php');
             exit;
-        }
-
-        if($operacao == 'diario_classe') {
-            require_once($BASE_DIR .'app/relatorios/web_diario/diario_classe/imprime_diario_classe.php');
-            echo '<br />';
-            exit('<script language="javascript" type="text/javascript">
-                    window.opener.location.reload();
-                    setTimeout("self.close()",450); </script>');
         }
 
 // ^ RELATORIOS ^ //

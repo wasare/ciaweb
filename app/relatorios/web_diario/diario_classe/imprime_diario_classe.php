@@ -171,8 +171,8 @@ $NO_PAGINAS = ceil(($carga_horaria['get_carga_horaria_realizada'] / 74)) * 2;
 $PAGINA_ATUAL = 1;
 
 // ARQUIVOS DE TEMPLATE
-$frente_tpl = "Diario_Frente.pdf";
-$verso_tpl = "Diario_Verso.pdf";
+$frente_tpl = dirname(__FILE__) .'/Diario_Frente.pdf';
+$verso_tpl = dirname(__FILE__). '/Diario_Verso.pdf';
 
 
 function diario_classe_preenche_rodape_frente(&$pdf) {
@@ -589,7 +589,7 @@ $nome_arquivo = "Diario_Classe_". $ABREVIATURA ."_". $TURMA ."_". $ANO."_". $SEM
 
 $pdf->Output("$nome_arquivo", 'D');
 
-header("Location: diarios_classe/pdf_tmp/$nome_arquivo");
+//header("Location: diarios_classe/pdf_tmp/$nome_arquivo");
 
 
 ?>
