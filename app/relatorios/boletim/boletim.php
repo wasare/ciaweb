@@ -4,9 +4,9 @@ require_once(dirname(__FILE__) .'/../../../app/setup.php');
 
 define('PDF_TMP_DIR', dirname(__FILE__) .'/boletins/pdf_tmp/');
 
-require_once(dirname(__FILE__) .'/../../../lib/fpdf16/fpdf.php');
+require_once(dirname(__FILE__) .'/../../../lib/fpdf17/fpdf.php');
 require_once(dirname(__FILE__) .'/../../../lib/fpdi/fpdi.php');
-require_once(dirname(__FILE__) .'/../../../lib/fpdf16/pdf.ext.php');
+require_once(dirname(__FILE__) .'/../../../lib/fpdf17/pdf.ext.php');
 
 
 function remove_files($dir) {
@@ -144,7 +144,7 @@ class  Boletim extends PDF {
     	$nota_distribuida = $con->get_one($n_distribuida_sql);
 			
 			if (is_numeric($nota_final) && is_numeric($nota_distribuida)) {
-				$media = round($nota_final / $nota_distribuida * 100, 2);
+				$media = @round($nota_final / $nota_distribuida * 100, 2);
 			}
 			else {
 				$media = '-';

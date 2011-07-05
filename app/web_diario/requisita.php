@@ -108,7 +108,7 @@ if ($_SESSION['sa_modulo'] == 'web_diario_login') {
                     window.opener.location.reload();
                     setTimeout("self.close()",450); </script>');
         }
-        
+
         if($operacao == 'competencias_observacoes') {
             require_once($BASE_DIR .'app/web_diario/professor/competencias_e_observacoes.php');
         }
@@ -187,6 +187,14 @@ if ($_SESSION['sa_modulo'] == 'web_diario_login') {
             exit;
         }
 
+        if($operacao == 'diario_classe') {
+            require_once($BASE_DIR .'app/relatorios/web_diario/diario_classe/imprime_diario_classe.php');
+            echo '<br />';
+            exit('<script language="javascript" type="text/javascript">
+                    window.opener.location.reload();
+                    setTimeout("self.close()",450); </script>');
+        }
+
 // ^ RELATORIOS ^ //
 
 
@@ -196,3 +204,4 @@ if ($_SESSION['sa_modulo'] == 'web_diario_login') {
         </script>
     </body>
 </html>
+

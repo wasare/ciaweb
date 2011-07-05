@@ -23,10 +23,10 @@ function envia_erro($msg) {
 function papeleta_header($diario_id) {
     global $conn;
 
-    $sql9 = "SELECT 
-      DISTINCT 
+    $sql9 = "SELECT
+      DISTINCT
           curso_disciplina_ofer(id) || ' - ' || curso_desc(curso_disciplina_ofer(id)) AS curso, get_campus(ref_campus) AS campus, descricao_periodo(ref_periodo), get_disciplina_de_disciplina_of(id) || ' - ' || descricao_disciplina(get_disciplina_de_disciplina_of(id)) || ' (' || id || ')' AS disciplina
-    FROM 
+    FROM
       disciplinas_ofer
    WHERE id = $diario_id AND is_cancelada = '0';";
 
@@ -56,7 +56,7 @@ function papeleta_header($diario_id) {
         $i++;
     }
     return $ret;
-} 
+}
 
 function get_curso($diario_id) {
 
@@ -107,7 +107,7 @@ function get_ano_periodo($periodo) {
 
     $qry1 = "SELECT
 					 to_char(dt_inicial, 'YYYY'), to_char(dt_final, 'YYYY')
-                FROM 
+                FROM
 					periodos WHERE id = '". $periodo ."';";
 
     return array_unique($conn->get_row($qry1));
@@ -178,11 +178,11 @@ function ini_diario($ofer) {
 
     // RECUPERA INFORMACOES DO DIARIO
     $qryDisc = " SELECT DISTINCT
-                prof.ref_professor, o.ref_disciplina, o.ref_periodo 
-                FROM 
+                prof.ref_professor, o.ref_disciplina, o.ref_periodo
+                FROM
                 disciplinas_ofer o, disciplinas_ofer_prof prof
                 WHERE
-                 o.id = " . $ofer . " AND 
+                 o.id = " . $ofer . " AND
                  o.is_cancelada = '0' AND
                  o.id = prof.ref_disciplina_ofer LIMIT 1;";
 
@@ -358,23 +358,23 @@ function registra_faltas($ref_aluno, $diario_id, $num_faltas, $data_chamada, $pr
 
 }
 
-// VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR 
+// VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR
 function acessa_diario($diario_id,$sa_ref_pessoa) {
 
     global $conn;
 
     $sql = 'SELECT
 				(
-					SELECT count(*) 
-							FROM coordenador 
+					SELECT count(*)
+							FROM coordenador
 							WHERE ref_professor = '. $sa_ref_pessoa .' AND
 								  ref_curso = '. get_curso($diario_id) .'
 				) + (
-					  SELECT COUNT(*) 
-							FROM disciplinas_ofer_prof 
+					  SELECT COUNT(*)
+							FROM disciplinas_ofer_prof
 							WHERE ref_disciplina_ofer = '. $diario_id .' AND
 								  ref_professor = '. $sa_ref_pessoa .'
-					) AS acesso;';						
+					) AS acesso;';
 
     $acesso = $conn->get_one($sql);
 
@@ -460,10 +460,10 @@ function acessa_ficha_aluno($aluno_id,$sa_ref_pessoa,$curso_id,$conexao=FALSE) {
 					SELECT count(*)
 							FROM contratos
 							WHERE ref_pessoa = '. $aluno_id .' AND
-								  ref_curso IN ( 
-                                                  SELECT DISTINCT 
+								  ref_curso IN (
+                                                  SELECT DISTINCT
                                                             ref_curso
-                                                       FROM 
+                                                       FROM
                                                             coordenador
                                                        WHERE
                                                             ref_professor = '. $sa_ref_pessoa .' AND
@@ -542,11 +542,11 @@ function atualiza_diario($aluno,$diario_id,$motivo_matricula=0){
 
 	// RECUPERA INFORMACOES DO DIARIO
 	$qryDisc = " SELECT DISTINCT
-				prof.ref_professor, o.ref_disciplina, o.ref_periodo 
-				FROM 
+				prof.ref_professor, o.ref_disciplina, o.ref_periodo
+				FROM
 				disciplinas_ofer o, disciplinas_ofer_prof prof
             	WHERE
-                 o.id = " . $diario_id . " AND 
+                 o.id = " . $diario_id . " AND
 				 o.is_cancelada = '0' AND
 				 o.id = prof.ref_disciplina_ofer ;";
 
@@ -591,21 +591,21 @@ function atualiza_diario($aluno,$diario_id,$motivo_matricula=0){
 	if($num_formula == 6) {
 
 		$qryNotas = 'SELECT
-		    m.ref_pessoa, id_ref_pessoas 
-	        FROM 
-	    	matricula m 
+		    m.ref_pessoa, id_ref_pessoas
+	        FROM
+	    	matricula m
 	        LEFT JOIN (
-		    	SELECT DISTINCT 
-				d.id_ref_pessoas 
-				FROM 
-				diario_notas d 
-				WHERE 
+		    	SELECT DISTINCT
+				d.id_ref_pessoas
+				FROM
+				diario_notas d
+				WHERE
 				d.d_ref_disciplina_ofer = ' . $diario_id . ' AND
                 id_ref_pessoas = ' . $aluno . '
-		      ) tmp 
-			ON ( m.ref_pessoa = id_ref_pessoas ) 
-	    	WHERE 
-		        m.ref_disciplina_ofer = ' . $diario_id . ' AND 
+		      ) tmp
+			ON ( m.ref_pessoa = id_ref_pessoas )
+	    	WHERE
+		        m.ref_disciplina_ofer = ' . $diario_id . ' AND
 		        m.ref_pessoa = ' . $aluno . ' AND
 		        id_ref_pessoas IS NULL  AND
 			    (m.dt_cancelamento is null) AND
@@ -789,13 +789,13 @@ function atualiza_diario($aluno,$diario_id,$motivo_matricula=0){
 
 			foreach($diario_notas as $registro)
 			{
-			
+
 				$ref_pessoa = $registro['registro_id'];
 				$nota_diario = $registro['nota_diario'];
 				$nota_final = $registro['nota_final'];
 				$nota_extra = $registro['nota_extra'];
 
-			    //print_r($registro);		
+			    //print_r($registro);
 				if($nota_extra == -1 && $nota_diario != $nota_final) {
 					// NOTA EXTRA NAO LANCADA E SOMATORIO ERRADO
 					$qryDiario .= ' UPDATE matricula SET nota_final = '. $nota_diario;
@@ -880,7 +880,7 @@ function atualiza_dispensa($aluno,$diario_id,$dispensa_tipo) {
 
 	global $conn;
 
-	// EXCLUI FALTAS E NOTAS ANTERIORES 
+	// EXCLUI FALTAS E NOTAS ANTERIORES
     $sql_dispensa = 'BEGIN;';
     $sql_faltas = "DELETE FROM diario_chamadas WHERE ra_cnec = '$aluno' AND ref_disciplina_ofer = $diario_id;";
     $sql_notas = "DELETE FROM diario_notas WHERE ra_cnec = '$aluno' AND d_ref_disciplina_ofer = $diario_id;";
@@ -889,11 +889,11 @@ function atualiza_dispensa($aluno,$diario_id,$dispensa_tipo) {
     // ^ EXCLUI FALTAS E NOTAS ANTERIORES ^ //
 
     // INICIALIZA O DIARIO CASO NECESSÁRIO
-    if(!is_inicializado($diario_id)) {    
+    if(!is_inicializado($diario_id)) {
 		if (ini_diario($diario_id)) {
 			atualiza_diario($aluno, $diario_id,$dispensa_tipo);
 		}
-        else 
+        else
 			echo '<script language=javascript> window.alert("Falha ao inicializar o diario!"); window.close();</script>';
 	}
     else
@@ -902,7 +902,7 @@ function atualiza_dispensa($aluno,$diario_id,$dispensa_tipo) {
 
 
 function lanca_nota($aluno,$nota_final,$diario_id,$codprova=1) {
-    
+
 	global $conn;
 
     // FIXME: antes de gravar a nota verificar:
@@ -912,13 +912,13 @@ function lanca_nota($aluno,$nota_final,$diario_id,$codprova=1) {
 
     $nota = str_replace(",",".",$nota_final);
 
-    $sql_nota .= "UPDATE 
-                     diario_notas 
-                  SET 
-                     nota = $nota 
-                  WHERE 
+    $sql_nota .= "UPDATE
+                     diario_notas
+                  SET
+                     nota = $nota
+                  WHERE
                      d_ref_disciplina_ofer = $diario_id AND
-                     ref_diario_avaliacao = $codprova AND 
+                     ref_diario_avaliacao = $codprova AND
                      ra_cnec = '$aluno';";
 
     $rs_nota = $conn->Execute($sql_nota);
@@ -934,8 +934,43 @@ function lanca_nota($aluno,$nota_final,$diario_id,$codprova=1) {
 function calcula_nota_extra($nota_parcial,$nota_extra) {
 
     return (double) $nota_parcial + $nota_extra;
-  
+
 }
+
+
+function get_descricao_sequencial_periodo($periodo) {
+
+    global $conn;
+
+    $qry1 = "SELECT
+					 to_char(dt_inicial, 'MM') AS mes_inicial,
+					 to_char(dt_final, 'MM') AS mes_final
+                FROM
+					periodos WHERE id = '". $periodo ."';";
+
+    $m = $conn->get_row($qry1);
+
+    return ($m['mes_final'] <= 12 && $m['mes_inicial'] >= 7) ? 'SEGUNDO' : 'PRIMEIRO';
+}
+
+function is_concluido($diario_id) {
+
+    global $conn;
+    $sql = 'SELECT
+                  fl_digitada
+                     FROM
+                        disciplinas_ofer d
+                     WHERE
+                        d.id = '. $diario_id .';';
+
+    $diario = $conn->get_one($sql);
+
+    if ($diario == 't')
+        return TRUE;
+    else
+        return FALSE;
+}
+
 /*
  // FIXME  -- para as faltas construir a chamada a partir de uma data inicial
 function lanca_chamada($aluno,$num_faltas,$getofer,$data_inicial) {
@@ -950,3 +985,4 @@ function lanca_conteudo($getofer,$data_inicial,$conteudo) {
 */
 
 ?>
+

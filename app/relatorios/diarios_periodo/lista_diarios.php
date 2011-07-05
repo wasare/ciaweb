@@ -19,10 +19,10 @@ $campus     = $_POST["campus"];
 $sql = "
 SELECT DISTINCT
     o.id AS \"Diário\",
-    d.descricao_disciplina || ' (' || d.id ||') ' AS \"Disciplina\",
+    d.descricao_disciplina || '(' || d.id || ')' AS \"Disciplina\",
     t.descricao AS \"Tipo\",
     o.turma AS \"Turma\",
-	
+
 	CASE WHEN professor_disciplina_ofer_todos(o.id) = '' THEN '<font color=\"red\">sem professor</font>'
          ELSE professor_disciplina_ofer_todos(o.id)
     END AS \"Professor\",
@@ -32,7 +32,9 @@ SELECT DISTINCT
     CASE WHEN o.fl_finalizada = TRUE THEN '<font color=\"red\">Finalizado</font>'
          WHEN o.fl_digitada = TRUE THEN '<font color=\"blue\">Concluído</font>'
          ELSE '<font color=\"green\">Aberto</font>'
-    END AS \"Situação\"
+    END AS \"Situação\",
+
+    '<a href=\"#\" onclick=\"abrir(\'Diario_Classe\', \'../../web_diario/requisita.php?do=diario_classe&id=' || o.id || '\');\"  id=\" || o.id || \">Imprimir</a>' AS \"Diário Classe (A3)\"
 
 FROM
     disciplinas_ofer o,
@@ -43,8 +45,8 @@ FROM
 
 WHERE
     o.ref_curso = s.id AND ";
-	
-if($tipo != '') 
+
+if($tipo != '')
 	$sql .= " t.id = '$tipo' AND ";
 
 $sql .= " s.ref_tipo_curso = t.id AND
@@ -52,7 +54,7 @@ $sql .= " s.ref_tipo_curso = t.id AND
     o.is_cancelada = '0' AND
     d.id = o.ref_disciplina AND ";
 
-if($campus != '') 
+if($campus != '')
 	$sql .= " o.ref_campus = '$campus' AND ";
 
 $sql .= " o.ref_campus = m.id
@@ -92,6 +94,9 @@ $rodape .= '<span style="font-size: 9px;"><strong>' . $resp_cargo . "</strong></
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link href="<?=$BASE_URL?>public/styles/style.css" rel="stylesheet" type="text/css">
     <link href="<?=$BASE_URL?>public/styles/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script type="text/javascript" src="<?=$BASE_URL .'lib/prototype.js'?>"> </script>
+    <script type="text/javascript" src="<?=$BASE_URL .'app/web_diario/web_diario.js'?>"> </script>
+
 </head>
 <body marginwidth="20" marginheight="20">
     <div style="width: 760px;" align="center">
@@ -119,3 +124,4 @@ $rodape .= '<span style="font-size: 9px;"><strong>' . $resp_cargo . "</strong></
 <br />
 </body>
 </html>
+

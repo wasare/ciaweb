@@ -228,6 +228,7 @@ if (count($diarios) == 0) {
                             $opcoes_diario .= "<a href=\"#\" onclick=\"abrir('$IEnome','../requisita.php?do=papeleta_completa&id=$diario_id');\">papeleta completa</a><br />";
                             $opcoes_diario .= "<a href=\"#\" onclick=\"abrir('$IEnome','../requisita.php?do=faltas_completo&id=$diario_id');\">faltas detalhado</a><br />";
                             $opcoes_diario .= "<a href=\"#\" onclick=\"abrir('$IEnome','../requisita.php?do=conteudo_aula&id=$diario_id');\">conte&uacute;do de aula</a><br />";
+                            $opcoes_diario .= "<a href=\"#\" onclick=\"abrir('$IEnome','../requisita.php?do=diario_classe&id=$diario_id');\">Diário de Classe (A3)</a><br />";
                             //$opcoes_diario .= "<a href=\"#\" onclick=\"abrir('$IEnome','../requisita.php?do=caderno_chamada&id=$diario_id');\">caderno de chamada</a>";
                             $fl_opcoes = 1;
                         }

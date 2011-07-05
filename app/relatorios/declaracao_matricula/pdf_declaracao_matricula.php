@@ -1,7 +1,7 @@
 <?php
 
 require_once('declaracao_matricula.inc.php');
-require_once('../../../lib/fpdf16/fpdf.php');
+require_once('../../../lib/fpdf17/fpdf.php');
 
 class PDF extends FPDF
 {
