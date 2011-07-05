@@ -283,7 +283,7 @@ function diario_classe_preenche_bases_conhecimento_e_atividades($data, &$pdf) {
 
     foreach ($conteudos as $conteudo) {
         $data_chamada = date::convert_date($conteudo['dia']);
-        $bases_conhecimentos .= trim(preg_replace( '/\s+/', ' ', $data_chamada .' - '. $conteudo['conteudo'])) ."\n";
+        $bases_conhecimentos .= trim(preg_replace( '/\s+/', ' ', $data_chamada .'  '. $conteudo['conteudo'])) ."\n";
         $atividades .= trim(preg_replace( '/\s+/', ' ', $data_chamada .' - '. $conteudo['atividades'])) ."\n";
     }
 
@@ -334,6 +334,8 @@ function diario_classe_preenche_alunos(&$pdf, $aulas='1|74') {
     // NÚMERO DE ORDEM
     $pdf->SetX(14);
     $pdf->Write(0, ++$numero_ordem);
+    $pdf->SetX(121.25);
+    $pdf->Write(0, $numero_ordem);
 
     // NOME ALUNO
     $pdf->SetX(20);

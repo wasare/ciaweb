@@ -41,18 +41,10 @@ $NOTAS = mediaPeriodo($periodo);
 $MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
 $NOTA_MAXIMA = $NOTAS['nota_maxima'];
 
-foreach($qrynotas_parciais as $aluno)
-{
-   /*
-   $flag_extra = 0;
-   $flag_diff = 0;
-   $flag_media = 0;
-   $flag_maior = 0;
-   $flag_grava = 0;
-   */
+foreach($qrynotas_parciais as $aluno) {
 
    $nota = $notas[$aluno['ref_pessoa']];
-	 $nota = number::decimal_br2numeric($nota,1);
+   $nota = number::decimal_br2numeric($nota,1);
 
    $aluno_id = $aluno['ref_pessoa'];
    $nota_parcial = $aluno['notaparcial'];
@@ -60,12 +52,10 @@ foreach($qrynotas_parciais as $aluno)
    $nota_extra = $aluno['notaextra'];
    $nome_aluno = $aluno['nome'];
 
-   if(!is_numeric($nota) || empty($nota) || $nota == 0) { $nota = -1; }
-   //else
-	//	$nota = number::decimal_br2numeric((double) $nota,1);
+   if(!is_numeric($nota) || empty($nota) || $nota == 0 || $nota < 0) { $nota = -1; }
 
 	 // NOTA EXTRA
-    if($nota_extra > -1) { $flag_extra = 1; } else { $flag_extra = 0;}
+    if($nota_extra > -1) { $flag_extra = 1; } else { $flag_extra = 0; }
 
     // NOTA DIFERENTE
 	if($nota != $nota_extra) { $flag_diff = 1; } else { $flag_diff = 0; }
@@ -75,19 +65,17 @@ foreach($qrynotas_parciais as $aluno)
    // TODO: Selecionar método de cálculo da nota final com base em parâmetros do sistema
    // SE FOR NOTA DE RECUPERACAO / REAVALIACAO CALCULA CONFORME CRITERIOS DE CADA CURSO
    if($nota != -1 && $nota > 0) {
-
       $NotaFinal = calcula_nota_extra($nota_parcial,$nota);
-
    }
    else {
-	    $NotaFinal = $nota_parcial;
+      $NotaFinal = $nota_parcial;
    }
 
    if($nota_parcial >= $MEDIA_FINAL_APROVACAO) { $flag_media = 1; } else {  $flag_media = 0;}
 
    if($NotaFinal > $NOTA_MAXIMA || $nota > $NOTA_MAXIMA ) { $flag_maior = 1;} else { $flag_maior = 0;}
 
-    $NotaReal = number::numeric2decimal_br((double) $nota,1);
+   $NotaReal = number::numeric2decimal_br((double) $nota,1);
 
     // VERIFICA CONDICOES PARA REGISTRAR A NOTA
 	// GRAVA AS NOTAS NO BANCO DE DADOS
@@ -102,8 +90,8 @@ foreach($qrynotas_parciais as $aluno)
 
       // GRAVA AS NOTAS NO BANCO DE DADOS
       // SO ATUALIZA A NOTA SE NAO EXISTIR A NOTA EXTRA E A SOMA FOR MENOR OU IGUAL A $NOTA_MAXIMA
-			// E SE NOTA EXTRA FOR MAIOR DO QUE 0
-	  if($flag_grava == 1 || $nota == -1 && $nota > 0) {
+      // E SE NOTA EXTRA FOR MAIOR DO QUE 0
+	  if($flag_grava == 1 || $nota == -1) {
 
         	$sql_update .= "UPDATE matricula
                              SET
