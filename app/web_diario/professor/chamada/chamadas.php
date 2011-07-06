@@ -54,7 +54,7 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
         <link href="../../lib/tigra_calendar/calendar.css" rel="stylesheet" type="text/css" />
         <style type="text/css">@import "<?=$BASE_URL .'public/styles/jquery.maxlength.css'?>";</style>
     </head>
-    <body>        
+    <body>
         <div align="left" class="titulo1">
             Lan&ccedil;amento de chamadas
         </div>
@@ -106,7 +106,7 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
             <br />
             <br />
             Atividades e avaliações da(s) aula(s):<br />
-            
+
             <input type="checkbox" class="checkbox" name="atividades[]" id="atividade1" value="Aula expositiva" /> Aula expositiva
             <br />
             <input type="checkbox" class="checkbox" name="atividades[]" id="atividade2" value="Aula prática / laboratório" /> Aula pr&aacute;tica / laborat&oacute;rio
@@ -126,7 +126,7 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
             <input type="checkbox" class="checkbox" name="atividades[]" id="atividade9" value="Avaliação" /> Avalia&ccedil;&atilde;o
             <br />
             <input type="checkbox" class="checkbox" name="atividades[]" id="atividade10" value="Outros" /> Outros (especificar abaixo) <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;<textarea name="outros" cols="48" rows="4" id="atividade11"><?=$_SESSION['conteudo']?></textarea>
+            &nbsp;&nbsp;&nbsp;&nbsp;<textarea name="outros" cols="48" rows="4" id="atividade11"></textarea>
             <br /><span class="maxlength-feedback" id="targetFeedback2"></span> <br />
             <br />
             <br />
@@ -161,7 +161,7 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
     <script type="text/javascript" src="<?=$BASE_URL .'lib/wz_tooltip.js'?>"> </script>
     <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.min.js'?>"></script>
     <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.maxlength.pack.js'?>"></script>
-    <script type="text/javascript">    
+    <script type="text/javascript">
         $(function() {
             $('#bases_conhecimento').maxlength({max: 300, feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback1'});
             $('#atividade11').maxlength({max: 300,feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback2'});

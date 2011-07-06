@@ -71,7 +71,7 @@ foreach($qrynotas_parciais as $aluno) {
       $NotaFinal = $nota_parcial;
    }
 
-   if($nota_parcial >= $MEDIA_FINAL_APROVACAO) { $flag_media = 1; } else {  $flag_media = 0;}
+   //if($nota_parcial >= $MEDIA_FINAL_APROVACAO) { $flag_media = 1; } else {  $flag_media = 0;}
 
    if($NotaFinal > $NOTA_MAXIMA || $nota > $NOTA_MAXIMA ) { $flag_maior = 1;} else { $flag_maior = 0;}
 
@@ -80,6 +80,7 @@ foreach($qrynotas_parciais as $aluno) {
     // VERIFICA CONDICOES PARA REGISTRAR A NOTA
 	// GRAVA AS NOTAS NO BANCO DE DADOS
 	// SO ATUALIZA A NOTA SE A MEDIA FOR MAIOR QUE $MEDIA_FINAL_APROVACAO E
+	$flag_media = 0;
 	// SE A NOTA FINAL OU A NOTA EXTRA NÃO FOR MAIOR QUE $NOTA_MAXIMA E
 	// SE A NOTA EXTRA ESTIVER SENDO ALTERADA
 	if($flag_diff == 1 && $flag_media == 0 && $flag_maior == 0 && $nota != -1) {

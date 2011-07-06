@@ -90,17 +90,32 @@ else {
 	}
 	else {
 
-		// MARCA/DESMARCA O DIARIO COMO CONCLUIDO
-		$sql2 = "UPDATE
+	    // VERIFICA SE A CARGA HORÁRIA LANÇADA É MAIOR OU IGUAL A PREVISTA
+	    $sql_carga_horaria = "SELECT get_carga_horaria_realizada($diario_id), get_carga_horaria(get_disciplina_de_disciplina_of($diario_id));";
+        $carga_horaria = $conn->get_row($sql_carga_horaria);
+
+        if ($carga_horaria['get_carga_horaria_realizada'] < $carga_horaria['get_carga_horaria']) {
+
+            $mensagem_concluido = 'A carga horária realizada está menor que a carga horária prevista!\n\n';
+		    $mensagem_concluido .= 'Por favor, faça o lançamento das chamadas para completar a carga horária.\n';
+		    $mensagem_concluido .= '\nA operação foi cancelada!';
+
+        }
+        else {
+
+		    // MARCA/DESMARCA O DIARIO COMO CONCLUIDO
+		    $sql2 = "UPDATE
 				disciplinas_ofer
 					 SET
 							fl_digitada = '$flag'
 					 WHERE
 							id = $diario_id;";
 
-		$conn->Execute($sql2);
+		    $conn->Execute($sql2);
 
-		$mensagem_concluido = 'Diário marcado / desmarcado com sucesso!';
+		    $mensagem_concluido = 'Diário marcado / desmarcado com sucesso!';
+        }
+
 
 	}
 }
