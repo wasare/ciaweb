@@ -4,6 +4,7 @@ set_time_limit(600);
 
 require_once(dirname(__FILE__). '/../../../setup.php');
 require_once($BASE_DIR .'core/web_diario.php');
+require_once($BASE_DIR .'core/situacao_academica.php');
 require_once($BASE_DIR .'core/number.php');
 require_once($BASE_DIR .'core/date.php');
 require_once(dirname(__FILE__). '/diario_classe.php');
@@ -162,6 +163,10 @@ $SEMESTRE = utf8_decode(get_descricao_sequencial_periodo($periodo_id));
 $ABREVIATURA = $diario_info['abreviatura'];
 $TURMA = $diario_info['turma'];
 
+$NOTAS = mediaPeriodo($periodo_id);
+$MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
+$NOTA_MAXIMA = $NOTAS['nota_maxima'];
+
 // N° DE AULAS
 $NO_AULAS = ($carga_horaria['get_carga_horaria_realizada'] > 74 ) ? '1|74' : '1|'. $carga_horaria['get_carga_horaria_realizada'];
 
@@ -175,6 +180,7 @@ $frente_tpl = dirname(__FILE__) .'/Diario_Frente.pdf';
 $verso_tpl = dirname(__FILE__). '/Diario_Verso.pdf';
 
 
+// FUNÇÕES
 function diario_classe_preenche_rodape_frente(&$pdf) {
   global $carga_horaria;
 
@@ -233,9 +239,6 @@ function diario_classe_preenche_cabecalho_frente(&$pdf) {
   // TURMA
   $pdf->SetX(355);
   $pdf->CellFitScale(56,0,utf8_decode($diario_info['turma']),0,0,'C',0);
-  //$pdf->Write(0, );
-
-  // @todo falta imprimir o bimestre/semestre, o ano e o período (turno) da disciplina
 
   // ^ CABEÇALHO ^//
 
@@ -293,11 +296,17 @@ function diario_classe_preenche_bases_conhecimento_e_atividades($data, &$pdf) {
     $pdf->SetX(30);
     $pdf->MultiCell(178,4.15,utf8_decode($bases_conhecimentos),0,'J', FALSE);
 
+    // INUTILIZA ESPAÇO EM BRANCO
+    $pdf->Line(28, $pdf->GetY(), 210.5, $pdf->GetY()); // LINHA
+    $pdf->Line(28, $pdf->GetY(), 210.5, 222.5); // TRAÇO DIAGONAL
+
     $pdf->SetY(53.5);
     $pdf->SetX(214.5);
     $pdf->MultiCell(188,4.15,utf8_decode($atividades),0,'J', FALSE);
 
-
+    // INUTILIZA ESPAÇO EM BRANCO
+    $pdf->Line(210.5, $pdf->GetY(), 403.5, $pdf->GetY()); // LINHA
+    $pdf->Line(210.5, $pdf->GetY(), 403.5, 222.5); // TRAÇO DIAGONAL
 }
 
 function diario_classe_preenche_observacoes_competencias(&$pdf) {
@@ -311,14 +320,22 @@ function diario_classe_preenche_observacoes_competencias(&$pdf) {
     $pdf->SetX(38);
     $pdf->MultiCell(170,3.9,utf8_decode(preg_replace( '/\s+/', ' ', $diario_info['observacoes'])),0,'J', FALSE);
 
+    // INUTILIZA ESPAÇO EM BRANCO
+    $pdf->Line(34, $pdf->GetY(), 210.5, $pdf->GetY()); // LINHA
+    $pdf->Line(34, $pdf->GetY(), 210.5, 268.5); // TRAÇO DIAGONAL
+
     $pdf->SetY(222.5);
     $pdf->SetX(220);
     $pdf->MultiCell(180,3.9,utf8_decode(preg_replace( '/\s+/', ' ', $diario_info['competencias'])),0,'J', FALSE);
 
+    // INUTILIZA ESPAÇO EM BRANCO
+    $pdf->Line(216.5, $pdf->GetY(), 403.5, $pdf->GetY()); // LINHA
+    $pdf->Line(216.5, $pdf->GetY(), 403.5, 268.5); // TRAÇO DIAGONAL
+
 }
 
 function diario_classe_preenche_alunos(&$pdf, $aulas='1|74') {
-  global $alunos_diario, $PAGINA_ATUAL, $NO_PAGINAS;
+  global $alunos_diario, $PAGINA_ATUAL, $NO_PAGINAS, $NOTA_MAXIMA;
 
   $pdf->SetXY(20, 50);
   $pdf->SetFont('Times','',10);
@@ -347,28 +364,53 @@ function diario_classe_preenche_alunos(&$pdf, $aulas='1|74') {
 
     diario_classe_preenche_faltas_aluno($ref_pessoa, &$pdf, $aulas);
 
+    $posicao_X = $pdf->GetX();
+    $posicao_Y = $pdf->GetY();
+
     if ($PAGINA_ATUAL == ($NO_PAGINAS - 1)) {
 
       if ($numero_ordem == 1)
         diario_classe_preenche_notas_distribuidas(&$pdf);
 
-      $nota_final = number::numeric2decimal_br($aluno['nota_final'],1);
+      if ($aluno['nota_final'] < $NOTA_MAXIMA)
+        $nota_final = number::numeric2decimal_br($aluno['nota_final'],1);
+      else
+        $nota_final = $aluno['nota_final'];
+
       $falta_total = $aluno['num_faltas'];
 
       diario_classe_preenche_notas_aluno($ref_pessoa, &$pdf);
 
       //// NOTA FINAL
-      $pdf->SetX(399);
+      $pdf->SetX(398.25);
       $pdf->Write(0, utf8_decode($nota_final));
 
       // TOTAL DE FALTAS
-      $pdf->SetX(406.15);
+      $pdf->SetX(406);
       $pdf->Write(0, utf8_decode($falta_total));
+
     }
 
     // PRÓXIMA LINHA
     $pdf->Ln(4);
   }
+
+  // INUTILIZA ESPAÇO EM BRANCO - ÁREA ALUNOS
+  $pdf->Line(14, $pdf->GetY(), 126.5, $pdf->GetY()); // LINHA HORIZONTAL 1
+  $pdf->Line(14, $pdf->GetY(), 126.5, 280.5); // TRAÇO DIAGONAL 1
+
+  // INUTILIZA ESPAÇO EM BRANCO - ÁREA FALTAS
+  $pdf->Line(126.5, $pdf->GetY(),  $posicao_X + 2.5, $pdf->GetY()); // LINHA HORIZONTAL 2
+  $pdf->Line(126.5, $pdf->GetY(), $posicao_X + 4, 280.5); // TRAÇO DIAGONAL 2
+
+  // INUTILIZA ESPAÇO EM BRANCO - ÁREA NOTAS
+  if ($PAGINA_ATUAL == ($NO_PAGINAS - 1)) {
+    $pdf->Line(355, $pdf->GetY(), 411.5, $pdf->GetY()); // LINHA HORIZONTAL 3
+    $pdf->Line(355, $pdf->GetY(), 411.5, 280.5); // TRAÇO DIAGONAL 3
+  }
+  else
+     $pdf->Line(355, 43, 411.5, 280.5); // TRAÇO DIAGONAL 3
+
   // ^ ALUNOS ^ //
 }
 
@@ -417,6 +459,18 @@ function diario_classe_preenche_chamada(&$pdf, $aulas='1|74') {
 
   if ($PAGINA_ATUAL % 2 != 0) diario_classe_preenche_alunos(&$pdf, $aulas);
 
+  // INUTILIZA ESPAÇO EM BRANCO
+  $posicao_X += $correcao_posicao[++$cont_posicao];
+  if ($cont_posicao == 73) {
+       $pdf->Line($posicao_X - 1, 41, $posicao_X - 1, 280.5); // LINHA VERTICAL 1
+       $posicao_X += $correcao_posicao[++$cont_posicao];
+       $pdf->Line($posicao_X - 1, 41, $posicao_X - 1, 280.5); // LINHA VERTICAL 2
+  }
+  if ($cont_posicao > 0 && $cont_posicao < 73) {
+       $pdf->Line($posicao_X - 1, 42,  $posicao_X - 1, 280.5); // LINHA VERTICAL 1
+       $pdf->Line($posicao_X - 1, 42, 352.5, 280.5); // TRAÇO DIAGONAL 1
+  }
+
   $aula_inicial = $aula_final + 1;
 
   for ($j = $aula_inicial; $j <= $carga_horaria['get_carga_horaria_realizada']; $j++) {
@@ -432,6 +486,7 @@ function diario_classe_preenche_chamada(&$pdf, $aulas='1|74') {
   $tplIdx = $pdf->importPage(1);
   $pdf->useTemplate($tplIdx);
   $pdf->SetMargins(0, 0, 0);
+  $pdf->SetLineWidth(0.4);
   ++$PAGINA_ATUAL;
 
   diario_classe_preenche_cabecalho_verso(&$pdf);
@@ -441,6 +496,12 @@ function diario_classe_preenche_chamada(&$pdf, $aulas='1|74') {
       diario_classe_preenche_observacoes_competencias(&$pdf);
       return;
   }
+  else {
+    // INUTILIZA ESPAÇO EM BRANCO - ÁREA OBSERVAÇÕES E COMPETÊNCIAS
+    $pdf->Line(33, 222.75, 210.5, 268.5); // TRAÇO DIAGONAL 1
+    $pdf->Line(216, 222.75, 403.5, 268.5); // TRAÇO DIAGONAL 2
+
+  }
 
   // ADICIONA NOVA FRENTE
   $pdf->AddPage();
@@ -448,6 +509,7 @@ function diario_classe_preenche_chamada(&$pdf, $aulas='1|74') {
   $tplIdx = $pdf->importPage(1);
   $pdf->useTemplate($tplIdx);
   $pdf->SetMargins(0, 0, 0);
+  $pdf->SetLineWidth(0.4);
   ++$PAGINA_ATUAL;
 
   // PREENCHE DEMAIS PÁGINAS DE FORMA RECURSIVA
@@ -574,6 +636,7 @@ $tplIdx = $pdf->importPage(1);
 // SELECIONA A PÁGINA DE TRABALHO
 $pdf->useTemplate($tplIdx);
 $pdf->SetMargins(0, 0, 0);
+$pdf->SetLineWidth(0.4);
 
 // PREENCHE O DIARIO DE CLASSE
 diario_classe_preenche(&$pdf, $NO_AULAS);

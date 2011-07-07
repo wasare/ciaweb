@@ -31,7 +31,7 @@ if($_POST['second'] == 1)
 
     }
 
-    if (!is_numeric($_POST['nota_final']) OR  $_POST['nota_final'] < 50 OR $_POST['nota_final'] > 100 )
+    if (!is_numeric($_POST['nota_final']) OR $_POST['nota_final'] > $MEDIA_FINAL_APROVACAO )
     {
         $erro_valida .= 'Nota da disciplina é inválida'."\n";
         $flag_erro = TRUE;

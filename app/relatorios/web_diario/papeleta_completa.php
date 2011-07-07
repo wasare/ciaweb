@@ -275,7 +275,7 @@ foreach($matriculas as $row3)
 			$nota = $row3['nota_final'];
 		}
 
-		if ($nota < $MEDIA_FINAL_APROVACAO)
+		if ($row3['nota_final'] < $MEDIA_FINAL_APROVACAO)
 		{
 			$nota = "<font color=\"red\"><b>$nota</b></font>";
 		}
@@ -377,11 +377,11 @@ foreach($matriculas as $row3)
 
                 if ($count <= $quantidade_notas_diario)
 	            echo '<td align="center">'. $nota_d .'</td>';
-				
+
 		$total_distribuido += $nota['nota_distribuida'];
 		$count++;
 	    }
-	
+
 	    echo '<td align="center">'. number::numeric2decimal_br($total_distribuido,1) .'</td>';
         ?>
     </tr>

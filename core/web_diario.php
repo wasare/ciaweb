@@ -8,6 +8,7 @@
  **/
 
 require_once(dirname(__FILE__) .'/../app/setup.php');
+require_once($BASE_DIR .'core/situacao_academica.php');
 
 // CONEXAO ABERTA PARA TRABALHAR COM TRANSACAO (NÃO PERSISTENTE)
 $conn = new connection_factory($param_conn);
@@ -570,6 +571,10 @@ function atualiza_diario($aluno,$diario_id,$motivo_matricula=0){
 
 	$grupo_novo = ("%-" . $getperiodo . "-%-" . $diario_id);
 
+	$NOTAS = mediaPeriodo($getperiodo);
+    $MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
+    $NOTA_MAXIMA = $NOTAS['nota_maxima'];
+
 
 	$flag_pendencia = 0;
 
@@ -807,10 +812,10 @@ function atualiza_diario($aluno,$diario_id,$motivo_matricula=0){
 				}
 				else {
 					// NOTA EXTRA LANCADA
-					if($nota_diario < 60 || $nota_final < 60) {
+					if($nota_diario < $MEDIA_FINAL_APROVACAO || $nota_final < $MEDIA_FINAL_APROVACAO) {
 
-						// CALCULA NOTA FINAL E VERIFICA NOTA EXTRA SOMENTE COM NOTA < 60
-						// NOTA < 60 RATIFICA O LANCAMENTO DA NOTA EXTRA
+						// CALCULA NOTA FINAL E VERIFICA NOTA EXTRA SOMENTE COM NOTA < $MEDIA_FINAL_APROVACAO
+						// NOTA < $MEDIA_FINAL_APROVACAO RATIFICA O LANCAMENTO DA NOTA EXTRA
 
 						$nota_final_calculada = calcula_nota_reavaliacao($diario_id,$nota_diario,$nota_extra);
 

@@ -203,7 +203,7 @@ foreach($qry3 as $row3)
 	}
 
 
-   if ($nota < $MEDIA_FINAL_APROVACAO)
+   if ($row3['nota_final'] < $MEDIA_FINAL_APROVACAO)
    {
       $nota = "<font color=\"red\"><b>$nota</b></font>";
    }
