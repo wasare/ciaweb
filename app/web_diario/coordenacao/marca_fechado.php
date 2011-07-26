@@ -22,7 +22,7 @@ if(isset($_SESSION['sa_modulo']) && $_SESSION['sa_modulo'] == 'web_diario_login'
   // ^ VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR ^ //
 }
 
-// VERIFICA SE O DIARIO FOI PREVIAMENTE CONCLUIDO
+// VERIFICA SE O DIARIO FOI PREVIAMENTE MARCADO COMO PREENCHIDO
 $sql1 = "SELECT
             fl_digitada
 		 FROM
@@ -34,7 +34,7 @@ $fl_digitada = $conn->get_one($sql1);
 
 if ($fl_digitada == 't') {
 	
-	// MARCA O DIARIO COMO CONCLUIDO
+	// MARCA O DIARIO COMO FECHADO
 	$sql1 = "UPDATE disciplinas_ofer
 					 SET
 							fl_finalizada = 't' 
@@ -43,17 +43,17 @@ if ($fl_digitada == 't') {
 	
 	$conn->Execute($sql1);
 	
-	$mensagem_finalizado = 'Diário finalizado com sucesso!';
+	$mensagem_fechado = 'Diário fechado com sucesso!';
 }
 else {
-	$mensagem_finalizado = 'Este diário ainda não foi concluído, por isso não pode ser finalizado.\n';
-	$mensagem_finalizado .= 'A operação foi cancelada!';
+	$mensagem_fechado = 'Este diário ainda não foi preenchido, por isso não pode ser fechado.\n';
+	$mensagem_fechado .= 'A operação foi cancelada!';
 }
 
 if ($_SESSION['sa_modulo'] == 'sa_login') {
 
 	exit('<script language="javascript" type="text/javascript">
-				alert(\''. $mensagem_finalizado .'\');
+				alert(\''. $mensagem_fechado .'\');
 				window.opener.location.reload();
 				setTimeout("self.close()",450); </script>');
 

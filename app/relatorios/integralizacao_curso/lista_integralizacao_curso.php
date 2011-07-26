@@ -218,7 +218,7 @@ $contrato = $conn->get_row('SELECT nome_campus, turma FROM campus a , contratos 
     <br /><br />
     <span style="color: teal; font-size: 0.8em;font-style: italic;">
      * A informa&ccedil;&atilde;o acima esta de acordo com os lan&ccedil;amentos do Sistema Acad&ecirc;mico<br />
-     * Somente as disciplinas de di&aacute;rios <strong>finalizados</strong> s&atilde;o consideradas <br />
+     * Somente as disciplinas de di&aacute;rios <strong>fechados</strong> s&atilde;o consideradas <br />
      * Disciplinas <strong>equivalentes</strong> cursadas s&atilde;o consideradas somente quanto conclu&iacute;das dentro do curso / contrato acima<br />
      * Para mais detalhes consulte a <strong>Ficha Acad&ecirc;mica</strong> do aluno<br />
     </span>

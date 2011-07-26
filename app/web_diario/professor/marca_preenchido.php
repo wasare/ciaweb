@@ -36,7 +36,7 @@ if($fl_digitada === 'f')
 else
 	$flag = 'f';
 
-$mensagem_concluido = '';
+$mensagem_preenchido = '';
 
 // VALIDA A NOTA FINAL DO ALUNO QUE DEVE ESTAR EM INTERVALOS DE 0,5 PONTOS
 if ($flag == 't') {
@@ -62,10 +62,10 @@ if ($flag == 't') {
 }
 
 if ($notas_fora_do_intervalo > 0 && $flag == 't') {
-	$mensagem_concluido = 'Existem '. $notas_fora_do_intervalo . ' notas fora do intervalo de 0,5 pontos.\n';
-	$mensagem_concluido .= 'Ajuste esta(s) nota(s) antes de marcá-lo como concluído.\n';
-	$mensagem_concluido .= 'DICA: Utilize a "Nota Extra" para ajustar esta(s) nota(s).\n';
-	$mensagem_concluido .= '\nA operação foi cancelada!';
+	$mensagem_preenchido = 'Existem '. $notas_fora_do_intervalo . ' notas fora do intervalo de 0,5 pontos.\n';
+	$mensagem_preenchido .= 'Ajuste esta(s) nota(s) antes de marcá-lo como preenchido.\n';
+	$mensagem_preenchido .= 'DICA: Utilize a "Nota Extra" para ajustar esta(s) nota(s).\n';
+	$mensagem_preenchido .= '\nA operação foi cancelada!';
 }
 else {
 
@@ -84,9 +84,9 @@ else {
   $observacoes = $diario_info['observacoes'];
 
 	if (empty($competencias) || empty($observacoes)) {
-		$mensagem_concluido = 'As Competências Desenvolvidas e/ou as Observações não foram informadas no campo apropriado!\n\n';
-		$mensagem_concluido .= 'Por favor, informe as Competências Desenvolvidas e/ou Observações da disciplina\nantes de marcar o diário como concluído.\n';
-		$mensagem_concluido .= '\nA operação foi cancelada!';
+		$mensagem_preenchido = 'As Competências Desenvolvidas e/ou as Observações não foram informadas no campo apropriado!\n\n';
+		$mensagem_preenchido .= 'Por favor, informe as Competências Desenvolvidas e/ou Observações da disciplina\nantes de marcar o diário como preenchido.\n';
+		$mensagem_preenchido .= '\nA operação foi cancelada!';
 	}
 	else {
 
@@ -96,14 +96,14 @@ else {
 
         if ($carga_horaria['get_carga_horaria_realizada'] < $carga_horaria['get_carga_horaria']) {
 
-            $mensagem_concluido = 'A carga horária realizada está menor que a carga horária prevista!\n\n';
-		    $mensagem_concluido .= 'Por favor, faça o lançamento das chamadas para completar a carga horária.\n';
-		    $mensagem_concluido .= '\nA operação foi cancelada!';
+          $mensagem_preenchido = 'A carga horária realizada está menor que a carga horária prevista!\n\n';
+					$mensagem_preenchido .= 'Por favor, faça o lançamento das chamadas para completar a carga horária.\n';
+					$mensagem_preenchido .= '\nA operação foi cancelada!';
 
         }
         else {
 
-		    // MARCA/DESMARCA O DIARIO COMO CONCLUIDO
+		    // MARCA/DESMARCA O DIARIO COMO PREENCHIDO
 		    $sql2 = "UPDATE
 				disciplinas_ofer
 					 SET
@@ -113,7 +113,7 @@ else {
 
 		    $conn->Execute($sql2);
 
-		    $mensagem_concluido = 'Diário marcado / desmarcado com sucesso!';
+		    $mensagem_preenchido = 'Diário marcado / desmarcado com sucesso!';
         }
 
 

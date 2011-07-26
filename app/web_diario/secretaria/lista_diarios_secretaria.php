@@ -204,18 +204,18 @@ if (count($diarios) == 0) {
                         else {
 
                             if($fl_digitada == 't') {
-                                $fl_situacao = '<font color="blue"><b>Conclu&iacute;do</b></font>';
+                                $fl_situacao = '<font color="blue"><b>Preenchido</b></font>';
                             }
 
                             if($fl_finalizada == 't') {
-                                $fl_situacao = '<font color="red"><b>Finalizado</b></font>';
+                                $fl_situacao = '<font color="red"><b>Fechado</b></font>';
                                 $opcoes_diario .= "<a href=\"#\" onclick=\"reaberto_secretaria('$diario_id','$IEnome');\">abre para lan&ccedil;amentos</a><br />";
 
                                 $fl_encerrado = 1;
                                 $fl_opcoes = 1;
                             }
                             else {
-                                $opcoes_diario .= "<a href=\"#\" onclick=\"finalizado_secretaria('$diario_id','$IEnome');\">finaliza para lan&ccedil;amentos</a><br />";
+                                $opcoes_diario .= "<a href=\"#\" onclick=\"fechado_secretaria('$diario_id','$IEnome');\">fecha para lan&ccedil;amentos</a><br />";
                                 $fl_opcoes = 1;
                             }
                         }
@@ -269,7 +269,7 @@ if (count($diarios) == 0) {
 
                 <br />
                 &nbsp;&nbsp;&nbsp;
-                <input type="button" value="Finalizar todos os diários concluídos" onclick="finaliza_todos_secretaria('<?=$diario_id?>','<?=$IEnome?>');" />
+                <input type="button" value="Fechar todos os diários preenchidos" onclick="fecha_todos_secretaria('<?=$diario_id?>','<?=$IEnome?>');" />
 
             </form>
             <script language="javascript" type="text/javascript">

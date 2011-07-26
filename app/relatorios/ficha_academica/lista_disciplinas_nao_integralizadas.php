@@ -171,7 +171,7 @@ if (count($disciplinas_nao_cursadas) > 0) {
     <br />
     <span style="color: teal; font-size: 0.8em;font-style: italic;">
      * As informa&ccedil;&otilde;es acima estam de acordo com os lan&ccedil;amentos do Sistema Acad&ecirc;mico<br />
-     * Somente as disciplinas de di&aacute;rios <strong>finalizados</strong> s&atilde;o consideradas para aprova&ccedil;&atilde;o, ou seja di&aacute;rios com situa&ccedil;&otilde;es diferentes s&atilde;o disciplinas n&atilde;o integralizadas<br />
+     * Somente as disciplinas de di&aacute;rios <strong>fechados</strong> s&atilde;o consideradas para aprova&ccedil;&atilde;o, ou seja di&aacute;rios com situa&ccedil;&otilde;es diferentes s&atilde;o disciplinas n&atilde;o integralizadas<br />
      * Disciplinas <strong>equivalentes</strong> cursadas s&atilde;o consideradas somente quando matriculadas especificamente para o curso / contrato listado<br />
     </span>
     <br /><br />

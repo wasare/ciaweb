@@ -219,16 +219,16 @@ foreach($diarios as $row3) :
     else {
 
         if($fl_digitada == 't') {
-            $fl_situacao = '<font color="blue"><b>Conclu&iacute;do</b></font>';
+            $fl_situacao = '<font color="blue"><b>Preenchido</b></font>';
         }
 
         if($fl_finalizada == 't') {
-            $fl_situacao = '<font color="red"><b>Finalizado</b></font>';
+            $fl_situacao = '<font color="red"><b>Fechado</b></font>';
             $fl_encerrado = 1;
 			$fl_opcoes = 1;
         }
         else {
-          $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'marca_finalizado\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">finaliza para lan&ccedil;amentos</a><br /><br />';
+          $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'marca_fechado\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">fechado para lan&ccedil;amentos</a><br /><br />';
           $fl_opcoes = 1;
 		}
     }
@@ -278,7 +278,7 @@ foreach($diarios as $row3) :
 ?>
 </table>
 <br />
-<input type="button" value="Finaliza todos os diários concluídos" onclick="enviar_diario('finaliza_todos',<?=$diario_id?>,<?=$fl_encerrado?>,'<?=$BASE_URL?>','<?=$IEnome?>');" />
+<input type="button" value="Fecha todos os diários preenchidos" onclick="enviar_diario('fecha_todos',<?=$diario_id?>,<?=$fl_encerrado?>,'<?=$BASE_URL?>','<?=$IEnome?>');" />
 &nbsp;&nbsp;
 <a href="#" onclick="javascript:window.close();">Fechar</a>
 </form>

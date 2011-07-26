@@ -177,7 +177,7 @@ $num_alunos  = count($arr_alunosid);
         <p>
             <b style="color:red;">Atenção:</b><br />
             <span style="color: teal; font-size: 0.8em;font-style: italic;">
-            - Este relatório exibe somente os diários concluídos ou finalizados.<br />
+            - Este relatório exibe somente os diários preenchidos ou fechados.<br />
             - Lista todos os alunos com matrícula no período
             selecionado e que tenham vínculo no curso/turma selecionados,
             independente da situação atual do aluno.
@@ -241,10 +241,10 @@ $num_alunos  = count($arr_alunosid);
                         <?php
                         //Situacao do diario
                         if($legenda['fl_digitada'] == 't') {
-                            echo '<font color="red"><b>Finalizado</b></font>';
+                            echo '<font color="red"><b>Fechado</b></font>';
                         }
                         elseif($legenda['fl_digitada'] == 'f' AND $legenda['fl_finalizada'] == 't') {
-                            echo '<font color="blue"><b>Conclu&iacute;do</b></font>';
+                            echo '<font color="blue"><b>Preenchido</b></font>';
                         }
                         elseif($legenda['fl_digitada'] == 'f' AND $legenda['fl_finalizada'] == 'f') {
                             echo '<font color="green"><b>Aberto</b></font>';

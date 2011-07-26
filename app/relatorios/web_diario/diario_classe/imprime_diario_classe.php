@@ -30,9 +30,9 @@ if ($_SESSION['sa_modulo'] == 'web_diario_login') {
 }
 // ^ VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR ^ //
 
-if(!is_concluido($diario_id)) {
+if(!is_preenchido($diario_id)) {
     exit('<script language="javascript" type="text/javascript">
-            alert(\'O diario deve estar marcado como "Concluido" antes de visualizar o Diario de Classe!\n\nA operação foi cancelada!\');
+            alert(\'O diario deve estar marcado como "Preenchido" antes de visualizar o Diario de Classe!\n\nA operacao foi cancelada!\');
             window.close();</script>');
 }
 

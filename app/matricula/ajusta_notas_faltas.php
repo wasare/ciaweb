@@ -12,10 +12,10 @@ if ($_POST['btnOK'] == 10)
 {
 	//-- PARAMETROS
 	$aluno_id    = $_POST['aluno_id']; // matricula do aluno
-	$diarios  = explode("|", $_POST['diarios']); // diarios a ajustar quando for mais de um separ�-los por um |
+	$diarios  = explode("|", $_POST['diarios']); // diarios a ajustar quando for mais de um separá-los por um |
 
 	/* 
-		Exemplos de URLs para efetiva��o do ajuste de nota e/ou faltas
+		Exemplos de URLs para efetivação do ajuste de nota e/ou faltas
 
 		ajusta_notas_faltas.php?d=2483|2484|2485|2486|2487|2488&id=2735
 		ajusta_notas_faltas.php?d=2483&id=2735
@@ -26,7 +26,7 @@ if ($_POST['btnOK'] == 10)
 	{
 		$diarios_ajustados = '';
 		foreach($diarios as $diario) {
-            if (is_diario($diario) && is_inicializado($diario) && !is_finalizado($diario)) {
+            if (is_diario($diario) && is_inicializado($diario) && !is_fechado($diario)) {
 				atualiza_diario("$aluno_id","$diario");
 				$diarios_ajustados .=  $diario .'  ';
 			}

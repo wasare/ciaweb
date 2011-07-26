@@ -122,7 +122,7 @@ $percFaltasMatriculada = 0;
 //carga horaria realizada
 $chRealizadaMatriculada = 0;
 
-// conta disciplinas aprovadas com diario nao finalizado
+// conta disciplinas aprovadas com diario nao fechados
 $diarios_nao_finalizados = 0;
 
 foreach ($ficha_academica as $disc) {
@@ -281,7 +281,7 @@ $percFaltasMatriculada = number_format($percFaltasMatriculada,'2',',','.');
   if ($diarios_nao_finalizados > 0) :
 ?>
     <span style="font-size: 0.7em;">
-      * Existe(m) <strong><?=$diarios_nao_finalizados?></strong> disciplina(s) aprovada(s) em di&aacute;rio(s) n&atilde;o finalizado(s), marcado(s) em <span style="color:#006FC7; font-weight: bold;">AZUL</span>.
+      * Existe(m) <strong><?=$diarios_nao_finalizados?></strong> disciplina(s) aprovada(s) em di&aacute;rio(s) n&atilde;o fechado(s), marcado(s) em <span style="color:#006FC7; font-weight: bold;">AZUL</span>.
     </span>
 <?php
   endif;

@@ -42,7 +42,7 @@ $sql1 ="SELECT id,
 
 $conteudos = $conn->get_all($sql1);
 
-$fl_finalizado = is_finalizado($diario_id);
+$fl_finalizado = is_fechado($diario_id);
 
 
 // RECUPERA COMPETENCIAS E OBSERVAÇÕES DO DIÁRIO

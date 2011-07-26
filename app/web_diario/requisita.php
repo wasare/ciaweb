@@ -106,10 +106,10 @@ if ($_SESSION['sa_modulo'] == 'web_diario_login') {
 
         if($operacao == 'marca_diario') {
             echo papeleta_header($diario_id);
-            require_once($BASE_DIR .'app/web_diario/professor/marca_concluido.php');
+            require_once($BASE_DIR .'app/web_diario/professor/marca_preenchido.php');
             echo '<br />';
             exit('<script language="javascript" type="text/javascript">
-                    alert(\''. $mensagem_concluido .'\');
+                    alert(\''. $mensagem_preenchido .'\');
                     window.opener.location.reload();
                     setTimeout("self.close()",450); </script>');
         }
@@ -125,18 +125,18 @@ if ($_SESSION['sa_modulo'] == 'web_diario_login') {
 
 // OPERACAO DA COORDENACAO
 
-        if($operacao == 'marca_finalizado') {
+        if($operacao == 'marca_fechado') {
             echo papeleta_header($diario_id);
-            require_once($BASE_DIR .'app/web_diario/coordenacao/marca_finalizado.php');
+            require_once($BASE_DIR .'app/web_diario/coordenacao/marca_fechado.php');
             echo '<br />';
             exit('<script language="javascript" type="text/javascript">
-                  alert(\''. $mensagem_finalizado .'\');
+                  alert(\''. $mensagem_fechado .'\');
                   window.opener.location.reload();
                   setTimeout("self.close()",450); </script>');
         }
 
-        if($operacao == 'finaliza_todos') {
-            require_once($BASE_DIR .'app/web_diario/coordenacao/finaliza_todos.php');
+        if($operacao == 'fecha_todos') {
+            require_once($BASE_DIR .'app/web_diario/coordenacao/fecha_todos.php');
             echo '<br />';
             exit('<script language="javascript" type="text/javascript">
                     window.opener.location.reload();

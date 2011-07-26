@@ -132,11 +132,11 @@ if($fl_finalizada == 'f' && $fl_digitada == 'f') {
 }
 else {
 	if($fl_digitada == 't') {
-            $fl_situacao = '<font color="blue"><b>Conclu&iacute;do</b></font>';
+            $fl_situacao = '<font color="blue"><b>Preenchido</b></font>';
     }
 
     if($fl_finalizada == 't') {
-        $fl_situacao = '<font color="red"><b>Finalizado</b></font>';
+        $fl_situacao = '<font color="red"><b>Fechado</b></font>';
         $fl_encerrado = 1;
     }
 }

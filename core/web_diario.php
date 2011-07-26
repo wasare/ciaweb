@@ -135,7 +135,7 @@ function is_inicializado($diario_id) {
         return FALSE;
 }
 
-function is_finalizado($diario_id) {
+function is_fechado($diario_id) {
 
     global $conn;
     $sql = 'SELECT
@@ -958,7 +958,7 @@ function get_descricao_sequencial_periodo($periodo) {
     return ($m['mes_final'] <= 12 && $m['mes_inicial'] >= 7) ? 'SEGUNDO' : 'PRIMEIRO';
 }
 
-function is_concluido($diario_id) {
+function is_preenchido($diario_id) {
 
     global $conn;
     $sql = 'SELECT

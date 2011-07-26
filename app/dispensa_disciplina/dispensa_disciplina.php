@@ -172,7 +172,7 @@ SELECT DISTINCT
 WHERE matriculada is null
 ) ORDER BY 2, 4 DESC, 3; ";
 
-// -- o.fl_finalizada = 'f' AND -- somente em diario aberto/finalizado
+// -- o.fl_finalizada = 'f' AND -- somente em diario aberto/fechado
 //
 //echo  '<pre>'. $sqlDisciplinas .'</pre>';
 

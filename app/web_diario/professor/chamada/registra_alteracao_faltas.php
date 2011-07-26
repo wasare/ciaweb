@@ -4,7 +4,7 @@ require_once(dirname(__FILE__) .'/../../../setup.php');
 require_once($BASE_DIR .'core/web_diario.php');
 require_once($BASE_DIR .'core/date.php');
 
-// CONEXAO ABERTA PARA TRABALHAR COM TRANSACAO (N√ÉO PERSISTENTE)
+// CONEXAO ABERTA PARA TRABALHAR COM TRANSACAO (N√O PERSISTENTE)
 $conn = new connection_factory($param_conn,FALSE);
 
 $diario_id = (int) $_POST['diario_id'];
@@ -19,10 +19,10 @@ if(!acessa_diario($diario_id,$sa_ref_pessoa)) {
 }
 // ^ VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR ^ //
 
-if (is_finalizado($diario_id)){
+if (is_fechado($diario_id)){
 
     echo '<script language="javascript" type="text/javascript">';
-    echo 'alert("ERRO! Este di·rio est· finalizado e n„o pode ser alterado!");';
+    echo 'alert("ERRO! Este di·rio est· fechado e n„o pode ser alterado!");';
     echo 'window.close();';
     echo '</script>';
     exit;

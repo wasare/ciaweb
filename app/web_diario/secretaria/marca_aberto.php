@@ -22,7 +22,7 @@ if(isset($_SESSION['sa_modulo']) && $_SESSION['sa_modulo'] == 'web_diario_login'
     // ^ VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR ^ //
 }
 
-// MARCA O DIARIO COMO CONCLUIDO
+// MARCA O DIARIO COMO PREENCHIDO
 $sql1 = "UPDATE disciplinas_ofer
          SET
             fl_finalizada = 'f'

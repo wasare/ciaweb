@@ -12,7 +12,7 @@ $diario_id = isset($_GET['diario_id']) ? (int) $_GET['diario_id'] : (int) $_POST
 if ((!isset($_POST['ok']) && $diario_id == 0))
     exit('<script language="javascript" type="text/javascript">window.alert("ERRO! Dados invalidos!");window.close();</script>');
 
-if (is_finalizado($diario_id))
+if (is_fechado($diario_id))
     exit('<script language="javascript" type="text/javascript">window.alert("Diario fechado para alteracoes!");window.close();</script>');
 
 //  VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR

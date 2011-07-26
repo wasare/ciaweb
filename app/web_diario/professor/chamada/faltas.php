@@ -21,10 +21,10 @@ if (!existe_chamada($diario_id)) {
   exit('<script language="javascript" type="text/javascript">window.alert("Nenhuma chamada registrada para este diario!");window.close(); </script>');
 }
 
-if (is_finalizado($diario_id)){
+if (is_fechado($diario_id)){
 
     echo '<script language="javascript" type="text/javascript">';
-    echo 'alert("ERRO! Este diário está finalizado e não pode ser alterado!");';
+    echo 'alert("ERRO! Este diário está fechado e não pode ser alterado!");';
     echo 'window.close();';
     echo '</script>';
     exit;

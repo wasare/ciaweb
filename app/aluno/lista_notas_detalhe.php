@@ -124,7 +124,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
     ?>
 </table>
 <br />
-(<strong>*</strong>) Disciplina com lan&ccedil;amentos n&atilde;o finalizados, pass&iacute;vel de altera&ccedil;&otilde;es.
+(<strong>*</strong>) Disciplina com lan&ccedil;amentos em aberto, pass&iacute;vel de altera&ccedil;&otilde;es.
 <br /><br />
 <div align="left" style="font-size: 0.85em;">
     <h4>Legenda</h4>

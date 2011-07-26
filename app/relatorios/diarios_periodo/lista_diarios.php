@@ -29,8 +29,8 @@ SELECT DISTINCT
 
     s.abreviatura AS \"Curso\",
 
-    CASE WHEN o.fl_finalizada = TRUE THEN '<font color=\"red\">Finalizado</font>'
-         WHEN o.fl_digitada = TRUE THEN '<font color=\"blue\">Concluído</font>'
+    CASE WHEN o.fl_finalizada = TRUE THEN '<font color=\"red\">Fechado</font>'
+         WHEN o.fl_digitada = TRUE THEN '<font color=\"blue\">Preenchido</font>'
          ELSE '<font color=\"green\">Aberto</font>'
     END AS \"Situação\",
 

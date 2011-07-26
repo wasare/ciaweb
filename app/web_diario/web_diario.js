@@ -31,9 +31,9 @@ function abrir(winName, urlLoc, w, h) {
 	//myWin.focus();
 }
 
-function concluido(diario_id) {
+function preenchido(diario_id) {
     if (! diario_id == "") {
-        if (! confirm('Você deseja marcar / desmarcar como concluído o diário ' + diario_id + '?' + '\n\n Como concluído o diário poderá ser "Finalizado" pela coordenação ficando\n bloqueado para alterações!')) {
+        if (! confirm('Você deseja marcar / desmarcar como preenchido o diário ' + diario_id + '?' + '\n\n Como "Preenchido" o diário poderá ser "Fechado" pela coordenação ficando\n bloqueado para alterações!')) {
             return false;
         }
         else {
@@ -44,9 +44,9 @@ function concluido(diario_id) {
 }
 
 
-function finalizado(diario_id) {
+function fechado(diario_id) {
     if (! diario_id == "") {
-        if (! confirm('Você deseja realmente finalizar o diário ' + diario_id + '?' + '\n Depois de finalizado o professor não poderá fazer alterações!\n')) {
+        if (! confirm('Você deseja realmente fechar o diário ' + diario_id + '?' + '\n Depois de "Fechado" o professor não poderá fazer alterações!\n')) {
             return false;
         }
         else {
@@ -56,9 +56,9 @@ function finalizado(diario_id) {
     return false;
 }
 
-function finaliza_todos(diario_id) {
+function fecha_todos(diario_id) {
 	if (! diario_id == "") {
-    	if (! confirm('Você deseja realmente finalizar todos os diários no período/curso corrente?\n Depois de finalizados o professor não poderá fazer alterações e \n somente a secretaria poderá abri-los novamente!')) {
+    	if (! confirm('Você deseja realmente fechar todos os diários no período/curso corrente?\n Depois de "Fechados" o professor não poderá fazer alterações e \n somente a secretaria poderá abri-los novamente!')) {
             return false;
         }
         else {
@@ -68,16 +68,16 @@ function finaliza_todos(diario_id) {
     return false;
 }
 
-function finalizado_secretaria(diario_id, wname) {
+function fechado_secretaria(diario_id, wname) {
     if (typeof wname == "undefined") {
       wname = "";
     }
     if (! diario_id == "") {
-        if (! confirm('Você deseja realmente finalizar o diário ' + diario_id + '?' + '\n Depois de finalizado o professor não poderá fazer alterações!\n')) {
+        if (! confirm('Você deseja realmente fechar o diário ' + diario_id + '?' + '\n Depois de "Fechado" o professor não poderá fazer alterações!\n')) {
             return false;
         }
         else {
-            abrir(wname,'../coordenacao/marca_finalizado.php?diario_id=' + diario_id)
+            abrir(wname,'../coordenacao/marca_fechado.php?diario_id=' + diario_id)
             return true;
         }
     }
@@ -101,16 +101,16 @@ function reaberto_secretaria(diario_id, wname) {
     return false;
 }
 
-function finaliza_todos_secretaria(diario_id, wname) {
+function fecha_todos_secretaria(diario_id, wname) {
     if (typeof wname == "undefined") {
       wname = "";
     }
 	if (! diario_id == "") {
-    	if (! confirm('Você deseja realmente finalizar todos os diários no período/curso corrente?\n Depois de finalizados o professor não poderá fazer alterações e \n somente a secretaria poderá abri-los novamente!')) {
+    	if (! confirm('Você deseja realmente fechar todos os diários no período/curso corrente?\n Depois de "Fehcado" o professor não poderá fazer alterações e \n somente a secretaria poderá abri-los novamente!')) {
             return false;
         }
         else {
-            abrir(wname,'../coordenacao/finaliza_todos.php?diario_id=' + diario_id);
+            abrir(wname,'../coordenacao/fecha_todos.php?diario_id=' + diario_id);
             return true;
         }
     }
@@ -129,19 +129,19 @@ function enviar_diario(action,ofer,encerrado,base_url,wname) {
   }
   
   if (encerrado == 1 && (action == 'notas' || action == 'chamada' || action == 'altera_chamada' || action == 'exclui_chamada' || action == 'marca_diario' )) {
-    alert("ERRO! Este diário está finalizado e não pode ser alterado!");
+    alert("ERRO! Este diário está fechado e não pode ser alterado!");
     return false;
   }
 
   if (action != 0) {
     switch (action) {
       case 'marca_diario':
-        if (concluido(ofer)) {
+        if (preenchido(ofer)) {
           abrir( wname + ' web diário', base_url + 'app/web_diario/requisita.php?do=' + action + '&id=' + ofer);
         }
         break;
-      case 'marca_finalizado':
-        if (finalizado(ofer)) {
+      case 'marca_fechado':
+        if (fechado(ofer)) {
            abrir( wname + ' web diário', base_url + 'app/web_diario/requisita.php?do=' + action + '&id=' + ofer);
         }
         break;
@@ -150,8 +150,8 @@ function enviar_diario(action,ofer,encerrado,base_url,wname) {
            abrir( wname + ' web diário', base_url + 'app/web_diario/requisita.php?do=' + action + '&id=' + ofer);
         }
         break;
-      case 'finaliza_todos':
-        if (finaliza_todos(ofer)) {
+      case 'fecha_todos':
+        if (fecha_todos(ofer)) {
            abrir( wname + ' web diário', base_url + 'app/web_diario/requisita.php?do=' + action + '&id=' + ofer);
         }
         break;
