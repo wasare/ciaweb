@@ -64,14 +64,16 @@ $sql_conteudos = "SELECT dia, conteudo, atividades
 
 // ALUNOS
 $sql_alunos_diario = "SELECT
-              b.nome, c.ref_pessoa, c.prontuario, a.num_faltas, a.nota_final
-              FROM matricula a, pessoas b, pessoa_prontuario_campus c
+              b.nome, ppc.ref_pessoa, c.prontuario, a.num_faltas, a.nota_final
+              FROM matricula a, pessoas b, pessoa_prontuario_campus ppc, contratos c
 
               WHERE
                  a.ref_disciplina_ofer = $diario_id AND
                  a.ref_pessoa = b.id AND
-                 a.ref_pessoa = c.ref_pessoa AND
-                 a.ref_campus = c.ref_campus
+                 a.ref_pessoa = ppc.ref_pessoa AND
+                 a.ref_campus = ppc.ref_campus AND
+                 a.ref_contrato = c.id AND
+                 ppc.prontuario = c.prontuario 
               ORDER BY lower(to_ascii(nome,'LATIN1'));" ;
 $alunos_diario = $conn->get_all($sql_alunos_diario);
 

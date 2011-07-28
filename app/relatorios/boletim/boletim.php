@@ -89,11 +89,18 @@ class  Boletim extends PDF {
 				$Texto = $Dados[$j][0];
 				$this->Write(5,utf8_decode($Texto));
 				$this->SetFont('Arial','B',10);
+				$Texto = "               Prontuário: ";
+				$this->Write(5,utf8_decode($Texto));
+				$this->SetFont('Arial','',11);
+				$this->Write(5,$Dados[$j][11]);
+				/*
+				$this->SetFont('Arial','B',10);
 				$Texto = "               Matrícula: ";
 				$this->Write(5,utf8_decode($Texto));
 				$this->SetFont('Arial','',11);
 				$Texto = str_pad($Dados[$j][1], 5, "0", STR_PAD_LEFT);
 				$this->Write(5,$Texto);
+				*/
 				// QUEBRA DE LINHA
 				$this->Ln(5);
 				$this->SetFont('Arial','B',10);
@@ -102,6 +109,14 @@ class  Boletim extends PDF {
 				$this->SetFont('Arial','',11);
 				$Texto = " $Curso";
 				$this->Write(5,utf8_decode($Texto));
+				
+				$this->Ln(5);
+				$this->SetFont('Arial','B',10);
+				$Texto = "Campus: ";
+				$this->Write(5,utf8_decode($Texto));
+				$this->SetFont('Arial','',11);
+				$this->Write(5,$Dados[$j][12]);
+				
 				// QUEBRA DE LINHA
 				$this->Ln(5);
 				$this->SetFont('Arial','B',10);
@@ -236,17 +251,20 @@ $aAlunos = $conn->get_all($qryAlunos);
 
 $qryBoletim = '
 SELECT 
-    p.nome, m.ref_pessoa as ra_cnec, d.descricao_disciplina, m.nota_final, d.carga_horaria, m.ref_curso, m.num_faltas, s.descricao as periodo, m.ref_periodo, m.ref_disciplina_ofer as oferecida, m.ordem_chamada
+    p.nome, m.ref_pessoa as ra_cnec, d.descricao_disciplina, m.nota_final, d.carga_horaria, m.ref_curso, m.num_faltas, s.descricao as periodo,
+		m.ref_periodo, m.ref_disciplina_ofer as oferecida, m.ordem_chamada, c.prontuario, get_campus(c.ref_campus)
     FROM
-        matricula m, disciplinas d, pessoas p, disciplinas_ofer o, periodos s
+        matricula m, disciplinas d, pessoas p, disciplinas_ofer o, periodos s, pessoa_prontuario_campus ppc, contratos c
     WHERE 
         m.ref_pessoa = p.id AND 
-		o.ref_periodo = \'%s\' AND        
-		p.ra_cnec = \'%s\' AND 
+				o.ref_periodo = \'%s\' AND        
+				p.ra_cnec = \'%s\' AND 
         m.ref_curso = %s AND         
         m.ref_disciplina_ofer = o.id AND 
         d.id = o.ref_disciplina AND
-        s.id = o.ref_periodo
+        s.id = o.ref_periodo AND
+				m.ref_contrato = c.id AND
+        ppc.prontuario = c.prontuario
     ORDER BY 3;';
 
 

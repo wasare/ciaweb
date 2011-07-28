@@ -59,7 +59,7 @@ if($count != 0 ) {
     
     if($count != 0) {
 
-        $msg = '<b>Erro:</b> Usu&aacute;rio j&aacute; exite.';
+        $msg = '<b>Erro:</b> Usu&aacute;rio j&aacute; existe.';
 
     }else {
 

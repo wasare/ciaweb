@@ -94,11 +94,20 @@ class acl {
      */
     public static function get_roles($pessoa_id, connection_factory $conn) {
 
+        $pessoa_id = (int) $pessoa_id;
+        
         $sql = "SELECT ref_papel
                     FROM usuario_papel a, usuario b
                     WHERE a.ref_usuario = b.id AND b.ref_pessoa = $pessoa_id;";
 
-        return $conn->get_col($sql);
+        $roles = $conn->get_col($sql);
+
+        if (count($roles) > 0)
+            return $roles;
+        else {
+            $roles = array();
+            return $roles;
+        }
     }
 
     /**
