@@ -38,10 +38,11 @@ class connection_factory {
 	 * Exibe o erro na tela e interrompe a execução
      */
 	public function show_error($error_msg) {
+		
+		$debug_msg = ($this->debug) ? $error_msg : '';
 
 		die('<h2 style="color: red">DB: Erro ao acessar o banco de dados</h2>'.
-                        '<div style="background-color: #ffffcc; padding:12px; margin:12px; font-size: 10px; width: 70%;">'.
-                        $error_msg .'</div>');
+                        '<div style="background-color: #ffffcc; padding:12px; margin:12px; font-size: 10px; width: 70%;">Confira os dados solicitados e/ou contate o administrador <br />'. $debug_msg .'</div>');
 	}
 
     /**

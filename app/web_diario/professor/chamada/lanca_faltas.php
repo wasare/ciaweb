@@ -41,8 +41,8 @@ $atividades = $_POST['atividades'];
 $_SESSION['conteudo'] = $conteudo;
 $conteudo = addslashes($conteudo);
 
-if ($atividades[count($atividades) - 1] == "Outros")
-    $atividades[count($atividades) - 1] = trim($_POST['outros']);
+if ($atividades[count($atividades) - 1] == "Outras")
+    $atividades[count($atividades) - 1] = trim($_POST['outras']);
 
 $atividades = addslashes(implode('; ', $atividades));
 

@@ -35,7 +35,8 @@ if(isset($_POST['ok']) && $_POST['ok'] == 'OK1') {
   $conteudo = addslashes($_POST['texto']);
 
   if ($atividades[count($atividades) - 1] == "Outras")
-    $atividades[count($atividades) - 1] = trim($_POST['Outras']);
+    $atividades[count($atividades) - 1] = trim($_POST['outras']);
+ 
 
   $atividades = addslashes(implode('; ', $atividades));
 
@@ -141,12 +142,10 @@ else
                  <input type="checkbox" class="checkbox" name="atividades[]" value="Outras" <?php if(!empty($outra_atividade)) echo ' checked="checked" '; ?> /> Outras - especificar
                  &nbsp;&nbsp;
 								 <br />
-									&nbsp;&nbsp;&nbsp;&nbsp;<textarea name="text" cols="48" rows="4" id="atividade11"><?=$outra_atividade?></textarea>
+									&nbsp;&nbsp;&nbsp;&nbsp;<textarea name="outras" cols="48" rows="4" id="atividade11"><?=$outra_atividade?></textarea>
 									<br /><span class="maxlength-feedback" id="targetFeedback2"></span> <br />
             <br />
             <br />
-
-            <?php echo $outra_atividade;?>
 
         </td>
   </tr>
@@ -168,8 +167,8 @@ else
 <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.maxlength.pack.js'?>"></script>
 <script type="text/javascript">		
 		$(function() {
-				$('#bases_conhecimento').maxlength({max: 300, feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback1'});
-				$('#atividade11').maxlength({max: 300,feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback2'});
+				$('#bases_conhecimento').maxlength({max: 200, feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback1'});
+				$('#atividade11').maxlength({max: 200,feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback2'});
 		});
 
 </script>

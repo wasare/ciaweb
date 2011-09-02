@@ -296,19 +296,43 @@ function diario_classe_preenche_bases_conhecimento_e_atividades($data, &$pdf) {
 
     $pdf->SetY(53.5);
     $pdf->SetX(30);
-    $pdf->MultiCell(178,4.15,utf8_decode($bases_conhecimentos),0,'J', FALSE);
+    
+    $no_linhas = $pdf->MultiCellCountLines(178,4.15,utf8_decode($bases_conhecimentos),0,'J', FALSE);
+    
+    $pdf->SetY(53.5);
+    $pdf->SetX(30);
+    
+    if ($no_linhas > 40)
+      $pdf->MultiCellFitLineScale(178,4.15,utf8_decode($bases_conhecimentos),0,'J', FALSE);
+    else
+      $pdf->MultiCell(178,4.15,utf8_decode($bases_conhecimentos),0,'J', FALSE);
 
+    $Y_atual = $pdf->GetY();    
     // INUTILIZA ESPAÇO EM BRANCO
-    $pdf->Line(28, $pdf->GetY(), 210.5, $pdf->GetY()); // LINHA
-    $pdf->Line(28, $pdf->GetY(), 210.5, 222.5); // TRAÇO DIAGONAL
+    if ($Y_atual < 222.75) {
+      $pdf->Line(28, $Y_atual, 210.5, $Y_atual); // LINHA
+      $pdf->Line(28, $Y_atual, 210.5, 222.5); // TRAÇO DIAGONAL
+    }
 
     $pdf->SetY(53.5);
     $pdf->SetX(214.5);
-    $pdf->MultiCell(188,4.15,utf8_decode($atividades),0,'J', FALSE);
-
+    
+    $no_linhas = $pdf->MultiCellCountLines(188,4.15,utf8_decode($atividades),0,'J', FALSE);
+    
+    $pdf->SetY(53.5);
+    $pdf->SetX(214.5);
+    
+    if ($no_linhas > 40)
+      $pdf->MultiCellFitLineScale(188,4.15,utf8_decode($atividades),0,'J', FALSE);
+    else
+      $pdf->MultiCell(188,4.15,utf8_decode($atividades),0,'J', FALSE); 
+    
+    $Y_atual = $pdf->GetY();    
     // INUTILIZA ESPAÇO EM BRANCO
-    $pdf->Line(210.5, $pdf->GetY(), 403.5, $pdf->GetY()); // LINHA
-    $pdf->Line(210.5, $pdf->GetY(), 403.5, 222.5); // TRAÇO DIAGONAL
+    if ($Y_atual < 222.75) {
+      $pdf->Line(210.5, $Y_atual, 403.5, $Y_atual); // LINHA
+      $pdf->Line(210.5, $Y_atual, 403.5, 222.5); // TRAÇO DIAGONAL
+    }
 }
 
 function diario_classe_preenche_observacoes_competencias(&$pdf) {

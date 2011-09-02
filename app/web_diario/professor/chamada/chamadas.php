@@ -131,8 +131,8 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
             <br />
             <input type="checkbox" class="checkbox" name="atividades[]" id="atividade9" value="Avaliação" /> Avalia&ccedil;&atilde;o
             <br />
-            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade10" value="Outros" /> Outros (especificar abaixo) <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;<textarea name="outros" cols="48" rows="4" id="atividade11"></textarea>
+            <input type="checkbox" class="checkbox" name="atividades[]" id="atividade10" value="Outras" /> Outras (especificar abaixo) <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;<textarea name="outras" cols="48" rows="4" id="atividade11"></textarea>
             <br /><span class="maxlength-feedback" id="targetFeedback2"></span> <br />
             <br />
             <br />
@@ -169,8 +169,8 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
     <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.maxlength.pack.js'?>"></script>
     <script type="text/javascript">
         $(function() {
-            $('#bases_conhecimento').maxlength({max: 300, feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback1'});
-            $('#atividade11').maxlength({max: 300,feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback2'});
+            $('#bases_conhecimento').maxlength({max: 200, feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback1'});
+            $('#atividade11').maxlength({max: 200,feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback2'});
         });
     </script>
 </body>
