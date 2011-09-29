@@ -1,6 +1,6 @@
 <?php
 
-require_once(dirname(__FILE__) .'/../../../setup.php');
+require_once(dirname(__FILE__) .'/../../setup.php');
 require_once($BASE_DIR .'lib/adodb5/tohtml.inc.php');
 require_once($BASE_DIR .'core/reports/header.php');
 require_once($BASE_DIR .'core/reports/carimbo.php');

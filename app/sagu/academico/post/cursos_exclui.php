@@ -1,14 +1,13 @@
 <?php 
 
-require("../../common.php");
-require_once '../../../../core/login/acl.php';
+require_once("../../common.php");
 
 $conn = new connection_factory($param_conn);
 
-$acl = new acl();
-if(!$acl->has_access(__FILE__, $conn)) {
-    exit ('Você não tem permissão para acessar este formulário!');
-}
+// Verifica as permissoes de acesso do usuario quanto ao arquivo
+$ACL_FILE = __FILE__;
+require_once($BASE_DIR .'core/login/acesso.php');
+// ^ Verifica as permissoes de acesso do usuario quanto ao arquivo ^ //
 
 $id = $_GET['id'];
 

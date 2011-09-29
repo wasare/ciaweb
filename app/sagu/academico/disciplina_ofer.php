@@ -4,6 +4,13 @@ require("../common.php");
 require("../properties.php");
 require("../lib/SQLCombo.php");
 
+$conn = new connection_factory($param_conn);
+
+// Verifica as permissoes de acesso do usuario quanto ao arquivo
+$ACL_FILE = __FILE__;
+require_once($BASE_DIR .'core/login/acesso.php');
+// ^ Verifica as permissoes de acesso do usuario quanto ao arquivo ^ //
+
 $ref_periodo = $properties->Get("ref_periodo");
 $op2_opcoes = SQLArray("$sql_periodos_academico");
 $op3_opcoes = SQLArray("select nome_campus, id from campus order by nome_campus");

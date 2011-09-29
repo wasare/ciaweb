@@ -3,6 +3,13 @@
 require("../common.php");
 require("../lib/SQLCombo.php");
 
+$conn = new connection_factory($param_conn);
+
+// Verifica as permissoes de acesso do usuario quanto ao arquivo
+$ACL_FILE = __FILE__;
+require_once($BASE_DIR .'core/login/acesso.php');
+// ^ Verifica as permissoes de acesso do usuario quanto ao arquivo ^ //
+
 $op_opcoes = SQLArray("select nome_setor, id from setor order by nome_setor");
 
 function Mostra_Carimbos()

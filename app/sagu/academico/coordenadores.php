@@ -3,6 +3,14 @@
 require("../common.php");
 require("../lib/SQLCombo.php");
 
+$conn = new connection_factory($param_conn);
+
+// Verifica as permissoes de acesso do usuario quanto ao arquivo
+$ACL_FILE = __FILE__;
+require_once($BASE_DIR .'core/login/acesso.php');
+// ^ Verifica as permissoes de acesso do usuario quanto ao arquivo ^ //
+
+
 $op_campus = SQLArray("select nome_campus, id from campus order by 1");
 $op_cursos = SQLArray("select id || ' - ' || descricao,id from cursos order by descricao");
 

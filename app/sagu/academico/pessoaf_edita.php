@@ -8,6 +8,14 @@ require("../lib/GetField.php");
 require("../lib/InvData.php");
 require("../lib/GetCursoExterno.php");
 
+$conn = new connection_factory($param_conn);
+
+// Verifica as permissoes de acesso do usuario quanto ao arquivo
+$ACL_FILE = __FILE__;
+require_once($BASE_DIR .'core/login/acesso.php');
+// ^ Verifica as permissoes de acesso do usuario quanto ao arquivo ^ //
+
+
 
 $id = $_GET['id'];
 

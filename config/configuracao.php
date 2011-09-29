@@ -54,7 +54,7 @@ $LOGIN_LOG_FILE = $BASE_DIR .'app/sagu/logs/login.log';
 $PATH_IMAGES    = $BASE_URL."public/images/";
 $REVISAO 	= @file_get_contents($BASE_DIR .'VERSAO.TXT');
 $SESS_TABLE     = 'sessao';
-$PAPEIS_SA = array('secretaria' => 1, 'administrador' => 2);
+$PAPEIS_SA = array('secretaria' => 1, 'administrador' => 2, 'administra_matrizes' => 4, 'relatorios' => 5);
 $PAPEIS_WEB_DIARIO = array('professor' => 3, 'coordenador' => 0);
 $PAPEIS_ADMINISTRADOR = array('administrador' => 2);
 $EMAIL_ADMIN = 'wanderson@cefetsp.br';

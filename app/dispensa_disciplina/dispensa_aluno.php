@@ -11,11 +11,13 @@ header("Cache-Control: no-cache");
 require_once('../../app/setup.php');
 
 
-//Criando a classe de conex�o
-$Conexao = NewADOConnection("postgres");
+$conn = $Conexao = new connection_factory($param_conn);
 
-//Setando como conex�o persistente
-$Conexao->PConnect("host=$host dbname=$database port=$port user=$user password=$password");
+// Verifica as permissoes de acesso do usuario quanto ao arquivo
+$ACL_FILE = __FILE__;
+require_once($BASE_DIR .'core/login/acesso.php');
+// ^ Verifica as permissoes de acesso do usuario quanto ao arquivo ^ //
+
 
 //EXECUTANDO SQL COM ADODB
 $Result1 = $Conexao->Execute("SELECT descricao, id FROM periodos ORDER BY 1 DESC;");

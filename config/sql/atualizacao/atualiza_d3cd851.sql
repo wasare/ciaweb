@@ -1,52 +1,10 @@
---
--- PostgreSQL database dump
---
+SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('papel', 'papel_id'), 5, true);
 
-SET client_encoding = 'UTF8';
-SET check_function_bodies = false;
-SET client_min_messages = warning;
+INSERT INTO papel VALUES (5, 'Acesso aos relatórios de acompanhamento acadêmico', 'Acompanhamento acadêmico');
 
-SET search_path = public, pg_catalog;
-
---
--- Name: url_url_id_seq; Type: SEQUENCE SET; Schema: public; Owner: usrsa
---
 
 SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('url', 'url_id'), 73, true);
 
-
---
--- Data for Name: url; Type: TABLE DATA; Schema: public; Owner: usrsa
---
-
-INSERT INTO url VALUES (1, '/index.php', 'Pagina de autenticação');
-INSERT INTO url VALUES (2, '/app/index.php', 'Página inicial do sistema');
-INSERT INTO url VALUES (3, '/app/diagrama.php', 'Página com o diagrama de acesso do sistema');
-INSERT INTO url VALUES (4, '/app/setup.php', 'Arquivo com as ações iniciais das páginas do sistema (bootstrap).');
-INSERT INTO url VALUES (5, '/', 'Raiz do sistema');
-INSERT INTO url VALUES (6, '/app/usuarios/', 'Pasta de controle de usuarios');
-INSERT INTO url VALUES (7, '/app/usuarios/alterar_senha.php', 'Alterar senha de usuario');
-INSERT INTO url VALUES (8, '/app/sagu/academico/curso_ins.php', 'Formulário inserir curso');
-INSERT INTO url VALUES (10, '/app/sagu/academico/post/cursos_exclui.php', 'Ação excluir curso');
-INSERT INTO url VALUES (11, '/app/sagu/academico/post/confirm_curso_ins.php', 'Confirmar inserir curso');
-INSERT INTO url VALUES (12, '/app/sagu/academico/post/curso_altera.php', 'Ação alterar curso');
-INSERT INTO url VALUES (13, '/app/sagu/academico/post/curso_ins.php', 'Ação inserir curso');
-INSERT INTO url VALUES (14, '/app/sagu/academico/disciplinas.php', 'Formulário inserir disciplina');
-INSERT INTO url VALUES (15, '/app/sagu/academico/post/disciplinas.php', 'Ação inserir disciplina');
-INSERT INTO url VALUES (16, '/app/sagu/academico/post/disciplinas_altera.php', 'Ação alterar disciplina');
-INSERT INTO url VALUES (17, '/app/sagu/academico/post/disciplinas_exclui.php', 'Ação excluir disciplina');
-INSERT INTO url VALUES (18, '/app/sagu/academico/cursos_disciplinas.php', 'Formulário inserir matriz');
-INSERT INTO url VALUES (19, '/app/sagu/academico/post/cursos_disciplinas.php', 'Ação inserir matriz');
-INSERT INTO url VALUES (20, '/app/sagu/academico/post/cursos_disciplinas_edita.php', 'Ação alterar matriz');
-INSERT INTO url VALUES (21, '/app/sagu/academico/post/cursos_disciplinas_exclui.php', 'Ação excluir matriz');
-INSERT INTO url VALUES (22, '/app/sagu/academico/inclui_pre_requisito.php', 'Formulário inserir pre-requisito');
-INSERT INTO url VALUES (23, '/app/sagu/academico/post/inclui_pre_requisito.php', 'Ação inserir pre-requisito');
-INSERT INTO url VALUES (24, '/app/sagu/academico/post/edita_pre_requisito.php', 'Ação alterar pre-requisito');
-INSERT INTO url VALUES (25, '/app/sagu/academico/post/pre_requisito_exclui.php', 'Ação excluir pre-requisito');
-INSERT INTO url VALUES (26, '/app/sagu/academico/inclui_disciplinas_equivalentes.php', 'Formulário disciplinas equivalentes');
-INSERT INTO url VALUES (27, '/app/sagu/academico/post/altera_disciplinas_equivalentes.php', 'Ação alterar disciplinas equivalentes');
-INSERT INTO url VALUES (28, '/app/sagu/academico/post/disciplinas_equivalentes_exclui.php', 'Ação excluir disciplinas equivalentes');
-INSERT INTO url VALUES (29, '/app/sagu/academico/post/inclui_disciplinas_equivalentes.php', 'Ação inserir disciplinas equivalentes');
 INSERT INTO url VALUES (30, '/app/aluno/config_area_aluno.php');
 INSERT INTO url VALUES (31, '/app/cargo/index.php');
 INSERT INTO url VALUES (32, '/app/colacao_grau/index.php');
@@ -93,7 +51,48 @@ INSERT INTO url VALUES (72, '/app/salas/index.php');
 INSERT INTO url VALUES (73, '/app/setor/index.php');
 
 
---
--- PostgreSQL database dump complete
---
+INSERT INTO public.papel_url VALUES (1, 30);
+INSERT INTO public.papel_url VALUES (1, 31);
+INSERT INTO public.papel_url VALUES (1, 32);
+INSERT INTO public.papel_url VALUES (1, 33);
+INSERT INTO public.papel_url VALUES (1, 34);
+INSERT INTO public.papel_url VALUES (1, 35);
+INSERT INTO public.papel_url VALUES (1, 36);
+INSERT INTO public.papel_url VALUES (1, 37);
+INSERT INTO public.papel_url VALUES (1, 38);
+INSERT INTO public.papel_url VALUES (1, 39);
+INSERT INTO public.papel_url VALUES (1, 40);
+INSERT INTO public.papel_url VALUES (1, 41);
+INSERT INTO public.papel_url VALUES (1, 42);
+INSERT INTO public.papel_url VALUES (1, 43);
+INSERT INTO public.papel_url VALUES (1, 44);
+INSERT INTO public.papel_url VALUES (1, 45);
+INSERT INTO public.papel_url VALUES (1, 46);
+INSERT INTO public.papel_url VALUES (1, 47);
+INSERT INTO public.papel_url VALUES (1, 48);
+INSERT INTO public.papel_url VALUES (1, 49);
+INSERT INTO public.papel_url VALUES (1, 50);
+INSERT INTO public.papel_url VALUES (1, 51);
+INSERT INTO public.papel_url VALUES (1, 52);
+INSERT INTO public.papel_url VALUES (1, 53);
+INSERT INTO public.papel_url VALUES (1, 54);
+INSERT INTO public.papel_url VALUES (1, 55);
+INSERT INTO public.papel_url VALUES (1, 56);
+INSERT INTO public.papel_url VALUES (1, 57);
+INSERT INTO public.papel_url VALUES (1, 58);
+INSERT INTO public.papel_url VALUES (1, 59);
+INSERT INTO public.papel_url VALUES (1, 60);
+INSERT INTO public.papel_url VALUES (1, 61);
+INSERT INTO public.papel_url VALUES (1, 62);
+INSERT INTO public.papel_url VALUES (1, 63);
+INSERT INTO public.papel_url VALUES (1, 64);
+INSERT INTO public.papel_url VALUES (1, 65);
+INSERT INTO public.papel_url VALUES (1, 66);
+INSERT INTO public.papel_url VALUES (1, 67);
+INSERT INTO public.papel_url VALUES (1, 68);
+INSERT INTO public.papel_url VALUES (1, 69);
+INSERT INTO public.papel_url VALUES (1, 70);
+INSERT INTO public.papel_url VALUES (1, 71);
+INSERT INTO public.papel_url VALUES (1, 72);
+INSERT INTO public.papel_url VALUES (1, 73);
 

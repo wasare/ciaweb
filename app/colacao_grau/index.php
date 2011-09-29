@@ -2,8 +2,13 @@
 
 require_once("../../app/setup.php");
 
-$Conexao = NewADOConnection("postgres");
-$Conexao->PConnect("host=$host dbname=$database port=$port user=$user password=$password");
+$conn = $Conexao = new connection_factory($param_conn);
+
+// Verifica as permissoes de acesso do usuario quanto ao arquivo
+$ACL_FILE = __FILE__;
+require_once($BASE_DIR .'core/login/acesso.php');
+// ^ Verifica as permissoes de acesso do usuario quanto ao arquivo ^ //
+
 
 $Result1 = $Conexao->Execute("SELECT descricao, id FROM periodos ORDER BY 1 DESC;");
 
@@ -57,7 +62,7 @@ if (!$Result1){
                 }
             }
 
-            alert(code + ' n�o � um c�digo v�lido!');
+            alert(code + ' não é um código válido!');
 
             field.focus();
 

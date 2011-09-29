@@ -5,11 +5,10 @@ require_once '../../../core/login/acl.php';
 
 $conn = new connection_factory($param_conn);
 
-$acl = new acl();
-if(!$acl->has_access(__FILE__, $conn)) {
-    exit ('Voc&ecirc; n&atilde;o tem permiss&atilde;o para acessar este formul&aacute;rio!');
-}
-
+// Verifica as permissoes de acesso do usuario quanto ao arquivo
+$ACL_FILE = __FILE__;
+require_once($BASE_DIR .'core/login/acesso.php');
+// ^ Verifica as permissoes de acesso do usuario quanto ao arquivo ^ //
 
 require_once("../lib/SQLCombo.php");
 
