@@ -3,20 +3,19 @@
  * Arquivo com as configuracoes iniciais
 */
 require_once("../../../app/setup.php");
-require_once("../../../core/reports/header.php");
+require_once($BASE_DIR .'core/reports/header.php');
 
 $header  = new header($param_conn);
 
 /**
  * Parametros do formulario
  */
-$periodo = $_POST['periodo'];
-$campus  = $_POST['campus'];
-$curso   = $_POST['curso'];
-$turma   = $_POST['turma'];
+$periodo = (string) $_POST['periodo'];
+$campus  = (int) $_POST['campus'];
+$curso   = (int) $_POST['curso'];
+$turma   = (string) $_POST['turma'];
 
-if(empty($periodo) or empty($campus) or empty($curso) or empty($turma) or
-        !isset($periodo) or !isset($campus) or !isset($curso) or !isset($turma) ) {
+if(empty($periodo) || $campus == 0 || $curso == 0 || empty($turma)) {
     echo '<script language="javascript">window.alert("Nenhum diario a ser exibido!");</script>';
     echo '<meta http-equiv="refresh" content="0;url=index.php">';
     exit;
@@ -121,7 +120,6 @@ SELECT * FROM (
             SELECT
                 id from disciplinas_ofer
             WHERE
-                fl_finalizada = 't' AND
                 is_cancelada = '0' AND
                 ref_curso = $curso AND
                 ref_periodo = '$periodo'
@@ -141,25 +139,22 @@ ORDER BY lower(to_ascii(nome,'LATIN1')), ref_disciplina_ofer";
 
 $arr_rel = $conn->get_all($sql_rel);
 
-$arr_diarios  = array();
-$arr_alunosid = array();
+$arr_diarios = $arr_diarios_aluno = array();
 
-//Criar um vetor somente com os diarios
+// prepara as matrizes com as informacoes
 foreach($arr_rel as $rel) {
-    $arr_diarios[]  = $rel['ref_disciplina_ofer'];
-    $arr_alunosid[] = $rel['matricula'];
+    $arr_diarios[]  = $diario_id = $rel['ref_disciplina_ofer'];
+    $arr_diarios_aluno[$rel['matricula']][$diario_id]['nota']  = number_format($rel['nota_final'],1,',','.');
+    $arr_diarios_aluno[$rel['matricula']][$diario_id]['faltas']  = $rel['num_faltas']; 
+    $arr_diarios_aluno[$rel['matricula']]['nome']  = $rel['nome'] .' ('. $rel['matricula'] .')';  
 }
 
-//Remove os valores duplicados
+//Remove os valores duplicados e ordena
 $arr_diarios = array_unique($arr_diarios);
 sort($arr_diarios);
 
-//Remove os valores duplicados
-$arr_alunosid = array_unique($arr_alunosid);
-
-//Totalizando
+// Totaliza quantidade de diarios vinculados ao filtro selecionado
 $num_diarios = count($arr_diarios);
-$num_alunos  = count($arr_alunosid);
 
 
 ?>
@@ -167,7 +162,7 @@ $num_alunos  = count($arr_alunosid);
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>SA</title>
+        <title><?=$IEnome?></title>
         <link href="<?=$BASE_URL?>public/styles/relatorio.css" rel="stylesheet" type="text/css">
         <link href="<?=$BASE_URL?>public/styles/print.css" rel="stylesheet" type="text/css" media="print" />
     </head>
@@ -177,9 +172,9 @@ $num_alunos  = count($arr_alunosid);
         <p>
             <b style="color:red;">Atenção:</b><br />
             <span style="color: teal; font-size: 0.8em;font-style: italic;">
-            - Este relatório exibe somente os diários preenchidos ou fechados.<br />
+            <!-- Este relatório exibe somente os diários preenchidos ou fechados.<br />-->
             - Lista todos os alunos com matrícula no período
-            selecionado e que tenham vínculo no curso/turma selecionados,
+            selecionado e que tenham <br />&nbsp;&nbsp;vínculo no curso/turma selecionados,
             independente da situação atual do aluno.
             </span>
         </p>
@@ -196,7 +191,7 @@ $num_alunos  = count($arr_alunosid);
                 <th align="center"><strong>Professor(a)</strong></th>
                 <th align="center"><strong>CH Prevista</strong></th>
                 <th align="center"><strong>CH Realizada</strong></th>
-                <th align="center"><strong>N Distribuida</strong></th>
+                <th align="center"><strong>N Distribu&iacute;da</strong></th>
                 <th align="center"><strong>Situa&ccedil;&atilde;o</strong></th>
             </tr>
             <?php foreach($arr_legenda as $legenda) : ?>
@@ -272,34 +267,24 @@ $num_alunos  = count($arr_alunosid);
                 <?php endfor; ?>
             </tr>
 
-            <?php foreach($arr_alunosid as $alunoid) : ?>
+            <?php foreach($arr_diarios_aluno as $aluno_id => $aluno) : ?>
 
             <tr valign="top">
                 <td width="300">
-                        <?php echo $conn->get_one('SELECT nome FROM pessoas WHERE id = '. $alunoid) .' ('. $alunoid .')' ; ?>
+                    <?=$aluno['nome']?>
                 </td>
                     <?php foreach($arr_diarios as $diario): ?>
                 <td>
                     <?php
-                    foreach($arr_rel as $rel) {
-                        if($alunoid === $rel['matricula'] AND $diario === $rel['ref_disciplina_ofer'])
-                            echo number_format($rel['nota_final'],2,',','.');
-                    }
-                    ?>&nbsp;
-                </td>
-                <td>
-                    <?php
-                    foreach($arr_rel as $rel) {
-                        if($alunoid === $rel['matricula'] AND $diario === $rel['ref_disciplina_ofer'])
-                            echo $rel['num_faltas'];
-                    }
+                    if (array_key_exists($diario, $aluno))
+                      echo $aluno[$diario]['nota'] .'&nbsp;</td><td>'. $aluno[$diario]['faltas'];
+                    else
+                      echo '&nbsp;&nbsp;-&nbsp;</td><td>&nbsp;-';
                     ?>&nbsp;
                 </td>
                 <?php endforeach; ?>
             </tr>
-
             <?php endforeach; ?>
-
         </table>
         <br />
         <div class="nao_imprime">

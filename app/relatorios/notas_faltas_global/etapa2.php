@@ -9,11 +9,12 @@ require_once("../../../app/setup.php");
  */
 $conn = new connection_factory($param_conn);
 
+
 /*
  * Parametros
  */
-$periodo = $_POST['periodo_id'];
-$campus  = $_POST['campus'];
+$periodo = (string) $_POST['periodo_id'];
+$campus = (int) $_POST['campus_id'];
 
 $sql = "SELECT DISTINCT
             c.id, c.descricao

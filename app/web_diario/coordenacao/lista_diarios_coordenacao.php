@@ -136,29 +136,24 @@ $periodo = $conn->get_row($qryPeriodo);
 <h4>clique na turma para exibir o relat&oacute;rio:</h4>
 <?php
 	$sql = "
-		SELECT DISTINCT turma
+		SELECT DISTINCT turma, ref_campus
 			FROM contratos
 			WHERE
     			ref_curso = ". $curso_id ." AND
     			turma is not null AND turma <> ''; ";
 
-	$arr_turmas = $conn->get_all($sql);
+	$arr_turmas_curso = $conn->get_all($sql);
 
 	$count = 0;
 
-    //$periodo_id = (string) $_GET['periodo_id'];
-	//$curso_id = (int) $_GET['curso_id'];
-	//$campus = (int) $_GET['campus'];
-	//$turma = (string) $_POST['turma'];
-
-	foreach($arr_turmas as $turma) :
+	foreach($arr_turmas_curso as $turma_curso) :
         $url = '';
         $url .= $BASE_URL .'app/web_diario/coordenacao/exibe_notas_faltas_global.php?curso_id='. $curso_id;
         $url .= '&periodo_id='. $periodo_id;
-        $url .= '&campus=1'; // TODO: selecionar campus de outra maneira
-        $url .= '&turma='. $turma['turma'];
+        $url .= '&campus='. $turma_curso['ref_campus'];
+        $url .= '&turma='. $turma_curso['turma'];
 ?>
-		<a href="#" onclick="abrir('Sistema Acadêmico', '<?=$url?>')" title="clique para visualizar"><?=$turma['turma']?></a>		     <br />
+		<a href="#" onclick="abrir('Sistema Acadêmico', '<?=$url?>')" title="clique para visualizar"><?=$turma_curso['turma']?></a>		     <br />
 <?php
     endforeach;
 ?>
