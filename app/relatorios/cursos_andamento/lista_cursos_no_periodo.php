@@ -12,14 +12,15 @@ $header  = new header($param_conn);
 
 $periodo    = $_POST['periodo1'];
 $tipo_curso = $_POST['tipo'];
+$campus_id = (int) $_POST['campus_id'];
 
 
 
-if ( is_numeric($_POST['cidade']) ) {
+if ($campus_id > 0) {
 
-	$cidade = ' o.ref_campus = '. $_POST['cidade'] .' AND';
+	$cidade = ' o.ref_campus = '. $campus_id .' AND';
     
-    $RsCidade = $conn->Execute("SELECT cidade_campus FROM campus WHERE id = " . $_POST['cidade'] . ";");
+    $RsCidade = $conn->Execute("SELECT cidade_campus FROM campus WHERE id = " . $campus_id . ";");
     
 	$txt_cidade = "&nbsp;&nbsp;-&nbsp;&nbsp;<strong>Cidade: </strong>" . $RsCidade->fields[0];
 

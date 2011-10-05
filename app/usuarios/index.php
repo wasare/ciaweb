@@ -1,15 +1,13 @@
 <?php
 
 require_once("../../app/setup.php");
-require_once(dirname(__FILE__).'/../../core/login/acl.php');
 
 $conn = new connection_factory($param_conn);
 
-// Definindo as permissoes do usuario quanto ao arquivo
-$acl = new acl();
-if(!$acl->has_access(__FILE__, $conn)) {
-    exit ('Você não tem permissão para acessar este formulário!');
-}
+// Verifica as permissoes de acesso do usuario quanto ao arquivo
+$ACL_FILE = __FILE__;
+require_once($BASE_DIR .'core/login/acesso.php');
+// ^ Verifica as permissoes de acesso do usuario quanto ao arquivo ^ //
 
 $sql = '
 SELECT
@@ -20,14 +18,15 @@ SELECT
     u.ativado,
     s.nome_setor,
     c.nome_campus,
-    p.id || \' - \' || p.nome as nome_pessoa
+    p.id || \' - \' || p.nome as nome_pessoa,
+    p.nome as nome_completo
 FROM
     usuario u, setor s, pessoas p, campus c
 WHERE
     s.id = u.ref_setor AND
     u.ref_pessoa = p.id AND
     c.id = u.ref_campus
-ORDER BY lower(u.nome)';
+ORDER BY to_ascii(p.nome,\'LATIN1\')';
 
 $RsNome = $conn->Execute(iconv("utf-8","utf-8",$sql));
 
@@ -36,7 +35,7 @@ $RsNome = $conn->Execute(iconv("utf-8","utf-8",$sql));
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>SA</title>
+        <title><?=$IEnome?></title>
         <link href="../../public/styles/formularios.css" rel="stylesheet" type="text/css" />
         <script language="javascript" src="../../lib/prototype.js" type="text/js"></script>
         <script language="javascript" src="index.js" type="text/js"></script>
@@ -69,6 +68,7 @@ $RsNome = $conn->Execute(iconv("utf-8","utf-8",$sql));
         <table width="80%" border="0">
             <tr  style="font-weight:bold; color: white; background-color: #666666;">
                 <th>Usu&aacute;rio</th>
+                <th>Nome</th>
                 <th>Campus</td>
                 <th>Setor</td>
                 <th>Permiss&otilde;es</th>
@@ -96,6 +96,7 @@ $RsNome = $conn->Execute(iconv("utf-8","utf-8",$sql));
                     </a>
                         <?=$situacao?>
                 </td>
+                <td align="left"><?=$RsNome->fields['nome_completo']?></td>
                 <td align="left"><?=$RsNome->fields['nome_campus']?></td>
                 <td align="left"><?=$RsNome->fields['nome_setor']?></td>
                 <td align="left">

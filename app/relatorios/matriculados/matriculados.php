@@ -14,11 +14,18 @@ $header  = new header($param_conn);
 
 $novatos    = $_POST['novatos'];
 $periodo    = $_POST["periodo1"];
-$aluno      = $_POST["aluno"];
+$prontuario = (string) $_POST['prontuario'];
 $curso      = $_POST["codigo_curso"];
 $resp_nome  = $_POST["resp_nome"];
 $resp_cargo = $_POST["resp_cargo"];
 $turma      = $_POST["turma"];
+$campus_id  = (int) $_POST['campus_id'];
+
+
+$aluno = (int) $conn->get_one("SELECT DISTINCT ref_pessoa FROM contratos WHERE ref_campus = $campus_id AND prontuario = '$prontuario';");
+
+if ($aluno == 0 && !empty($prontuario))
+	exit('<script language="javascript" type="text/javascript">window.alert("ERRO! Aluno não encontrado!");window.close();</script>');
 
 
 
@@ -203,12 +210,14 @@ if($num_result < 1)
 $RsCurso = $conn->Execute("SELECT descricao ||' (' || id || ') ' as \"Curso\" FROM cursos WHERE id = $curso;");
 $info = "<h4>" . $RsCurso->fields[0] . "</h4>";
 
-$RsPeriodo = $conn->Execute("SELECT descricao FROM periodos WHERE id = '$periodo';");
-$DescricaoPeriodo = $RsPeriodo->fields[0];
+$DescricaoPeriodo = $conn->get_one("SELECT descricao FROM periodos WHERE id = '$periodo';");
+$nome_campus = $conn->get_one("SELECT cidade_campus FROM campus WHERE id = " . $campus_id . ";");
 
+$info .= "<strong>Período: </strong> <span>$DescricaoPeriodo</span> $des_turma&nbsp;&nbsp;-&nbsp;&nbsp;";
+$info .= "<strong>Campus: </strong> <span>$nome_campus</span><br />";
 $info .= "<strong>Data: </strong>" . date("d/m/Y") . "&nbsp;&nbsp;-&nbsp;&nbsp;";
 $info .= "<strong>Hora: </strong>" . date("H:i:s") . "&nbsp;&nbsp;-&nbsp;&nbsp;";
-$info .= "<strong>Total de Registros: </strong>" . $num_result . "&nbsp;&nbsp;-&nbsp;&nbsp;";
-$info .= "<strong>Período: </strong> <span>$DescricaoPeriodo</span> $des_turma<br><br>";
+$info .= "<strong>Total de Registros: </strong>" . $num_result .'<br /><br />';
+
 
 ?>

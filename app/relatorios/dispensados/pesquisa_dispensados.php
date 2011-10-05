@@ -8,6 +8,7 @@ $conn = new connection_factory($param_conn);
 $Result1 = $conn->Execute("SELECT descricao, id FROM periodos ORDER BY 1 DESC;");
 
 $Result2 = $conn->Execute("SELECT nome_campus, id FROM campus ORDER BY 1 DESC;");
+$arr_campi = $conn->get_all('SELECT id, nome_campus FROM campus ORDER BY nome_campus;');
 
 $Result3 = $conn->Execute("SELECT descricao, id FROM tipos_curso ORDER BY 1 DESC;");
 
@@ -54,14 +55,29 @@ $carimbo = new carimbo($param_conn);
         	<span class="textfieldRequiredMsg">Obrigat&oacute;rio.</span>
         </span>
         <br />
-			Campus:<br />
-            <?php print $Result2->GetMenu('campus_id',null,true,false,0); ?>
-			<span class="comentario">Caso n&atilde;o selecionado exibir&aacute; todos.</span>
+        Campus:<br />
+        <select id="campus" name="campus" disabled="disabled">
+        <?php
+          $ref_campus = 0;
+          foreach($arr_campi as $campus): 
+            if ($_SESSION['sa_campus'] == $campus['nome_campus']) {
+              $selected = ' selected="selected"'; 
+              $ref_campus = $campus['id'];
+            }
+            else
+              $selected = '';
+        ?>
+          <option value="<?=$campus['id']?>" <?=$selected?>>
+            <?=$campus['nome_campus']?>
+          </option>
+        <?php endforeach;?>
+        </select> 
+        <input type="hidden" name="campus_id" id="campus_id" value="<?=$ref_campus?>" />
         <br />
          <h4>Ou</h4>
-                C&oacute;digo do aluno:<br />
-                &nbsp;&nbsp;<span class="comentario">Se preenchido, os campos anteriores ser&aatilde;o ignorados.</span><br />
-                <input name="aluno_id" type="text" id="aluno_id" size="10" />
+                Prontu&aacute;rio do aluno:<br />
+                &nbsp;&nbsp;<span class="comentario">Se preenchido, os campos anteriores ser&atilde;o ignorados.</span><br />
+                <input name="prontuario" type="text" id="prontuario" size="10" />
                 <br />
 
 

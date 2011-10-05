@@ -4,6 +4,8 @@ require_once("../../../app/setup.php");
 
 $conn = new connection_factory($param_conn);
 
+$arr_campi = $conn->get_all('SELECT id, nome_campus FROM campus ORDER BY nome_campus;');
+
 $Result1   = $conn->Execute("SELECT descricao, id FROM periodos ORDER BY 1 DESC;");
 
 $Result3   = $conn->Execute("SELECT descricao, id FROM tipos_curso ORDER BY 1 DESC;");
@@ -53,9 +55,24 @@ $RsCidades = $conn->Execute("SELECT nome_campus, id FROM campus WHERE ref_empres
 		    <?php print $Result3->GetMenu('tipo',null,true,false,0); ?>
 		    <span class="comentario">Caso n&atilde;o selecionado exibir&aacute; todos.</span>
 			<br />
-			Campus:<br />
-			<?php  print $RsCidades->GetMenu('cidade',null,true,false,0); ?>
-			<span class="comentario">Caso n&atilde;o preenchido exibir&aacute; todos.</span>
+		    Campus:<br />
+        <select id="campus" name="campus" disabled="disabled">
+        <?php
+          $ref_campus = 0;
+          foreach($arr_campi as $campus): 
+            if ($_SESSION['sa_campus'] == $campus['nome_campus']) {
+              $selected = ' selected="selected"'; 
+              $ref_campus = $campus['id'];
+            }
+            else
+              $selected = '';
+        ?>
+          <option value="<?=$campus['id']?>" <?=$selected?>>
+            <?=$campus['nome_campus']?>
+          </option>
+        <?php endforeach;?>
+        </select> 
+        <input type="hidden" name="campus_id" id="campus_id" value="<?=$ref_campus?>" />
 		</div>
 	</form>
 	<script type="text/javascript">

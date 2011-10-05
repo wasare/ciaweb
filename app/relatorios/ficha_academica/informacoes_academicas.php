@@ -10,10 +10,21 @@ require_once($BASE_DIR .'core/date.php');
 $conn = new connection_factory($param_conn);
 $header  = new header($param_conn);
 
-$aluno_id = (int) $_GET['aluno'];
+$prontuario = (string) $_GET['p'];
+$campus_id = (int) $_GET['c'];
+
+// @todo validar acesso somente as informações do campus do usuário
+
+if ($prontuario == 0 || $campus_id == 0)
+    exit('<script language="javascript" type="text/javascript">window.alert("ERRO! Dados invalidos!");window.close();</script>');
+
+
+$aluno_id = (int) $conn->get_one("SELECT ref_pessoa FROM pessoa_prontuario_campus WHERE ref_campus = $campus_id AND prontuario = '$prontuario';");
 
 if ($aluno_id == 0)
-    exit('<script language="javascript" type="text/javascript">window.alert("ERRO! Dados invalidos!");window.close();</script>');
+    exit('<script language="javascript" type="text/javascript">window.alert("ERRO! Aluno não encontrado!");window.close();</script>');
+
+
 
 $sql1 = "SELECT DISTINCT
     d.id, 
@@ -74,7 +85,7 @@ $contratos = $conn->get_all('SELECT DISTINCT c.id, pessoa_nome(c.ref_pessoa) AS 
         <a target="_blank" href="<?=$BASE_URL?>/app/relatorios/pessoas/lista_pessoa.php?pessoa_id=<?=$aluno_id?>">
           <img src="<?=$BASE_URL?>/public/images/icons/pessoa.png" width="20" height="20" border="0" title="Informa&ccedil;&otilde;es pessoais" alt="Informa&ccedil;&otilde;es pessoais" />
         </a>
-        <br /><b>Matr&iacute;cula: </b><?=str_pad($aluno_id, 5, "0", STR_PAD_LEFT)?></font><br>
+        <br /><b>Prontu&aacute;rio: </b><?=$prontuario?></font><br>
     </div>
     <h4>Contratos</h4>
     <table cellpadding="0" cellspacing="0" class="relato">
@@ -104,11 +115,11 @@ $contratos = $conn->get_all('SELECT DISTINCT c.id, pessoa_nome(c.ref_pessoa) AS 
         <td align="center"><?=date::convert_date($c['dt_desativacao'])?></td>
         <td align="center">
           &nbsp;
-          <a target="_blank" href="lista_ficha_academica.php?aluno=<?=$aluno_id?>&cs=<?=$c['ref_curso']?>&contrato=<?=$c['id']?>">
+          <a target="_blank" href="lista_ficha_academica.php?aluno=<?=$aluno_id?>&cs=<?=$c['ref_curso']?>&contrato=<?=$c['id']?>&campus=<?=$campus_id?>">
             <img src="<?=$BASE_URL?>/public/images/icons/report.png" width="20" height="20" border="0" title="Visualizar ficha acad&ecirc;mica" alt="Visualizar ficha acad&ecirc;mica" />
           </a>
           &nbsp;&nbsp;
-          <a target="_blank" href="<?=$BASE_URL?>/app/relatorios/integralizacao_curso/lista_integralizacao_curso.php?aluno=<?=$aluno_id?>&cs=<?=$c['ref_curso']?>&contrato=<?=$c['id']?>">
+          <a target="_blank" href="<?=$BASE_URL?>/app/relatorios/integralizacao_curso/lista_integralizacao_curso.php?aluno=<?=$aluno_id?>&cs=<?=$c['ref_curso']?>&contrato=<?=$c['id']?>&campus=<?=$campus_id?>">
             <img src="<?=$BASE_URL?>/public/images/icons/verifica.png" width="20" height="20" border="0" title="Verifica integraliza&ccedil;&atilde;o do curso" alt="Verifica integraliza&ccedil;&atilde;o do curso" />
           </a>
           &nbsp;

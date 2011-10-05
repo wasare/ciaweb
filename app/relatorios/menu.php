@@ -1,6 +1,10 @@
 <?php
 
-require("../../app/setup.php");
+require_once("../../app/setup.php");
+
+$conn = new connection_factory($param_conn);
+
+$arr_campi = $conn->get_all('SELECT id, nome_campus FROM campus ORDER BY nome_campus;');
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -84,8 +88,23 @@ require("../../app/setup.php");
                         <legend><strong><h3>Acesso R&aacute;pido</h3></strong></legend>
                         <fieldset>
                             <legend><strong>Informações Acad&ecirc;micas</strong></legend>
-                            Matr&iacute;cula:&nbsp;<input type="text" name="aluno_id" id="aluno_id" size="6" />
-                            <input type="button" name="envia_aluno" id="envia_aluno" value="OK" onclick="abrir('<?=$IEnome?>' + ' web diário', '<?=$BASE_URL?>' + 'app/relatorios/ficha_academica/informacoes_academicas.php?aluno=' + $F('aluno_id'));" />
+                            Campus:&nbsp;
+                            <select id="campus" name="campus" disabled="disabled">
+                              <?php
+                              foreach($arr_campi as $campus): 
+                                if ($_SESSION['sa_campus'] == $campus['nome_campus'])
+                                  $selected = ' selected="selected"'; 
+                                else
+                                  $selected = '';
+                              ?>
+                                <option value="<?=$campus['id']?>" <?=$selected?>>
+                                  <?=$campus['nome_campus']?>
+                                </option>
+                              <?php endforeach;?>
+                            </select>                            
+                            <br />
+                            Prontu&aacute;rio:&nbsp;<input type="text" name="aluno_id" id="aluno_id" size="6" />
+                            <input type="button" name="envia_aluno" id="envia_aluno" value="OK" onclick="abrir('<?=$IEnome?>' + ' web diário', '<?=$BASE_URL?>' + 'app/relatorios/ficha_academica/informacoes_academicas.php?p=' + $F('aluno_id') + '&c=' + $F('campus'));" />
                         </fieldset>
                         <br />
                         <fieldset>

@@ -7,6 +7,8 @@ $conn = new connection_factory($param_conn);
 
 $carimbo = new carimbo($param_conn);
 
+$arr_campi = $conn->get_all('SELECT id, nome_campus FROM campus ORDER BY nome_campus;');
+
 $Result1 = $conn->Execute("SELECT descricao, id FROM periodos ORDER BY 1 DESC;");
 
 $Result2 = $conn->Execute("SELECT nome_campus, id FROM campus ORDER BY 1 DESC;");
@@ -88,9 +90,25 @@ $Result3 = $conn->Execute("SELECT descricao, id FROM tipos_curso ORDER BY 1 DESC
 			<?php print $Result3->GetMenu('tipo',null,true,false,0); ?>
 			<span class="comentario">Caso n&atilde;o selecionado exibir&aacute; todos.</span>
 			<br />
-			Campus:<br />
-            <?php print $Result2->GetMenu('campus',null,true,false,0); ?>
-			<span class="comentario">Caso n&atilde;o selecionado exibir&aacute; todos.</span>
+		    Campus:<br />
+        <select id="campus_select" name="campus_select" disabled="disabled">
+        <?php
+          $ref_campus = 0;
+          foreach($arr_campi as $campus): 
+            if ($_SESSION['sa_campus'] == $campus['nome_campus']) {
+              $selected = ' selected="selected"'; 
+              $ref_campus = $campus['id'];
+            }
+            else
+              $selected = '';
+        ?>
+          <option value="<?=$campus['id']?>" <?=$selected?>>
+            <?=$campus['nome_campus']?>
+          </option>
+        <?php endforeach;?>
+        </select> 
+        <input type="hidden" name="campus" id="campus" value="<?=$ref_campus?>" /> 
+		    <br />
 			<br />
 			Assinatura:<br />
 			<?php echo $carimbo->listar();?>

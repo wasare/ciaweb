@@ -11,9 +11,14 @@ $header  = new header($param_conn);
 $carimbo = new carimbo($param_conn);
 
 $periodo = (string) $_POST['periodo1'];
-$aluno_id = (int) $_POST['aluno_id'];
+$pronturio = (string) $_POST['prontuario'];
 
 $campus_id = (int) $_POST['campus_id'];
+
+$aluno_id = (int) $conn->get_one("SELECT DISTINCT ref_pessoa FROM contratos WHERE ref_campus = $campus_id AND prontuario = '$prontuario';");
+
+if ($aluno_id == 0 && !empty($prontuario))
+	exit('<script language="javascript" type="text/javascript">window.alert("ERRO! Aluno não encontrado!");window.close();</script>');
 
 
 if ($aluno_id == 0 && empty($periodo)) {

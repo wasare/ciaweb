@@ -17,6 +17,7 @@ $aluno_id   = $_POST["aluno"];
 $sql = "
 SELECT DISTINCT
     p.id as \"Matrícula\",
+    c.prontuario as \"Prontuário\",
     p.nome as \"Nome\",
     SUM(d.carga_horaria) AS \"CH Matriculada\",
     SUM(m.num_faltas) as \"Total Faltas\",
@@ -27,7 +28,8 @@ FROM
     disciplinas d,
     pessoas p,
     disciplinas_ofer o,
-    periodos s
+    periodos s,
+    contratos c
 WHERE
     m.ref_pessoa = p.id AND
     p.id IN (
@@ -44,16 +46,16 @@ WHERE
     m.dt_matricula >= '2004-01-01' AND
     m.ref_disciplina_ofer = o.id AND
     d.id = o.ref_disciplina AND                
+    c.id = m.ref_contrato AND
 	s.id = o.ref_periodo ";
 
 if ( is_numeric($aluno_id) )
 	$sql .= " AND p.id = $aluno_id ";
 
-$sql .= "  GROUP BY p.id, p.nome, m.ref_periodo, m.ref_curso   ORDER BY 2";
+$sql .= "  GROUP BY p.id, p.nome, m.ref_periodo, m.ref_curso,c.prontuario   ORDER BY 2";
 
 
 $sql = 'SELECT * FROM ('. $sql .') AS T1 ORDER BY lower(to_ascii("Nome",\'LATIN1\'));';
-
 
 $Result1 = $conn->Execute($sql);
 

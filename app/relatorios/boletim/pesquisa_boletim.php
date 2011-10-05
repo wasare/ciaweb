@@ -5,6 +5,8 @@ require_once("../../../core/search.php");
 
 $conn = new connection_factory($param_conn);
 
+$arr_campi = $conn->get_all('SELECT id, nome_campus FROM campus ORDER BY nome_campus;');
+
 $Result1 = $conn->Execute("SELECT descricao, id FROM periodos ORDER BY 1 DESC;");
 
 $busca   = new search('search','codigo_curso','searchlist', 'form1', '../curso_lista.php');
@@ -52,6 +54,25 @@ $busca   = new search('search','codigo_curso','searchlist', 'form1', '../curso_l
 		        <span class="textfieldRequiredMsg">Valor obrigat&oacute;rio.</span>
 		    </span>
 		    <br />
+		    Campus:<br />
+        <select id="campus" name="campus" disabled="disabled">
+        <?php
+          $ref_campus = 0;
+          foreach($arr_campi as $campus): 
+            if ($_SESSION['sa_campus'] == $campus['nome_campus']) {
+              $selected = ' selected="selected"'; 
+              $ref_campus = $campus['id'];
+            }
+            else
+              $selected = '';
+        ?>
+          <option value="<?=$campus['id']?>" <?=$selected?>>
+            <?=$campus['nome_campus']?>
+          </option>
+        <?php endforeach;?>
+        </select> 
+        <input type="hidden" name="campus_id" id="campus_id" value="<?=$ref_campus?>" /> 
+		    <br />
 		    Curso:<br />
 		    <span id="sprytextfield2">
 		        <?php 
@@ -61,9 +82,10 @@ $busca   = new search('search','codigo_curso','searchlist', 'form1', '../curso_l
 		        ?>
 				<span class="textfieldRequiredMsg">Obrigat&oacute;rio.</span>
 		    </span>
+
 		    <br />
-		    C&oacute;digo do Aluno:<br />
-		    <input name="aluno_id" type="text" id="aluno_id" size="10" />
+		    Pront&aacute;rio do Aluno:<br />
+		    <input name="prontuario" type="text" id="prontuario" size="12" />
 		    <span class="comentario">Caso n&atilde;o preenchido exibir&aacute; todos.</span>
 		</div>
 	</form>

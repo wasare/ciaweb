@@ -6,6 +6,8 @@ require_once("../../../core/search.php");
 
 $conn = new connection_factory($param_conn);
 
+$arr_campi = $conn->get_all('SELECT id, nome_campus FROM campus ORDER BY nome_campus;');
+
 $Result1 = $conn->Execute("SELECT descricao, id FROM periodos ORDER BY 1 DESC;");
 
 $carimbo = new carimbo($param_conn);
@@ -48,6 +50,25 @@ $carimbo = new carimbo($param_conn);
             <?php  print $Result1->GetMenu('periodo',null,true,false,0,'onchange="ChangeOp()"'); ?>
             <span class="textfieldRequiredMsg">Obrigat&oacute;rio.</span>
         </span>
+        <br />
+        Campus:<br />
+        <select id="campus" name="campus" disabled="disabled">
+        <?php
+          $ref_campus = 0;
+          foreach($arr_campi as $campus): 
+            if ($_SESSION['sa_campus'] == $campus['nome_campus']) {
+              $selected = ' selected="selected"'; 
+              $ref_campus = $campus['id'];
+            }
+            else
+              $selected = '';
+        ?>
+          <option value="<?=$campus['id']?>" <?=$selected?>>
+            <?=$campus['nome_campus']?>
+          </option>
+        <?php endforeach;?>
+        </select> 
+        <input type="hidden" name="campus_id" id="campus_id" value="<?=$ref_campus?>" /> 
         <br />
 	Assinatura:<br />
 	<?php echo $carimbo->listar();?>

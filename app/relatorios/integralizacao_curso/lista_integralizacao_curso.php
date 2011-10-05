@@ -11,12 +11,13 @@ $header  = new header($param_conn);
 $aluno_id    = (int) $_GET['aluno'];
 $curso_id    = (int) $_GET['cs'];
 $contrato_id = (int) $_GET['contrato'];
+$campus_id = (int) $_GET['campus'];
 
 $NOTAS = mediaPeriodo($conn->get_one('SELECT ref_periodo_turma FROM contratos WHERE id = '. $contrato_id));
 $MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
 $NOTA_MAXIMA = $NOTAS['nota_maxima'];
 
-if ($aluno_id == 0 || $curso_id == 0 || $contrato_id == 0)
+if ($aluno_id == 0 || $curso_id == 0 || $contrato_id == 0 || $campus_id == 0)
     exit('<script language="javascript" type="text/javascript">window.alert("ERRO! Dados invalidos!");window.close();</script>');
 
 
@@ -29,6 +30,8 @@ if(isset($_SESSION['sa_modulo']) && $_SESSION['sa_modulo'] == 'web_diario_login'
   }
   // ^ VERIFICA O DIREITO DE ACESSO A FICHA COMO PROFESSOR OU COORDENADOR ^ //
 }
+
+$prontuario = (string) $conn->get_one("SELECT prontuario FROM pessoa_prontuario_campus WHERE ref_campus = $campus_id AND ref_pessoa = $aluno_id;");
 
 $fl_integralizado = FALSE;
 
@@ -151,7 +154,7 @@ $contrato = $conn->get_row('SELECT nome_campus, turma FROM campus a , contratos 
     </div>
       <h2>Integraliza&ccedil;&atilde;o de Curso</h2>
     <div id="cabecalho" style="text-align: left;">
-      <font color="#000000" size="2"><b> Nome: </b><?=$nome_aluno?>&nbsp;&nbsp;<b>Matr&iacute;cula: </b><?=str_pad($aluno_id, 5, "0", STR_PAD_LEFT)?></font><br>
+      <font color="#000000" size="2"><b> Nome: </b><?=$nome_aluno?>&nbsp;&nbsp;<b>Prontu&aacute;rio: </b><?=$prontuario?></font><br>
       <font color="#000000" size="2"> <b>Curso: </b><?=$nome_curso?>
         <br /><b>Turma: </b><?=$turma = (!empty($contrato['turma'])) ? $contrato['turma'] : '-'?>&nbsp;&nbsp;<b>Contrato: </b><?=$contrato_id?></font><br />
       <font color="#000000" size="2"> <b>Campus: </b><?=$contrato['nome_campus']?><br />

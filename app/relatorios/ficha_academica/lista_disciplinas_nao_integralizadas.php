@@ -1,6 +1,6 @@
 <?php
 
-if ($aluno_id == 0 || $curso_id == 0 || $contrato_id == 0)
+if ($aluno_id == 0 || $curso_id == 0 || $contrato_id == 0 || $campus_id == 0)
     exit('<script language="javascript" type="text/javascript">window.alert("ERRO! Dados invalidos!");window.close();</script>');
 
 
@@ -19,7 +19,12 @@ $fl_integralizado = FALSE;
 // TODAS AS DISCIPLINAS DA MATRIZ CURRICULAR
 $sql_disciplinas_curso = "SELECT ref_disciplina FROM cursos_disciplinas WHERE ref_curso = $curso_id;";
 
+
 // DISCIPLINAS APROVADAS COM MATRICULA PARA O CONTRATO CONSULTADO
+$NOTAS = mediaPeriodo($conn->get_one('SELECT ref_periodo_turma FROM contratos WHERE id = '. $contrato_id));
+$MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
+$NOTA_MAXIMA = $NOTAS['nota_maxima'];
+
 $sql_disciplinas_aprovadas = "
         SELECT DISTINCT
             o.ref_disciplina
@@ -33,12 +38,11 @@ $sql_disciplinas_aprovadas = "
                 o.is_cancelada = '0' AND
                 m.dt_cancelamento IS NULL AND
                 (
-                    ( m.nota_final >= $MEDIA_FINAL_APROVACAO AND
+                    (  m.nota_final >= $MEDIA_FINAL_APROVACAO AND
                       o.fl_finalizada = 't' AND
                       ( m.num_faltas <= ( get_carga_horaria_realizada(o.id) ) * 0.25 ) ) OR
                     ref_motivo_matricula IN (2,3,4)
                 ); ";
-
 
 $disciplinas_curso = (array) $conn->get_col($sql_disciplinas_curso);
 

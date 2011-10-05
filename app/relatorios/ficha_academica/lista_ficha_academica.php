@@ -13,10 +13,15 @@ $header  = new header($param_conn);
 $aluno_id    = (int) $_GET['aluno'];
 $curso_id    = (int) $_GET['cs'];
 $contrato_id = (int) $_GET['contrato'];
+$campus_id = (int) $_GET['campus'];
 
 
-if ($aluno_id == 0 || $curso_id == 0 || $contrato_id == 0)
+
+if ($aluno_id == 0 || $curso_id == 0 || $contrato_id == 0 || $campus_id == 0)
     exit('<script language="javascript" type="text/javascript">window.alert("ERRO! Dados invalidos!");window.close();</script>');
+
+$prontuario = (string) $conn->get_one("SELECT prontuario FROM pessoa_prontuario_campus WHERE ref_campus = $campus_id AND ref_pessoa = $aluno_id;");
+
 
 
 //  VERIFICA O DIREITO DE ACESSO A FICHA COMO PROFESSOR OU COORDENADOR
@@ -43,7 +48,8 @@ $sql1 = "SELECT DISTINCT
     m.ref_motivo_matricula,
     professor_disciplina_ofer_todos(o.id),
     get_carga_horaria_realizada(o.id) as carga_horaria_realizada,
-    o.fl_digitada, o.fl_finalizada
+    o.fl_digitada, o.fl_finalizada,
+    c.prontuario
     FROM
         matricula m, disciplinas d, disciplinas_ofer o, periodos s, contratos c
     WHERE
@@ -85,7 +91,7 @@ $contrato = $conn->get_row('SELECT nome_campus, turma, dt_formatura FROM campus 
     </div>
 	<h2>Ficha Acad&ecirc;mica</h2>
     <div id="cabecalho" style="text-align: left;">
-      <font color="#000000" size="2"><b> Nome: </b><?=$nome_aluno?>&nbsp;&nbsp;<b>Matr&iacute;cula: </b><?=str_pad($aluno_id, 5, "0", STR_PAD_LEFT)?></font><br>
+      <font color="#000000" size="2"><b> Nome: </b><?=$nome_aluno?>&nbsp;&nbsp;<b>Prontu&aacute;rio: </b><?=$prontuario?></font><br>
       <font color="#000000" size="2"> <b>Curso: </b><?=$nome_curso?>&nbsp;&nbsp;<b>Turma: </b><?=$turma = (!empty($contrato['turma'])) ? $contrato['turma'] : '-'?></font><br />
       <font color="#000000" size="2"> <b>Campus: </b><?=$contrato['nome_campus']?>&nbsp;&nbsp;<b>Contrato: </b><?=$contrato_id?><br /><b>Data: </b> <?php echo date("d/m/Y"); ?>&nbsp;&nbsp;<b>Hora: </b><?php echo date("H:i"); ?></font><br />
     </div>
@@ -218,6 +224,7 @@ foreach ($ficha_academica as $disc) {
 		$chRealizadaAprovado += $carga_realizada;
 	}
 
+
      //total notas matriculada
      $notaMatriculada += $nota_final;
      //total percentual de faltas
@@ -287,7 +294,8 @@ $percFaltasMatriculada = number_format($percFaltasMatriculada,'2',',','.');
   endif;
 ?>
 
-<br /><br />
+<br />
+
 <table border="0" cellspacing="0" cellpadding="0" class="relato">
   <tr bgcolor="666666">
     <th height="24" colspan="2">
@@ -321,16 +329,9 @@ $percFaltasMatriculada = number_format($percFaltasMatriculada,'2',',','.');
   <tr>
     <td>Data de cola&ccedil;&atilde;o de grau: </td>
     <td align="center"><?=$data_colacao_grau = !empty($contrato['dt_formatura']) ? date::convert_date($contrato['dt_formatura']) : ' - '; ?></td>
-  </tr
+  </tr>
 </table>
 <br />
-<?php
-  $NOTAS = mediaPeriodo($periodo);
-  $MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
-  $NOTA_MAXIMA = $NOTAS['nota_maxima'];
-
-  require_once('lista_disciplinas_nao_integralizadas.php');
-?>
 <div align="left" class="relato" style="font-size: 0.75em;">
     <h4>Legenda</h4>
     <strong>CI</strong> - Disciplina Cursada na Institui&ccedil;&atilde;o<br />
@@ -343,6 +344,14 @@ $percFaltasMatriculada = number_format($percFaltasMatriculada,'2',',','.');
     <strong>DE</strong> - Disciplina Equivalente<br />
 </div>
 <br />
+
+<div id="disciplinas_nao_integralizadas">
+<?php
+  require_once('lista_disciplinas_nao_integralizadas.php');
+?>
+</div>
+
+
 <br />
 
 <div class="nao_imprime">

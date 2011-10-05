@@ -217,15 +217,22 @@ class concat_pdf extends FPDI {
 
 }
 
+$conn = new connection_factory($param_conn);
+
 $periodo  = $_POST['periodo'];
 $curso    = $_POST['codigo_curso'];
-$aluno_id = $_POST['aluno_id'];
+$prontuario = (string) $_POST['prontuario'];
+$campus_id = (int) $_POST['campus_id'];
+
+$aluno_id = (int) $conn->get_one("SELECT DISTINCT ref_pessoa FROM contratos WHERE ref_campus = $campus_id AND prontuario = '$prontuario';");
+
+if ($aluno_id == 0 && !empty($prontuario))
+	exit('<script language="javascript" type="text/javascript">window.alert("ERRO! Aluno não encontrado!");window.close();</script>');
+
 
 $qryCurso = " SELECT id || ' - ' || descricao FROM cursos WHERE id = ".$curso.";";
 
 $Registro = $Mat;
-
-$conn = new connection_factory($param_conn);
 
 $NCurso = $conn->get_one($qryCurso);
 
@@ -240,13 +247,17 @@ WHERE
 	ref_periodo = '$periodo' AND
 	ref_curso = $curso ";
 	
-if (!empty($aluno_id)  && is_numeric($aluno_id) ) {
+if ($aluno_id >= 0 && !empty($prontuario)) {
 	$qryAlunos .= "AND A.ref_pessoa = ".$aluno_id;
 }
 
 $qryAlunos .= " ORDER BY A.ref_pessoa;";
 
 $aAlunos = $conn->get_all($qryAlunos);
+
+if (count($aAlunos) == 0)
+	exit('<script language="javascript" type="text/javascript">window.alert("ERRO! Nenhum aluno encontrado!");window.close();</script>');
+
 
 
 $qryBoletim = '

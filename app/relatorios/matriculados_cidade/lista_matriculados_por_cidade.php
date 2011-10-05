@@ -12,6 +12,7 @@ $header  = new header($param_conn);
 $carimbo = new carimbo($param_conn);
 
 $periodo = $_POST['periodo1'];
+$campus_id = (int) $_POST['campus_id'];
 
 $sqlCursos = "
 select distinct 
@@ -20,6 +21,7 @@ from
     matricula m, cursos c
 where
     m.ref_periodo = '$periodo' AND
+    m.ref_campus = $campus_id AND
     m.ref_curso = c.id
 ORDER BY 2;";
 
@@ -30,6 +32,8 @@ $total = $RsCursos->RecordCount();
 if($total < 1){
   echo "<script>alert('Nenhum registro foi retornado!'); window.close();</script>";
 }
+
+$campus_nome = $conn->get_one("SELECT cidade_campus FROM campus WHERE id = " . $campus_id . ";");
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -47,7 +51,8 @@ if($total < 1){
        	<?php echo $header->get_empresa($PATH_IMAGES, $IEnome); ?>
 
   <h2>MATRÍCULAS/CIDADES DE ALUNOS POR CURSO</h2>
-  <h3>Per&iacute;odo: <?=$periodo; ?></h3>
+  <h3>Per&iacute;odo: <?=$periodo?></h3>
+  <h3>Campus: <?=$campus_nome?></h3>
   <br />
     <?php
         while(!$RsCursos->EOF) {

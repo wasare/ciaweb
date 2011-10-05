@@ -48,10 +48,18 @@ $busca1  = new search('periodo','periodo_id','periodos_list', 'form1', '../perio
                 </span>
                 <br />
                 Campus:<br />
-                <select id="campus" name="campus">
-                    <?php foreach($arr_campi as $campus): ?>
-                    <option value="<?=$campus['id']?>"><?=$campus['nome_campus']?></option>
-                    <?php endforeach; ?>
+                <select id="campus" name="campus" disabled="disabled">
+                 <?php
+                  foreach($arr_campi as $campus): 
+                    if ($_SESSION['sa_campus'] == $campus['nome_campus'])
+                      $selected = ' selected="selected"'; 
+                    else
+                      $selected = '';
+                 ?>
+                    <option value="<?=$campus['id']?>" <?=$selected?>>
+                      <?=$campus['nome_campus']?>
+                    </option>
+                <?php endforeach;?>
                 </select>
                 <br /><br />
                 <p>
