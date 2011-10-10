@@ -279,7 +279,7 @@ $diarios_turma = array();
                         
                         if ( $nota_distribuida == "") {
                             $nota_distribuida = 0;
-                        }
+                        }                     
                         
                         $destaca_nota_distribuida = ($nota_distribuida == 0) ? ' bgcolor="#cccccc"' : ''; 
                         
@@ -420,7 +420,7 @@ $diarios_turma = array();
                       <?=$aluno[$diario]['nota']?></td>
                       <td align="center" <?=$destaca_faltas?>><?=$aluno[$diario]['faltas']?>
                     <?php else : ?>
-                      </td><td align="center">                      
+                      -</td><td align="center">-                     
                     <?php endif;?>
                 </td>                
                 <?php endforeach; ?>

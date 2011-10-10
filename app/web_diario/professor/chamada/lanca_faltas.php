@@ -191,6 +191,7 @@ function autoTab(input,len, e) {
     <td align="center"><strong>Faltas</strong></td>
     <td align="center"><b>&nbsp;Matr&iacute;cula</b></td>
     <td><b>&nbsp;Nome do aluno</b></td>
+    <td><b>&nbsp;Faltas</b></td>
 		<td><b>&nbsp;% Faltas atual</b></td>
   </tr>
 
@@ -230,7 +231,13 @@ $ordem = 1;
         </td>
         <td align="center"><?=$matricula?></td>
         <td><?=$nome?></td>
-				<td align="center"><font color="<?=$destaque_faltas?>"><?=number::numeric2decimal_br($percentual_faltas_atual,2);?></font></td>				
+        <td align="center">
+				  <font color="<?=$destaque_faltas?>"><?=$faltas?></font>
+				</td>		
+				<td align="center">
+				  <font color="<?=$destaque_faltas?>"><?=number::numeric2decimal_br($percentual_faltas_atual,2);?>
+				  </font>
+				</td>					
         </tr>
 <?php
 		$ordem++;

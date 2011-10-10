@@ -3,6 +3,7 @@
 require_once(dirname(__FILE__) .'/../../../setup.php');
 require_once($BASE_DIR .'core/web_diario.php');
 require_once($BASE_DIR .'core/date.php');
+require_once($BASE_DIR .'core/number.php');
 
 $conn = new connection_factory($param_conn);
 
@@ -69,7 +70,8 @@ $faltas_chamada = $conn->get_all($sql_falta);
 $sql1 ="SELECT DISTINCT
   p.nome,
   p.id,
-  p.ra_cnec
+  p.ra_cnec,
+  m.num_faltas
 FROM
   matricula m
   INNER JOIN pessoas p ON (m.ref_pessoa = p.id)
@@ -81,6 +83,9 @@ ORDER BY
 
 
 $alunos = $conn->get_all($sql1);
+
+$sql_carga_horaria = "SELECT get_carga_horaria_realizada($diario_id);";
+$carga_horaria_realizada = $conn->get_one($sql_carga_horaria);
 
 ?>
 
@@ -178,10 +183,12 @@ function autoTab(input,len, e) {
 <br />
 <table cellspacing="0" cellpadding="0" class="papeleta">
   <tr bgcolor="#666666">
-    <td align="center"><font color="#FFFFFF"><strong>N&ordm; ordem</strong></font></td>
-    <td align="center"><font color="#FFFFFF"><strong>Faltas</strong></font></td>
-    <td align="center"><font color="#FFFFFF"><b>&nbsp;Matr&iacute;cula</b></font></td>
-    <td><font color="#FFFFFF"><b>&nbsp;Nome do aluno</b></font></td>
+	<td align="center"><b>Ordem</b></td>
+    <td align="center"><strong>Faltas</strong></td>
+    <td align="center"><b>&nbsp;Matr&iacute;cula</b></td>
+    <td><b>&nbsp;Nome do aluno</b></td>
+    <td><b>&nbsp;Faltas</b></td>
+		<td><b>&nbsp;% Faltas atual</b></td>
   </tr>
   
 <?php 
@@ -192,6 +199,7 @@ $ordem = 1;
 foreach($alunos as $aluno) :
 	$aluno_id = $aluno['ra_cnec'];
 	$nome_aluno = $aluno['nome'];
+	$total_faltas = (int) $aluno['num_faltas'];
 
 	$faltas = '';
 
@@ -201,13 +209,18 @@ foreach($alunos as $aluno) :
 
         foreach($faltas_chamada as $aluno_chamada) {
           if($aluno_chamada['ra_cnec'] == $aluno_id) {
-            $faltas = $aluno_chamada['faltas'];
+            $faltas = (int) $aluno_chamada['faltas'];
             break;
           }
         }
-      }
+  }
 
-      if($st == '#F3F3F3') $st = '#E3E3E3'; else $st ='#F3F3F3';
+  if($st == '#F3F3F3') $st = '#E3E3E3'; else $st ='#F3F3F3';
+      
+  $percentual_faltas_atual = round($total_faltas / $carga_horaria_realizada * 100, 2);
+		
+	$destaque_faltas = ($percentual_faltas_atual > 25) ? 'red' : 'black';
+      
 ?>
 
   <tr bgcolor="<?=$st?>">
@@ -217,6 +230,13 @@ foreach($alunos as $aluno) :
     </td>
     <td align="center"><?=$aluno_id?></td>
     <td><?=$nome_aluno?></td>
+    <td align="center">
+		  <font color="<?=$destaque_faltas?>"><?=$total_faltas?></font>
+		</td>		
+		<td align="center">
+			<font color="<?=$destaque_faltas?>"><?=number::numeric2decimal_br($percentual_faltas_atual,2);?>
+		  </font>
+	  </td>
   </tr>
 <?php
 

@@ -161,6 +161,8 @@ $qtde_notas = $conn->get_one($sql_quantidade_notas);
 
 <script type="text/javascript">
 
+jQuery.noConflict();
+
 function findNextElement(index) {
  if(Prototype.Browser.IE) {
     elements = new Form.getElements(document.forms[0]);
@@ -203,8 +205,43 @@ function validate_nota(field) {
 		alert("Você não pode lançar " + field.value + " pontos e distribuir somente " + distribuida + " pontos!");
         field.focus();
     }
+    else
+      if(toNumeric(distribuida) <= 0 || distribuida == '') {
+		    alert("Você deve informar o valor máximo da Nota P" + <?=$prova?> + " em \"Nota distribuída\"!");
+        $('valor_avaliacao').focus();
+      }    
 }
 
+function validate_valor_avaliacao(field) {
+  var valida = true;
+  $('informa_notas').getInputs('text').each(function(input) {  
+    if(toNumeric(input.value) > toNumeric(field.value)) {
+      valida = false;
+    }  
+  });  
+      
+  if(!valida) {
+   alert("Você não pode lançar nota(s) maior(es) que o valor máximo \ndefinido no campo \"Nota distribuída\"!\n\nPor favor, revise seus lançamentos.");
+   return false;
+  }  
+}
+
+function validate_notas() {
+  var valida = true;
+  var valor_avaliacao = $F('valor_avaliacao');
+  $('informa_notas').getInputs('text').each(function(input) {  
+    if(toNumeric(input.value) > toNumeric(valor_avaliacao)) {      
+      valida = false;
+    }  
+  });  
+      
+  if(!valida) {
+   alert("Você não pode lançar nota(s) maior(es) que o valor máximo \ndefinido no campo \"Nota distribuída\"!\n\nPor favor, corrija e tente novamente.");
+   //Event.stop(e);
+   return false;
+  } 
+  
+}
 </script>
 
 </head>
@@ -228,7 +265,7 @@ function validate_nota(field) {
  <?=papeleta_header($diario_id)?>
  <br />
 
-<form name="informa_notas" id="informa_notas" method="post" action="<?=$BASE_URL .'app/web_diario/professor/notas/grava_notas.php'?>">
+<form name="informa_notas" id="informa_notas" onsubmit="return validate_notas();" method="post" action="<?=$BASE_URL .'app/web_diario/professor/notas/grava_notas.php'?>">
 
 	<input type="hidden" name="codprova" id="codprova" value="<?=$prova?>">
 	<input type="hidden" name="diario_id" id="diario_id" value="<?=$diario_id?>">
@@ -239,9 +276,9 @@ function validate_nota(field) {
 ?>
     <span class="obrigatorio">Para eliminar todas as notas informe 0 para todas as notas.</span><br />
 
-			<p><strong>Nota distribu&iacute;da:</strong>
-			<input name="valor_avaliacao" type="text" id="valor_avaliacao" size="5" maxlength="4" value="<?=$nota_distribuida?>" tabindex="1" />&nbsp;
-			<span class="obrigatorio">* obrigatória</span>
+			<p><strong>Nota distribu&iacute;da<span class="obrigatorio">*</span></strong>
+			<input name="valor_avaliacao" type="text" id="valor_avaliacao" onkeyup="validate_valor_avaliacao(this);" size="5" maxlength="4" value="<?=$nota_distribuida?>" tabindex="1" />&nbsp;
+			<br /><span class="obrigatorio">* Informe o valor m&aacute;ximo para Nota</span><font color="blue"> P<?=$prova?></font>
 			</p>
 <?php	else : ?>
 			<p>
@@ -301,7 +338,7 @@ function validate_nota(field) {
       <tr bgcolor="<?=$st?>"> <td align="center"><?=$ordem?></td>
 		<td align="center">
 	   <input name="notas[<?=$aluno['ref_pessoa']?>]"  type="text" onkeyup="validate_nota(this);" value="<?=$notaprova?>" size="4" maxlength="4" tabindex="<?=$ordem + 1?>">
-	  <input type="hidden" name="matricula[]" value="<?=$aluno['ref_pessoa']?>"></td>
+	   <input type="hidden" name="matricula[]" value="<?=$aluno['ref_pessoa']?>"></td>
             <td><?=$aluno['ref_pessoa']?></td>
             <td><?=$aluno['nome']?></td>
 
@@ -352,6 +389,7 @@ $('informa_notas').getInputs('text').each(function(input) {
         }
     );
 });
+
 </script>
 <script type="text/javascript">
 	<!--
