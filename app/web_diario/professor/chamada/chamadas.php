@@ -43,16 +43,9 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
         <!-- Adobe Spry Framework -->
         <script src="../../lib/Spry/widgets/textfieldvalidation/SpryValidationTextField.js" type="text/javascript"></script>
         <link href="../../lib/Spry/widgets/textfieldvalidation/SpryValidationTextField.css" rel="stylesheet" type="text/css" />
-        <!-- Tigra Calendar -->
-        <script language="JavaScript">
-            <!--
-            //Configuracao do caminho das imagens do tigra calendar
-            var caminho_img_tigra = '../../lib/tigra_calendar/img/';
-            -->
-        </script>
-        <script src="../../lib/tigra_calendar/calendar_br.js"  type="text/javascript" language="JavaScript" ></script>
-        <link href="../../lib/tigra_calendar/calendar.css" rel="stylesheet" type="text/css" />
+
         <style type="text/css">@import "<?=$BASE_URL .'public/styles/jquery.maxlength.css'?>";</style>
+        <style type="text/css">@import "<?=$BASE_URL .'public/styles/redmond/jquery-ui.custom.css'?>";</style>
     </head>
     <body>
         <div align="left" class="titulo1">
@@ -70,12 +63,7 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
             Data da chamada:<br />
             <span id="date1">
                 <input type="text" name="data_chamada" id="data_chamada" />
-                    <script type="text/javascript">
-                        new tcal ({
-                            'formname': 'envia_chamada',
-                            'controlname': 'data_chamada'
-                        });
-                    </script>
+
                 <span class="textfieldRequiredMsg">Valor obrigat&oacute;rio.</span>
                 <span class="textfieldInvalidFormatMsg">Formato inv&aacute;lido.</span>
             </span>
@@ -166,12 +154,35 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
         </div>
     <script type="text/javascript" src="<?=$BASE_URL .'lib/wz_tooltip.js'?>"> </script>
     <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.min.js'?>"></script>
+    <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.ui/jquery.ui.core.min.js'?>"></script>
+    <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.ui/jquery.ui.datepicker.min.js'?>"></script>
+    <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.ui/jquery.ui.datepicker-pt-BR.js'?>"></script>
     <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.maxlength.pack.js'?>"></script>
+
     <script type="text/javascript">
         $(function() {
+        
             $('#bases_conhecimento').maxlength({max: 200, feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback1'});
+            
             $('#atividade11').maxlength({max: 200,feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback2'});
-        });
+            
+            $('#data_chamada').datepicker({
+              //beforeShowDay: noDeliveryOn,
+              //numberOfMonths: 2,
+              //minDate: 0,
+              //maxDate: +10,
+              firstDay: 0,
+              showOn: 'both',
+              buttonImageOnly: false,
+              //showButtonPanel: true,
+              showOtherMonths: true,
+              selectOtherMonths: true,              
+             // buttonImage: '/../../../public/images/calendar.gif',
+              onSelect: function() { this.focus(); $('#aula_tipo').focus(); },
+           });
+            
+        });      
+        
     </script>
 </body>
 </html>
