@@ -59,5 +59,12 @@ class date {
 		return $mes;
 	}
 
+        function dia_semana($num_dia) {
+
+            $dias_semana = array('Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado');
+            return $dias_semana[$num_dia];
+
+        }
+
 }
 ?>

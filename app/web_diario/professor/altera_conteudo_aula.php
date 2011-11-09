@@ -39,6 +39,19 @@ if(isset($_POST['ok']) && $_POST['ok'] == 'OK1') {
  
 
   $atividades = addslashes(implode('; ', $atividades));
+  
+  // VERIFICA QUANTIDADE MAXIMA DE CARACTERES PARA O CONTEUDO LANCADO
+  if (strlen($conteudo) > 200)
+    die('<script language="javascript" type="text/javascript"> window.alert("Bases e conhecimentos deve ter no maximo 200 caracteres!");window.history.back(1); </script>');
+  // ^ VERIFICA QUANTIDADE MAXIMA DE CARACTERES PARA O CONTEUDO LANCADO
+
+  // VERIFICA QUANTIDADE MAXIMA DE CARACTERES PARA "OUTRAS" ATIVIDADES
+  if (strlen(trim($_POST['outras'])) > 200)
+    die('<script language="javascript" type="text/javascript"> window.alert("Atividades do tipo \"Outras\" deve ter no maximo 200 caracteres!");window.history.back(1); </script>');
+  // ^ VERIFICA QUANTIDADE MAXIMA DE CARACTERES PARA "OUTRAS" ATIVIDADES
+ 
+ 
+
 
 	$sql1 = 'UPDATE diario_seq_faltas SET conteudo = \''. $conteudo .'\',';
 	$sql1 .= ' atividades = \''. $atividades .'\' WHERE id = '.$_POST['flag'].';';

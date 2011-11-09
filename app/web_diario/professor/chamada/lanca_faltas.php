@@ -3,6 +3,7 @@
 require_once(dirname(__FILE__) .'/../../../setup.php');
 require_once($BASE_DIR .'core/web_diario.php');
 require_once($BASE_DIR .'core/number.php');
+require_once($BASE_DIR .'core/date.php');
 
 $conn = new connection_factory($param_conn);
 
@@ -65,8 +66,21 @@ if(empty($conteudo) || empty($atividades))
 
 // VERIFICA SE EXISTE CHAMADA NESTA DATA
 if(existe_chamada($diario_id, $data_chamada))
-	die('<script language="javascript" type="text/javascript"> window.alert("Já existe chamada realizada para esta data.");window.history.back(1); </script>');
+  die('<script language="javascript" type="text/javascript"> window.alert("Já existe chamada realizada para esta data.");window.history.back(1); </script>');
 // ^ VERIFICA SE EXISTE CHAMADA NESTA DATA ^ //
+
+// VERIFICA QUANTIDADE MAXIMA DE CARACTERES PARA O CONTEUDO LANCADO
+if (strlen($conteudo) > 200)
+  die('<script language="javascript" type="text/javascript"> window.alert("Bases e conhecimentos deve ter no maximo 200 caracteres!");window.history.back(1); </script>');
+// ^ VERIFICA QUANTIDADE MAXIMA DE CARACTERES PARA O CONTEUDO LANCADO
+
+// VERIFICA QUANTIDADE MAXIMA DE CARACTERES PARA "OUTRAS" ATIVIDADES
+if (strlen(trim($_POST['outras'])) > 200)
+  die('<script language="javascript" type="text/javascript"> window.alert("Atividades do tipo \"Outras\" deve ter no maximo 200 caracteres!");window.history.back(1); </script>');
+// ^ VERIFICA QUANTIDADE MAXIMA DE CARACTERES PARA "OUTRAS" ATIVIDADES
+
+
+
 
 // NÃO HOUVE FALTAS PARA A CHAMADA
 if($flag_falta === 'F') {
@@ -176,7 +190,11 @@ function autoTab(input,len, e) {
     <input type="hidden" name="atividades_chamada" id="atividades_chamada" value="<?=$atividades?>">
 
   <h3>
-    Data da Chamada:&nbsp;<font color="blue"><?=$data_chamada?></font>
+    <?php 
+        $dt_chamada = date("w", strtotime(date::convert_date($data_chamada)));
+    ?>
+    Data da Chamada:&nbsp;<font color="blue"><?=$data_chamada?></font>&nbsp;->&nbsp;
+    <font color="brown"><?=date::dia_semana($dt_chamada) . PHP_EOL?></font>
     <br />Quantidade de Aulas:&nbsp; <font color="brown"> <?=$num_aulas?></font>
   </h3>
 	<a href="<?=$BASE_URL .'app/web_diario/requisita.php?do='. $operacao .'&id=' . $diario_id?>"><strong>Alterar a data e/ou quantidade de aulas</strong></a><br />

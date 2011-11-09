@@ -41,11 +41,41 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link rel="stylesheet" href="<?=$BASE_URL .'public/styles/web_diario.css'?>" type="text/css">
         <!-- Adobe Spry Framework -->
-        <script src="../../lib/Spry/widgets/textfieldvalidation/SpryValidationTextField.js" type="text/javascript"></script>
+        <script src="<?=$BASE_URL?>lib/Spry/widgets/textfieldvalidation/SpryValidationTextField.js" type="text/javascript"></script>
         <link href="../../lib/Spry/widgets/textfieldvalidation/SpryValidationTextField.css" rel="stylesheet" type="text/css" />
 
         <style type="text/css">@import "<?=$BASE_URL .'public/styles/jquery.maxlength.css'?>";</style>
         <style type="text/css">@import "<?=$BASE_URL .'public/styles/redmond/jquery-ui.custom.css'?>";</style>
+
+    <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.min.js'?>"></script>
+    <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.maxlength.pack.js'?>"></script>
+    <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.ui/jquery.ui.core.min.js'?>"></script>
+    <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.ui/jquery.ui.widget.min.js'?>"></script>
+    <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.ui/jquery.ui.datepicker.min.js'?>"></script>
+    <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.ui/jquery.ui.datepicker-pt-BR.js'?>"></script>
+    <script type="text/javascript" src="<?=$BASE_URL?>lib/wz_tooltip.js"> </script>
+    
+    <script type="text/javascript">
+
+        $().ready(function() {
+
+           $('#bases_conhecimento').maxlength({max: 200, feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback1'});
+            
+           $('#atividade11').maxlength({max: 200,feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback2'});
+
+           $('#data_chamada').datepicker({
+              onSelect: function() { $('#data_chamada').trigger("blur"); },
+              onClose: function() { $("#data_chamada").trigger("blur"); },
+              firstDay: 0,
+              showOn: 'both',
+              buttonImageOnly: false,
+              showOtherMonths: true,
+              selectOtherMonths: true
+           });           
+
+        });   
+
+    </script> 
     </head>
     <body>
         <div align="left" class="titulo1">
@@ -60,16 +90,16 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
             <p>
                 <a href="javascript:void(0);" onmouseover="TagToTip('instrucoes', ABOVE, true,PADDING, 9, TITLE, 'Ajuda - Lan&ccedil;amento de chamadas', CLOSEBTN, true,STICKY, true,FONTSIZE, '0.8em', COPYCONTENT, false, BGCOLOR, '#FFFFFF' )" onmouseout="UnTip()">Ajuda/Instru&ccedil;&otilde;es</a>
             </p>
-            Data da chamada:<br />
+            <strong>Data da chamada:</strong>&nbsp;
             <span id="date1">
-                <input type="text" name="data_chamada" id="data_chamada" />
+                <input type="text" name="data_chamada" id="data_chamada" value="<?=date('d/m/Y')?>"/>
 
                 <span class="textfieldRequiredMsg">Valor obrigat&oacute;rio.</span>
                 <span class="textfieldInvalidFormatMsg">Formato inv&aacute;lido.</span>
             </span>
             <br />
             <br />
-            Selecione a quantidade de aulas desta chamada:
+            <strong>Selecione a quantidade de aulas desta chamada: </strong>
             <br />
             <select name="aula_tipo" id="aula_tipo" style="width:400px">
                 <option>--- quantidade de aulas ---</option>
@@ -94,12 +124,12 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
             </select>
             <br />
             <br />
-            Bases e conhecimentos desenvolvidos na(s) aula(s):<br />
+            <strong>Bases e conhecimentos desenvolvidos na(s) aula(s):</strong><br />
             <textarea name="conteudo" cols="50" rows="6" id="bases_conhecimento"><?=$_SESSION['conteudo']?></textarea>
             <br /><span class="maxlength-feedback" id="targetFeedback1"></span> <br />
             <br />
             <br />
-            Atividades e avaliações da(s) aula(s):<br />
+            <strong>Atividades e avaliações da(s) aula(s):</strong><br />
 
             <input type="checkbox" class="checkbox" name="atividades[]" id="atividade1" value="Aula expositiva" /> Aula expositiva
             <br />
@@ -152,38 +182,6 @@ $meses = array("Janeiro","Fevereiro", "Mar&ccedil;o", "Abril", "Maio", "Junho", 
                 <br />
             </font>
         </div>
-    <script type="text/javascript" src="<?=$BASE_URL .'lib/wz_tooltip.js'?>"> </script>
-    <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.min.js'?>"></script>
-    <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.ui/jquery.ui.core.min.js'?>"></script>
-    <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.ui/jquery.ui.datepicker.min.js'?>"></script>
-    <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.ui/jquery.ui.datepicker-pt-BR.js'?>"></script>
-    <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.maxlength.pack.js'?>"></script>
-
-    <script type="text/javascript">
-        $(function() {
-        
-            $('#bases_conhecimento').maxlength({max: 200, feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback1'});
-            
-            $('#atividade11').maxlength({max: 200,feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback2'});
-            
-            $('#data_chamada').datepicker({
-              //beforeShowDay: noDeliveryOn,
-              //numberOfMonths: 2,
-              //minDate: 0,
-              //maxDate: +10,
-              firstDay: 0,
-              showOn: 'both',
-              buttonImageOnly: false,
-              //showButtonPanel: true,
-              showOtherMonths: true,
-              selectOtherMonths: true,              
-             // buttonImage: '/../../../public/images/calendar.gif',
-              onSelect: function() { this.focus(); $('#aula_tipo').focus(); },
-           });
-            
-        });      
-        
-    </script>
 </body>
 </html>
 

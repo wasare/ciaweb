@@ -173,7 +173,11 @@ function autoTab(input,len, e) {
     <input type="hidden" name="data_chamada" id="data_chamada" value="<?=$data_chamada?>">
 
   <h3>
-    Data da Chamada:&nbsp;<font color="blue"><?=date::convert_date($data_chamada)?></font>
+    <?php
+        $dt_chamada = date("w", strtotime($data_chamada));
+    ?>
+    Data da Chamada:&nbsp;<font color="blue"><?=date::convert_date($data_chamada)?></font>&nbsp;->&nbsp;
+    <font color="brown"><?=date::dia_semana($dt_chamada)?></font>
     <br />Quantidade de Aulas:&nbsp;<font color="brown"><?=$num_aulas?></font>
   </h3>
 
