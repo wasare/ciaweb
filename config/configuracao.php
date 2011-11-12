@@ -9,7 +9,7 @@ date_default_timezone_set('America/Sao_Paulo');
  * Banco de dados
  */
 $host     = '127.0.0.1';
-$database = 'ciaweb';
+$database = 'ciaweb_novo';
 $user     = 'ciaweb_user';
 $password = 'u0sodQFhArqOELlBNKxJ';
 $port     = 5432;
@@ -142,4 +142,3 @@ FROM periodos
 ORDER BY 1 DESC;";
 
 ?>
-

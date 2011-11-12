@@ -26,7 +26,7 @@ $sessao = new session($param_conn);
 /*
  * Dados do usuario autenticado
  */
-list($sa_usuario,$sa_senha,$sa_usuario_id,$sa_ref_pessoa) = explode(":",$_SESSION['sa_auth']);
+list($sa_usuario,$sa_senha,$sa_usuario_id,$sa_ref_pessoa) = explode(":",@$_SESSION['sa_auth']);
 
 /*
  * Verifica a autenticacao do usuario
@@ -37,4 +37,3 @@ $sa_verifica_login->check_login($sessao);
 
 
 ?>
-

@@ -11,6 +11,8 @@ class session {
 
     protected $session_life_time = 900; // 900 segundos = 15 minutos
     protected $session_table;
+    protected $persist = TRUE;
+    protected $debug = FALSE;
 
     function __construct($conn_options, $persist = TRUE, $debug = FALSE, $sess_table = 'sessao') {
 
@@ -35,7 +37,7 @@ class session {
     }
 
     /*
-     * Gera um novo ID para sess�o
+     * Gera um novo ID para sessão
     */
     public static function refresh() {
         $random = rand(1,2);
@@ -57,9 +59,10 @@ class session {
     }
 
     /*
-     * Resume uma sess�o criada anteriormente
+     * Resume uma sessão criada anteriormente
     */
     public static function resume() {
+        global $persist, $debug;
 
         if(isset($GLOBALS['ADODB_SESS_CONN']) && is_object($GLOBALS['ADODB_SESS_CONN'])) {
             ADOdb_session::Persist($connectMode = $persist);
@@ -68,7 +71,7 @@ class session {
         }
     }
 
-    // forca eliminacao das sess�es expiradas de acordo com o tempo definido por  $session_life_time
+    // forca eliminacao das sessões expiradas de acordo com o tempo definido por  $session_life_time
     protected function clear_expired_sessions() {
         if(is_object($GLOBALS['ADODB_SESS_CONN'])) {
             $time = $GLOBALS['ADODB_SESS_CONN']->OffsetDate(-$this->session_life_time/24/3600,$GLOBALS['ADODB_SESS_CONN']->sysTimeStamp);
@@ -77,7 +80,7 @@ class session {
     }
 
     /**
-     * Configura o tempo m�ximo de dura��o da sess�o em segundos
+     * Configura o tempo máximo de duração da sessão em segundos
      * @return void
      */
     public function session_life_time($time) {

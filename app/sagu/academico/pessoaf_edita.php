@@ -332,21 +332,18 @@ list ($nome_pai_, $nome_mae_) = GetFiliacao($ref_filiacao, false);
 			echo("$id<br>");
 			if ($fl_dados_pessoais == 'f')
 			{
-				echo("<font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"red\"><b>(Divulga&ccedil;&atilde;o de dados pessoais n�o permitida!!!)</b></font>");
+				echo("<font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\" color=\"red\"><b>(Divulga&ccedil;&atilde;o de dados pessoais n&atilde;o permitida!!!)</b></font>");
 			}
-			?> <input type="hidden" name="id" value="<? echo($id); ?>"> </font></td>
-		<th rowspan="6"><font size="-1" color="brown">clique na foto para
-		editar</font><br />
-		<a
-			href="form_foto.php?id=<?php echo $id; ?>&pessoa=<?php echo $nome; ?>"><img
-			title="<? echo($nome); ?>" src="../../../core/pessoa_foto.php?id=<? echo($id); ?>"
-			alt="<?echo($nome);?>" border="1" width="120" /></a></th>
-
+			?> <input type="hidden" name="id" value="<?=$id?>"> </font></td>
+		<th rowspan="6"><font size="-1" color="brown">clique na foto para editar</font><br />
+		<a href="form_foto.php?id=<?=$id?>&pessoa=<?=$nome?>"><img
+			title="<?=$nome?>" src="<?=$BASE_URL?>core/pessoa_foto.php?id=<?=$id?>"
+			alt="<?=$nome?>" border="1" width="120" /></a></th>
 	</tr>
 	<tr>
 		<td bgcolor="#CCCCFF"><font
 			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Nome&nbsp;<span class="required">*</span>&nbsp;</font></td>
-		<td><input name="nome" type=text value="<?echo($nome);?>" size="30"></td>
+		<td><input name="nome" type=text value="<?=$nome?>" size="30"></td>
 	</tr>
 	<tr>
 		<td bgcolor="#CCCCFF"><font

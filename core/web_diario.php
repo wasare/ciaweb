@@ -990,4 +990,3 @@ function lanca_conteudo($getofer,$data_inicial,$conteudo) {
 */
 
 ?>
-
