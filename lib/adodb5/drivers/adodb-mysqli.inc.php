@@ -1,6 +1,6 @@
 <?php
 /*
-V5.09 25 June 2009   (c) 2000-2009 John Lim (jlim#natsoft.com). All rights reserved.
+V5.14 8 Sept 2011  (c) 2000-2011 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
@@ -50,7 +50,8 @@ class ADODB_mysqli extends ADOConnection {
 	var $_bindInputArray = false;
 	var $nameQuote = '`';		/// string to use to quote identifiers and names
 	var $optionFlags = array(array(MYSQLI_READ_DEFAULT_GROUP,0));
-  var $arrayClass = 'ADORecordSet_array_mysqli';
+  	var $arrayClass = 'ADORecordSet_array_mysqli';
+  	var $multiQuery = false;
 	
 	function ADODB_mysqli() 
 	{			
@@ -98,6 +99,9 @@ class ADODB_mysqli extends ADOConnection {
 			mysqli_options($this->_connectionID,$arr[0],$arr[1]);
 		}
 
+		//http ://php.net/manual/en/mysqli.persistconns.php
+		if ($persist && PHP_VERSION > 5.2 && strncmp($argHostname,'p:',2) != 0) $argHostname = 'p:'.$argHostname;
+
 		#if (!empty($this->port)) $argHostname .= ":".$this->port;
 		$ok = mysqli_real_connect($this->_connectionID,
  				    $argHostname,
@@ -143,10 +147,13 @@ class ADODB_mysqli extends ADOConnection {
 	// do not use $ADODB_COUNTRECS
 	function GetOne($sql,$inputarr=false)
 	{
+	global $ADODB_GETONE_EOF;
+	
 		$ret = false;
 		$rs = $this->Execute($sql,$inputarr);
-		if ($rs) {	
-			if (!$rs->EOF) $ret = reset($rs->fields);
+		if ($rs) {
+			if ($rs->EOF) $ret = $ADODB_GETONE_EOF;
+			else $ret = reset($rs->fields);
 			$rs->Close();
 		}
 		return $ret;
@@ -194,11 +201,11 @@ class ADODB_mysqli extends ADOConnection {
 		return true;
 	}
 	
-	function RowLock($tables,$where='',$flds='1 as adodb_ignore') 
+	function RowLock($tables,$where='',$col='1 as adodbignore') 
 	{
 		if ($this->transCnt==0) $this->BeginTrans();
 		if ($where) $where = ' where '.$where;
-		$rs = $this->Execute("select $flds from $tables $where for update");
+		$rs = $this->Execute("select $col from $tables $where for update");
 		return !empty($rs); 
 	}
 	
@@ -308,7 +315,7 @@ class ADODB_mysqli extends ADOConnection {
 	}
 
 	  
-	function MetaIndexes ($table, $primary = FALSE)
+	function MetaIndexes ($table, $primary = FALSE, $owner = false)
 	{
 		// save old fetch mode
 		global $ADODB_FETCH_MODE;
@@ -684,15 +691,23 @@ class ADODB_mysqli extends ADOConnection {
 		return $mysql_res;
 		*/
 		
-		if( $rs = mysqli_multi_query($this->_connectionID, $sql.';') )//Contributed by "Geisel Sierote" <geisel#4up.com.br>
-		{
-			$rs = ($ADODB_COUNTRECS) ? @mysqli_store_result( $this->_connectionID ) : @mysqli_use_result( $this->_connectionID );
-			return $rs ? $rs : true; // mysqli_more_results( $this->_connectionID )
+		if ($this->multiQuery) {
+			$rs = mysqli_multi_query($this->_connectionID, $sql.';');
+			if ($rs) {
+				$rs = ($ADODB_COUNTRECS) ? @mysqli_store_result( $this->_connectionID ) : @mysqli_use_result( $this->_connectionID );
+				return $rs ? $rs : true; // mysqli_more_results( $this->_connectionID )
+			}
 		} else {
-			if($this->debug)
-			ADOConnection::outp("Query: " . $sql . " failed. " . $this->ErrorMsg());
-			return false;
+			$rs = mysqli_query($this->_connectionID, $sql, $ADODB_COUNTRECS ? MYSQLI_STORE_RESULT : MYSQLI_USE_RESULT);
+		
+			if ($rs) return $rs;
 		}
+
+		if($this->debug)
+			ADOConnection::outp("Query: " . $sql . " failed. " . $this->ErrorMsg());
+		
+		return false;
+		
 	}
 
 	/*	Returns: the last error message from previous database operation	*/	
@@ -947,6 +962,19 @@ class ADORecordSet_mysqli extends ADORecordSet{
 	
 	function _close() 
 	{
+	    //if results are attached to this pointer from Stored Proceedure calls, the next standard query will die 2014
+        //only a problem with persistant connections
+
+        //mysqli_next_result($this->connection->_connectionID); trashes the DB side attached results.
+
+        while(mysqli_more_results($this->connection->_connectionID)){
+           @mysqli_next_result($this->connection->_connectionID);
+        }
+
+        //Because you can have one attached result, without tripping mysqli_more_results
+        @mysqli_next_result($this->connection->_connectionID);
+
+
 		mysqli_free_result($this->_queryID); 
 	  	$this->_queryID = false;	
 	}
