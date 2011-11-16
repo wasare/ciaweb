@@ -2,6 +2,7 @@
 
 // Informa o curso quando acessando do web diario
 $curso = (int) $_GET['curso'];
+$diario_id = (int) $_GET['diario_id'];
 $pessoa_id = (int) $_GET['id'];
 
 if(is_numeric($pessoa_id) && $pessoa_id != 0) {
@@ -26,7 +27,7 @@ if(is_numeric($pessoa_id) && $pessoa_id != 0) {
     
   //  VERIFICA O DIREITO DE ACESSO A FICHA COMO PROFESSOR OU COORDENADOR
   if(isset($_SESSION['sa_modulo']) && $_SESSION['sa_modulo'] == 'web_diario_login') {
-    $acessa_foto = acessa_ficha_aluno($pessoa_id,$sa_ref_pessoa,$curso_id);
+    $acessa_foto = acessa_diario($diario_id,$sa_ref_pessoa);
   }
   // ^ VERIFICA O DIREITO DE ACESSO A FICHA COMO PROFESSOR OU COORDENADOR ^ //
 

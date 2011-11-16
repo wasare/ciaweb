@@ -209,6 +209,7 @@ foreach($diarios as $row3) :
     $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'papeleta_completa\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .' - Papeleta Completa\');">Papeleta completa</a><br />';
     $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'faltas_completo\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .' - Detalhes de Faltas\');">Faltas detalhado</a><br />';
     $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'conteudo_aula\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .' - Aulas\');">Conte&uacute;do de aula</a><br />';
+    $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'carometro\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .' - Fotos da Turma\');">Car&ocirc;metro</a><br />';
     $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'diario_classe\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .' - Diário Classe\');">Diário de Classe (A3)</a><br />';
     //$opcoes_diario .= '<a href="#" onclick="enviar_diario(\'caderno_chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Caderno de chamada</a>';
 

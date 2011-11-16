@@ -191,6 +191,11 @@ if ($_SESSION['sa_modulo'] == 'web_diario_login') {
             require_once($BASE_DIR .'app/web_diario/consultas/pesquisa_aluno.php');
             exit;
         }
+        
+        if($operacao == 'carometro') {
+            require_once($BASE_DIR .'app/relatorios/web_diario/carometro.php');
+            exit;
+        }
 
 // ^ RELATORIOS ^ //
 
