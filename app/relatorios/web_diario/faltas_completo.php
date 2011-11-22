@@ -34,7 +34,8 @@ $sql4 = "SELECT
          FROM matricula a, pessoas b
          WHERE
             a.ref_disciplina_ofer = $diario_id AND
-            a.ref_pessoa = b.id
+            a.ref_pessoa = b.id AND
+            a.ref_motivo_matricula = 0
          ORDER BY lower(to_ascii(nome,'LATIN1'));" ;
 
 $sql5 = "SELECT dia, CASE 
