@@ -2958,3 +2958,13 @@ ALTER TABLE ONLY contratos
     ADD CONSTRAINT contratos_prontuario_ref_pessoa_ref_campus_fkey FOREIGN KEY (prontuario,ref_pessoa,ref_campus) REFERENCES pessoa_prontuario_campus(prontuario,ref_pessoa,ref_campus) MATCH SIMPLE;
 
 
+-- git commit 68fe7b8
+CREATE OR REPLACE FUNCTION get_num_matriculados(integer) RETURNS bigint
+    AS $_$select count(*) 
+        from matricula 
+        where 
+          ref_disciplina_ofer = $1 and 
+          dt_cancelamento is null and
+          ref_motivo_matricula = 0; $_$
+    LANGUAGE sql;
+

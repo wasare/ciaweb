@@ -30,11 +30,6 @@ if ($_SESSION['sa_modulo'] == 'web_diario_login') {
 }
 // ^ VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR ^ //
 
-if(!is_preenchido($diario_id)) {
-    exit('<script language="javascript" type="text/javascript">
-            alert(\'O diario deve estar marcado como "Preenchido" antes de visualizar o Diario de Classe!\n\nA operacao foi cancelada!\');
-            window.close();</script>');
-}
 
 remove_files(DIARIO_CLASSE_PDF_TMP_DIR);
 
@@ -73,7 +68,9 @@ $sql_alunos_diario = "SELECT
                  a.ref_pessoa = ppc.ref_pessoa AND
                  a.ref_campus = ppc.ref_campus AND
                  a.ref_contrato = c.id AND
-                 ppc.prontuario = c.prontuario 
+                 ppc.prontuario = c.prontuario AND
+                 a.dt_cancelamento is null AND
+                 a.ref_motivo_matricula = 0
               ORDER BY lower(to_ascii(nome,'LATIN1'));" ;
 $alunos_diario = $conn->get_all($sql_alunos_diario);
 
@@ -137,7 +134,9 @@ $sql_dario_info = "SELECT
           turma,
           professor_disciplina_ofer_todos(o.id) AS professores,
           o.ref_periodo,
-          d.abreviatura
+          d.abreviatura,
+          o.id as diario,
+          o.fl_finalizada
     FROM
       disciplinas_ofer o, disciplinas d
    WHERE o.id = $diario_id AND o.is_cancelada = '0' AND o.ref_disciplina = d.id;";
@@ -203,6 +202,20 @@ function diario_classe_preenche_cabecalho_frente(&$pdf) {
   global $diario_info, $ANO, $TURNO, $SEMESTRE;
 
   // CABEÇALHO
+  
+  
+  // DIARIO EM ABERTO
+  if ($diario_info['fl_finalizada'] == 'f') {
+  
+    $pdf->SetFont('Times','BU',14);
+
+    // CONFIGURA POSICAO
+    $pdf->SetXY(160, 8);
+    
+    $pdf->Write(0, utf8_decode('DIÁRIO NÃO FECHADO, PASSÍVEL DE ALTERAÇÕES'));
+  
+  }
+  
 
   // CONFIGURA FONTE
   $pdf->SetFont('Times','',11);
@@ -210,7 +223,7 @@ function diario_classe_preenche_cabecalho_frente(&$pdf) {
   // ALTURA INICIAL
   $pdf->SetY(14.5);
 
-  // DATA ENCERRAMENTO
+  // DATA DE IMPRESSAO
   $pdf->SetX(292);
   $pdf->Write(0, date("d/m/Y H:s i\s"));
 
@@ -250,6 +263,19 @@ function diario_classe_preenche_cabecalho_verso(&$pdf) {
   global $diario_info, $ANO, $TURNO;
 
   // CABEÇALHO VERSO
+  
+  // DIARIO EM ABERTO
+  if ($diario_info['fl_finalizada'] == 'f') {
+  
+    $pdf->SetFont('Times','BU',14);
+
+    // CONFIGURA POSICAO
+    $pdf->SetXY(200, 28);
+    
+    $pdf->Write(0, utf8_decode('DIÁRIO NÃO FECHADO, PASSÍVEL DE ALTERAÇÕES'));
+  
+  }
+  
 
   // CONFIGURA FONTE
   $pdf->SetFont('Times','',11);
@@ -278,7 +304,7 @@ function diario_classe_preenche_cabecalho_verso(&$pdf) {
 }
 
 function diario_classe_preenche_bases_conhecimento_e_atividades($data, &$pdf) {
-    global $conn, $sql_conteudos;
+    global $conn, $diario_info, $sql_conteudos;
 
     list($data_inicial, $data_final) = explode('|', $data);
 
@@ -307,11 +333,14 @@ function diario_classe_preenche_bases_conhecimento_e_atividades($data, &$pdf) {
     else
       $pdf->MultiCell(178,4.15,utf8_decode($bases_conhecimentos),0,'J', FALSE);
 
-    $Y_atual = $pdf->GetY();    
-    // INUTILIZA ESPAÇO EM BRANCO
-    if ($Y_atual < 222.75) {
-      $pdf->Line(28, $Y_atual, 210.5, $Y_atual); // LINHA
-      $pdf->Line(28, $Y_atual, 210.5, 222.5); // TRAÇO DIAGONAL
+    $Y_atual = $pdf->GetY(); 
+    
+    if ($diario_info['fl_finalizada'] == 't') { 
+      // INUTILIZA ESPAÇO EM BRANCO
+      if ($Y_atual < 222.75) {
+        $pdf->Line(28, $Y_atual, 210.5, $Y_atual); // LINHA
+        $pdf->Line(28, $Y_atual, 210.5, 222.5); // TRAÇO DIAGONAL
+      }
     }
 
     $pdf->SetY(53.5);
@@ -327,41 +356,48 @@ function diario_classe_preenche_bases_conhecimento_e_atividades($data, &$pdf) {
     else
       $pdf->MultiCell(188,4.15,utf8_decode($atividades),0,'J', FALSE); 
     
-    $Y_atual = $pdf->GetY();    
-    // INUTILIZA ESPAÇO EM BRANCO
-    if ($Y_atual < 222.75) {
-      $pdf->Line(210.5, $Y_atual, 403.5, $Y_atual); // LINHA
-      $pdf->Line(210.5, $Y_atual, 403.5, 222.5); // TRAÇO DIAGONAL
+    $Y_atual = $pdf->GetY();
+    
+    if ($diario_info['fl_finalizada'] == 't') { 
+      // INUTILIZA ESPAÇO EM BRANCO
+      if ($Y_atual < 222.75) {
+        $pdf->Line(210.5, $Y_atual, 403.5, $Y_atual); // LINHA
+        $pdf->Line(210.5, $Y_atual, 403.5, 222.5); // TRAÇO DIAGONAL
+      }
     }
 }
 
 function diario_classe_preenche_observacoes_competencias(&$pdf) {
-    global $conn, $sql_observacoes_competencias;
+    global $conn, $diario_info, $sql_observacoes_competencias;
 
-    $diario_info = $conn->get_row($sql_observacoes_competencias);
+    $anotacoes_diario = $conn->get_row($sql_observacoes_competencias);
 
     $pdf->SetFont('Times','',10);
 
     $pdf->SetY(222.5);
     $pdf->SetX(38);
-    $pdf->MultiCell(170,3.9,utf8_decode(preg_replace( '/\s+/', ' ', $diario_info['observacoes'])),0,'J', FALSE);
+    $pdf->MultiCell(170,3.9,utf8_decode(preg_replace( '/\s+/', ' ', $anotacoes_diario['observacoes'])),0,'J', FALSE);
 
-    // INUTILIZA ESPAÇO EM BRANCO
-    $pdf->Line(34, $pdf->GetY(), 210.5, $pdf->GetY()); // LINHA
-    $pdf->Line(34, $pdf->GetY(), 210.5, 268.5); // TRAÇO DIAGONAL
+    if ($diario_info['fl_finalizada'] == 't') { 
+      // INUTILIZA ESPAÇO EM BRANCO
+      $pdf->Line(34, $pdf->GetY(), 210.5, $pdf->GetY()); // LINHA
+      $pdf->Line(34, $pdf->GetY(), 210.5, 268.5); // TRAÇO DIAGONAL
+    }
 
     $pdf->SetY(222.5);
     $pdf->SetX(220);
-    $pdf->MultiCell(180,3.9,utf8_decode(preg_replace( '/\s+/', ' ', $diario_info['competencias'])),0,'J', FALSE);
+    $pdf->MultiCell(180,3.9,utf8_decode(preg_replace( '/\s+/', ' ', $anotacoes_diario['competencias'])),0,'J', FALSE);
 
-    // INUTILIZA ESPAÇO EM BRANCO
-    $pdf->Line(216.5, $pdf->GetY(), 403.5, $pdf->GetY()); // LINHA
-    $pdf->Line(216.5, $pdf->GetY(), 403.5, 268.5); // TRAÇO DIAGONAL
+    if ($diario_info['fl_finalizada'] == 't') { 
+      // INUTILIZA ESPAÇO EM BRANCO
+      $pdf->Line(216.5, $pdf->GetY(), 403.5, $pdf->GetY()); // LINHA
+      $pdf->Line(216.5, $pdf->GetY(), 403.5, 268.5); // TRAÇO DIAGONAL
+    }
 
 }
 
 function diario_classe_preenche_alunos(&$pdf, $aulas='1|74') {
-  global $alunos_diario, $PAGINA_ATUAL, $NO_PAGINAS, $NOTA_MAXIMA;
+  global $alunos_diario, $diario_info, $PAGINA_ATUAL, $NO_PAGINAS, $NOTA_MAXIMA;
 
   $pdf->SetXY(20, 50);
   $pdf->SetFont('Times','',10);
@@ -421,21 +457,23 @@ function diario_classe_preenche_alunos(&$pdf, $aulas='1|74') {
     $pdf->Ln(4);
   }
 
-  // INUTILIZA ESPAÇO EM BRANCO - ÁREA ALUNOS
-  $pdf->Line(14, $pdf->GetY(), 126.5, $pdf->GetY()); // LINHA HORIZONTAL 1
-  $pdf->Line(14, $pdf->GetY(), 126.5, 280.5); // TRAÇO DIAGONAL 1
+  if ($diario_info['fl_finalizada'] == 't') { 
+    // INUTILIZA ESPAÇO EM BRANCO - ÁREA ALUNOS
+    $pdf->Line(14, $pdf->GetY(), 126.5, $pdf->GetY()); // LINHA HORIZONTAL 1
+    $pdf->Line(14, $pdf->GetY(), 126.5, 280.5); // TRAÇO DIAGONAL 1
 
-  // INUTILIZA ESPAÇO EM BRANCO - ÁREA FALTAS
-  $pdf->Line(126.5, $pdf->GetY(),  $posicao_X + 2.5, $pdf->GetY()); // LINHA HORIZONTAL 2
-  $pdf->Line(126.5, $pdf->GetY(), $posicao_X + 4, 280.5); // TRAÇO DIAGONAL 2
+    // INUTILIZA ESPAÇO EM BRANCO - ÁREA FALTAS
+    $pdf->Line(126.5, $pdf->GetY(),  $posicao_X + 2.5, $pdf->GetY()); // LINHA HORIZONTAL 2
+    $pdf->Line(126.5, $pdf->GetY(), $posicao_X + 4, 280.5); // TRAÇO DIAGONAL 2
 
-  // INUTILIZA ESPAÇO EM BRANCO - ÁREA NOTAS
-  if ($PAGINA_ATUAL == ($NO_PAGINAS - 1)) {
-    $pdf->Line(355, $pdf->GetY(), 411.5, $pdf->GetY()); // LINHA HORIZONTAL 3
-    $pdf->Line(355, $pdf->GetY(), 411.5, 280.5); // TRAÇO DIAGONAL 3
+    // INUTILIZA ESPAÇO EM BRANCO - ÁREA NOTAS
+    if ($PAGINA_ATUAL == ($NO_PAGINAS - 1)) {
+      $pdf->Line(355, $pdf->GetY(), 411.5, $pdf->GetY()); // LINHA HORIZONTAL 3
+      $pdf->Line(355, $pdf->GetY(), 411.5, 280.5); // TRAÇO DIAGONAL 3
+    }
+    else
+      $pdf->Line(355, 43, 411.5, 280.5); // TRAÇO DIAGONAL 3
   }
-  else
-     $pdf->Line(355, 43, 411.5, 280.5); // TRAÇO DIAGONAL 3
 
   // ^ ALUNOS ^ //
 }
@@ -449,7 +487,7 @@ function diario_classe_preenche(&$pdf, $aulas='1|74') {
 }
 
 function diario_classe_preenche_chamada(&$pdf, $aulas='1|74') {
-  global $frente_tpl, $verso_tpl, $NO_PAGINAS, $PAGINA_ATUAL, $correcao_posicao, $carga_horaria, $datas_chamadas;
+  global $frente_tpl, $verso_tpl, $NO_PAGINAS, $PAGINA_ATUAL, $correcao_posicao, $carga_horaria, $datas_chamadas, $diario_info;
 
   list($aula_inicial, $aula_final) = explode('|', $aulas);
 
@@ -485,16 +523,18 @@ function diario_classe_preenche_chamada(&$pdf, $aulas='1|74') {
 
   if ($PAGINA_ATUAL % 2 != 0) diario_classe_preenche_alunos(&$pdf, $aulas);
 
-  // INUTILIZA ESPAÇO EM BRANCO
-  $posicao_X += $correcao_posicao[++$cont_posicao];
-  if ($cont_posicao == 73) {
+  if ($diario_info['fl_finalizada'] == 't') {
+    // INUTILIZA ESPAÇO EM BRANCO
+    $posicao_X += $correcao_posicao[++$cont_posicao];
+    if ($cont_posicao == 73) {
        $pdf->Line($posicao_X - 1, 41, $posicao_X - 1, 280.5); // LINHA VERTICAL 1
        $posicao_X += $correcao_posicao[++$cont_posicao];
        $pdf->Line($posicao_X - 1, 41, $posicao_X - 1, 280.5); // LINHA VERTICAL 2
-  }
-  if ($cont_posicao > 0 && $cont_posicao < 73) {
+    }
+    if ($cont_posicao > 0 && $cont_posicao < 73) {
        $pdf->Line($posicao_X - 1, 42,  $posicao_X - 1, 280.5); // LINHA VERTICAL 1
        $pdf->Line($posicao_X - 1, 42, 352.5, 280.5); // TRAÇO DIAGONAL 1
+    }
   }
 
   $aula_inicial = $aula_final + 1;
@@ -523,10 +563,11 @@ function diario_classe_preenche_chamada(&$pdf, $aulas='1|74') {
       return;
   }
   else {
-    // INUTILIZA ESPAÇO EM BRANCO - ÁREA OBSERVAÇÕES E COMPETÊNCIAS
-    $pdf->Line(33, 222.75, 210.5, 268.5); // TRAÇO DIAGONAL 1
-    $pdf->Line(216, 222.75, 403.5, 268.5); // TRAÇO DIAGONAL 2
-
+    if ($diario_info['fl_finalizada'] == 't') { 
+      // INUTILIZA ESPAÇO EM BRANCO - ÁREA OBSERVAÇÕES E COMPETÊNCIAS
+      $pdf->Line(33, 222.75, 210.5, 268.5); // TRAÇO DIAGONAL 1
+      $pdf->Line(216, 222.75, 403.5, 268.5); // TRAÇO DIAGONAL 2
+    }
   }
 
   // ADICIONA NOVA FRENTE

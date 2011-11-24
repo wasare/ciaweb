@@ -73,7 +73,9 @@ SELECT DISTINCT
     d.carga_horaria,
     professor_disciplina_ofer_todos(o.id) AS prof,
     o.fl_digitada,
-    o.fl_finalizada
+    o.fl_finalizada,
+    d.abreviatura,
+    o.turma
 FROM
     disciplinas d, disciplinas_ofer o, disciplinas_ofer_prof dp
 WHERE
@@ -175,6 +177,12 @@ $r2 = '#FFFFCC';
 $l = $t = 0;
 $diarios_turma = array();
 
+$data_emissao = date("d/m/Y H:m s");
+$nome_arquivo_csv = 'notas_faltas_global_'. $curso .'_'. $turma .'_'. $periodo .'_'. $campus .'.csv';
+$arquivo_csv = $BASE_DIR .'/public/relat/web_diario/'. $nome_arquivo_csv;
+
+if (is_file($arquivo_csv)) @unlink($arquivo_csv);
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -217,15 +225,17 @@ $diarios_turma = array();
         </p>
         <strong>Per&iacute;odo:</strong> <?=$desc_periodo?><br />
         <strong>Curso:</strong> <?=$desc_curso[0]?><br />
-        <strong>Turma:</strong> <?=$turma?><br />
+        <strong>Turma do curso:</strong> <?=$turma?><br />
         <strong>Campus:</strong> <?=$desc_curso[1]?><br />
-        <strong>Data de emiss&atilde;o:</strong> <?=date("d/m/Y H:m s")?><br />
+        <strong>Data de emiss&atilde;o:</strong> <?=$data_emissao?><br />
         
         <br /><br />
         <b>LEGENDA</b>
         <table cellpadding="0" cellspacing="0" class="relato">
             <tr bgcolor="#cccccc" class="header">
                 <th align="center"><strong>C&oacute;d. Di&aacute;rio</strong></th>
+                <th align="center"><strong>C&oacute;d. Disciplina</strong></th>
+                <th align="center"><strong>Turma da Disciplina</strong></th>
                 <th align="center"><strong>Descri&ccedil;&atilde;o</strong></th>
                 <th align="center"><strong>Professor(a)</strong></th>
                 <th align="center"><strong>CH Prevista</strong></th>
@@ -233,14 +243,51 @@ $diarios_turma = array();
                 <th align="center"><strong>N Distribu&iacute;da</strong></th>
                 <th align="center"><strong>Situa&ccedil;&atilde;o</strong></th>
             </tr>
-            <?php foreach($arr_legenda as $legenda) : 
+            <?php
+            
+            $csv_cabecalho = "\r\n\r\n";
+            $csv_cabecalho .= '"Período: '. $desc_periodo .'";'. "\r\n";
+            $csv_cabecalho .= '"Curso: '. $desc_curso[0] .'";'. "\r\n";
+            $csv_cabecalho .= '"Turma do curso: '. $turma .'";'. "\r\n";
+            $csv_cabecalho .= '"Campus: '. $desc_curso[1] .'";'. "\r\n";
+            $csv_cabecalho .= '"Data de emissão: '. $data_emissao .'";'. "\r\n";
+            
+            
+            
+            $csv_cabecalho0 = '"Cód. Diário";"Cód. Disciplina";"Turma da Disciplina";';
+            $csv_cabecalho0 .= 'Descrição;"Professor(a)";"CH Prevista";';
+            $csv_cabecalho0 .= '"CH Realizada";"N Distribuída";"Situação";'. "\r\n";
+            
+            $csv_dados = $csv_cabecalho0;
+            
+            
+            foreach($arr_legenda as $legenda) : 
               
               $lcolor = ( ($l % 2) == 0) ? $r1 : $r2;
               $l++;
+              
+              // Situacao do diario
+              if($legenda['fl_digitada'] == 't') {
+                 $situacao_diario = '<font color="red"><b>Fechado</b></font>';
+                 $csv_situacao = 'Fechado';
+              }
+              elseif($legenda['fl_digitada'] == 'f' AND $legenda['fl_finalizada'] == 't') {
+                 $situacao_diario = '<font color="blue"><b>Preenchido</b></font>';
+                 $csv_situacao = 'Preenchido';
+              }
+              elseif($legenda['fl_digitada'] == 'f' AND $legenda['fl_finalizada'] == 'f') {
+                 $situacao_diario = '<font color="green"><b>Aberto</b></font>';
+                 $csv_situacao = 'Aberto';
+              }            
+
+              
             ?>
             <tr bgcolor="<?=$lcolor?>">
                 <td align="center"><?=$legenda['diario']?></td>
-                <td><?=$legenda['id']?> - <?=$legenda['descricao_extenso']?></td>
+                <td align="center"><?=$legenda['abreviatura']?></td>
+                <td align="center"><?=$legenda['turma']?></td>
+                
+                <td><?=$legenda['descricao_extenso']?></td>
                 <td><?=$legenda['prof']?></td>
                 <td align="center"><?=$legenda['carga_horaria']?></td>
                 
@@ -261,7 +308,8 @@ $diarios_turma = array();
                         
                         $arr_diarios[$legenda['diario']]['diario'] = $legenda['diario'];
                         $arr_diarios[$legenda['diario']]['ch_realizada'] = $carga_realizada;
-                        $diarios_turma[] = $legenda['diario'];                      
+                        $diarios_turma[] = $legenda['diario'];
+                        $siglas_diarios[$legenda['diario']] = $legenda['abreviatura'] .'-'. $legenda['turma'];                    
                         
                         ?>
                 <td align="center" <?=$destaca_carga_realizada?>>
@@ -281,7 +329,9 @@ $diarios_turma = array();
                             $nota_distribuida = 0;
                         }                     
                         
-                        $destaca_nota_distribuida = ($nota_distribuida == 0) ? ' bgcolor="#cccccc"' : ''; 
+                        $destaca_nota_distribuida = ($nota_distribuida == 0) ? ' bgcolor="#cccccc"' : '';
+                        
+                        $nota_distribuida = ($nota_distribuida > 0) ? number_format($nota_distribuida,1,',','.') : $nota_distribuida;
                         
                         $arr_diarios[$legenda['diario']]['nota_distribuida'] = $nota_distribuida;
                         
@@ -290,25 +340,24 @@ $diarios_turma = array();
                   <?=$nota_distribuida?>
                 </td>
                 <td>
-                        <?php
-                        //Situacao do diario
-                        if($legenda['fl_digitada'] == 't') {
-                            echo '<font color="red"><b>Fechado</b></font>';
-                        }
-                        elseif($legenda['fl_digitada'] == 'f' AND $legenda['fl_finalizada'] == 't') {
-                            echo '<font color="blue"><b>Preenchido</b></font>';
-                        }
-                        elseif($legenda['fl_digitada'] == 'f' AND $legenda['fl_finalizada'] == 'f') {
-                            echo '<font color="green"><b>Aberto</b></font>';
-                        }
-                        ?>
+                  <?=$situacao_diario?>
                 </td>
             </tr>
-            <?php endforeach; ?>
+            <?php 
+                
+                  $csv_dados .= $legenda['diario'] .';"'. $legenda['abreviatura'] .'";';
+                  $csv_dados .= $legenda['turma'] .';"'. $legenda['descricao_extenso'] .'";"';
+                  $csv_dados .= $legenda['prof'] .'";'. $legenda['carga_horaria'] .';';
+                  $csv_dados .= $carga_realizada .';'. $nota_distribuida .';"';
+                  $csv_dados .= $csv_situacao .'";'. "\r\n";
+                
+                endforeach; ?>
         </table>
         <br /><br />
         <?php
-        
+          
+          $csv_dados .= "\r\n\r\n\r\n";
+          
           $diarios = implode(',', $diarios_turma);
           
           $arr_rel = $conn->get_all(sprintf($sql_rel,$diarios));
@@ -352,7 +401,10 @@ $diarios_turma = array();
             else
               $arr_diarios_aluno[$rel['matricula']][$diario_id]['destaca_faltas'] = FALSE;
                           
-          }       
+          }  
+          
+          $csv_cabecalho1 = 'Aluno;';
+          $csv_cabecalho2 = '" ";';             
         
         ?>
 
@@ -363,15 +415,34 @@ $diarios_turma = array();
                     <strong>Aluno</strong>
                 </th>
                 <?php foreach($diarios_turma as $diario) : ?>
-                <th colspan="2"><strong><?=$diario?></strong></th>
-                <?php endforeach; ?>
+                <th colspan="2"><strong><?=$siglas_diarios[$diario]?></strong></th>
+                <?php 
+                        $csv_cabecalho1 .= $siglas_diarios[$diario] .';';
+                        $csv_cabecalho1 .= $siglas_diarios[$diario] .';';
+                      
+                      endforeach;
+                      
+                      $csv_cabecalho1 .= 'Global;';
+                      $csv_cabecalho1 .= '"Global (%)";'. "\r\n"; 
+                
+                ?>
                 <th colspan="2"><strong>Global</strong></th>
             </tr>
             <tr bgcolor="#cccccc" class="header">
-                <?php for($i = 0; $i <= count($diarios_turma); $i++): ?>
+                <?php for($i = 0; $i < count($diarios_turma); $i++): ?>
                 <th><strong>N</strong></th>
                 <th><strong>F</strong></th>
-                <?php endfor; ?>
+                <?php 
+                      $csv_cabecalho2 .= 'N;F;';
+                    endfor; 
+                    
+                    $csv_cabecalho2 .= 'N;F;'. "\r\n"; // GLOBAL
+                    $csv_cabecalho1 .= $csv_cabecalho2;
+                    $csv_dados .= $csv_cabecalho1;
+                ?>
+                <!-- GLOBAL -->
+                <th><strong>N</strong></th>
+                <th><strong>F</strong></th>
             </tr>
         </thead>
         <tbody>
@@ -401,7 +472,11 @@ $diarios_turma = array();
                 <td width="300">
                     <?=$aluno['nome']?>
                 </td>
-                    <?php foreach($diarios_turma as $diario): 
+                    <?php 
+                    
+                     $csv_dados .= '"'. $aluno['nome'] .'";';                      
+                      
+                     foreach($diarios_turma as $diario): 
                     
                        if($aluno[$diario]['destaca_nota'])
                         $destaca_nota = ' bgcolor="#cccccc"';
@@ -415,25 +490,54 @@ $diarios_turma = array();
                     
                     ?>
                 <td align="center" <?=$destaca_nota?>>
-                    <?php
+                   <?php
                     if (array_key_exists($diario, $aluno)) : ?>
                       <?=$aluno[$diario]['nota']?></td>
                       <td align="center" <?=$destaca_faltas?>><?=$aluno[$diario]['faltas']?>
-                    <?php else : ?>
+                    
+                   <?php 
+                      $csv_dados .= $aluno[$diario]['nota'] .';'. $aluno[$diario]['faltas'] .';'; 
+                    else : 
+                      $csv_dados .= '"        X";"        X";';
+                   ?>
                       -</td><td align="center">-                     
-                    <?php endif;?>
+                  <?php 
+                      
+                   endif;
+                  ?>
                 </td>                
-                <?php endforeach; ?>
-                <td align="center" <?=$destaca_nota_global?>><?=$nota_global?></td>
-                <td align="center" <?=$destaca_falta_global?>><?=$falta_global?>&nbsp;%</td>
+             <?php 
+                
+                endforeach;
+                
+                $csv_dados .= $nota_global .';'. $falta_global .';'. "\r\n";
+                                              
+             ?>
+             <td align="center" <?=$destaca_nota_global?>><?=$nota_global?></td>
+             <td align="center" <?=$destaca_falta_global?>><?=$falta_global?>&nbsp;%</td>
             </tr>
-            <?php endforeach; ?>
+            <?php 
+              endforeach; 
+              
+              $csv_dados .= $csv_cabecalho;
+              
+              // GRAVA ARQUIVO CSV TEMPORÁRIO 
+              $fp = fopen($arquivo_csv, 'w');
+              fwrite($fp, $csv_dados);
+              fclose($fp);
+           ?>
           </tbody>
         </table>
         <br />
         <div class="nao_imprime">
             <input type="button" value="Imprimir" onClick="window.print()" />
             &nbsp;&nbsp;&nbsp;
+            <?php 
+                if (is_file($arquivo_csv)) :
+            ?>
+            <a href="<?=$BASE_URL?>/public/relat/web_diario/<?=$nome_arquivo_csv?>" target="_blank">Baixar em arquivo CSV</a>
+            &nbsp;&nbsp;&nbsp;
+            <?php endif; ?>
             <a href="#" onclick="javascript:window.close();">Fechar</a>
         </div>
         <br />

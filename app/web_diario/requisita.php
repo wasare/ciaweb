@@ -111,7 +111,7 @@ if ($_SESSION['sa_modulo'] == 'web_diario_login') {
             exit('<script language="javascript" type="text/javascript">
                     alert(\''. $mensagem_preenchido .'\');
                     window.opener.location.reload();
-                    setTimeout("self.close()",450); </script>');
+                    setTimeout("self.close()",250); </script>');
         }
 
         if($operacao == 'competencias_observacoes') {

@@ -94,7 +94,7 @@ else {
 	    $sql_carga_horaria = "SELECT get_carga_horaria_realizada($diario_id), get_carga_horaria(get_disciplina_de_disciplina_of($diario_id));";
         $carga_horaria = $conn->get_row($sql_carga_horaria);
 
-        if ($carga_horaria['get_carga_horaria_realizada'] < $carga_horaria['get_carga_horaria']) {
+        if ($carga_horaria['get_carga_horaria_realizada'] == $carga_horaria['get_carga_horaria']) {
 
           $mensagem_preenchido = 'A carga horária realizada está menor que a carga horária prevista!\n\n';
 					$mensagem_preenchido .= 'Por favor, faça o lançamento das chamadas para completar a carga horária.\n';

@@ -77,7 +77,8 @@ FROM
   INNER JOIN pessoas p ON (m.ref_pessoa = p.id)
 WHERE
   (m.ref_disciplina_ofer = $diario_id) AND
-  (m.dt_cancelamento is null)
+  (m.dt_cancelamento is null) AND
+  (m.ref_motivo_matricula = 0)
 ORDER BY
   p.nome; ";
 
