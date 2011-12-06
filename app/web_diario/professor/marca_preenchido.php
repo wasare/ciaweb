@@ -90,15 +90,15 @@ else {
 	}
 	else {
 
-	    // VERIFICA SE A CARGA HORÁRIA LANÇADA É MAIOR OU IGUAL A PREVISTA
-	    $sql_carga_horaria = "SELECT get_carga_horaria_realizada($diario_id), get_carga_horaria(get_disciplina_de_disciplina_of($diario_id));";
+	 // VERIFICA SE A CARGA HORÁRIA LANÇADA É MAIOR OU IGUAL A PREVISTA
+	 $sql_carga_horaria = "SELECT CAST(get_carga_horaria_realizada($diario_id) AS INTEGER),CAST(get_carga_horaria(get_disciplina_de_disciplina_of($diario_id)) AS INTEGER);";
         $carga_horaria = $conn->get_row($sql_carga_horaria);
 
-        if ($carga_horaria['get_carga_horaria_realizada'] == $carga_horaria['get_carga_horaria']) {
+        if ($carga_horaria['get_carga_horaria_realizada'] < (int) $carga_horaria['get_carga_horaria']) {
 
           $mensagem_preenchido = 'A carga horária realizada está menor que a carga horária prevista!\n\n';
-					$mensagem_preenchido .= 'Por favor, faça o lançamento das chamadas para completar a carga horária.\n';
-					$mensagem_preenchido .= '\nA operação foi cancelada!';
+          $mensagem_preenchido .= 'Por favor, faça o lançamento das chamadas para completar a carga horária.\n';
+	  $mensagem_preenchido .= '\nA operação foi cancelada!';
 
         }
         else {

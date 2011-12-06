@@ -84,11 +84,11 @@ if ($fl_digitada == 't') {
 	  }
 	  else {
 
-	    // VERIFICA SE A CARGA HORÁRIA LANÇADA É MAIOR OU IGUAL A PREVISTA
-	    $sql_carga_horaria = "SELECT get_carga_horaria_realizada($diario_id), get_carga_horaria(get_disciplina_de_disciplina_of($diario_id));";
-        $carga_horaria = $conn->get_row($sql_carga_horaria);
+	   // VERIFICA SE A CARGA HORÁRIA LANÇADA É MAIOR OU IGUAL A PREVISTA
+	   $sql_carga_horaria = "SELECT CAST(get_carga_horaria_realizada($diario_id) AS INTEGER),CAST(get_carga_horaria(get_disciplina_de_disciplina_of($diario_id)) AS INTEGER);";
+           $carga_horaria = $conn->get_row($sql_carga_horaria);
 
-        if ($carga_horaria['get_carga_horaria_realizada'] == $carga_horaria['get_carga_horaria']) {
+        if ($carga_horaria['get_carga_horaria_realizada'] < $carga_horaria['get_carga_horaria']) {
 
           $mensagem_fechado = 'A carga horária realizada está menor que a carga horária prevista!\n\n';
 					$mensagem_fechado .= 'O professor(a) deve lançar das chamadas faltantes para completar a carga horária.\n';
