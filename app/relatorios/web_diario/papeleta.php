@@ -33,12 +33,13 @@ $NOTAS = mediaPeriodo($conn->get_one('SELECT periodo_disciplina_ofer('. $diario_
 $MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
 
 $sql3 = "SELECT
-         b.nome, b.id AS ra_cnec, a.ordem_chamada, a.nota_final, a.num_faltas
-         FROM matricula a, pessoas b
+         b.nome, b.id AS ra_cnec, c.prontuario, a.ordem_chamada, a.nota_final, a.num_faltas
+         FROM matricula a, pessoas b, contratos c
          WHERE
             (a.dt_cancelamento is null) AND
             a.ref_disciplina_ofer = $diario_id AND
             a.ref_pessoa = b.id AND
+            a.ref_contrato = c.id AND
             a.ref_motivo_matricula = 0
 
          ORDER BY lower(to_ascii(nome,'LATIN1'));" ;
@@ -154,7 +155,7 @@ if( $fl_finalizada == 'f') {
 <table cellspacing="0" cellpadding="0" class="papeleta">
 	<tr bgcolor="#cccccc">
 		<th  align="center"><b>N&ordm;</b></th>
-		<th  align="center"><b>Matr&iacute;cula</b></th>
+		<th  align="center"><b>Prontu&aacute;rio</b></th>		
 		<th><b>Nome</b></th>
 		<th align="center"><b>Nota</b></th>
 		<th align="center"><b>Falta</b></th>
@@ -182,6 +183,7 @@ $r2 = '#FFFFCC';
 foreach($qry3 as $row3)
 {
    $nome_f = $row3['nome'];
+   $prontuario = $row3['prontuario'];
    $racnec = $row3['ra_cnec'];
    $racnec = str_pad($racnec, 5, "0", STR_PAD_LEFT) ;
    $num = $row3['ordem_chamada'];
@@ -217,7 +219,7 @@ foreach($qry3 as $row3)
       $rcolor = $r2;
    }
    print("<tr bgcolor=\"$rcolor\">\n");
-   print(" <td align=\"center\" >". $N++ ."</td>\n <td align=\"center\" >$racnec</td>\n <td>$nome_f</td>\n ");
+   print(" <td align=\"center\" >". $N++ ."</td>\n <td align=\"center\" >$prontuario</td>\n <td>$nome_f</td>\n ");
    print ("<td align=\"center\">$nota</td>\n ");
    print ("<td align=\"center\">$falta</td>\n ");
    print("</tr>\n ");

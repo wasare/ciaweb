@@ -123,7 +123,7 @@ if ($_SESSION['sa_modulo'] == 'sa_login') {
 	exit('<script language="javascript" type="text/javascript">
 				alert(\''. $mensagem_fechado .'\');
 				window.opener.location.reload();
-				setTimeout("self.close()",250); </script>');
+				setTimeout("self.close()",120); </script>');
 
 }
 	

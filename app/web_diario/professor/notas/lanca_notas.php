@@ -190,7 +190,7 @@ else
 <br />
 * Para lan&ccedil;ar uma nota de <font color="red">arredondamento ou reavalia&ccedil;&atilde;o</font> utilize a op&ccedil;&atilde;o "Nota Extra" na lista de "Lan&ccedil;amento referente &agrave;".
 <br />
-* <font color="red">IMPORTANTE:</font> Uma vez lan&ccedil;ada a "Nota Extra" as notas de 1 a <?=$qtde_notas?> n&atilde;o poder&atilde;o ser alteradas!
+* <font color="red">IMPORTANTE:</font> Uma vez lan&ccedil;ada a "Nota Extra" as notas de 1 a <?=$qtde_notas?> ficar&atilde;o bloqueadas para altera&ccedil;&otilde;es. <br />&nbsp;&nbsp;&nbsp;&nbsp;Caso necessite alterar as notas de 1 a <?=$qtde_notas?> primeiro elimine a "Nota Extra" do aluno correspondente. <br />&nbsp;&nbsp;&nbsp;&nbsp;Deixe o campo da "Nota Extra" em branco (sem nenhum valor) e clique no botão "Gravar notas".
 </font>
 
 </body>

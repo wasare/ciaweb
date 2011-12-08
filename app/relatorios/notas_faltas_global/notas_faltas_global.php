@@ -5,8 +5,10 @@
 require_once("../../../app/setup.php");
 require_once($BASE_DIR .'core/reports/header.php');
 require_once($BASE_DIR .'core/situacao_academica.php');
+require_once($BASE_DIR .'lib/latin1utf8.class.php');
 
 $header  = new header($param_conn);
+$trans = new Latin1UTF8();
 
 /**
  * Parametros do formulario
@@ -246,17 +248,18 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
             <?php
             
             $csv_cabecalho = "\r\n\r\n";
-            $csv_cabecalho .= '"Período: '. $desc_periodo .'";'. "\r\n";
-            $csv_cabecalho .= '"Curso: '. $desc_curso[0] .'";'. "\r\n";
-            $csv_cabecalho .= '"Turma do curso: '. $turma .'";'. "\r\n";
-            $csv_cabecalho .= '"Campus: '. $desc_curso[1] .'";'. "\r\n";
-            $csv_cabecalho .= '"Data de emissão: '. $data_emissao .'";'. "\r\n";
+            $csv_cabecalho .= '"Período: '. $desc_periodo .'",'. "\r\n";
+            $csv_cabecalho .= '"Curso: '. $desc_curso[0] .'",'. "\r\n";
+            $csv_cabecalho .= '"Turma do curso: '. $turma .'",'. "\r\n";
+            $csv_cabecalho .= '"Campus: '. $desc_curso[1] .'",'. "\r\n";
+            $csv_cabecalho .= '"Data de emissão: '. $data_emissao .'",'. "\r\n";
+            $csv_cabecalho .= '"-*- = não matriculado",'. "\r\n";
             
             
             
-            $csv_cabecalho0 = '"Cód. Diário";"Cód. Disciplina";"Turma da Disciplina";';
-            $csv_cabecalho0 .= 'Descrição;"Professor(a)";"CH Prevista";';
-            $csv_cabecalho0 .= '"CH Realizada";"N Distribuída";"Situação";'. "\r\n";
+            $csv_cabecalho0 = '"Cód. Diário","Cód. Disciplina","Turma da Disciplina",';
+            $csv_cabecalho0 .= 'Descrição,"Professor(a)","CH Prevista",';
+            $csv_cabecalho0 .= '"CH Realizada","N Distribuída","Situação",'. "\r\n";
             
             $csv_dados = $csv_cabecalho0;
             
@@ -345,11 +348,11 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
             </tr>
             <?php 
                 
-                  $csv_dados .= $legenda['diario'] .';"'. $legenda['abreviatura'] .'";';
-                  $csv_dados .= $legenda['turma'] .';"'. $legenda['descricao_extenso'] .'";"';
-                  $csv_dados .= $legenda['prof'] .'";'. $legenda['carga_horaria'] .';';
-                  $csv_dados .= $carga_realizada .';'. $nota_distribuida .';"';
-                  $csv_dados .= $csv_situacao .'";'. "\r\n";
+                  $csv_dados .= '"'. $legenda['diario'] .'","'. $legenda['abreviatura'] .'","';
+                  $csv_dados .= $legenda['turma'] .'","'. $legenda['descricao_extenso'] .'","';
+                  $csv_dados .= $legenda['prof'] .'","'. $legenda['carga_horaria'] .'","';
+                  $csv_dados .= $carga_realizada .'","'. $nota_distribuida .'","';
+                  $csv_dados .= $csv_situacao .'",'. "\r\n";
                 
                 endforeach; ?>
         </table>
@@ -403,8 +406,8 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
                           
           }  
           
-          $csv_cabecalho1 = 'Aluno;';
-          $csv_cabecalho2 = '" ";';             
+          $csv_cabecalho1 = '"Aluno",';
+          $csv_cabecalho2 = '" ",';             
         
         ?>
 
@@ -417,13 +420,13 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
                 <?php foreach($diarios_turma as $diario) : ?>
                 <th colspan="2"><strong><?=$siglas_diarios[$diario]?></strong></th>
                 <?php 
-                        $csv_cabecalho1 .= $siglas_diarios[$diario] .';';
-                        $csv_cabecalho1 .= $siglas_diarios[$diario] .';';
+                        $csv_cabecalho1 .= '"'. $siglas_diarios[$diario] .'","';
+                        $csv_cabecalho1 .= $siglas_diarios[$diario] .'",';
                       
                       endforeach;
                       
-                      $csv_cabecalho1 .= 'Global;';
-                      $csv_cabecalho1 .= '"Global (%)";'. "\r\n"; 
+                      $csv_cabecalho1 .= '"Global",';
+                      $csv_cabecalho1 .= '"Global (%)",'. "\r\n"; 
                 
                 ?>
                 <th colspan="2"><strong>Global</strong></th>
@@ -433,10 +436,10 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
                 <th><strong>N</strong></th>
                 <th><strong>F</strong></th>
                 <?php 
-                      $csv_cabecalho2 .= 'N;F;';
+                      $csv_cabecalho2 .= '"N","F",';
                     endfor; 
                     
-                    $csv_cabecalho2 .= 'N;F;'. "\r\n"; // GLOBAL
+                    $csv_cabecalho2 .= '"N","F",'. "\r\n"; // GLOBAL
                     $csv_cabecalho1 .= $csv_cabecalho2;
                     $csv_dados .= $csv_cabecalho1;
                 ?>
@@ -474,7 +477,7 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
                 </td>
                     <?php 
                     
-                     $csv_dados .= '"'. $aluno['nome'] .'";';                      
+                     $csv_dados .= '"'. $aluno['nome'] .'",';                      
                       
                      foreach($diarios_turma as $diario): 
                     
@@ -496,9 +499,9 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
                       <td align="center" <?=$destaca_faltas?>><?=$aluno[$diario]['faltas']?>
                     
                    <?php 
-                      $csv_dados .= $aluno[$diario]['nota'] .';'. $aluno[$diario]['faltas'] .';'; 
+                      $csv_dados .= '"'. $aluno[$diario]['nota'] .'","'. $aluno[$diario]['faltas'] .'",'; 
                     else : 
-                      $csv_dados .= '"        X";"        X";';
+                      $csv_dados .= '"-*-","-*-",';
                    ?>
                       -</td><td align="center">-                     
                   <?php 
@@ -510,7 +513,7 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
                 
                 endforeach;
                 
-                $csv_dados .= $nota_global .';'. $falta_global .';'. "\r\n";
+                $csv_dados .= '"'. $nota_global .'","'. $falta_global .'",'. "\r\n";
                                               
              ?>
              <td align="center" <?=$destaca_nota_global?>><?=$nota_global?></td>
@@ -523,7 +526,7 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
               
               // GRAVA ARQUIVO CSV TEMPORÁRIO 
               $fp = fopen($arquivo_csv, 'w');
-              fwrite($fp, $csv_dados);
+              fwrite($fp, $trans->mixed_to_latin1($csv_dados));
               fclose($fp);
            ?>
           </tbody>

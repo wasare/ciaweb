@@ -82,14 +82,15 @@ $MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
 
 
 $sql3 = 'SELECT
-            b.nome, b.ra_cnec, a.ordem_chamada, a.nota_final, c.ref_diario_avaliacao, c.nota, a.num_faltas
+            b.nome, b.ra_cnec, d.prontuario, a.ordem_chamada, a.nota_final, c.ref_diario_avaliacao, c.nota, a.num_faltas
         FROM
-            matricula a, pessoas b, diario_notas c
+            matricula a, pessoas b, diario_notas c, contratos d
         WHERE
             (a.dt_cancelamento is null) AND
             a.ref_disciplina_ofer = '. $diario_id .' AND
             a.ref_pessoa = b.id AND
             b.ra_cnec = c.ra_cnec AND
+            a.ref_contrato = d.id AND
             c.d_ref_disciplina_ofer = a.ref_disciplina_ofer AND
             a.ref_motivo_matricula = 0
         ORDER BY
@@ -217,7 +218,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 <table cellspacing="0" cellpadding="0" class="papeleta">
 	<tr bgcolor="#cccccc">
 		<th><b>N&ordm;</b></th>
-		<th><b>Matr&iacute;cula</b></th>
+		<th  align="center"><b>Prontu&aacute;rio</b></th>	
 		<th><b>Nome</b></th>
         <?php
             for( $i = 1; $i <= $quantidade_notas_diario; $i++ ) :
@@ -250,11 +251,12 @@ $No = 1;
 $r1 = '#FFFFFF';
 $r2 = '#FFFFCC';
 
-foreach($matriculas as $row3)
-{
-    if ($row3['ref_diario_avaliacao'] == 1)
-	{
+foreach($matriculas as $row3) {
+
+  if ($row3['ref_diario_avaliacao'] == 1) {
+  
 		$nome_f = $row3["nome"];
+		$prontuario = $row3['prontuario'];
 		$racnec = $row3["ra_cnec"];
 		$racnec = str_pad($racnec, 5, "0", STR_PAD_LEFT) ;
 		$num = $row3["ordem_chamada"];
@@ -291,7 +293,7 @@ foreach($matriculas as $row3)
 
 		print  ("<tr bgcolor=\"$rcolor\">\n");
 		print ("<td align=\"center\">".$No++."</td>\n ");
-		print (" <td align=\"center\">$racnec</td>\n <td>$nome_f</td>\n ");
+		print (" <td align=\"center\">$prontuario</td>\n <td>$nome_f</td>\n ");
 
 		$total_nota_webdiario = 0;
 	}
