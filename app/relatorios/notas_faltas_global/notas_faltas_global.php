@@ -270,18 +270,20 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
               $l++;
               
               // Situacao do diario
-              if($legenda['fl_digitada'] == 't') {
-                 $situacao_diario = '<font color="red"><b>Fechado</b></font>';
-                 $csv_situacao = 'Fechado';
+              if($legenda['fl_finalizada'] == 'f' && $legenda['fl_digitada'] == 'f') {
+                $situacao_diario = '<font color="green"><b>Aberto</b></font>';
+                $csv_situacao = 'Aberto';
               }
-              elseif($legenda['fl_digitada'] == 'f' AND $legenda['fl_finalizada'] == 't') {
-                 $situacao_diario = '<font color="blue"><b>Preenchido</b></font>';
-                 $csv_situacao = 'Preenchido';
-              }
-              elseif($legenda['fl_digitada'] == 'f' AND $legenda['fl_finalizada'] == 'f') {
-                 $situacao_diario = '<font color="green"><b>Aberto</b></font>';
-                 $csv_situacao = 'Aberto';
-              }            
+              else {
+                if($legenda['fl_digitada'] == 't') {
+                  $situacao_diario = '<font color="blue"><b>Preenchido</b></font>';
+                  $csv_situacao = 'Preenchido';
+                }
+                if($legenda['fl_finalizada'] == 't') {
+                  $situacao_diario = '<font color="red"><b>Fechado</b></font>';
+                  $csv_situacao = 'Fechado';
+                }   
+              }      
 
               
             ?>
