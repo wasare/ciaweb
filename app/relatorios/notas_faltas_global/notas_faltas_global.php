@@ -263,6 +263,7 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
             
             $csv_dados = $csv_cabecalho0;
             
+            $situacao_diarios = array();
             
             foreach($arr_legenda as $legenda) : 
               
@@ -273,15 +274,18 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
               if($legenda['fl_finalizada'] == 'f' && $legenda['fl_digitada'] == 'f') {
                 $situacao_diario = '<font color="green"><b>Aberto</b></font>';
                 $csv_situacao = 'Aberto';
+                $situacao_diarios[$legenda['diario']] = 'Aberto';
               }
               else {
                 if($legenda['fl_digitada'] == 't') {
                   $situacao_diario = '<font color="blue"><b>Preenchido</b></font>';
                   $csv_situacao = 'Preenchido';
+                  $situacao_diarios[$legenda['diario']] = 'Preenchido';
                 }
                 if($legenda['fl_finalizada'] == 't') {
                   $situacao_diario = '<font color="red"><b>Fechado</b></font>';
                   $csv_situacao = 'Fechado';
+                  $situacao_diarios[$legenda['diario']] = 'Fechado';
                 }   
               }      
 
@@ -435,7 +439,7 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
                 
                 ?>
                 <th colspan="2"><strong>Global</strong></th>
-                <th><strong>Situação</strong></th>
+                <th rowspan="2"><strong>Situação</strong></th>
             </tr>
             <tr bgcolor="#cccccc" class="header">
                 <?php for($i = 0; $i < count($diarios_turma); $i++): ?>
@@ -457,13 +461,14 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
         <tbody>
 
             <?php foreach($arr_diarios_aluno as $aluno_id => $aluno) : 
-              
+            
               $num_diarios_aluno = 0;
               $num_diarios_nota_maior_igual_5 = 0;
               $num_diarios_nota_menor_5 = 0;
               $num_diarios_nota_maior_igual_4 = 0;
               $situacao_aluno = '';
               $reprovado_por_faltas = FALSE;
+              $calc_situacao_final = TRUE;
               $csv_situacao_aluno = '';
               
               
@@ -524,9 +529,13 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
                     ?>
                 <td align="center" <?=$destaca_nota?>>
                    <?php
-                    
+
                     if (array_key_exists($diario, $aluno)) : 
                       $num_diarios_aluno++;
+
+                      if ($situacao_diarios[$diario] == 'Aberto')
+                         $calc_situacao_final = FALSE;
+                      
                       $nota_diario = number_format($aluno[$diario]['nota'],1,'.','');
                       
                       if ($nota_diario >= 4)
@@ -560,14 +569,17 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
                 
                 // VERIFICA A SITUACAO DO ALUNO CASO NÃO TENHA REPROVADO DIRETO
    
+                if (!$calc_situacao_final[$aluno_id]) {
+                  $situacao_aluno = '<font color="orange"><strong>DI&Aacute;RIO(S) EM ABERTO</strong></font>';
+                  $csv_situacao_aluno = 'DIÁRIO(S) EM ABERTO';
+                }
                 // MG >= 6,0 e NCC >= 5,0 e FG >=75% = APROVADO
-                if (!$reprovado_por_faltas && $nota_global >= $MEDIA_FINAL_APROVACAO && $num_diarios_nota_maior_igual_5 == $num_diarios_aluno) {
+                elseif (!$reprovado_por_faltas && $nota_global >= $MEDIA_FINAL_APROVACAO && $num_diarios_nota_maior_igual_5 == $num_diarios_aluno) {
                   $situacao_aluno = '<font color="green"><strong>APROVADO</strong></font>';
                   $csv_situacao_aluno = 'APROVADO';
-                }
-                
+                }                
                 // MG >= 7,5 e NCC >= 4,0 e FG >=75% = APROVADO  
-                if (!$reprovado_por_faltas && $nota_global >= ($NOTA_MAXIMA * 0.75) && $num_diarios_nota_maior_igual_4 == $num_diarios_aluno) {
+                elseif (!$reprovado_por_faltas && $nota_global >= ($NOTA_MAXIMA * 0.75) && $num_diarios_nota_maior_igual_4 == $num_diarios_aluno) {
                   $situacao_aluno = '<font color="green"><strong>APROVADO</strong></font>';
                   $csv_situacao_aluno = 'APROVADO';
                   
@@ -584,7 +596,8 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
                else {
                   $situacao_aluno = '<font color="red"><strong>REPROVADO</strong></font>';
                   $csv_situacao_aluno = 'REPROVADO';
-               }
+               }              
+               
                   
                $csv_dados .= '"'. $nota_global .'","'. $falta_global .'","'. $csv_situacao_aluno .'",'. "\r\n";
                                               
