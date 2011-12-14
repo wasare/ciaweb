@@ -106,6 +106,12 @@ if ($controle == '2')
         </table>
       </td>
     </tr>
+    <tr>
+      <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Abreviatura&nbsp;<span class="required">*</span> </font></td>
+      <td>
+        <input name="abreviatura" type=text size="20" maxlength="20">
+      </td>
+    </tr>
     <tr> 
       <td bgcolor="#CCCCFF"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Descri&ccedil;&atilde;o Breve&nbsp;<span class="required">*</span> </font></td>
       <td> 

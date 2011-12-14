@@ -151,10 +151,10 @@ ORDER BY lower(to_ascii(nome,'LATIN1')), ref_disciplina_ofer";
 $sql_rel = "
 SELECT * FROM (
     SELECT DISTINCT
-        b.nome, b.id as matricula, a.nota_final, a.num_faltas, ref_disciplina_ofer
+        b.nome, b.id as matricula, c.prontuario, a.nota_final, a.num_faltas, ref_disciplina_ofer
 
     FROM
-        matricula a, pessoas b
+        matricula a, pessoas b, contratos c
     WHERE
         (a.dt_cancelamento is null) AND
         a.ref_disciplina_ofer IN (
@@ -168,7 +168,7 @@ SELECT * FROM (
                 ref_curso = $curso AND
                 turma = '$turma'
         ) AND
-
+        a.ref_contrato = c.id AND
         a.ref_motivo_matricula = '0'
 ) AS T1
 ORDER BY lower(to_ascii(nome,'LATIN1')), ref_disciplina_ofer";
@@ -377,7 +377,8 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
     
             $arr_diarios_aluno[$rel['matricula']][$diario_id]['nota']  = number_format($rel['nota_final'],1,',','.');
             $arr_diarios_aluno[$rel['matricula']][$diario_id]['faltas']  = $rel['num_faltas']; 
-            $arr_diarios_aluno[$rel['matricula']]['nome']  = $rel['nome'] .' ('. $rel['matricula'] .')';  
+            $arr_diarios_aluno[$rel['matricula']]['nome']  = $rel['nome'] .' ('. $rel['matricula'] .')'; 
+            $arr_diarios_aluno[$rel['matricula']]['prontuario']  = $rel['prontuario'];  
             
             $arr_diarios_aluno[$rel['matricula']]['faltas_global']  += $rel['num_faltas'];
             $arr_diarios_aluno[$rel['matricula']]['nota_global']  += $rel['nota_final'];
@@ -408,17 +409,19 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
                           
           }  
           
-          $csv_cabecalho1 = '"Aluno",';
-          $csv_cabecalho2 = '" ",';             
+          $csv_cabecalho1 = '"Prontuário","Aluno",';
+          $csv_cabecalho2 = '" "," ",';             
         
         ?>
 
         <table cellpadding="0" cellspacing="0" class="relato" id="faltas_nota_global">
           <thead>
             <tr bgcolor="#cccccc" class="header">
-                <th rowspan="2">
-                    <strong>Aluno</strong>
-                </th>
+            
+                <th rowspan="2"><strong>Prontu&aacute;rio</strong></th>
+                <th rowspan="2"><strong>Aluno</strong></th>
+                
+                
                 <?php foreach($diarios_turma as $diario) : ?>
                 <th colspan="2"><strong><?=$siglas_diarios[$diario]?></strong></th>
                 <?php 
@@ -432,6 +435,7 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
                 
                 ?>
                 <th colspan="2"><strong>Global</strong></th>
+                <th><strong>Situação</strong></th>
             </tr>
             <tr bgcolor="#cccccc" class="header">
                 <?php for($i = 0; $i < count($diarios_turma); $i++): ?>
@@ -453,16 +457,39 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
         <tbody>
 
             <?php foreach($arr_diarios_aluno as $aluno_id => $aluno) : 
-            
+              
+              $num_diarios_aluno = 0;
+              $num_diarios_nota_maior_igual_5 = 0;
+              $num_diarios_nota_menor_5 = 0;
+              $num_diarios_nota_maior_igual_4 = 0;
+              $situacao_aluno = '';
+              $reprovado_por_faltas = FALSE;
+              $csv_situacao_aluno = '';
+              
+              
               $tcolor = ( ($t % 2) == 0) ? $r1 : $r2;
               $t++;
               
               $falta_global = ($aluno['faltas_global'] * 100 ) / $aluno['ch_realizada_disciplinas_matriculadas'];              
               $destaca_falta_global = ($falta_global >= 25) ? ' bgcolor="#cccccc"' : '';
+              
+              if ($falta_global >= 25) {
+                $situacao_aluno = '<font color="red"><strong>REPROVADO</strong></font>';
+                $csv_situacao_aluno = 'REPROVADO';
+                $reprovado_por_faltas = TRUE;
+                
+              }
+              
               $falta_global = number_format($falta_global,1,',','.');
               
               if($aluno['aproveitamento_global'] > 0) {              
                 $nota_global = ($aluno['aproveitamento_global'] / $aluno['disciplinas_nota_distribuida']);
+                
+                if ($nota_global < $MEDIA_FINAL_APROVACAO) {
+                  $situacao_aluno = '<font color="red"><strong>REPROVADO</strong></font>';
+                  $csv_situacao_aluno = 'REPROVADO';
+                }
+                
                 $destaca_nota_global = ($nota_global < $MEDIA_FINAL_APROVACAO) ? ' bgcolor="#cccccc"' : '';
                 $nota_global = number_format($nota_global,1,',','.');                
               }
@@ -474,12 +501,13 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
             ?>
 
             <tr valign="top" bgcolor="<?=$tcolor?>">
-                <td width="300">
-                    <?=$aluno['nome']?>
-                </td>
+            
+                <td align="center"><?=$aluno['prontuario']?></td>
+                <td width="300"> <?=$aluno['nome']?> </td>
+                
                     <?php 
                     
-                     $csv_dados .= '"'. $aluno['nome'] .'",';                      
+                     $csv_dados .= '"'. $aluno['prontuario'] .'*","'. $aluno['nome'] .'",';                      
                       
                      foreach($diarios_turma as $diario): 
                     
@@ -496,7 +524,21 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
                     ?>
                 <td align="center" <?=$destaca_nota?>>
                    <?php
-                    if (array_key_exists($diario, $aluno)) : ?>
+                    
+                    if (array_key_exists($diario, $aluno)) : 
+                      $num_diarios_aluno++;
+                      $nota_diario = number_format($aluno[$diario]['nota'],1,'.','');
+                      
+                      if ($nota_diario >= 4)
+                         $num_diarios_nota_maior_igual_4++;
+                         
+                      if ($nota_diario >= 5)
+                         $num_diarios_nota_maior_igual_5++;
+                      
+                      if ($nota_diario < 5)
+                         $num_diarios_nota_menor_5++;
+                      
+                    ?>
                       <?=$aluno[$diario]['nota']?></td>
                       <td align="center" <?=$destaca_faltas?>><?=$aluno[$diario]['faltas']?>
                     
@@ -513,13 +555,43 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
                 </td>                
              <?php 
                 
-                endforeach;
+                endforeach;               
                 
-                $csv_dados .= '"'. $nota_global .'","'. $falta_global .'",'. "\r\n";
+                
+                // VERIFICA A SITUACAO DO ALUNO CASO NÃO TENHA REPROVADO DIRETO
+   
+                // MG >= 6,0 e NCC >= 5,0 e FG >=75% = APROVADO
+                if (!$reprovado_por_faltas && $nota_global >= $MEDIA_FINAL_APROVACAO && $num_diarios_nota_maior_igual_5 == $num_diarios_aluno) {
+                  $situacao_aluno = '<font color="green"><strong>APROVADO</strong></font>';
+                  $csv_situacao_aluno = 'APROVADO';
+                }
+                
+                // MG >= 7,5 e NCC >= 4,0 e FG >=75% = APROVADO  
+                if (!$reprovado_por_faltas && $nota_global >= ($NOTA_MAXIMA * 0.75) && $num_diarios_nota_maior_igual_4 == $num_diarios_aluno) {
+                  $situacao_aluno = '<font color="green"><strong>APROVADO</strong></font>';
+                  $csv_situacao_aluno = 'APROVADO';
+                  
+                } 
+                // MG >= 6,0 e (NCC < 5,0 em 1 ou 2 CC) e FG >= 75%  == APROVADO COM DEPENDÊNCIAS               
+                elseif (!$reprovado_por_faltas && $nota_global >= $MEDIA_FINAL_APROVACAO && ($num_diarios_aluno <= 5 &&  $num_diarios_nota_menor_5 == 1)) {
+                  $situacao_aluno = '<font color="orange"><strong>APROVADO COM DEPENDÊNCIA</strong></font>';
+                  $csv_situacao_aluno = 'APROVADO COM DEPENDÊNCIA';
+               
+               } elseif (!$reprovado_por_faltas && $nota_global >= $MEDIA_FINAL_APROVACAO && ($num_diarios_aluno > 5 && $num_diarios_nota_menor_5 == 2)) {
+                  $situacao_aluno = '<font color="orange"><strong>APROVADO COM DEPENDÊNCIA</strong></font>';
+                  $csv_situacao_aluno = 'APROVADO COM DEPENDÊNCIA';
+               }
+               else {
+                  $situacao_aluno = '<font color="red"><strong>REPROVADO</strong></font>';
+                  $csv_situacao_aluno = 'REPROVADO';
+               }
+                  
+               $csv_dados .= '"'. $nota_global .'","'. $falta_global .'","'. $csv_situacao_aluno .'",'. "\r\n";
                                               
              ?>
              <td align="center" <?=$destaca_nota_global?>><?=$nota_global?></td>
              <td align="center" <?=$destaca_falta_global?>><?=$falta_global?>&nbsp;%</td>
+             <td align="center"><?=$situacao_aluno?></td>
             </tr>
             <?php 
               endforeach; 

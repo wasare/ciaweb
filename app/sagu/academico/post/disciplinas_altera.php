@@ -13,6 +13,7 @@ if(!$acl->has_access(__FILE__, $conn)) {
 $id                   = $_POST['id'];
 $ref_grupo            = $_POST['ref_grupo'];
 $ref_departamento     = $_POST['ref_departamento'];
+$abreviatura          = $_POST['abreviatura'];
 $descricao_disciplina = $_POST['descricao_disciplina'];
 $descricao_extenso    = $_POST['descricao_extenso'];
 $num_creditos         = $_POST['num_creditos'];
@@ -22,10 +23,8 @@ $carga_horaria        = $_POST['carga_horaria'];
 CheckFormParameters(array("id",
                           "ref_grupo",
                           "ref_departamento",
-                          "descricao_disciplina",
-                          "descricao_extenso",
-                          "num_creditos",
-                          "carga_horaria"));
+                          "abreviatura",
+                          "descricao_disciplina"));
 
 $conn = new Connection;
 
@@ -35,6 +34,7 @@ $sql = "update disciplinas set " .
        "    id = '$id'," .
        "    ref_grupo = '$ref_grupo'," .
        "    ref_departamento = '$ref_departamento'," .
+       "    abreviatura = '$abreviatura'," .
        "    descricao_disciplina = '$descricao_disciplina'," .
        "    descricao_extenso = '$descricao_extenso'," .
        "    num_creditos = '$num_creditos'," .

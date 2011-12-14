@@ -16,6 +16,7 @@ $sql = "select " .
        "    id," .
        "    ref_grupo," .
        "    ref_departamento," .
+       "    abreviatura," .
        "    descricao_disciplina," .
        "    descricao_extenso," .
        "    num_creditos," .
@@ -29,6 +30,7 @@ SaguAssert($query && $query->MoveNext(),"Registro n&aatilde;o encontrado!");
 list ( $id,
 $ref_grupo,
 $ref_departamento,
+$abreviatura,
 $descricao_disciplina,
 $descricao_extenso,
 $num_creditos,
@@ -38,7 +40,7 @@ $query->Close();
 
 $conn->Close();
 
-$descricao_disciplina = substr($descricao_disciplina, 0, 30);
+$descricao_disciplina = substr($descricao_disciplina, 0, 100);
 
 list ($nome_grupo)=GetGrupoDiscipl($ref_grupo, true);
 list ($nome_departamento)=GetDepartamento($ref_departamento, true);
@@ -143,19 +145,25 @@ if ($controle == '2')
 		</table>
 		</td>
 	</tr>
+        <tr>
+                    <td bgcolor="#CCCCFF"><font
+                            face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Abreviatura&nbsp;<span class="required">*</span> </font></td>
+                    <td><input name="abreviatura" type=text
+                               value="<?echo($abreviatura);?>" maxlength="20" size="20"></td>
+        </tr>
 	<tr>
 		<td bgcolor="#CCCCFF"><font
 			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Descri&ccedil;&atilde;o
 		Breve&nbsp;<span class="required">*</span> </font></td>
 		<td><input name="descricao_disciplina" type=text
-			value="<?echo($descricao_disciplina);?>" maxlength="160" size="30"></td>
+			value="<?echo($descricao_disciplina);?>" maxlength="100" size="40"></td>
 	</tr>
 	<tr>
 		<td bgcolor="#CCCCFF"><font
 			face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#00009C">&nbsp;Descri&ccedil;&atilde;o
 		Completa&nbsp;</font></td>
 		<td><input name="descricao_extenso" type=text
-			value="<?echo($descricao_extenso);?>" size="40"></td>
+			value="<?echo($descricao_extenso);?>" maxlength="160" size="40"></td>
 	</tr>
 	<tr>
 		<td bgcolor="#CCCCFF"><font
