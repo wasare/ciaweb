@@ -397,7 +397,7 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
             }
             else
               $aproveitamento = $rel['nota_final'];
-              
+
             $arr_diarios_aluno[$rel['matricula']]['aproveitamento_global'] += $aproveitamento;
             
             if($aproveitamento < $MEDIA_FINAL_APROVACAO && $arr_diarios[$diario_id]['nota_distribuida'] > 0) 
@@ -467,9 +467,9 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
               $num_diarios_nota_menor_5 = 0;
               $num_diarios_nota_maior_igual_4 = 0;
               $situacao_aluno = '';
+              $csv_situacao_aluno = '';
               $reprovado_por_faltas = FALSE;
               $calc_situacao_final = TRUE;
-              $csv_situacao_aluno = '';
               
               
               $tcolor = ( ($t % 2) == 0) ? $r1 : $r2;
@@ -496,10 +496,10 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
                 }
                 
                 $destaca_nota_global = ($nota_global < $MEDIA_FINAL_APROVACAO) ? ' bgcolor="#cccccc"' : '';
-                $nota_global = number_format($nota_global,1,',','.');                
+                $nota_global_formatada = number_format($nota_global,3,',','.');                
               }
               else {
-                $nota_global = '-';              
+                $nota_global_formatada = '-';              
                 $destaca_nota_global = '';
               }
               
@@ -568,41 +568,42 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
                 
                 
                 // VERIFICA A SITUACAO DO ALUNO CASO NÃO TENHA REPROVADO DIRETO
-   
-                if (!$calc_situacao_final[$aluno_id]) {
+               
+                if (!$calc_situacao_final) {
                   $situacao_aluno = '<font color="orange"><strong>DI&Aacute;RIO(S) EM ABERTO</strong></font>';
                   $csv_situacao_aluno = 'DIÁRIO(S) EM ABERTO';
                 }
-                // MG >= 6,0 e NCC >= 5,0 e FG >=75% = APROVADO
-                elseif (!$reprovado_por_faltas && $nota_global >= $MEDIA_FINAL_APROVACAO && $num_diarios_nota_maior_igual_5 == $num_diarios_aluno) {
-                  $situacao_aluno = '<font color="green"><strong>APROVADO</strong></font>';
-                  $csv_situacao_aluno = 'APROVADO';
-                }                
-                // MG >= 7,5 e NCC >= 4,0 e FG >=75% = APROVADO  
-                elseif (!$reprovado_por_faltas && $nota_global >= ($NOTA_MAXIMA * 0.75) && $num_diarios_nota_maior_igual_4 == $num_diarios_aluno) {
-                  $situacao_aluno = '<font color="green"><strong>APROVADO</strong></font>';
-                  $csv_situacao_aluno = 'APROVADO';
-                  
-                } 
-                // MG >= 6,0 e (NCC < 5,0 em 1 ou 2 CC) e FG >= 75%  == APROVADO COM DEPENDÊNCIAS               
-                elseif (!$reprovado_por_faltas && $nota_global >= $MEDIA_FINAL_APROVACAO && ($num_diarios_aluno <= 5 &&  $num_diarios_nota_menor_5 == 1)) {
-                  $situacao_aluno = '<font color="orange"><strong>APROVADO COM DEPENDÊNCIA</strong></font>';
-                  $csv_situacao_aluno = 'APROVADO COM DEPENDÊNCIA';
+                elseif (is_numeric($nota_global)) {
+                  // MG >= 6,0 e NCC >= 5,0 e FG >=75% = APROVADO 
+                  if ($nota_global >= $MEDIA_FINAL_APROVACAO && ($num_diarios_nota_maior_igual_5 == $num_diarios_aluno) && !$reprovado_por_faltas) {
+                    $situacao_aluno = '<font color="green"><strong>APROVADO</strong></font>';
+                    $csv_situacao_aluno = 'APROVADO';
+                  }
+                                
+                  // MG >= 7,5 e NCC >= 4,0 e FG >=75% = APROVADO  
+                  if (($nota_global >= ($NOTA_MAXIMA * 0.75)) && ($num_diarios_nota_maior_igual_4 == $num_diarios_aluno) && !$reprovado_por_faltas) {
+                    $situacao_aluno = '<font color="green"><strong>APROVADO</strong></font>';
+                    $csv_situacao_aluno = 'APROVADO';
+                  }
+                 
+                // MG >= 6,0 e (NCC < 5,0 em 1 CC quando NCC <= 5) e FG >= 75%  == APROVADO COM DEPENDÊNCIAS               
+                  if ($nota_global >= $MEDIA_FINAL_APROVACAO && $num_diarios_aluno <= 5 && $num_diarios_nota_menor_5 <= 1 && $num_diarios_nota_menor_5 > 0 && !$reprovado_por_faltas) {
+                    $situacao_aluno = '<font color="orange"><strong>APROVADO COM DEPENDÊNCIA</strong></font>';
+                    $csv_situacao_aluno = 'APROVADO COM DEPENDÊNCIA';
+                  }
+
+                  // MG >= 6,0 e (NCC < 5,0 em 2 CC quando NCC > 5) e FG >= 75%  == APROVADO COM DEPENDÊNCIAS 
+                  if ($nota_global >= $MEDIA_FINAL_APROVACAO && ($num_diarios_aluno > 5 && $num_diarios_nota_menor_5 <= 2 && $num_diarios_aluno > 5 && $num_diarios_nota_menor_5 > 0) && !$reprovado_por_faltas) {
+                    $situacao_aluno = '<font color="orange"><strong>APROVADO COM DEPENDÊNCIA</strong></font>';
+                    $csv_situacao_aluno = 'APROVADO COM DEPENDÊNCIA';
+                  }
                
-               } elseif (!$reprovado_por_faltas && $nota_global >= $MEDIA_FINAL_APROVACAO && ($num_diarios_aluno > 5 && $num_diarios_nota_menor_5 == 2)) {
-                  $situacao_aluno = '<font color="orange"><strong>APROVADO COM DEPENDÊNCIA</strong></font>';
-                  $csv_situacao_aluno = 'APROVADO COM DEPENDÊNCIA';
-               }
-               else {
-                  $situacao_aluno = '<font color="red"><strong>REPROVADO</strong></font>';
-                  $csv_situacao_aluno = 'REPROVADO';
-               }              
-               
-                  
-               $csv_dados .= '"'. $nota_global .'","'. $falta_global .'","'. $csv_situacao_aluno .'",'. "\r\n";
+                }       
+
+               $csv_dados .= '"'. $nota_global_formatada .'","'. $falta_global .'","'. $csv_situacao_aluno .'",'. "\r\n";
                                               
              ?>
-             <td align="center" <?=$destaca_nota_global?>><?=$nota_global?></td>
+             <td align="center" <?=$destaca_nota_global?>><?=$nota_global_formatada?></td>
              <td align="center" <?=$destaca_falta_global?>><?=$falta_global?>&nbsp;%</td>
              <td align="center"><?=$situacao_aluno?></td>
             </tr>
