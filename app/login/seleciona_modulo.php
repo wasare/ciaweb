@@ -1,9 +1,9 @@
 <?php
 
 require_once('../../config/configuracao.php');
-require_once($BASE_DIR .'lib/adLDAP.php');
 require_once($BASE_DIR .'core/data/connection_factory.php');
 require_once($BASE_DIR .'core/login/session.php');
+require_once($BASE_DIR .'core/login/auth.ldap.php');
 require_once($BASE_DIR .'core/login/auth.php');
 require_once($BASE_DIR .'core/login/acl.php');
 
@@ -11,8 +11,8 @@ $sessao = new session($param_conn);
 $conn = new connection_factory($param_conn);
 
 // verifica usuário na base LDAP e na base SQL
-$adLdap = new adLDAP($param_ldap);
-$autentica = new auth($BASE_URL, $adLdap);
+$authLDAP = new authLDAP($param_ldap);
+$autentica = new auth($BASE_URL, $authLDAP);
 $autentica->log_file($BASE_DIR .'logs/login.log');
 
 // INICIA UM NOVO PROCESSO DE LOGIN

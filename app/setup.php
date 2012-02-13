@@ -13,9 +13,9 @@ require_once(dirname(__FILE__).'/../config/configuracao.php');
 /**
  * Arquivos requeridos
  */
-require_once($BASE_DIR .'lib/adLDAP.php');
 require_once($BASE_DIR .'core/data/connection_factory.php');
 require_once($BASE_DIR .'core/login/session.php');
+require_once($BASE_DIR .'core/login/auth.ldap.php');
 require_once($BASE_DIR .'core/login/auth.php');
 
 /*

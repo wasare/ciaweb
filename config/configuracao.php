@@ -9,7 +9,7 @@ date_default_timezone_set('America/Sao_Paulo');
  * Banco de dados
  */
 $host     = '127.0.0.1';
-$database = 'ciaweb_novo';
+$database = 'ciaweb_17112011';
 $user     = 'ciaweb_user';
 $password = 'u0sodQFhArqOELlBNKxJ';
 $port     = 5432;
@@ -33,11 +33,11 @@ $param_conn_aluno['password'] = 'eokQdfaBO9M8CY6snUzy';
 $param_conn_aluno['port']     = $port;
 
 /**
- * Variaveis de acesso a base LDAP (atualmente somente AD)
+ * Variaveis de acesso a base LDAP (veja core/login/auth.ldap.php)
  */
-$param_ldap['account_suffix']      = '@campuscar.ifsp';
-$param_ldap['base_dn']             = 'DC=campuscar,DC=ifsp';
-$param_ldap['domain_controllers']  = array();
+$param_ldap['base_dn']     = 'ou=Users,dc=dominio,dc=local';
+$param_ldap['ldap_hosts']  = array('127.0.0.1');
+
 
 /**
  * HTML Padrao

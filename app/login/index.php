@@ -1,9 +1,9 @@
 <?php
 
 require_once('../../config/configuracao.php');
-require_once($BASE_DIR .'lib/adLDAP.php');
 require_once($BASE_DIR .'core/data/connection_factory.php');
 require_once($BASE_DIR .'core/login/session.php');
+require_once($BASE_DIR .'core/login/auth.ldap.php');
 require_once($BASE_DIR .'core/login/auth.php');
 
 $sessao = new session($param_conn);
