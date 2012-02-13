@@ -43,8 +43,7 @@ $has_curso = FALSE;
 if(count($cursos)  > 0) $has_curso = TRUE;
 
 // RECUPERA INFORMACOES SOBRE oS PERIODOS DA COORDENACAO
-$qry_periodos = 'SELECT DISTINCT o.ref_periodo,p.descricao FROM disciplinas_ofer o, periodos p WHERE  o.ref_periodo = p.id AND o.ref_curso IN (SELECT DISTINCT ref_curso FROM coordenador WHERE ref_professor = '. $sa_ref_pessoa .') ORDER BY ref_periodo DESC;';
-
+$qry_periodos = 'SELECT DISTINCT o.ref_periodo,p.descricao,p.dt_inicial FROM disciplinas_ofer o, periodos p WHERE  o.ref_periodo = p.id AND o.ref_curso IN (SELECT DISTINCT ref_curso FROM coordenador WHERE ref_professor = '. $sa_ref_pessoa .') ORDER BY p.dt_inicial DESC;';
 $periodos = $conn->get_all($qry_periodos);
 // ^ RECUPERA INFORMACOES SOBRE oS PERIODOS DA COORDENACAO ^ //
 

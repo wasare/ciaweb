@@ -27,7 +27,7 @@ $is_coordenador = FALSE;
 $is_professor = FALSE;
 
 // RECUPERA INFORMACOES SOBRE OS PERIODOS DO PROFESSOR
-$qry_periodo = 'SELECT DISTINCT o.ref_periodo,p.descricao FROM disciplinas_ofer o, disciplinas_ofer_prof dp, periodos p WHERE dp.ref_professor = '. $sa_ref_pessoa .' AND o.id = dp.ref_disciplina_ofer AND p.id = o.ref_periodo ORDER BY ref_periodo DESC LIMIT 1;';
+$qry_periodo = 'SELECT DISTINCT o.ref_periodo,p.descricao,p.dt_inicial FROM disciplinas_ofer o, disciplinas_ofer_prof dp, periodos p WHERE dp.ref_professor = '. $sa_ref_pessoa .' AND o.id = dp.ref_disciplina_ofer AND p.id = o.ref_periodo ORDER BY p.dt_inicial DESC LIMIT 1;';
 
 $periodo = $conn->get_row($qry_periodo);
 
@@ -38,7 +38,7 @@ if(count($periodo) > 0) {
 // ^ RECUPERA INFORMACOES SOBRE OS PERIODOS DO PROFESSOR ^ //
 
 // RECUPERA INFORMACOES SOBRE OS PERIODOS DO COORDENADOR
-$sql_coordena = 'SELECT DISTINCT o.ref_periodo,p.descricao FROM disciplinas_ofer o, periodos p WHERE  o.ref_periodo = p.id AND o.ref_curso IN (SELECT DISTINCT ref_curso FROM coordenador WHERE ref_professor = '. $sa_ref_pessoa .') ORDER BY ref_periodo DESC LIMIT 1;';
+$sql_coordena = 'SELECT DISTINCT o.ref_periodo,p.descricao,p.dt_inicial FROM disciplinas_ofer o, periodos p WHERE  o.ref_periodo = p.id AND o.ref_curso IN (SELECT DISTINCT ref_curso FROM coordenador WHERE ref_professor = '. $sa_ref_pessoa .') ORDER BY p.dt_inicial DESC LIMIT 1;';
 
 $periodo_coordenacao = $conn->get_row($sql_coordena);
 

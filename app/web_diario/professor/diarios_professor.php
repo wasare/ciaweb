@@ -83,7 +83,7 @@ $sql3 = 'SELECT DISTINCT
 
 
 // RECUPERA INFORMACOES SOBRE OS PERIODOS DO PROFESSOR
-$qry_periodos = 'SELECT DISTINCT o.ref_periodo,p.descricao FROM disciplinas_ofer o, disciplinas_ofer_prof dp, periodos p WHERE dp.ref_professor = '. $sa_ref_pessoa .' AND o.id = dp.ref_disciplina_ofer AND p.id = o.ref_periodo ORDER BY ref_periodo DESC;';
+$qry_periodos = 'SELECT DISTINCT o.ref_periodo,p.descricao,p.dt_inicial FROM disciplinas_ofer o, disciplinas_ofer_prof dp, periodos p WHERE dp.ref_professor = '. $sa_ref_pessoa .' AND o.id = dp.ref_disciplina_ofer AND p.id = o.ref_periodo ORDER BY p.dt_inicial DESC;';
 $periodos = $conn->get_all($qry_periodos);
 // ^ RECUPERA INFORMACOES SOBRE OS PERIODOS DO PROFESSOR ^ //
 
