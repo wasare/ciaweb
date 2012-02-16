@@ -301,21 +301,22 @@ function verificaRequisitos($aluno_id,$curso_id,$diario_id)
     }
 
     $ret = FALSE;
-	if (count($requisitos_matriculados) > 0)
-    {
-        // VERIFICA SE HOUVE REPROVAÇÃO POR FALTAS EM ALGUM PRÉ-REQUISITO
-    	if (verificaReprovacaoPorFaltas($aluno_id,$requisitos_matriculados))
-            $ret = TRUE;
-      	else
-            $ret = FALSE;
-    }
 
-	// VERIFICA SE A QUANTIDADE DE REQUISITOS MATRICULADOS APROVADOS É MAIOR OU IGUAL
+    // VERIFICA SE A QUANTIDADE DE REQUISITOS MATRICULADOS APROVADOS É MAIOR OU IGUAL
     // AOS REQUISITOS  EXIGIDOS PELA DISCIPLINA, NESTE CASO OS REQUISITOS FORAM SATISFEITOS
     if (count($requisitos_matriculados) >= $total_requisitos)
     	$ret = FALSE;
     else
         $ret = TRUE;
+
+    if (count($requisitos_matriculados) > 0) {
+        // VERIFICA SE HOUVE REPROVAÇÃO POR FALTAS EM ALGUM PRÉ-REQUISITO
+        if (verificaReprovacaoPorFaltas($aluno_id,$requisitos_matriculados))
+            $ret = TRUE;
+        else
+            $ret = FALSE;
+    }
+
 
     return $ret;
 }
