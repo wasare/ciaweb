@@ -17,6 +17,8 @@ $periodo = (string) $_POST['periodo'];
 $campus  = (int) $_POST['campus'];
 $curso   = (int) $_POST['curso'];
 $turma   = (string) $_POST['turma'];
+$turno   = (string) $_POST['turno'];
+$turno_desc   = (string) $_POST['turno_desc'];
 
 if(empty($periodo) || $campus == 0 || $curso == 0 || empty($turma)) {
     echo '<script language="javascript">window.alert("Nenhum diario a ser exibido!");</script>';
@@ -34,6 +36,25 @@ $NOTAS = mediaPeriodo($periodo);
 $MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
 $NOTA_MAXIMA = $NOTAS['nota_maxima'];
 
+
+/**
+ * Prepara SQL para filtar o turno
+ */
+$turno_sql = '';
+if (!is_numeric($turno) && !empty($turno)) {
+
+  $turno_sql = " AND id IN (SELECT DISTINCT 
+                                  o.id 
+                                FROM disciplinas_ofer o LEFT JOIN disciplinas_ofer_compl oc 
+                                ON (o.id = oc.ref_disciplina_ofer)
+                                WHERE 
+                                    oc.turno = '$turno' AND
+                                    o.ref_campus = $campus AND
+                                    o.ref_periodo = '$periodo' AND
+                                    o.is_cancelada = '0'
+                              )";
+
+}
 
 /**
  * Busca a descricao do periodo
@@ -98,6 +119,7 @@ WHERE
                 is_cancelada = '0' AND
                 ref_curso = $curso AND
                 ref_periodo = '$periodo'
+                $turno_sql
         ) AND
         a.ref_pessoa = b.id AND
         a.ref_pessoa IN(
@@ -122,35 +144,6 @@ $arr_legenda = $conn->get_all($sql_legenda);
 $sql_rel = "
 SELECT * FROM (
     SELECT DISTINCT
-        b.nome, b.id as matricula, a.nota_final, a.num_faltas, ref_disciplina_ofer
-    FROM
-        matricula a, pessoas b
-    WHERE
-        (a.dt_cancelamento is null) AND
-        a.ref_disciplina_ofer IN (
-            SELECT
-                id from disciplinas_ofer
-            WHERE
-                is_cancelada = '0' AND
-                ref_curso = $curso AND
-                ref_periodo = '$periodo'
-        ) AND
-        a.ref_pessoa = b.id AND
-        a.ref_pessoa IN(
-            SELECT DISTINCT ref_pessoa
-            FROM contratos
-            WHERE
-                ref_curso = $curso AND
-                turma = '$turma'
-        ) AND
-        a.ref_motivo_matricula = '0'
-) AS T1
-ORDER BY lower(to_ascii(nome,'LATIN1')), ref_disciplina_ofer";
-
-
-$sql_rel = "
-SELECT * FROM (
-    SELECT DISTINCT
         b.nome, b.id as matricula, c.prontuario, a.nota_final, a.num_faltas, ref_disciplina_ofer
 
     FROM
@@ -161,7 +154,7 @@ SELECT * FROM (
             %s
         ) AND
         a.ref_pessoa = b.id AND
-        a.ref_pessoa IN(
+        a.ref_pessoa IN (
             SELECT DISTINCT ref_pessoa
             FROM contratos
             WHERE
@@ -229,6 +222,9 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
         <strong>Curso:</strong> <?=$desc_curso[0]?><br />
         <strong>Turma do curso:</strong> <?=$turma?><br />
         <strong>Campus:</strong> <?=$desc_curso[1]?><br />
+        <?php if (!empty($turno_desc)) : ?>
+          <strong>Turno:</strong> <?=$turno_desc?><br />
+        <?php endif; ?>
         <strong>Data de emiss&atilde;o:</strong> <?=$data_emissao?><br />
         
         <br /><br />
@@ -366,6 +362,11 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
         <?php
           
           $csv_dados .= "\r\n\r\n\r\n";
+          
+          // não há diários para a turma do curso e/ou turno selecionados
+          if (count($diarios_turma) == 0) {
+            $diarios_turma[] = 0;          
+          }
           
           $diarios = implode(',', $diarios_turma);
           

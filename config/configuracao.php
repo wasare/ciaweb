@@ -38,6 +38,9 @@ $param_conn_aluno['port']     = $port;
 $param_ldap['base_dn']     = 'ou=Users,dc=dominio,dc=local';
 $param_ldap['ldap_hosts']  = array('127.0.0.1');
 
+$param_ldap_aluno['base_dn']     = 'ou=Users,dc=dominio,dc=local';
+$param_ldap_aluno['ldap_hosts']  = array('127.0.0.1');
+
 
 /**
  * HTML Padrao
@@ -57,7 +60,7 @@ $SESS_TABLE     = 'sessao';
 $PAPEIS_SA = array('secretaria' => 1, 'administrador' => 2, 'administra_matrizes' => 4, 'relatorios' => 5);
 $PAPEIS_WEB_DIARIO = array('professor' => 3, 'coordenador' => 0);
 $PAPEIS_ADMINISTRADOR = array('administrador' => 2);
-$EMAIL_ADMIN = 'wanderson@cefetsp.br';
+$EMAIL_ADMIN = 'wanderson@ifsp.edu.br';
 $USUARIO_ALTERA_SENHA = 0;
 
 /*

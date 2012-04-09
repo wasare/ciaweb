@@ -38,17 +38,17 @@ class auth {
     public function login($login, $senha, $modulo, $conn) {
 
         $ret = FALSE;
-
+        
         $log_msg = $_SERVER['REMOTE_ADDR'] .' - ['. date("d/m/Y H:i:s") .'] - ';
 
         if(empty($login) || empty($senha)) {
-            $_SESSION['sa_msg'] = 'Nome de usuário e senha não preenchidos';
+            $_SESSION['sa_msg'] = 'Nome de usuário e/ou senha não preenchidos';
             exit(header('Location: '. $this->base_url .'app/login/index.php'));
         }
         else {
 
             // autentica na base LDAP e atualiza a senha caso necessário
-            if ($this->ldap_conn) {
+            if ($this->ldap_conn == TRUE) {
               if ($this->ldap_conn->authenticate($login, $senha)) {
 
                 $nova_senha = hash('sha256',trim($senha));

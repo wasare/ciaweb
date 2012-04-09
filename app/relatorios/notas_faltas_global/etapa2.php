@@ -15,6 +15,25 @@ $conn = new connection_factory($param_conn);
  */
 $periodo = (string) $_POST['periodo_id'];
 $campus = (int) $_POST['campus_id'];
+$turno = (string) $_POST['turno'];
+
+$turno_sql = $turno_desc = '';
+if (!is_numeric($turno) && !empty($turno)) {
+
+  $turno_sql = " AND c.id IN (SELECT DISTINCT 
+                                  o.ref_curso 
+                                FROM disciplinas_ofer o LEFT JOIN disciplinas_ofer_compl oc 
+                                ON (o.id = oc.ref_disciplina_ofer)
+                                WHERE 
+                                    oc.turno = '$turno' AND
+                                    o.ref_campus = $campus AND
+                                    o.ref_periodo = '$periodo' AND
+                                    o.is_cancelada = '0'
+                              )";
+                          
+   $turno_desc = $conn->get_one("SELECT get_turno('$turno')");
+
+}
 
 $sql = "SELECT DISTINCT
             c.id, c.descricao
@@ -23,6 +42,7 @@ $sql = "SELECT DISTINCT
             c.id = m.ref_curso AND
             m.ref_campus = $campus AND
             m.ref_periodo = '$periodo'
+            $turno_sql
         ORDER BY c.descricao;";
 
 $arr_cursos = $conn->get_all($sql);
@@ -49,10 +69,12 @@ $nome_periodo = $conn->get_one("SELECT descricao FROM periodos WHERE id = '$peri
                         return radio.checked;
                     }
                 ).value;
-                //Capturando o valor do text
-                //var id_curso = $F('curso');
+                var turno = $F('turno');
+                var periodo = $F('periodo');
+                var campus = $F('campus');
+                //alert(turno);
                 var url = 'lista_turmas.php';
-                var pars = 'id_curso=' + id_curso;
+                var pars = 'id_curso=' + id_curso + '&turno=' + turno + '&periodo=' + periodo + '&campus=' + campus;
                 var myAjax = new Ajax.Updater('resposta',url, {method: 'get',parameters: pars});
             }
         </script>
@@ -62,6 +84,8 @@ $nome_periodo = $conn->get_one("SELECT descricao FROM periodos WHERE id = '$peri
         <form action="notas_faltas_global.php" method="post" name="form1" id="form1" target="_blank">
             <input type="hidden" id="periodo" name="periodo" value="<?=$periodo?>" />
             <input type="hidden" id="campus" name="campus" value="<?=$campus?>" />
+            <input type="hidden" id="turno" name="turno" value="<?=$turno?>" />
+            <input type="hidden" id="turno_desc" name="turno_desc" value="<?=$turno_desc?>" />
             <div class="btn_action" id="btn_voltar">
                 <a href="javascript:history.back();" class="bar_menu_texto">
                     <img src="../../../public/images/icons/back.png" alt="Voltar" width="20" height="20" />
@@ -77,8 +101,12 @@ $nome_periodo = $conn->get_one("SELECT descricao FROM periodos WHERE id = '$peri
                 <br />
                 <strong>Campus:</strong>
                 <?=$nome_campus?>
-                <br />
-                <br />
+                <?php if (isset($turno_desc)) : ?>
+                  <br />
+                  <strong>Turno:</strong>
+                  <?=$turno_desc?>
+                <?php endif; ?>
+                <br /><br />
                 <strong>Selecione um curso:</strong><br />
 
                 <span id="ValidRadio1">

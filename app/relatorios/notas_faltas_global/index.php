@@ -12,6 +12,17 @@ $conn = new connection_factory($param_conn);
 
 $arr_campi = $conn->get_all('SELECT id, nome_campus FROM campus ORDER BY nome_campus;');
 
+$turno_sql = "SELECT DISTINCT 
+                  oc.turno 
+               FROM disciplinas_ofer o LEFT JOIN disciplinas_ofer_compl oc 
+               ON (o.id = oc.ref_disciplina_ofer)
+               WHERE 
+                    o.ref_campus = (SELECT id FROM campus WHERE nome_campus = '". $_SESSION['sa_campus'] ."') AND
+                    o.is_cancelada = '0'
+              ";
+
+$arr_turno = $conn->get_all("SELECT id, nome FROM turno WHERE id IN ($turno_sql) ORDER BY nome ;");
+
 $busca1  = new search('periodo','periodo_id','periodos_list', 'form1', '../periodo_lista.php');
 //$busca2  = new search('curso','curso_id','cursos_list', 'form1', '../curso_lista.php');
 
@@ -46,6 +57,20 @@ $busca1  = new search('periodo','periodo_id','periodos_list', 'form1', '../perio
                     <span class="textfieldRequiredMsg">Obrigat&oacute;rio.</span>
                     <?=$busca1->area_lista()?>
                 </span>
+                <br />
+                Turno:<br />
+                <span class="comentario">Selecione o turno ou deixe como está para listar os cursos de todos os turnos.</span>
+                <br />
+                <select id="turno" name="turno">
+                  <option value=""> </option>
+                 <?php
+                  foreach($arr_turno as $turno):
+                 ?>
+                  <option value="<?=$turno['id']?>">
+                      <?=$turno['nome']?>
+                  </option>
+                <?php endforeach;?>
+                </select>
                 <br />
                 Campus:<br />
                 <select id="campus" name="campus" disabled="disabled">

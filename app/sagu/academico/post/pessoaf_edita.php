@@ -28,7 +28,7 @@ $rg_cidade              = $_POST['rg_cidade'];
 $ref_filiacao           = $_POST['ref_filiacao'];
 $ref_naturalidade       = $_POST['ref_naturalidade'];
 $ref_nacionalidade      = $_POST['ref_nacionalidade'];
-$cod_cpf_cgc            = $_POST['cod_cpf_cgc'];
+$cod_cpf_cgc            = (string) $_POST['cod_cpf_cgc'];
 $titulo_eleitor         = $_POST['titulo_eleitor'];
 $placa_carro            = $_POST['placa_carro'];
 $fl_dados_pessoais      = $_POST['fl_dados_pessoais'];
@@ -63,6 +63,8 @@ $cep           = trim(str_replace('-','',$cep));
 $cod_cpf_cgc   = str_replace('/','',$cod_cpf_cgc);
 $cod_cpf_cgc   = str_replace('-','',$cod_cpf_cgc);
 $cod_cpf_cgc   = trim(str_replace('.','',$cod_cpf_cgc));
+
+if (empty($cod_cpf_cgc)) $cod_cpf_cgc = 'NULL';
 
 
 
