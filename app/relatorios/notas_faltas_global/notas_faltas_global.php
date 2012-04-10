@@ -21,9 +21,7 @@ $turno   = (string) $_POST['turno'];
 $turno_desc   = (string) $_POST['turno_desc'];
 
 if(empty($periodo) || $campus == 0 || $curso == 0 || empty($turma)) {
-    echo '<script language="javascript">window.alert("Nenhum diario a ser exibido!");</script>';
-    echo '<meta http-equiv="refresh" content="0;url=index.php">';
-    exit;
+    die('<script language="javascript">window.alert("Nenhum diario a ser exibido!");window.close();</script>');
 }
 
 /*
@@ -231,9 +229,8 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
         <b>LEGENDA</b>
         <table cellpadding="0" cellspacing="0" class="relato">
             <tr bgcolor="#cccccc" class="header">
-                <th align="center"><strong>C&oacute;d. Di&aacute;rio</strong></th>
-                <th align="center"><strong>C&oacute;d. Disciplina</strong></th>
-                <th align="center"><strong>Turma da Disciplina</strong></th>
+                <th align="center"><strong>Di&aacute;rio</strong></th>
+                <th align="center"><strong>Disciplina - Turma</strong></th>
                 <th align="center"><strong>Descri&ccedil;&atilde;o</strong></th>
                 <th align="center"><strong>Professor(a)</strong></th>
                 <th align="center"><strong>CH Prevista</strong></th>
@@ -248,18 +245,27 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
             $csv_cabecalho .= '"Curso: '. $desc_curso[0] .'",'. "\r\n";
             $csv_cabecalho .= '"Turma do curso: '. $turma .'",'. "\r\n";
             $csv_cabecalho .= '"Campus: '. $desc_curso[1] .'",'. "\r\n";
+            
+            if (!empty($turno_desc)) {
+              $csv_cabecalho .= '"Turno: '. $turno_desc .'",'. "\r\n";
+            }
+            
             $csv_cabecalho .= '"Data de emissão: '. $data_emissao .'",'. "\r\n";
             $csv_cabecalho .= '"-*- = não matriculado",'. "\r\n";
             
             
             
-            $csv_cabecalho0 = '"Cód. Diário","Cód. Disciplina","Turma da Disciplina",';
+            $csv_cabecalho0 = '"Diário","Disciplina - Turma",';
             $csv_cabecalho0 .= 'Descrição,"Professor(a)","CH Prevista",';
             $csv_cabecalho0 .= '"CH Realizada","N Distribuída","Situação",'. "\r\n";
             
             $csv_dados = $csv_cabecalho0;
             
             $situacao_diarios = array();
+            /*print_r($arr_legenda);
+            if(count($arr_legenda) == 0) {
+              die('<script language="javascript">window.alert("Nenhum diario a ser exibido1!");window.close();</script>');
+            }*/
             
             foreach($arr_legenda as $legenda) : 
               
@@ -289,8 +295,7 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
             ?>
             <tr bgcolor="<?=$lcolor?>">
                 <td align="center"><?=$legenda['diario']?></td>
-                <td align="center"><?=$legenda['abreviatura']?></td>
-                <td align="center"><?=$legenda['turma']?></td>
+                <td align="center"><?=$legenda['abreviatura']?>-<?=$legenda['turma']?></td>
                 
                 <td><?=$legenda['descricao_extenso']?></td>
                 <td><?=$legenda['prof']?></td>
@@ -350,8 +355,8 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
             </tr>
             <?php 
                 
-                  $csv_dados .= '"'. $legenda['diario'] .'","'. $legenda['abreviatura'] .'","';
-                  $csv_dados .= $legenda['turma'] .'","'. $legenda['descricao_extenso'] .'","';
+                  $csv_dados .= '"'. $legenda['diario'] .'","'. $legenda['abreviatura'] .'-'. $legenda['turma'] .'","';
+                  $csv_dados .= $legenda['descricao_extenso'] .'","';
                   $csv_dados .= $legenda['prof'] .'","'. $legenda['carga_horaria'] .'","';
                   $csv_dados .= $carga_realizada .'","'. $nota_distribuida .'","';
                   $csv_dados .= $csv_situacao .'",'. "\r\n";
@@ -470,13 +475,16 @@ if (is_file($arquivo_csv)) @unlink($arquivo_csv);
               $situacao_aluno = '';
               $csv_situacao_aluno = '';
               $reprovado_por_faltas = FALSE;
-              $calc_situacao_final = TRUE;
-              
+              $calc_situacao_final = TRUE;              
               
               $tcolor = ( ($t % 2) == 0) ? $r1 : $r2;
-              $t++;
+              $t++;              
               
-              $falta_global = ($aluno['faltas_global'] * 100 ) / $aluno['ch_realizada_disciplinas_matriculadas'];              
+              if (($aluno['faltas_global'] * 100 ) > 0 && $aluno['ch_realizada_disciplinas_matriculadas'] > 0)
+                $falta_global = ($aluno['faltas_global'] * 100 ) / $aluno['ch_realizada_disciplinas_matriculadas'];
+              else 
+                $falta_global = 0;
+                         
               $destaca_falta_global = ($falta_global >= 25) ? ' bgcolor="#cccccc"' : '';
               
               if ($falta_global >= 25) {

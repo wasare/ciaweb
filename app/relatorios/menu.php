@@ -81,6 +81,10 @@ $arr_campi = $conn->get_all('SELECT id, nome_campus FROM campus ORDER BY nome_ca
                 <a href="matriculados_pessoas/pesquisa_todos_alunos_periodo.php" title="Pessoas com matr&iacute;cula" target="_self">
                     <img src="../../public/images/icons/lupa.png" />&nbsp;Pessoas com matr&iacute;cula
                 </a>
+                <br />
+                 <a href="web_diario/situacao_diarios/index.php" title="Resumo de preenchimento dos di&aacute;rios" target="_self">
+                 <img src="../../public/images/icons/lupa.png" />&nbsp;Resumo de preenchimento dos di&aacute;rios
+                </a>
             </div>
             <div class="box_menu_relatorio" style="float: left; border: 0; padding-left: 5em;">
                 <form name="acessa_rapido" id="acesso_rapido" method="post" action="">

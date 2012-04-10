@@ -8,10 +8,8 @@ $periodo_id = (string) $_GET['periodo_id'];
 $curso_id = (int) $_GET['curso_id'];
 $campus = (int) $_GET['campus'];
 $turma = (string) $_GET['turma'];
-
-//echo "//Array ( [periodo] => 0902 [campus] => 1 [curso] => 633 [turma] => 1 )";
-
-//die(print_r($_GET));
+$turno   = (string) $_GET['turno'];
+$turno_desc   = (string) $_GET['turno_desc'];
 
 // VERIFICA SE O USUARIO TEM DIREITO DE ACESSO
 $sql_coordena = ' SELECT count(*)
@@ -33,6 +31,9 @@ $_POST['periodo'] = $periodo_id;
 $_POST['campus'] = $campus;
 $_POST['curso'] = $curso_id;
 $_POST['turma'] = $turma;
+$_POST['turno'] = $turno;
+$_POST['turno_desc'] = $turno;
+
 
 require_once($BASE_DIR .'app/relatorios/notas_faltas_global/notas_faltas_global.php');
 

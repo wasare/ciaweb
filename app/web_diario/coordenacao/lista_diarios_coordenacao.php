@@ -105,6 +105,22 @@ $periodo = $conn->get_row($qryPeriodo);
 
 <script type="text/javascript" src="<?=$BASE_URL .'lib/prototype.js'?>"> </script>
 <script type="text/javascript" src="<?=$BASE_URL .'app/web_diario/web_diario.js'?>"> </script>
+        <script language="javascript">
+            // consulta ajax com prototype
+            function consulta_ajax(){
+                var turno = $F('turno');
+                if (turno.replace(/\s/g,"") == "") turno = 'X';
+                var curso = $F('curso');
+                var periodo = $F('periodo');
+                var campus = $F('campus');
+                // alert(turno);
+                var url = 'coordenacao/lista_turmas.php';
+                var pars = 'curso_id=' + curso + '&turno=' + turno + '&periodo=' + periodo + '&campus=' + campus;
+                var myAjax = new Ajax.Updater('resposta_turmas',url, {method: 'get',parameters: pars});
+            }
+        </script>
+
+
 </head>
 
 <body>
@@ -132,31 +148,49 @@ $periodo = $conn->get_row($qryPeriodo);
 </span>
 
 <!-- panel para selecao de turma para o relatorio // inicio //-->
-<div id="notas_faltas_pane" style="display:none; border: 0.0015em solid; width:200px; text-align:center;">
-<h4>clique na turma para exibir o relat&oacute;rio:</h4>
+<div id="notas_faltas_pane" style="display:none; border: 0.0015em solid; width:320px; text-align:center;">
+<h4>Selecione as informações abaixo:</h4>
 <?php
-	$sql = "
-		SELECT DISTINCT turma, ref_campus
-			FROM contratos
-			WHERE
-    			ref_curso = ". $curso_id ." AND
-    			turma is not null AND turma <> ''; ";
+  
+  $turno_sql = "SELECT DISTINCT 
+                  oc.turno 
+               FROM disciplinas_ofer o LEFT JOIN disciplinas_ofer_compl oc 
+               ON (o.id = oc.ref_disciplina_ofer)
+               WHERE 
+                    o.ref_campus = (SELECT id FROM campus WHERE nome_campus = '".       $_SESSION['sa_campus'] ."') AND
+                    o.is_cancelada = '0' AND
+                    o.ref_curso = $curso_id
+              ";
 
-	$arr_turmas_curso = $conn->get_all($sql);
-
-	$count = 0;
-
-	foreach($arr_turmas_curso as $turma_curso) :
-        $url = '';
-        $url .= $BASE_URL .'app/web_diario/coordenacao/exibe_notas_faltas_global.php?curso_id='. $curso_id;
-        $url .= '&periodo_id='. $periodo_id;
-        $url .= '&campus='. $turma_curso['ref_campus'];
-        $url .= '&turma='. $turma_curso['turma'];
+  $arr_turno = $conn->get_all("SELECT id, nome FROM turno WHERE id IN ($turno_sql) ORDER BY nome ;"); 
+  
+  $campus = $conn->get_one("SELECT DISTINCT id FROM campus WHERE nome_campus = '".       $_SESSION['sa_campus'] ."'"); 
+  
 ?>
-		<a href="#" onclick="abrir('Sistema Acadêmico', '<?=$url?>')" title="clique para visualizar"><?=$turma_curso['turma']?></a>		     <br />
-<?php
-    endforeach;
-?>
+<form action="" method="post" name="form1" id="form1">
+ <strong>Turno:</strong>
+  <select id="turno" name="turno" onchange="consulta_ajax();">
+      <option value="">-- selecione --</option>
+    <?php
+      foreach($arr_turno as $turno):
+    ?>
+      <option value="<?=$turno['id']?>">
+        <?=$turno['nome']?>
+      </option>
+    <?php endforeach;?>
+ </select>
+ <input type="hidden" id="curso" name="curso" value="<?=$curso_id?>" />
+ <input type="hidden" id="periodo" name="periodo" value="<?=$periodo_id?>" />
+ <input type="hidden" id="campus" name="campus" value="<?=$campus?>" />
+ <input type="hidden" id="turno" name="turno" value="<?=$turno?>" />
+ <input type="hidden" id="turno_desc" name="turno_desc" value="<?=$turno_desc?>" />
+ <br /><br />
+ 
+
+ <div id="resposta_turmas"></div>
+ <br />
+ </form>
+
 <br />
 </div>
 <!-- panel para selecao de turma para o relatorio \\ fim \\ -->

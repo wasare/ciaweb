@@ -2,7 +2,7 @@
 /*
  * Arquivo com as configuracoes iniciais
  */
-require_once("../../../app/setup.php");
+require_once('../../../../app/setup.php');
 
 /*
  * Estancia a classe de conexao e abre
@@ -19,8 +19,8 @@ $turno = (string) $_POST['turno'];
 
 $turno_sql = $turno_desc = '';
 if (!is_numeric($turno) && !empty($turno)) {
-
-   $turno_sql = " c.id IN (SELECT DISTINCT 
+                              
+     $turno_sql = " c.id IN (SELECT DISTINCT 
                                   m.ref_curso
                                 FROM disciplinas_ofer o 
                                   LEFT JOIN disciplinas_ofer_compl oc 
@@ -58,10 +58,10 @@ $nome_periodo = $conn->get_one("SELECT descricao FROM periodos WHERE id = '$peri
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>SA</title>
-        <link href="../../../public/styles/formularios.css" rel="stylesheet" type="text/css" />
-        <script src="../../../lib/Spry/widgets/radiovalidation/SpryValidationRadio.js" type="text/javascript"></script>
-        <link href="../../../lib/Spry/widgets/radiovalidation/SpryValidationRadio.css" rel="stylesheet" type="text/css" />
-        <script language="javascript" src="../../../lib/prototype.js"></script>
+        <link href="<?=$BASE_URL?>public/styles/formularios.css" rel="stylesheet" type="text/css" />
+        <script src="<?=$BASE_URL?>lib/Spry/widgets/radiovalidation/SpryValidationRadio.js" type="text/javascript"></script>
+        <link href=".<?=$BASE_URL?>lib/Spry/widgets/radiovalidation/SpryValidationRadio.css" rel="stylesheet" type="text/css" />
+        <script language="javascript" src="<?=$BASE_URL?>lib/prototype.js"></script>
         <script language="javascript">
             //Consulta ajax com prototype
             function consulta_ajax(){
@@ -82,22 +82,21 @@ $nome_periodo = $conn->get_one("SELECT descricao FROM periodos WHERE id = '$peri
         </script>
     </head>
     <body>
-        <h2>Relat&oacute;rio global de notas e faltas</h2>
-        <form action="notas_faltas_global.php" method="post" name="form1" id="form1" target="_blank">
+        <h2>Relat&oacute;rio de acompanhamento dos di&aacute;rios</h2>
+        <form action="situacao_diarios.php" method="post" name="form1" id="form1" target="_blank">
             <input type="hidden" id="periodo" name="periodo" value="<?=$periodo?>" />
             <input type="hidden" id="campus" name="campus" value="<?=$campus?>" />
             <input type="hidden" id="turno" name="turno" value="<?=$turno?>" />
             <input type="hidden" id="turno_desc" name="turno_desc" value="<?=$turno_desc?>" />
             <div class="btn_action" id="btn_voltar">
                 <a href="javascript:history.back();" class="bar_menu_texto">
-                    <img src="../../../public/images/icons/back.png" alt="Voltar" width="20" height="20" />
+                    <img src="<?=$BASE_URL?>public/images/icons/back.png" alt="Voltar" width="20" height="20" />
                     <br />Voltar
                 </a>
             </div>
             <div class="panel" id="panel">
                 <h3>Etapa 2 de 2</h3>
-                <span class="comentario"><strong>Aten&ccedil;&atilde;o:</strong> O relat&oacute;rio exibir&aacute; somente os di&aacute;rio concluídos.</span>
-                <br /><br />
+                <br />
                 <strong>Per&iacute;odo:</strong>
                 <?=$nome_periodo?>
                 <br />
@@ -112,14 +111,19 @@ $nome_periodo = $conn->get_one("SELECT descricao FROM periodos WHERE id = '$peri
                 <strong>Selecione um curso:</strong><br />
 
                 <span id="ValidRadio1">
-                    <span class="radioRequiredMsg">Selecione um curso.</span><br />
                     
-                    <?php foreach($arr_cursos as $curso): ?>
-                    <input type="radio" name="curso" id="curso" value="<?=$curso['id']?>" onclick="consulta_ajax();" />
+                    <?php
+                      $count = 0; 
+                      foreach($arr_cursos as $curso): 
+                        $checked = ($count === 0) ? 'checked="checked"' : '';
+                    ?>
+                    <input type="radio" name="curso" id="curso" value="<?=$curso['id']?>" <?=$checked?> />
                     <?=$curso['descricao']?> (<?=$curso['id']?>)<br />
-                    <?php endforeach; ?>
+                    <?php 
+                      $count++;
+                      endforeach; 
+                    ?>
 
-                    <span class="radioRequiredMsg">Selecione um curso.</span>
                 </span>
 
                 <br />
