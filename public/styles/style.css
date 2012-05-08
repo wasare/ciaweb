@@ -1,4 +1,4 @@
-/*Pesquisa*/
+﻿/*Pesquisa*/
 
 body {
 	font-family:Verdana, Arial, Helvetica, sans-serif;
@@ -152,4 +152,6 @@ h2 {
    font-size: 0.75em;
    font-weight: bold;
 }
-
+disc{
+		font-size:16px;
+	}
