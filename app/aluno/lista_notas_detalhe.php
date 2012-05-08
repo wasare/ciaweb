@@ -182,7 +182,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
         	  
        	$cont = $nota_disc_maxima = 0;
        	$nDistribuida_sql = 
-       	"SELECT nota_distribuida FROM diario_formulas where grupo like '%-211-%-177' order by prova;";
+       	"SELECT nota_distribuida FROM diario_formulas where grupo like '%-$periodo-%-$disciplina_ofer' order by prova;";
        	$nDist_info = $conn->get_all($nDistribuida_sql);
         if (count($nDist_info) > 0 ) {
             foreach ($nDist_info as $disciplina_aluno) {
