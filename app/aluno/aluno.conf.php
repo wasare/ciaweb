@@ -23,10 +23,8 @@ if(isset($_SESSION['sa_aluno_user']) and $_SESSION['sa_aluno_user'] != '') {
      * Verifica se o formulario de autenticacao
      * enviou parametros
      */
-    if($_POST['user']
-            and $_POST['senha']
-            and $_POST['nasc']
-    ) {
+    if($_POST['user'] and $_POST['senha'] and $_POST['nasc'])
+    {
         $user  = (int) $_POST['user'];
         $senha = md5($_POST['senha']);
         $nasc  = addslashes($_POST['nasc']);
