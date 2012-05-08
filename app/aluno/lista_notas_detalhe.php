@@ -71,7 +71,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
             	//Fim
 ?>
 
-<!--IniÃ‚Â­cio - Victor Uliisses Pugliese - 15:28 01/05/2012 - Tabela Media -->
+<!--Inicio - Victor Uliisses Pugliese - 15:28 01/05/2012 - Tabela Media -->
 <table style="width: 220px; font-size: 12px" >
 	<tr bgcolor="#EEEEEE">
 		<td><b>Média</b></td>
@@ -167,7 +167,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
             		if($disciplina_aluno['nota'] != -1)
             		{
 	            		echo '<td align="center">'. number::numeric2decimal_br($disciplina_aluno['nota'],1) .'</td>';        
-	            		$media_aluno += (int) $disciplina_aluno['nota'];
+	            		$media_aluno += (float) $disciplina_aluno['nota'];
 	            	}
 	            	else
 	            		echo '<td align="center"> 0,0 </td>';
@@ -182,14 +182,14 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
         	  
        	$cont = $nota_disc_maxima = 0;
        	$nDistribuida_sql = 
-       	"SELECT nota_distribuida FROM diario_formulas where grupo like '%-211-%-177' order by prova;";
+       	"SELECT nota_distribuida FROM diario_formulas where grupo like '%-$periodo-%-$disciplina_ofer' order by prova;";
        	$nDist_info = $conn->get_all($nDistribuida_sql);
         if (count($nDist_info) > 0 ) {
             foreach ($nDist_info as $disciplina_aluno) {
              	if($disciplina_aluno['nota_distribuida'] != -1)
 	           	{
 	           		echo '<td align="center">'. $disciplina_aluno['nota_distribuida'] .'</td>';        
-	           		$nota_disc_maxima += (int) $disciplina_aluno['nota_distribuida'];
+	           		$nota_disc_maxima += (float) $disciplina_aluno['nota_distribuida'];
 	           	}
 	           	else
 	           		echo '<td align="center"> 0,0 </td>';
