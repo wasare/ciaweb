@@ -1,6 +1,4 @@
-<meta http-equiv="Content-Type" content="charset=UTF-8"> </meta>
 <?php
-
 require_once('aluno.conf.php');
 include_once('includes/topo.htm');
 
@@ -22,8 +20,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 <p>
     <strong>Aluno: </strong><?=$aluno?> - <?=$rs_pessoa?><br />
     <strong>Curso: </strong><?=$curso?> - <?=$rs_curso?><br />
-    <strong>Perí­odo: </strong><?=$rs_periodo?><br />
-    Gerado às <?php echo date("H:i:s") ." do dia ". date("d/m/y"); ?>
+    <strong>Período: </strong><?=$rs_periodo?><br />
 </p>
 
 <?php
@@ -59,29 +56,22 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 		foreach ($diario_info as $disciplina_aluno) {
 			if ($count == 0) {
 				$nao_finalizada = ($disciplina_aluno['fl_finalizada'] == 'f') ? '<strong>*</strong>' : ' ';  
-				echo '<h3><b>Detalhes da disciplina: </b>'. $disciplina_aluno['descricao_disciplina'] . $nao_finalizada . '</h3>';
+				echo '<disc><b>Disciplina: </b>'. $disciplina_aluno['descricao_disciplina'] . $nao_finalizada . '</disc><p/>';
 				//Inicio - Victor Ullisses Pugliese - 10h54 04/05/2012 - Media da Sala 
 				$turma_int = intval($turma) + 0.5;
 				echo 
 				"<table style='font-size: 12px'>
-					<tr>";
-	   			if($turma == intval($turma))
-	   				echo "<td style='><b>Média da Turma:</b></td><td>" . $turma . "</td>";
-	   			else if($turma <= $turma_int)
-	   				echo "<td><b>Média da Turma:</b></td><td>" . ($turma_int) . "</td>";
-	   			else
-	   				echo "<td>Média da Turma:</td><td>" . ($turma_int+0.5) . "</td>";
-	   			echo"</tr>
+					<tr><b>Média da Turma: </b></td>". number::numeric2decimal_br($turma,1). "</tr>
 	   				 <tr>";
    				//Fim da Media da Sala;
-   				//IniciÂ­o: Victor Ullisses Pugliese - 12:38 27/04/2012 - CARGA HORARIA;
+   				//IniciÃ‚Â­o: Victor Ullisses Pugliese - 12:38 27/04/2012 - CARGA HORARIA;
             		echo "<td><b>Aulas Dadas:<b/></td><td>". $ch_realizada . "</td>
             		</tr>
             	</table><p />";
             	//Fim
 ?>
 
-<!--IniÂ­cio - Victor Uliisses Pugliese - 15:28 01/05/2012 - Tabela Media -->
+<!--IniÃ‚Â­cio - Victor Uliisses Pugliese - 15:28 01/05/2012 - Tabela Media -->
 <table style="width: 220px; font-size: 12px" >
 	<tr bgcolor="#EEEEEE">
 		<td><b>Média</b></td>
@@ -165,8 +155,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
     </tr>
     <?php
     //Inicio - Victor Ullisses Pugliese - 11h27min 04/05/2012 - Exibe notas e pesos;
-        $cont = 0;
-        $total = 0;
+        $cont = $media_aluno = 0;
         
         $color =  ($color != '#ffffff') ? '#ffffff' : '#cce5ff';
         echo '<tr bgcolor="'. $color .'">'; 
@@ -178,7 +167,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
             		if($disciplina_aluno['nota'] != -1)
             		{
 	            		echo '<td align="center">'. number::numeric2decimal_br($disciplina_aluno['nota'],1) .'</td>';        
-	            		$total += $disciplina_aluno['nota'];
+	            		$media_aluno += (int) $disciplina_aluno['nota'];
 	            	}
 	            	else
 	            		echo '<td align="center"> 0,0 </td>';
@@ -186,35 +175,39 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
             	$cont++;            	
         }
         
-        echo '<td align="center">'. $total .'</td>';
+        echo '<td align="center">'. $media_aluno .'</td>';
         echo '</tr>
         	  <tr>
         	  <td><center><b>Nota<br/>Máxima</b></center></td>';
         	  
-       	$cont = 0;
-        if (count($diario_info) > 0 ) {
-            foreach ($diario_info as $disciplina_aluno) {
-            	if(($cont % 2 == 0) && $cont<=(($quantidade_notas_diario+1)*2-4))
-            	{
-            		if($disciplina_aluno['nota'] != -1)
-	            		echo '<td align="center">'. 0 .'</td>';        
-	            	else
-	            		echo '<td align="center"> 0,0 </td>';
-	            		}
+       	$cont = $nota_disc_maxima = 0;
+       	$nDistribuida_sql = 
+       	"SELECT nota_distribuida FROM diario_formulas where grupo like '%-211-%-177' order by prova;";
+       	$nDist_info = $conn->get_all($nDistribuida_sql);
+        if (count($nDist_info) > 0 ) {
+            foreach ($nDist_info as $disciplina_aluno) {
+             	if($disciplina_aluno['nota_distribuida'] != -1)
+	           	{
+	           		echo '<td align="center">'. $disciplina_aluno['nota_distribuida'] .'</td>';        
+	           		$nota_disc_maxima += (int) $disciplina_aluno['nota_distribuida'];
+	           	}
+	           	else
+	           		echo '<td align="center"> 0,0 </td>';
+	         	}	         	
             	$cont++;
+            	if ($cont == $quantidade_notas_diario) break;
             }
         }
         
         echo '<td align="center">'. '-' .'</td>';
-        echo '<td align="center">'. $disciplina_aluno['total_distribuido'] .'</td>';
+        echo '<td align="center">'. $nota_disc_maxima .'</td>';
 	    //Fim do Exibe notas e pesos;
-    }
     ?>
 </table>
 <br />
 <?php
 	if($situacao == "M")
-		echo "(<strong>*</strong>) Disciplina com lançamentos em aberto, passível de alterações.<br /><br />";
+		echo "(<strong>*</strong>) Disciplina com lançamentos em aberto, passí­vel de alterações.<br /><br />";
 ?>
 <div align="left" style="font-size: 0.85em;">
     <h4>Legenda</h4>
@@ -223,7 +216,8 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
     <strong>M</strong> - Matriculado <br /><br />
 </div>
 <br />
+Gerado no dia <?php echo date("d/m/Y") ." às ". date("H:i:s"); ?> <br/><br/>
 <input type="button" value="Imprimir" onClick="window.print()">&nbsp;&nbsp;&nbsp;<a href="#" onclick="history.back(-1);return false;">Voltar</a>
 <br /><br />
-<?php include_once('Untitled_1.htmlincludes/rodape.htm'); ?>      
+<?php include_once('includes/rodape.htm'); ?>      
 

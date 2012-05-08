@@ -1,5 +1,4 @@
-﻿<meta http-equiv="Content-Type" content="charset=UTF-8"> </meta>
-<?php
+﻿<?php
 
 require_once('aluno.conf.php');
 include_once('includes/topo.htm');
@@ -36,7 +35,6 @@ $rs_diarios_matriculados = count($rs_diarios);
     <strong>Aluno: </strong><?=$aluno?> - <?=$rs_pessoa?><br />
     <strong>Curso: </strong><?=$curso?> - <?=$rs_curso?><br />
     <strong>Perí­odo: </strong><?=$rs_periodo?><br />
-    Gerado às <?php echo date("H:i:s") ." do dia ". date("d/m/y"); ?>
 </p>
 <span style="color: red; font-style:italic; font-family:arial,times;">Clique no 
 nome da disciplina para detalhar os lançamentos e visualizar mais informações</span>
@@ -86,9 +84,22 @@ nome da disciplina para detalhar os lançamentos e visualizar mais informações
 				{
 					echo '<td>'. $disciplina_aluno['descricao_disciplina'] . $nao_finalizada .'</td>';				
 				}
-				echo '<td align="center">'. number::numeric2decimal_br($disciplina_aluno['nota_final'],1) .'</td>';
-				echo '<td align="center">'. $disciplina_aluno['total_distribuido'] .'</td>';
-								
+				if($disciplina_aluno['total_distribuido'] > 0)
+				{
+					echo '<td align="center">'. number::numeric2decimal_br($disciplina_aluno['nota_final'],1) .'</td>';
+				}
+				else
+				{
+					echo '<td align="center"> - </td>';
+				}
+				if($disciplina_aluno['total_distribuido'] > 0)
+				{
+					echo '<td align="center">'. $disciplina_aluno['total_distribuido'] .'</td>';
+				}
+				else
+				{
+					echo '<td align="center"> - </td>';
+				}				
 				echo '<td align="center">'. $disciplina_aluno['num_faltas'] .'</td>';
 				
 				//Inici­o: Victor Ullisses Pugliese - 12:38 27/04/2012 - CARGA HORARIA;
@@ -148,6 +159,7 @@ coordenação do curso. <br />
 </font>
 <?php endif; ?>
 <br />
+Gerado no dia <?php echo date("d/m/Y") ." às ". date("H:i:s"); ?> <br/><br/>
 <input type="button" value="Imprimir" onClick="window.print()">&nbsp;&nbsp;&nbsp;<a href="lista_cursos.php">Voltar</a>
 <br /><br />
 <?php include_once('includes/rodape.htm'); ?>      
