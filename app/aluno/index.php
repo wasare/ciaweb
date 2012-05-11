@@ -2,7 +2,7 @@
 require_once(dirname(__FILE__) .'/../../config/configuracao.php');
 require_once($BASE_DIR .'core/login/session.php');
 
-// Inicia a sessao
+// inicia a sessao
 $sessao = new session($param_conn);
 $sessao->destroy();
 
@@ -55,14 +55,11 @@ $sessao->destroy();
                         <img src="../../public/images/sa_icon.png" alt="logomarca SA" width="80" height="68" style="margin: 10px;" />
                     </td>
                     <td valign="top">
-                        <h3>Bem vindo ao Sistema Acad&ecirc;mico - M&oacute;dulo do aluno.</h3>
+                        <h3>Bem vindo ao CIAWEB</h3>
+                        <h2>M&oacute;dulo do aluno</h2>
 
-                        No Registro Escolar utilizar o n&uacute;mero do seu prontu&aacute;rio; <br />
-                        Na data de nascimento informe a data no formato DD/MM/AAAA.<br />
-                        Se ocorrer algum problema de usu&aacute;rio ou senha inv&aacute;lido, verfique os dados.<br />
-                        Caso persista o erro consulte a Ger&ecirc;ncia de Registros Escolares se a sua data de nascimento est&aacute; correta no sistema. <br />
+                        Utilize a sua senha pessoal de acesso, é a mesma utilizada para logar nos computadores dos laborat&oacute;rios.<br />
 
-                        Na senha utilize o seu prontu&aacute;rio para o acesso inicial.<br />
                         <b>Qualquer diverg&ecirc;ncia em notas e faltas informe-se com o seu professor.</b><br />
 
                     </td>
@@ -74,20 +71,10 @@ $sessao->destroy();
                     <table border="0">
                         <tr>
                             <td align="right">
-                                Matr&iacute;cula:
+                               Prontu&aacute;rio:
                             </td>
                             <td>
-                                <input type="text" id="user" name="user" maxlength="20" style="width: 140px;" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right">
-
-                                Data de nascimento:
-                            </td>
-                            <td>
-                                <input type="text" id="nasc" name="nasc" maxlength="20" style="width: 140px;" />
-                                <span class="style1">(DD/MM/AAAA)</span>
+                                <input type="text" id="prontuario" name="prontuario" maxlength="20" style="width: 140px;" />
                             </td>
                         </tr>
                         <tr>
@@ -104,7 +91,6 @@ $sessao->destroy();
                                 <p>
                                     <input type="image" src="../../public/images/bt_entrar.png" />
                                 </p>
-                                <a href="esqueci_senha.php">Esqueci minha senha</a>
                             </td>
                         </tr>
                     </table>
@@ -116,7 +102,7 @@ $sessao->destroy();
             <table border="0">
                 <tr>
                     <td>
-                        <img src="../../public/images/logo.jpg" alt="IFSP - Caraguatatuba" style="margin: 10px;" />
+                        <img src="../../public/images/logo.jpg" alt="<?=$IEnome?>" style="margin: 10px;" />
                     </td>
                     <td>
                         <strong>Instituto Federal  S&atilde;o Paulo</strong><br />
@@ -125,7 +111,7 @@ $sessao->destroy();
                 </tr>
             </table>
             <p>
-                <font color="#999999">&copy;2011 IFSP Campus Caraguatatuba</font>
+                <font color="#999999">&copy;2012  IFSP Campus Caraguatatuba</font>
             </p>
         </div>
 

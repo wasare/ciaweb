@@ -3,7 +3,7 @@
 require_once('aluno.conf.php');
 include_once('includes/topo.htm');
 
-$aluno   = $user;
+$aluno   = $aluno_id;
 $periodo = $_GET["p"];
 $curso   = $_GET["c"];
 $rs_pessoa   = $conn->get_one("SELECT nome FROM pessoas WHERE id = $aluno");
