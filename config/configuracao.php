@@ -9,9 +9,9 @@ date_default_timezone_set('America/Sao_Paulo');
  * Banco de dados
  */
 $host     = '127.0.0.1';
-$database = 'ciaweb_042012';
-$user     = 'ciaweb_user';
-$password = 'u0sodQFhArqOELlBNKxJ';
+$database = 'ciaweb_24042012';
+$user     = 'postgres';
+$password = '1234';
 $port     = 5432;
 
 /**
@@ -28,8 +28,8 @@ $param_conn['port']     = $port;
  */
 $param_conn_aluno['host']     = $param_conn['host'];
 $param_conn_aluno['database'] = $param_conn['database'];
-$param_conn_aluno['user']     = 'aluno';
-$param_conn_aluno['password'] = 'eokQdfaBO9M8CY6snUzy';
+$param_conn_aluno['user']     = 'postgres';
+$param_conn_aluno['password'] = '1234';
 $param_conn_aluno['port']     = $port;
 
 /**
