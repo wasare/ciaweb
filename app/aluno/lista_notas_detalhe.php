@@ -155,7 +155,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
     </tr>
     <?php
     //Inicio - Victor Ullisses Pugliese - 11h27min 04/05/2012 - Exibe notas e pesos;
-        $cont = $media_aluno = 0;
+        $media_aluno = 0;
         
         $color =  ($color != '#ffffff') ? '#ffffff' : '#cce5ff';
         echo '<tr bgcolor="'. $color .'">'; 
@@ -171,8 +171,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 	            	}
 	            	else
 	            		echo '<td align="center"> 0,0 </td>';
-	            //}
-            	$cont++;            	
+	            //}      	
         }
         
         echo '<td align="center">'. $media_aluno .'</td>';
