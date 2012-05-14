@@ -82,13 +82,8 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 	<tr bgcolor="#A7E6FE">
 		<td><center>
 			<?php	
-	        	$nota_int = intval($disciplina_aluno['nota_final']) + 0.5;
-	   			if($disciplina_aluno['nota_final'] == intval($disciplina_aluno['nota_final']))
-	   				echo $disciplina_aluno['nota_final'];
-	   			else if($disciplina_aluno['nota_final'] <= $nota_int)
-	   				echo ($nota_int);
-	   			else
-	   				echo ($nota_int+0.5);
+			//Inicio - Victor Ullisses Pugliese - 15h47min 14/05/2012 - Média Aluno
+	   			echo $disciplina_aluno['nota_final'];
 	        //Fim Media Aluno;
 			?>
 		</center></td>
