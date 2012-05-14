@@ -1,27 +1,5 @@
 Bem-vindo,
-
-------------------------------------------------------------
-Arquivo LEIAME do SA - Sistema Acadêmico EPROTEC
-------------------------------------------------------------
-
-Este arquivo contém informações importantes sobre este programa.
-Leia com atenção as informações antes de começar a instalação.
-
-O SA - Sistema Acadêmico desenvolvido pelo GTI do IFMG - Campus
-Bambuí. O desenvolvimento começou ainda quando a instituição chamava-se CEFET-Bambuí. O sistema teve como base inicial o
-Sistema de controle acadêmico SAGU versão 1.
-
-
-------------------------------------------------------------
-Notas sobre atualização
-------------------------------------------------------------
-
-Verifique procedimentos de atualizações no arquivo ATUALIZACAO.TXT
-
-
-------------------------------------------------------------
-Notas sobre a instalação
-------------------------------------------------------------
+Este manual serve apenas para a instalação da ferramenta no windows que tem como objetivo apenas testes e desenvolvimento
 
 Requisitos de Sistema:
 ========================
@@ -61,14 +39,14 @@ Qualquer dúvida leia o arquivo: http://tutology.net/category/mysql/install-postg
 error_reporting = E_ALL & ~E_NOTICE
 
 
-Instalação do sistema no Apache:
+Instalação do sistema no WAMP:
 =================================
 
-1. Crie um novo host no Apache ou utilize o host padrão
-2. Copie todos os arquivos para qualquer pasta dentro da raiz
+1. Copie todos os arquivos para qualquer pasta dentro da raiz
    do host, esta pasta deve ser acessível pelo navegador
-3. Edite o arquivo config/configuracao.php e altere os dados de conexão com o banco de dados e a variável $BASE_URL, para refletir as suas necessidades, ou seja, se fosse tiver descompactado o arquivo na raiz do Wamp coloque no 
-$BASE_URL = localhost/<nomepasta>/
+2. Edite o arquivo config/configuracao.php e altere as variáveis de conexão com o banco de dados mais a variável $BASE_URL, 
+ex.: Se você tiver descompactado o arquivo na raiz do Wamp coloque $BASE_URL = localhost/<nomepasta>/
+
 
 Problemas Conhecidos:
 =================================
@@ -79,79 +57,96 @@ Você deverá criar ainda uma pasta logs dentro da raiz do aplicativo com um arqui
 Barra invertida:
 Inverta a posição da barra no arquivo de configuração dentro do diretório config na variável $BASE_DIR e também outra na variável $logs.
 
+------------------------------------------------------------
+Primeiros passos
+------------------------------------------------------------
 
-      Primeiro acesso:
-      =================
-      
-      1. Aponte o seu navegador para o endereço (URL) onde esta instalado o sistema
-      2. Selecione o módulo "Secretaria"
-      3. Informe o usuário e senha inicial: admin admin, clique em entrar. Se estiver tudo
-         certo você verá a tela inicial do sistema que exibe um diagrama colorido do funcionamento básico do sistema.
-      4. Se não conseguir acesso ou ocorrer algum erro pesquise no google usando a mensagem de erro como termo. Você também deve procurar por possíveis erros nos logs do Apache.
+Um sistema acadêmico normalmente é um programa complexo, e para um funcionamento
+correto é necessário uma série de informações e cadastros que devem ser previamente
+preenchidos. Na instalação padrão alguns cadastros básicos já foram gravados
+diretamente no banco de dados. Mas para o funcionamento completo é necessário
+realizar outras configurações e cadastros.
 
-      
-      ------------------------------------------------------------
-      Primeiros passos
-      ------------------------------------------------------------
-      
-      Um sistema acadêmico normalmente é um programa complexo, e para um funcionamento.
-      Correto é necessário uma série de informações e cadastros que devem ser previamente
-      Preenchidos. Na instalação padrão alguns cadastros básicos já foram gravados
-      Diretamente no banco de dados. Mas para o funcionamento completo é necessário
-      Realizar outras configurações e cadastros.
-      
-      
-      Configuração básica
-      =====================
-      
-      1. Em "Cadastros" -> "Pessoas Físicas", altere os dados do usuário de código 1.
-         Atualize o cadastro para que seja o cadastro de uma pessoal física real que será
-         Uma das administradoras do sistema. Mais usuários podem ser incluídos posteriormente,
-         Neste caso cadastre primeiramente como pessoa física, depois a inclua como usuário
-         Em "Sistema" -> "Configurações" -> "Usuários do sistema"
-      2. Altere a senha do usuário admin para uma senha segura
-      3. Ajuste as informações da instituição em "Sistema" -> "Configurações" -> "Empresas"
-      4. Ajuste as informações dos campi da instituição em "Sistema" -> "Configurações" -> "Campus"
-      5. Ajuste as informações dos carimbos que serão utilizados nos relatórios em
-         "Sistema" -> "Configurações" -> "Carimbos"
-      
-      
-      Configurações acadêmicas e de matrizes curriculares
-      ====================================================
-      
-      1. Cadastre o primeiro período letivo em "Sistema" -> "Configurações" -> "Períodos", o código. Pode ser alfanumérico e poderá ser utilizado por mais de um curso. Como sugestão poderá utilizar 101 para 1º semestre 2010, 102 para 2º semestre de 2010, etc. As informações sobre os períodos. Letivos são usados por todo o sistema e deve ser incluído a cada novo período letivo.
-      2. Crie o primeiro curso em "Matrizes" -> "Cursos"
-      3. Cadastre as disciplinas para o primeiro curso em "Matrizes" -> "Disciplinas", as disciplinas. Cadastradas podem ser utilizadas por mais de um curso
-      4. Monte a matriz / grade curricular do primeiro curso em "Matrizes" -> "Cursos / Disciplinas", clicando no botão "Incluir" é possível associar cada disciplina ao curso desejado.
-      5. Cadastre os "Pré-requisitos" ou as "Disciplinas Equivalentes" no menu "Matrizes" e conforme as necessidades
-      
-      
-      Processo de matrícula
-      ==============================
-      
-      Antes de efetuar qualquer matrícula é necessário:
-      
-      1. Cadastrar os alunos como pessoas físicas em "Cadastros" -> "Pessoas Físicas"
-      2. Vincular a pessoa física / aluno a algum curso em "Cadastros" -> "Contratos", uma mesma pessoa física pode possuir mais de um contrato e também manter outros vínculos dentro do sistema, como professor, coordenador, usuário do sistema, etc.
-      3. Oferte as disciplinas do curso em "Matrículas" -> "Disciplinas Oferecidas", nesta tela é possível tanto incluir disciplinas para posterior matrícula quanto consultar, alterar,   cancelar, etc. Depois de ofertada a disciplina é criado um código único que identifica a disciplina ofertada como um diário. Este código é muito importante dentro do sistema, relatórios, etc. Não é necessário informar o professor durante a oferta da disciplina, inclusive é recomendado incluí-lo somente após a realização das matrículas, basta alterar a disciplina ofertada.
-      4. Efetue as matrículas dos alunos em "Matrículas" -> “Matrícula", a matrícula pode ser regular ou avulsa, para um grupo de disciplinas ofertadas ou indivualmente para qualquer disciplina ofertada.
-      5. Depois de matricular os alunos, pode-se alterar a oferta de disciplina e incluir o professor ou professores da disciplina. Os professores e coordenadores devem ser previamente cadastrados como pessoas físicas, e posteriormente em "Cadastros" -> "Professores" e "Cadastros" -> "Coordenadores".
-      Para instruções um pouco mais detalhadas acesse a "Ajuda e Documentação" no rodapé da tela inicial do sistema. Ou procure ajuda no grupo de discussão sobre o sistema em http://groups.google.com/group/sistema-academico-eprotec
-      
 
-      ------------------------------------------------------------
-      Desenvolvedores
-      ------------------------------------------------------------
-      Santiago Silva Pereira        - santiago.pereira@ifmg.edu.br
-      Wanderson Santiago dos Reis   - wanderson.reis@ifmg.edu.br
-      
-      ------------------------------------------------------------
-      Colaboradores 
-      ------------------------------------------------------------
-      Rafael Bernardino Cardoso - Campus Formiga
-      Roger Santos Ferreira     - Campus Formiga
-      Rogerio Costa Canto       - Campus Formiga
+Configuração básica
+=====================
 
-      ------------------------------------------------------------
-      Copyright 2006-2010 - Instituto Federal de Minas Gerais - Campus Bambuí
-      Todos os direitos reservados
+1. Em "Cadastros" -> "Pessoas Físicas", altere os dados do usuário de código 1.
+   Atualize o cadastro para que seja o cadastro de uma pessoal física real que será
+   uma das administradoras do sistema. Mais usuários podem ser incluídos posteriormente,
+   neste caso cadastre primeiramente como pessoa física, depois a inclua como usuário
+   em "Sistema" -> "Configurações" -> "Usuários do sistema"
+2. Altere a senha do usuário admin para uma senha segura
+3. Ajuste as informações da instituição em "Sistema" -> "Configurações" -> "Empresas"
+4. Ajuste as informações dos campi da instituição em "Sistema" -> "Configurações" -> "Campus"
+5. Ajuste as informações dos carimbos que serão utilizados nos relatórios em
+   "Sistema" -> "Configurações" -> "Carimbos"
+
+
+Configurações acadêmicas e de matrizes curriculares
+====================================================
+
+1. Cadastre o primeiro período letivo em "Sistema" -> "Configurações" -> "Períodos", o código
+   pode ser alfanumérico e poderá ser utilizado por mais de um curso. Como sugestão poderá utilizar
+    101 para 1º semestre 2010, 102 para 2º semestre de 2010, etc. As informações sobre os períodos
+    letivos são usados por todo o sistema e devem ser incluídos a cada novo período letivo.
+2. Crie o primeiro curso em "Matrizes" -> "Cursos"
+3. Cadastre as disciplinas para o primeiro curso em "Matrizes" -> "Disciplinas", as disciplinas 
+   cadastradas podem ser utilizadas por mais de um curso
+4. Monte a matriz / grade curricular do primeiro curso em "Matrizes" -> "Cursos / Disciplinas", 
+   clicando no botão  "Incluir" é possível associar cada diciplina ao curso desejado
+5. Cadastre os "Pré-requisitos" ou as "Disciplinas Equivalentes" no menu "Matrizes" e conforme as
+   necessidades
+
+
+Processo de matrícula
+==============================
+
+Antes de efetuar qualquer matrícula é necessário:
+
+1. Cadastrar os alunos como pessoas físicas em "Cadastros" -> "Pessoas Físicas"
+2. Vincular a pessoa física / aluno a algum curso em "Cadastros" -> "Contratos",
+   uma mesma pessoa física pode possuir mais de um contrato e também manter outros
+   vínculos dentro do sistema, como professor, coordenador, usuário do sistema, etc.
+3. Oferte as disciplinas do curso em "Matrículas" -> "Disciplinas Oferecidas", neste tela
+   é possível tanto incluir disciplinas para posterior matrícula quanto consultar, alterar,
+   cancelar, etc. Depois de ofertada a disciplina é criado um código único que identifica
+   a disciplina ofertada como um diário. Este código é muito importante dentro do sistema,
+   relatórios, etc. Não é necessário informar o professor durante a oferta da disciplina,
+   inclusive é recomendado incluí-lo somente após a realização das matrículas, basta
+   alterar a disciplina ofertada.
+4. Efetue as matrículas dos alunos em "Matrículas" -> "Matrícula", a matrícula pode ser regular ou
+   avulsa, para um grupo de disciplinas ofertadas ou indivualmente para qualquer disciplina ofertada
+5. Depois de matricular os alunos, pode-se alterar a oferta de disciplina e incluir o professor ou 
+   professores da disciplina. Os professores e coordenadores devem ser previamente cadastrados 
+   como pessoas físicas, e posteriormente em "Cadastros" -> "Professores" e "Cadastros" ->
+   "Coordenadores"
+
+
+
+
+Para instruções um pouco mais detalhadas acesse a "Ajuda e Documentação" no rodapé da
+tela inicial do sistema. Ou procure ajuda no grupo de discussão sobre o sistema em
+http://groups.google.com/group/sistema-academico-eprotec
+
+
+
+
+------------------------------------------------------------
+Desenvolvedores
+------------------------------------------------------------
+Santiago Silva Pereira        - santiago.pereira@ifmg.edu.br
+Wanderson Santiago dos Reis   - wanderson.reis@ifmg.edu.br
+
+
+------------------------------------------------------------
+Colaboradores 
+------------------------------------------------------------
+Rafael Bernardino Cardoso - Campus Formiga
+Roger Santos Ferreira     - Campus Formiga
+Rogerio Costa Canto       - Campus Formiga
+Victor Ulisses Puglise    - Campus Caraguatatuba
+
+------------------------------------------------------------
+Copyright 2006-2012 - Instituto Federal de Minas Gerais - Campus Bambuí
+Todos os direitos reservados
