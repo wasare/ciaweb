@@ -3,6 +3,7 @@
 require_once(dirname(__FILE__) .'/../../config/configuracao.php');
 require_once($BASE_DIR .'core/data/connection_factory.php');
 require_once($BASE_DIR .'core/login/session.php');
+require_once($BASE_DIR .'core/login/auth.ldap.php');
 require_once($BASE_DIR .'core/date.php');
 require_once($BASE_DIR .'core/number.php');
 require_once($BASE_DIR .'core/situacao_academica.php');
@@ -14,25 +15,23 @@ $conn = new connection_factory($param_conn_aluno);
 /*
  * Verifica se as variaveis de sessao do usuario foram setadas
  */
-if(isset($_SESSION['sa_aluno_user']) and $_SESSION['sa_aluno_user'] != '') {
-    $user  = $_SESSION['sa_aluno_user'];
-    $senha = $_SESSION['sa_aluno_senha'];
-    $nasc  = $_SESSION['sa_aluno_nasc'];
-}else {
+if (isset($_SESSION['sa_aluno_user']) && $_SESSION['sa_aluno_user'] != '') {
+  $prontuario_upper  = $_SESSION['sa_aluno_user'];
+  $senha = $_SESSION['sa_aluno_senha'];
+}
+else {
     /*
      * Verifica se o formulario de autenticacao
      * enviou parametros
      */
-    if($_POST['user'] and $_POST['senha'] and $_POST['nasc'])
-    {
-        $user  = (int) $_POST['user'];
+    if($_POST['prontuario'] && $_POST['senha']) {
+        $prontuario_upper = mb_strtoupper($_POST['prontuario'], 'UTF-8');
         $senha = md5($_POST['senha']);
-        $nasc  = addslashes($_POST['nasc']);
 
-        $_SESSION['sa_aluno_user']  = $user;
+        $_SESSION['sa_aluno_user']  = $prontuario_upper;
         $_SESSION['sa_aluno_senha'] = $senha;
-        $_SESSION['sa_aluno_nasc']  = $nasc;
-    }else {
+    }
+    else {
         /*
          * Em caso de sessao expirada retorna para
          * o formulario de autenticacao
@@ -41,72 +40,37 @@ if(isset($_SESSION['sa_aluno_user']) and $_SESSION['sa_aluno_user'] != '') {
     }
 }
 
-/*
- * Verifica a autenticacao do usuario na base dados
-*/
-$qryUsuarioCont = "
-SELECT COUNT(*) FROM acesso_aluno a, pessoas b
-WHERE
-    a.ref_pessoa = $user AND
-    b.id = $user AND
-    dt_nascimento = '$nasc' AND
-    a.senha = '$senha'; ";
+$prontuario_lower = mb_strtolower($prontuario_upper, 'UTF-8');
 
-$AlunoCont = $conn->get_one($qryUsuarioCont);
+$sql_verifica = "SELECT senha, ppc.prontuario, ppc.ref_pessoa FROM acesso_aluno a LEFT OUTER JOIN pessoa_prontuario_campus ppc ON (a.ref_pessoa = ppc.ref_pessoa) WHERE ppc.prontuario = '$prontuario_upper'; ";
 
-if ($AlunoCont != 1) {
-    print '<script language=javascript>
-           window.alert("Usuário e/ou senha inválido(s)");
+$aluno_info = $conn->get_row($sql_verifica);
+$aluno_id = $aluno_info['ref_pessoa'];
+$senha_banco = $aluno_info['senha'];
+
+// verifica usuário na base LDAP e na base SQL
+$authLDAP = new authLDAP($param_ldap_aluno);
+
+// autentica na base LDAP e atualiza a senha caso necessário
+if ($authLDAP->authenticate('a'. $prontuario_lower, $_POST['senha'])) {
+    
+  // atualiza senha no banco com base na autenticação feita no LDAP
+  if ($senha_banco != $senha) {
+    $atualiza_senha = "UPDATE acesso_aluno SET senha = '$senha' WHERE ref_pessoa = ". $aluno_id .";";
+    $usuario_atualizado = $conn->Execute($atualiza_senha);
+  }
+
+  $aluno_info = $conn->get_row($sql_verifica);
+  $senha_banco = $aluno_info['senha'];
+}
+
+$acesso_cont = ($senha == $senha_banco) ? 1 : 0;
+
+if ($acesso_cont == 0) {
+    print '<script language="javascript">
+           window.alert("Dados de acesso incorretos!");
            javascript:window.history.back(1);
            </script>';
     exit;
 }
-/*
-else {
-    // VERIFICA MATRICULA NO PERIODO CORRENTE
-    $m = date("m");
-
-    if($m > 7) {
-        $m = '06';
-    } else {
-        $m = '01';
-    }
-
-    $DataInicial = date("01/01/2006");
-
-    $qryPeriodoCont = '
-        SELECT DISTINCT COUNT(*)
-        FROM matricula a, pessoas b, disciplinas c, periodos d, cursos e
-        WHERE
-            a.ref_disciplina
-            IN (
-                SELECT DISTINCT a.ref_disciplina
-                FROM matricula a, disciplinas b
-                WHERE
-                    a.ref_disciplina = b.id AND
-                    a.ref_motivo_matricula = 0 AND
-                    a.ref_pessoa = %s
-            ) AND
-            d.dt_final >= \'%s\' AND
-            a.ref_curso = e.id AND
-        a.ref_periodo = d.id AND
-        a.ref_disciplina = c.id AND
-        a.ref_pessoa = b.id AND
-        a.ref_pessoa = %s;';
-
-    $aluno = $user;
-    $data = $DataInicial;
-
-    $MatCont = $conn->get_one(sprintf($qryPeriodoCont,$aluno, $data, $aluno));
-
-    if ($MatCont == 0) {
-        print '
-            <script language=javascript>
-                window.alert("Matrícula para o período corrente não encontrada!");
-                javascript:window.history.back(1);
-            </script>';
-        exit;
-    }
-}
-*/
 ?>

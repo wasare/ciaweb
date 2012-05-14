@@ -1,7 +1,8 @@
-﻿<?php
+<?php
 
 require_once('aluno.conf.php');
 include_once('includes/topo.htm');
+
 // Recupera a lista de cursos e periodos atuais para o aluno
 $sql_curso = '
 SELECT DISTINCT
@@ -28,7 +29,7 @@ WHERE
     f.id = a.ref_contrato
 ;';
 
-$aluno = $user;
+$aluno = $aluno_id;
 $data = date("01/01/2006");
 
 $arr_curso = array();

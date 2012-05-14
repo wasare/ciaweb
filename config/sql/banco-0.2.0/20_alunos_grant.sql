@@ -11,3 +11,6 @@ GRANT SELECT ON TABLE disciplinas_ofer TO aluno;
 GRANT SELECT ON TABLE funcionario TO aluno;
 GRANT SELECT ON TABLE periodos TO aluno;
 GRANT SELECT,REFERENCES ON TABLE pessoas_fotos TO aluno;
+GRANT SELECT ON TABLE diario_seq_faltas TO aluno;
+GRANT SELECT ON TABLE tipos_curso TO aluno;
+GRANT SELECT ON TABLE pessoa_prontuario_campus TO aluno;

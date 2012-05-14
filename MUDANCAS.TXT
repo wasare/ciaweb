@@ -1,3 +1,424 @@
+
+commit 5be74ff5c36a76fc8ae9081558cd842f9dcd0860
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Fri May 11 16:46:29 2012 -0300
+
+    - corrigi permissões de acesso a tabelas para o usuário "aluno"
+
+commit aaa2cfbed246dc1fae6b445a02f9face5efc479e
+Merge: 8901c6b 18b2e34
+Author: wasare <wasare@gmail.com>
+Date:   Tue May 8 12:36:39 2012 -0700
+
+    Merge pull request #2 from victorpugliese/campuscar
+    
+    Reparo no cast int to float na distribuição de nota máxima e média do aluno;
+
+commit 18b2e34bcb8a0fb03561b89557a10985dc9951ff
+Author: Victor <viktao@msn.com>
+Date:   Tue May 8 16:31:37 2012 -0300
+
+    Alteração no SELECT das Notas Máximas distribuidas;
+
+commit 8901c6b48b3ad8f5e90d175fe66c11da84c458fa
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Tue May 8 16:26:36 2012 -0300
+
+    - suporte a multiplos OU ao utilizar uma base LDAP para autenticação
+
+commit 5c9eeee2b9787faf5dd9802cba0119f968839f88
+Author: Victor <viktao@msn.com>
+Date:   Tue May 8 16:16:49 2012 -0300
+
+    Reparo no cast int to float;
+    
+    Signed-off-by: Victor <viktao@msn.com>
+
+commit 1585cf1d025ce15f42f1934ef3281afa11886fa7
+Merge: 8e2c603 5d8c702
+Author: wasare <wasare@gmail.com>
+Date:   Tue May 8 11:55:19 2012 -0700
+
+    Merge pull request #1 from victorpugliese/campuscar
+    
+    Campuscar
+
+commit 5d8c70217005239b23c3d333266bf0a1099f78d0
+Author: Victor <viktao@msn.com>
+Date:   Tue May 8 15:20:22 2012 -0300
+
+    Reparos na interface Aluno de posição de data e hora e exibição dos pesos das notas.
+    
+    Signed-off-by: Victor <viktao@msn.com>
+
+commit 7bbddca62858febcf7dc379cf7dbca93c0570dd6
+Author: Victor <viktao@msn.com>
+Date:   Tue May 8 12:38:57 2012 -0300
+
+    Manual de instalação para o Sistema Operacional Windows, uso exclusivo para testes e desenvolvimento.
+    Alterações na Interface Aluno lista_notas e lista_notas_detalhe
+    
+    Lista_Notas:
+    Data e Hora
+    % Faltas
+    (*) Situação
+    
+    Lista_Notas_Detalhe:
+    Data e hora
+    Separação de dados aluno e turma
+    (*) Situação
+    
+    Signed-off-by: Victor <viktao@msn.com>
+
+commit 8e2c60392a239048621cb1896a7c4fe398841c00
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Mon Apr 9 21:09:12 2012 -0300
+
+    - inclui novo relatório de resumo de  preenchimento de diários
+    - melhorias diversas no relatório de notas e faltas global
+
+commit dd118c870a05ca381dfd3dd5e5c56e0e3c27e8c3
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Mon Apr 9 11:01:43 2012 -0300
+
+    - corrigi erro de alteração cadastro de CPF quando se usa as telas de gestão de pessoas
+    - melhora mensagem de falha na autenticação
+    - ajusta arquivo de configuração que recebe novos parâmetros de conexão
+    - suporta a filtragem por turno no relatório de notas e faltas globais
+
+commit 9b0c5f3afa2ea56c7fc16afa2ec958bb5c5291ba
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Thu Feb 16 21:25:34 2012 -0200
+
+    - aplica as últimas alterações relevantes e disponibilizadas logo após o fork do SA-EPROTEC
+
+commit 8b0245b72ff70ede9fc3b4c5294a985ef813f5dc
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Mon Feb 13 09:55:48 2012 -0200
+
+    - corrigi a ordenação da lista de períodos no web diário
+
+commit 0c97fe47f4cd25ec11c4a56b0d6cf4e6f8d9f61f
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Mon Feb 13 08:12:52 2012 -0200
+
+    - corrigi e melhora o suporte a autenticação em base LDAP
+
+commit 86727d65dc78fe39469ed8dfe531d56104d1792c
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Wed Dec 14 21:08:21 2011 -0200
+
+    - corrigi avaliação de critérios da situação final do aluno no relatório de notas e faltas por curso no período
+
+commit ae03548483f5399e20e7d1f1926a961e30964dfc
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Wed Dec 14 00:33:31 2011 -0200
+
+     - não calcula / exibe a situação final do aluno no relatório de notas e faltas do curso no período quando existir diários em aberto
+
+commit 6087e7dbaba7d008388bd10209ba72a507a1e994
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Tue Dec 13 23:47:27 2011 -0200
+
+     - inclui situação final do aluno no relatório de notas e faltas do curso no período
+     - adiciona suporte ao campo abreviatura no cadastro de disciplinas
+
+commit e1f68116f2647264c016957680b7e3101e16efaf
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Sun Dec 11 13:52:48 2011 -0200
+
+    - corrigi a exibição da situação do diário no relatório de notas e faltas do curso no período
+
+commit a2c021eebdbe85bf0309c6e2f8b09bbb90afb770
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Thu Dec 8 18:59:51 2011 -0200
+
+    - melhora instruções na tela de lançamento de notas
+    - converter para LATIN1 os dados exportados do relatório de notas e faltas global para arquivo CSV e melhora o suporte a abertura do arquivo no excel
+    - incluir o prontuário dos alunos na(s) papeleta(s)
+    - corrigir validação do preenchimento dos diários ao fechá-los em lote na área da coordenação
+
+commit cb05caffcce8f01ca897ac089ad20cd090b829fc
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Tue Dec 6 19:26:34 2011 -0200
+
+    - corrigi a validação do diário antes de marcá-lo como preenchido / fechado
+
+commit ef78cc85a34f7ff128c6a889a9e86830533e43be
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Wed Nov 23 22:52:59 2011 -0200
+
+    - inclui a sigla da disciplina / turma no cabeçalho do relatório de notas e faltas globais
+    - inclui suporte a exportação para CSV do relatório de notas e faltas globais
+    - corrigi exibição de alunos dispensados durante alteração de faltas na chamada e no diário de classe em A3
+    - corrigi função de contabilização de alunos matriculados na disciplina
+    - libera impressão do diário de classe em A3 independente da situação do mesmo
+    - executa verificações de preenchimento ao fechar o diário
+
+commit 68fe7b87c770d2e1245b56b436eea010d1dabefa
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Tue Nov 22 18:31:19 2011 -0200
+
+    - corrigi exibição de alunos dispensados no relatório de faltas detalhado
+
+commit ac99a8ed6aa96fa818658c17ce4ac83016a85200
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Mon Nov 21 12:18:45 2011 -0200
+
+    - adiciona suporte a 7 e 8 aulas seguidas na chamada
+
+commit 744ffd43b8e7a18520bb85efe2a27f23ebd374f8
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Wed Nov 16 16:03:33 2011 -0200
+
+    - adiciona carômetro para exibição de fotos dos alunos
+
+commit 0a78b334e94cc4d31d37b296342bab5f0c9f4336
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Fri Nov 11 23:22:12 2011 -0200
+
+    - corrigi o suporte a exibição de fotos dos alunos
+
+commit 928386336e4c90d9810b5037eeb9e22707a72528
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Fri Nov 11 23:05:01 2011 -0200
+
+    - atualiza versão da biblioteca ADODB
+
+commit c34745d6836e3034973e939fa338159c93d5570e
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Wed Nov 9 20:23:28 2011 -0200
+
+    - corrigi a exbição do novo calendário de seleção da data da chamada
+    - atualiza bibliotecas jquery*
+    - acrescenta o nome do dia da semana referente a data na tela de chamada
+    - valida tamanho dos textos digitados para as chamadas
+
+commit 64946b98acdf8fd773d27e963d55601ab1d26199
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Mon Oct 31 09:06:29 2011 -0200
+
+    - substitue calendário para seleção de data na tela de chamada do web diário
+
+commit d0543605f583d1953c234d3153bfddc87351d392
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Mon Oct 10 15:28:18 2011 -0300
+
+    - melhorias na validação durante o lançamento de notas
+    - corrigi exibição do relatório de notas e faltas global
+
+commit 8805032ce103ee953f4bba36d8637ba6c7752742
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Thu Oct 6 13:54:03 2011 -0300
+
+    - melhorias no relatório de notas e faltas global
+
+commit 188a0a7c1f21735e9a002168c4194b3ee7a0bf2f
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Wed Oct 5 01:07:18 2011 -0300
+
+    - corrigi e otimiza o relatório de notas e faltas global
+
+commit f49ce00ceff53af1a1bbee891daa1c894cba566e
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Tue Oct 4 21:10:40 2011 -0300
+
+    - (em andamento) adaptação de relatórios para utilizar / exibir o prontuário do aluno
+
+commit b6d4118deb2afd4e6a5557701ca55b915cf8db30
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Thu Sep 29 09:51:28 2011 -0300
+
+    - adiciona novo papel "Acompanhamento acadêmico"
+    - adiciona verificação de permissões em alguns arquivos
+
+commit d3cd85166ee023b22ce8e801bc5445b1e558c71c
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Fri Sep 2 15:20:53 2011 -0300
+
+    - melhora a exibição de erros de banco de dados
+    - limita o espaço em 200 caracteres nos campos descritivos da chamada
+    - corrigi a edição das atividades já lançadas na chamada
+    - melhora o suporte para impressão de textos longo no diário de classe em A3
+
+commit 666804a5b80b87205c91c0f291ad742fcf891b0a
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Thu Jul 28 13:51:12 2011 -0300
+
+    - corrigi erro quando usuário não cadastrado tentar se autenticar
+    - vincular corretamente pessoa ao curso usando o prontuário, evitando duplicidade de nomes para pessoas com mais de um prontuário
+    - ajusta o boletim e o diário de classe para filtrar corretamente pelo prontuário do aluno
+
+commit 3a2a198ee70d1cc65502514c2c021280fb736dea
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Tue Jul 26 17:40:39 2011 -0300
+
+    - inclui suporte a lançamento de chamadas com 5 e 6 aulas
+
+commit 33bb6815f7681a272a953783337010e55a949111
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Tue Jul 26 15:52:59 2011 -0300
+
+    - adequa a descrição da situação do diário para melhorar a consistência da informação: concluído -> preenchido e finalizado -> fechado
+
+commit 1c98da3b157d2f449ef7473f0fe666f5918e5962
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Thu Jul 7 12:54:01 2011 -0300
+
+    - corrigi destaque da exibição da nota quando a média é total nas papeletas
+    - permite abrir diversas janelas ao mesmo tempo no web diário
+    - ajustes pequenos de verificação da nota máxima para aprovação
+    - inutiliza áreas não preenchidas do Diário de Classe (A3)
+
+commit a7117fe95d440845e9b0f06175f3f4d00d471c90
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Wed Jul 6 12:10:11 2011 -0300
+
+    - corrigi gravação da nota extra que não estava salvando a nota
+    - corrigi exibição de conteúdo lançado anteriormente na tela de chamadas
+    - verifica se carga horária realizada é maior ou igual a carga horária prevista antes de marcar o diário como concluído
+
+commit a012a6ef44bcf676fa9cc5f723bddc9616228b30
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Tue Jul 5 19:02:09 2011 -0300
+
+    - corrigi gravação da nota extra que ficava bloqueada após lançamento
+    - substitui o template do verso do Diário de Classe em A3 e ajusta detalhes da impressão
+
+commit 5792271e0b2a4c03d806ff23617db54fbb54d30d
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Tue Jul 5 14:26:39 2011 -0300
+
+    - corrigi o envio do arquivo PDF do diário de classe (A3) para o navegador
+
+commit 6d5127b64635a27f96ce0c65350db51f55e28ccf
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Tue Jul 5 13:37:46 2011 -0300
+
+    - atualiza biblioteca FPDF para versão 1.7
+    - adiciona suporte a impressão do diário de classe no formato padrão (A3)
+
+commit efa472d8edf6ef69da0c4f01e329cc806b61685c
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Fri Jul 1 20:46:19 2011 -0300
+
+    - permite o arredondamento / reavaliação utilizando a nota extra que será somada a nota final
+    - pequenas melhorias na tela de lançamento de notas: cabeçalho fixo e filtro de valores digitados
+
+commit de7856803391a44ff2532e83712076464dda939a
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Mon Jun 20 22:52:57 2011 -0300
+
+    - inclue novo recurso para registrar informações das competências desenvolvidas e observações do diário
+    - melhoria na seleção dos módulos disponíveis durante o processo de login
+
+commit 0554b11727d346cbc47a8ab61914df03dad1f00e
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Mon Jun 20 14:23:56 2011 -0300
+
+    - corrigi exibição de notas distribuídas na papeleta completa
+    - simplifica a tela de login, permitindo a escolha do módulo em um segundo passo e conforme o perfil de acesso do usuário
+    - limita em 300 caracteres as informações digitadas durante a chamada (bases e conhecimentos e atividades e avaliações)
+    - bloqueia a marcação do diário como "concluído" quando houver notas fora do intervalo de 0,5 pontos
+
+commit ba10ec5dbe1e26918b515bd30b584df3b569b656
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Fri Jun 3 09:48:06 2011 -0300
+
+    - melhoria na exibição do relatório de faltas completo
+    - melhoria na exibição das listagem de diários e rótulos de funções do web diário
+    - exibe e destaca o percentual de faltas do aluno durante a chamada no web diário
+    - torna os campos ref_disciplina e turma chave única na tabela disciplinas_ofer
+    - torna o campo cod_cpf_cgc chave única na tabela pessoas
+    - adiciona arquivos para testes de impressão do diário de classe
+
+commit 2527ec69d30bb611b0c1b20e8569cf82d11a4003
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Thu Jun 2 19:33:21 2011 -0300
+
+    - Corrigi suporte a UTF-8 na emissão dos boletins
+    - Adiciona média em % na emissão do boletins
+
+commit 982d78ba258f72928ce1dee56bd8f4f72964ed6d
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Wed Apr 13 23:38:31 2011 -0300
+
+    - corrigi arquivos de importação de contratos e matriculas
+    - corrigi a edição das atividades da aula lançada na chamada
+    - inclui configurações de atividades de aulas no arquivo config/configuracao.php
+
+commit f77286e028448c1f4a413027d72d97471dc90de6
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Mon Apr 4 09:17:17 2011 -0300
+
+    - adiciona suporte ao registro de atividades durante a chamada
+    - inclui scripts para importação de dados diretamente no banco a partir de arquivos CSV
+
+commit 6e240afbd82655ae14d4d5e35c17f072cdecc9ab
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Wed Mar 16 09:37:43 2011 -0300
+
+    - adiciona parâmetro para ocultar a troca de senha pelo usuário no arquivo configuracao.php
+    - corrige erro na consulta de alunos no web diário
+    - ajusta CSS do web diário para melhor compatibilidade com os navegadores IE7 e IE8
+    - oculta opção de geração do caderno de chamada e de acesso aos programas leitores de .ps no web diário
+
+commit 571427be70f64ca29f2e0da2a4761ff5c96a6f29
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Tue Mar 15 15:25:30 2011 -0300
+
+    - ajusta parâmetros para cálculo e verificação de média final conforme IFSP
+    - move a biblioteca openwysiwyg da pasta app/avisos para a pasta lib
+
+commit d15c40096f92ca8d48501feb7763298babacb195
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Tue Mar 15 00:34:24 2011 -0300
+
+    - elimina suporte as extensões .php3 e .phtml
+
+commit 97469f0985c75ea4e0d8b4ba9226b68e17dcb380
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Mon Mar 14 14:21:14 2011 -0300
+
+    - converte todos os arquivos do projeto para UTF-8, exceto arquivos da pasta lib
+
+commit c2f31248360e1bc8c2de5ae252a6f1b418912719
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Mon Mar 14 11:10:08 2011 -0300
+
+    - exclui arquivos desnecessários da pasta lib/Spry
+
+commit aefadb29173950e331b8ccee748418f1a1b99e2d
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Mon Mar 14 09:36:12 2011 -0300
+
+    - converte imagens e textos para exibir rótulos do IFSP - Campus Caraguatatuba, ao invés do IFMG
+
+commit 7fd875601fec19b9973f42b5f38dfdaff338ca86
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Wed Mar 9 14:23:14 2011 -0300
+
+    - corrigi consultas SQL compatibilizando com UTF-8
+    - adiciona alterações na estrutura do banco de dados: nova tabela "pessoa_prontuario_campus" e nova coluna "abreviatura" na tabela disciplinas
+
+commit ffaa576d56fbb2f6032ff3a06ecdecfc5f6fcc46
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Tue Mar 1 16:25:06 2011 -0300
+
+    - adiciona suporte para autenticação no AD (LDAP)
+
+commit 29fe02fd25628eab5994b954429afa511ccb2d71
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Fri Nov 19 01:53:47 2010 -0200
+
+    banco de dados e arquivos convertidos para UTF8 e setup inicial do arquivo config/configuracao.php
+
+commit a1ec09d232e5fcc8e93869ae4bd0edeae838cdd6
+Author: Wanderson S Reis <wanderson@ospath.com>
+Date:   Thu Nov 18 23:11:36 2010 -0200
+
+    revisão 273 / Campus Bambuí
+
 ------------------------------------------------------------------------
 r273 | wandersonsreis | 2010-10-08 12:32:20 -0300 (Sex, 08 Out 2010) | 3 lines
 

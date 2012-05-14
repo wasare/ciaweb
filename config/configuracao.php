@@ -9,7 +9,7 @@ date_default_timezone_set('America/Sao_Paulo');
  * Banco de dados
  */
 $host     = '127.0.0.1';
-$database = 'ciaweb_17112011';
+$database = 'ciaweb_042012';
 $user     = 'ciaweb_user';
 $password = 'u0sodQFhArqOELlBNKxJ';
 $port     = 5432;
@@ -35,11 +35,12 @@ $param_conn_aluno['port']     = $port;
 /**
  * Variaveis de acesso a base LDAP (veja core/login/auth.ldap.php)
  */
-$param_ldap['base_dn']     = 'ou=Users,dc=dominio,dc=local';
+$param_ldap['base_dn'][]   = 'ou=Users,dc=campus,dc=local';
+$param_ldap['base_dn'][]   = 'ou=Users,dc=campus,dc=local';
 $param_ldap['ldap_hosts']  = array('127.0.0.1');
 
-$param_ldap_aluno['base_dn']     = 'ou=Users,dc=dominio,dc=local';
-$param_ldap_aluno['ldap_hosts']  = array('127.0.0.1');
+$param_ldap_aluno['base_dn'][]  = 'ou=Users,dc=campus,dc=local';
+$param_ldap_aluno['ldap_hosts'] = array('127.0.0.1');
 
 
 /**
@@ -50,7 +51,7 @@ $DOC_TYPE       = '<meta http-equiv="Content-Type" content="text/html; charset= 
 /**
  * Variaveis do sistema
  */
-$BASE_URL       = 'http://'. $_SERVER['HTTP_HOST'] . '/~wasare/dev/netbeans-php/academico/';
+$BASE_URL       = 'http://'. $_SERVER['HTTP_HOST'] . '/~wasare/dev/netbeans-php/ciaweb/';
 $BASE_DIR       = dirname(dirname(realpath(__FILE__))) .'/';
 $LOGIN_URL      = $BASE_URL .'index.php';
 $LOGIN_LOG_FILE = $BASE_DIR .'app/sagu/logs/login.log';

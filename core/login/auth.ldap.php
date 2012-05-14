@@ -97,8 +97,15 @@ class authLDAP {
         if ($this->_server_type == 'AD')        
           $bind = @ldap_bind($this->_conn,$username . $this->_account_suffix,$password);
 
-        if ($this->_server_type == 'LDAP')
-          $bind = @ldap_bind($this->_conn, 'uid='. $username .','. $this->_base_dn, $password);  
+        if ($this->_server_type == 'LDAP') 
+          if (is_array($this->_base_dn) && count($this->_base_dn) != 0) {
+            foreach($this->_base_dn as $base_dn) {
+              $bind = @ldap_bind($this->_conn, 'uid='. $username .','. $base_dn, $password);       
+              if ($bind) break;
+            }
+          }
+          else
+            $bind = @ldap_bind($this->_conn, 'uid='. $username .','. $this->_base_dn, $password);
 
         if (!$bind) $ret = FALSE;
 

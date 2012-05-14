@@ -2,9 +2,9 @@
 require_once('aluno.conf.php');
 include_once('includes/topo.htm');
 
-$aluno           = $user;
-$periodo		 = $_GET["p"];
-$curso			 = $_GET["c"];
+$aluno           = $aluno_id;
+$periodo         = $_GET["p"];
+$curso		 = $_GET["c"];
 $disciplina_ofer = $_GET['d'];
 
 $rs_pessoa   = $conn->get_one("SELECT nome FROM pessoas WHERE id = $aluno");
