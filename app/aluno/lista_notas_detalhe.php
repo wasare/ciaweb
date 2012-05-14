@@ -162,8 +162,8 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
         echo "<td><center> - </center></td>";
         if (count($diario_info) > 0 ) {
             foreach ($diario_info as $disciplina_aluno) {
-            	if(($cont % 2 == 0) && $cont<=($quantidade_notas_diario+1)*2)
-            	{
+            	//if(($cont % 2 == 0) && $cont<=($quantidade_notas_diario+1)*2)
+            	//{
             		if($disciplina_aluno['nota'] != -1)
             		{
 	            		echo '<td align="center">'. number::numeric2decimal_br($disciplina_aluno['nota'],1) .'</td>';        
@@ -171,7 +171,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 	            	}
 	            	else
 	            		echo '<td align="center"> 0,0 </td>';
-	            }
+	            //}
             	$cont++;            	
         }
         
