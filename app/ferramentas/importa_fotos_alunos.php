@@ -8,15 +8,13 @@ require_once($BASE_DIR.'app/sagu/academico/bitmap.inc.php');
 // CONEXAO ABERTA PARA TRABALHAR COM TRANSACAO (NÃO PERSISTENTE)
 $conn = new connection_factory($param_conn);
 
-
-
 $dir = dirname(__FILE__).'/fotos';
 
 if(is_dir($dir)){
-		$fotos = array_merge((array) glob("" . $dir . "/*.jpg"), (array) glob("" . $dir . "/*.JPG"));
+  $fotos = array_merge((array) glob("" . $dir . "/*.jpg"), (array) glob("" . $dir . "/*.JPG"));
 }
 else
-   echo '<h3>Nenhuma foto dispon&iacute;vel para importa&ccedil;&atilde;o!</h3>';
+  echo '<h3>Nenhuma foto dispon&iacute;vel para importa&ccedil;&atilde;o!</h3>';
 
 
 if (count($fotos) == 0) echo '<h3>Nenhuma foto dispon&iacute;vel para importa&ccedil;&atilde;o!</h3>';
