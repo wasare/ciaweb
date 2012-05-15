@@ -166,7 +166,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 	            	}
 	            	else
 	            		echo '<td align="center"> 0,0 </td>';
-	            //}      	
+	            //}
 			}
         
 			echo '<td align="center">'. $media_aluno .'</td>';
