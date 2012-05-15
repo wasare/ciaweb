@@ -43,7 +43,6 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
             c.d_ref_disciplina_ofer = a.ref_disciplina_ofer AND
             a.ref_motivo_matricula = 0
         ORDER BY descricao_disciplina, ref_diario_avaliacao;";
-
 	$diario_info = $conn->get_all($sql_diario_info);
 	//Inicio - Victor Ullisses Pugliese - 10h52min 04/05/2012 -  Media da turma;
 	$sql_media_turma = "SELECT AVG(nota_final) FROM matricula WHERE ref_disciplina_ofer = ".$disciplina_ofer;
@@ -156,6 +155,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
         echo '<tr bgcolor="'. $color .'">'; 
         echo "<td><center> - </center></td>";
         if (count($diario_info) > 0 ) {
+		    echo count($diario_info);
             foreach ($diario_info as $disciplina_aluno) {
             	//if(($cont % 2 == 0) && $cont<=($quantidade_notas_diario+1)*2)
             	//{
@@ -167,26 +167,26 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 	            	else
 	            		echo '<td align="center"> 0,0 </td>';
 	            //}      	
-        }
+			}
         
-        echo '<td align="center">'. $media_aluno .'</td>';
-        echo '</tr>
+			echo '<td align="center">'. $media_aluno .'</td>';
+			echo '</tr>
         	  <tr>
         	  <td><center><b>Nota<br/>Máxima</b></center></td>';
         	  
-       	$cont = $nota_disc_maxima = 0;
-       	$nDistribuida_sql = 
-       	"SELECT nota_distribuida FROM diario_formulas where grupo like '%-$periodo-%-$disciplina_ofer' order by prova;";
-       	$nDist_info = $conn->get_all($nDistribuida_sql);
-        if (count($nDist_info) > 0 ) {
-            foreach ($nDist_info as $disciplina_aluno) {
-             	if($disciplina_aluno['nota_distribuida'] != -1)
-	           	{
-	           		echo '<td align="center">'. $disciplina_aluno['nota_distribuida'] .'</td>';        
-	           		$nota_disc_maxima += (float) $disciplina_aluno['nota_distribuida'];
-	           	}
-	           	else
-	           		echo '<td align="center"> 0,0 </td>';
+			$cont = $nota_disc_maxima = 0;
+			$nDistribuida_sql = 
+			"SELECT nota_distribuida FROM diario_formulas where grupo like '%-$periodo-%-$disciplina_ofer' order by prova;";
+			$nDist_info = $conn->get_all($nDistribuida_sql);
+			if (count($nDist_info) > 0 ) {
+				foreach ($nDist_info as $disciplina_aluno) {
+					if($disciplina_aluno['nota_distribuida'] != -1)
+					{
+						echo '<td align="center">'. $disciplina_aluno['nota_distribuida'] .'</td>';        
+						$nota_disc_maxima += (float) $disciplina_aluno['nota_distribuida'];
+					}
+					else
+						echo '<td align="center"> 0,0 </td>';
 	         	}	         	
             	$cont++;
             	if ($cont == $quantidade_notas_diario) break;
