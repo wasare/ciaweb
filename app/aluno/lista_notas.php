@@ -1,7 +1,7 @@
 ﻿<?php
-
 require_once('aluno.conf.php');
 include_once('includes/topo.htm');
+include("includes/menu.html");
 
 $aluno   = $aluno_id;
 $periodo = $_GET["p"];
@@ -38,7 +38,7 @@ $rs_diarios_matriculados = count($rs_diarios);
 </p>
 <span style="color: red; font-style:italic; font-family:arial,times;">Clique no 
 nome da disciplina para detalhar os lançamentos e visualizar mais informações</span>
-<table style="width: 460px; font-size:12px">
+<table style="font-size:100%; wordwrap: auto;">
     <tr bgcolor=#EEEEEE>
         <th>Disciplina</th>
         <th>Média</th>
@@ -73,7 +73,7 @@ nome da disciplina para detalhar os lançamentos e visualizar mais informações
         if (count($diarios_info) > 0 ) {
             foreach ($diarios_info as $disciplina_aluno) {
 				$nao_finalizada = ($disciplina_aluno['fl_finalizada'] == 'f') ? '<strong>*</strong>' : ' ';
-				$color =  ($color != '#ffffff') ? '#ffffff' : '#A7E6FE';
+				$color =  ($color != '#ffffff') ? '#ffffff' : '#9AF8A6';
 
                 echo '<tr bgcolor="'. $color .'">';
 				if($disciplina_aluno['total_distribuido'] > 0)
@@ -94,7 +94,7 @@ nome da disciplina para detalhar os lançamentos e visualizar mais informações
 				}
 				if($disciplina_aluno['total_distribuido'] > 0)
 				{
-					echo '<td align="center">'. $disciplina_aluno['total_distribuido'] .'</td>';
+					echo '<td align="center">'. number::numeric2decimal_br($disciplina_aluno['total_distribuido'],1) .'</td>';
 				}
 				else
 				{

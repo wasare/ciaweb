@@ -1,7 +1,7 @@
 <?php
-
 require_once('aluno.conf.php');
 include_once('includes/topo.htm');
+include("includes/menu.html");
 
 // Recupera a lista de cursos e periodos atuais para o aluno
 $sql_curso = '
