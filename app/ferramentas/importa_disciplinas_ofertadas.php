@@ -17,16 +17,14 @@ TODO: incluir a informação ref_campus, ref_periodo e ref_periodo_turma no arqu
 Formato do CSV
 ===============
 
-curso|disciplina abrv|turma|vagas
-ADS|COEA1|1|40
-ADS|INGA1|1|40
+curso|nome disciplina|disciplina abrv|turma|vagas
+ADS||COEA1|1|40
+ADS||INGA1|1|40
 
 */
-$csv = dirname(__FILE__).'/csv/disciplinas_ofertadas_tecnico_111.csv';
+$csv = dirname(__FILE__).'/csv/disciplinas_integrado_informatica_oferta.csv';
 
 $memory_limit = ini_get('memory_limit');
-
-
 
 function trocaini($wStr,$w1,$w2) {
 
@@ -89,12 +87,15 @@ function _disciplinas_ofertadas_importa($memory_limit, $csv_file) {
     $trans = new Latin1UTF8();
 
     $ref_campus = 6;
-    $ref_periodo = '111';
-    $ref_periodo_turma = '111';
+    $ref_periodo = '12';
+    $ref_periodo_turma = '12';
 
     $qry = '';
 
     $nao_sera_importado = '';
+    
+    $sql_final = '';
+
 
     if (!file_exists($csv_file)) {
         echo 'arquivo n&atilde;o encontrado: ' . $csv_file;
@@ -118,9 +119,9 @@ function _disciplinas_ofertadas_importa($memory_limit, $csv_file) {
       set_time_limit(60);
 
       $curso_sigla = trim($line[0]);
-      $abreviatura = trim($line[1]);
-      $turma = trim($line[2]);
-      $num_alunos = trim($line[3]);
+      $abreviatura = trim($line[2]);
+      $turma = trim($line[3]);
+      $num_alunos = trim($line[4]);
 
       // buscar ref_disciplina
       $sql_disciplina = "SELECT id FROM disciplinas ";
@@ -155,6 +156,8 @@ function _disciplinas_ofertadas_importa($memory_limit, $csv_file) {
           $qry_importa .= " VALUES (CURRVAL('seq_disciplinas_ofer_id'), -1, 1);";
 
           $qry_importa .= "COMMIT;";
+          
+          $sql_final .=  $qry_importa .'<br />';
 
           $ret = $conn->adodb->Execute($qry_importa);
           //$ret = TRUE;
@@ -187,13 +190,15 @@ function _disciplinas_ofertadas_importa($memory_limit, $csv_file) {
     }
 
     if (strlen($qry) > 0) {
-    echo '<h3>Resultado da importa&ccedil;&atilde;o</h3>';
-        echo "<br />$qry<br />";
+      echo '<h3>Resultado da importa&ccedil;&atilde;o</h3>';
+      echo "<br />$qry<br />";
     }
     else {
-        echo '<h3>Nenhum registro para importa&ccedil;&atilde;o</h3>';
+      echo '<h3>Nenhum registro para importa&ccedil;&atilde;o</h3>';
     }
-
+        
+    echo '<h3>Consulta SQL</h3>';
+    echo "<br />$sql_final<br />";
 }
 
 

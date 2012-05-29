@@ -17,12 +17,15 @@ TODO: incluir a informação ref_campus no arquivo CSV
 Formato do CSV
 ===============
 
-curso|codigo|disciplina|aulas|semestre no curso
+curso|codigo|disciplina|total de aulas / semanas|período/semestre no curso
 ADM|ADMO3|ADMINISTRAÇÃO FINANCEIRA|40|1
 ADM|CATO3|CÁLCULOS TRABALHISTAS|40|1
 
+curso|nome da disciplina|codigo|total de aulas / semanas|período/semestre no curso
+IWEB|Artes|ARTI1|80|1
+
 */
-$csv = dirname(__FILE__).'/csv/disciplinas_matrizes.csv';
+$csv = dirname(__FILE__).'/csv/disciplinas_integrado_informatica.csv';
 
 $memory_limit = ini_get('memory_limit');
 
@@ -93,6 +96,8 @@ function _matrizes_importa($memory_limit, $csv_file) {
     $qry = '';
 
     $nao_sera_importado = '';
+    
+    $sql_final = '';
 
     if (!file_exists($csv_file)) {
         echo 'arquivo n&atilde;o encontrado: ' . $csv_file;
@@ -116,21 +121,19 @@ function _matrizes_importa($memory_limit, $csv_file) {
       set_time_limit(60);
 
       $curso_sigla = trim($line[0]);
-      $abreviatura = trim($line[1]);
-      $nome = addslashes(uc_first_names(trim($line[2])));
-      $nome = $trans->mixed_to_utf8($nome);
-
+      $nome = addslashes(uc_first_names(trim($line[1])));
+      $nome = $trans->mixed_to_utf8($nome);      
+      $abreviatura = trim($line[2]);
+      
       $carga_horaria = trim($line[3]);
 
+      $semestre_curso = trim($line[4]);
+      
       $curriculo_mco =  'M';
 
       //$semestre_curso = str_split($abreviatura);
       //$semestre_curso = $semestre_curso[4];
-      $semestre_curso = 1;
-
-
-      //echo $prontuario . ' - '. $nome . '<br />';
-      //if (strlen($prontuario) != 6) continue;
+      //$semestre_curso = 1;
 
       // verifica codigo do curso
       $sql_verifica = "SELECT MAX(id) FROM cursos ";
@@ -152,6 +155,8 @@ function _matrizes_importa($memory_limit, $csv_file) {
           $qry_importa .= " VALUES ($ref_curso, $ref_campus, CURRVAL('seq_disciplina'), $semestre_curso, '$curriculo_mco');";
 
           $qry_importa .= "COMMIT;";
+          
+          $sql_final .=  $qry_importa .'<br />';
 
           $ret = $conn->adodb->Execute($qry_importa);
           //$ret = TRUE;
@@ -183,12 +188,15 @@ function _matrizes_importa($memory_limit, $csv_file) {
     }
 
     if (strlen($qry) > 0) {
-    echo '<h3>Resultado da importa&ccedil;&atilde;o</h3>';
+        echo '<h3>Resultado da importa&ccedil;&atilde;o</h3>';
         echo "<br />$qry<br />";
     }
     else {
         echo '<h3>Nenhum registro para importa&ccedil;&atilde;o</h3>';
     }
+    
+    echo '<h3>Consulta SQL</h3>';
+    echo "<br />$sql_final<br />"; 
 
 }
 

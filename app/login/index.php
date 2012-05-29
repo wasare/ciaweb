@@ -10,9 +10,9 @@ $sessao = new session($param_conn);
 
 // INICIA UM NOVO PROCESSO DE LOGIN
 if(!isset($_POST['uid']) || !isset($_POST['pwd'])) {
-		
-	// FAZ O PROCESSO DE LOGOUT EXCLUINDO A SESSAO DO BANCO
-	list($sa_usuario,$sa_senha,$sa_usuario_id,$sa_ref_pessoa) = explode(":",$_SESSION['sa_auth']);
+  if (isset($_SESSION['sa_auth'])) {
+    // FAZ O PROCESSO DE LOGOUT EXCLUINDO A SESSAO DO BANCO
+    list($sa_usuario,$sa_senha,$sa_usuario_id,$sa_ref_pessoa) = explode(":",$_SESSION['sa_auth']);
     $cont = 0;
     while(isset($_SESSION['sa_auth'])) {
       @$sessao->clear_session($sa_usuario, NULL);
@@ -20,6 +20,7 @@ if(!isset($_POST['uid']) || !isset($_POST['pwd'])) {
       if($cont == 2) break;
       $cont++;
     }
+  }
 }
 
 
@@ -127,12 +128,12 @@ if(!isset($_POST['uid']) || !isset($_POST['pwd'])) {
                     </td>
                 </tr>
             </table>
-			<p>
+      <p>
 				<font color="#999999">&copy;2011 IFSP Campus Caraguatatuba</font>
 			</p>
         </div>
         <!-- Mensagens -->
-        <?php if($_SESSION['sa_msg']) { ?>
+        <?php if (isset($_SESSION['sa_msg'])) { ?>
         <div id="alert_login">
             <table border="0">
                 <tr>
@@ -153,4 +154,3 @@ if(!isset($_POST['uid']) || !isset($_POST['pwd'])) {
         <?php } ?>
     </body>
 </html>
-

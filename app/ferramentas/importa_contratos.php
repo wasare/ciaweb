@@ -24,7 +24,7 @@ ADS|1105019
 
 */
 
-$csv = dirname(__FILE__).'/csv/contratos_111.csv';
+$csv = dirname(__FILE__).'/csv/integrado_informatica.csv';
 
 $memory_limit = ini_get('memory_limit');
 
@@ -84,18 +84,21 @@ function uc_first_names($string) {
 }
 
 
-function _alunos_importa($memory_limit, $csv_file) {
+function _contratos_importa($memory_limit, $csv_file) {
 
     global $conn;
 
     $trans = new Latin1UTF8();
 
     $ref_campus = 6;
-    $ref_last_periodo = '111';
+    $ref_last_periodo = '12';
+    $sigla_curso = 'IWEB';
 
     $qry = '';
 
     $nao_sera_importado = '';
+    
+    $sql_final = '';
 
     if (!file_exists($csv_file)) {
         echo 'arquivo n&atilde;o encontrado: ' . $csv_file;
@@ -119,7 +122,10 @@ function _alunos_importa($memory_limit, $csv_file) {
       set_time_limit(60);
 
       $curso_sigla = trim($line[0]);
-      $prontuario = mb_strtoupper(trim($line[1]), 'UTF-8');
+      
+      $curso_sigla = $sigla_curso;
+      
+      $prontuario = mb_strtoupper(trim($line[0]), 'UTF-8');
 
       //$nome = addslashes(uc_first_names(trim($line[1])));
       //$nome = $trans->mixed_to_utf8($nome);
@@ -148,10 +154,12 @@ function _alunos_importa($memory_limit, $csv_file) {
 
           $qry_importa = "BEGIN;";
 
-          $qry_importa .= "INSERT INTO contratos (ref_campus, ref_pessoa, ref_curso, dt_ativacao, ref_motivo_ativacao, ref_last_periodo, ref_periodo_turma)";
-          $qry_importa .= " VALUES ($ref_campus, $ref_pessoa, $ref_curso, now(), 1, $ref_last_periodo, $ref_last_periodo);";
+          $qry_importa .= "INSERT INTO contratos (ref_campus, ref_pessoa, ref_curso, dt_ativacao, ref_motivo_ativacao, ref_last_periodo, ref_periodo_turma, prontuario)";
+          $qry_importa .= " VALUES ($ref_campus, $ref_pessoa, $ref_curso, now(), 1, $ref_last_periodo, $ref_last_periodo, '$prontuario');";
 
           $qry_importa .= "COMMIT;";
+          
+          $sql_final .=  $qry_importa .'<br />';
 
           $ret = $conn->adodb->Execute($qry_importa);
           //$ret =  TRUE;
@@ -165,8 +173,6 @@ function _alunos_importa($memory_limit, $csv_file) {
         else {
             // prontuário já existe na base de dados
             $nao_sera_importado .= $sql_verifica  .'<br />';
-
-
         }
 
         $count++;
@@ -185,17 +191,21 @@ function _alunos_importa($memory_limit, $csv_file) {
     }
 
     if (strlen($qry) > 0) {
-    echo '<h3>Resultado da importa&ccedil;&atilde;o</h3>';
-        echo "<br />$qry<br />";
+      echo '<h3>Resultado da importa&ccedil;&atilde;o</h3>';
+      echo "<br />$qry<br />";
     }
     else {
-        echo '<h3>Nenhum registro para importa&ccedil;&atilde;o</h3>';
+      echo '<h3>Nenhum registro para importa&ccedil;&atilde;o</h3>';
     }
+    
+    echo '<h3>Consulta SQL</h3>';
+    echo "<br />$sql_final<br />"; 
+    
 
 }
 
 
-_alunos_importa($memory_limit, $csv);
+_contratos_importa($memory_limit, $csv);
 
 
 

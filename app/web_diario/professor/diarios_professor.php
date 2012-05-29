@@ -18,11 +18,11 @@ $diario = @explode("|", $_GET['diario']);
 
 if(isset($_GET['id']) AND ( !is_numeric($diario['0']) OR !is_numeric($diario['1'])) ) {
      exit('<script language="javascript" type="text/javascript">
-	 		window.alert("ERRO! Primeiro selecione um diário!"); javascript:window.history.back(1);</script>');
+      window.alert("ERRO! Primeiro selecione um diário!"); javascript:window.history.back(1);</script>');
 }
 else {
 
-	if($diario['2'] === '1' && in_array($_GET['acao'], $Movimento) ) {
+	if(isset($diario['2']) &&  $diario['2'] === '1' && in_array($_GET['acao'], $Movimento) ) {
 
      exit('<script language="javascript" type="text/javascript">
             window.alert("ERRO! Este diário está fechado e não pode ser alterado!"); javascript:window.history.back(1);
@@ -292,4 +292,3 @@ foreach($diarios as $row3) :
 
 </body>
 </html>
-

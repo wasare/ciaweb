@@ -13,13 +13,13 @@ set_time_limit(0);
 Formato do CSV
 ===============
 
-prontuario|aluno
-1105001|CLEBER ANTONIO DA SILVA
-1105019|BRUNO PALUMBO MARGARIDO DOS SANTOS
+prontuario|aluno|CPF
+1105001|CLEBER ANTONIO DA SILVA|00000000000
+1105019|BRUNO PALUMBO MARGARIDO DOS SANTOS|00000000000
 
 */
 
-$csv = dirname(__FILE__).'/csv/alunos_superior.csv';
+$csv = dirname(__FILE__).'/csv/integrado_informatica.csv';
 
 $memory_limit = ini_get('memory_limit');
 
@@ -90,6 +90,8 @@ function _alunos_importa($memory_limit, $csv_file) {
     $qry = '';
 
     $nao_sera_importado = '';
+    
+    $sql_final = '';
 
     if (!file_exists($csv_file)) {
         echo 'arquivo n&atilde;o encontrado: ' . $csv_file;
@@ -115,6 +117,9 @@ function _alunos_importa($memory_limit, $csv_file) {
       $prontuario = mb_strtoupper(trim($line[0]), 'UTF-8');
       $nome = addslashes(uc_first_names(trim($line[1])));
       $nome = $trans->mixed_to_utf8($nome);
+      $cpf = trim($line[2]);
+      
+      $senha = 'A' . $prontuario;
 
 
       //echo $prontuario . ' - '. $nome . '<br />';
@@ -133,16 +138,25 @@ function _alunos_importa($memory_limit, $csv_file) {
 
           $qry_importa = "BEGIN;";
 
-          $qry_importa .= "INSERT INTO pessoas (nome)";
-          $qry_importa .= " VALUES ('$nome');";
+          if (!empty($cpf)) {
+            $qry_importa .= "INSERT INTO pessoas (nome)";
+            $qry_importa .= " VALUES ('$nome');";
+          }
+          else {
+            $qry_importa .= "INSERT INTO pessoas (nome)";
+            $qry_importa .= " VALUES ('$nome');";
+          }          
+          
           $qry_importa .= " INSERT INTO documentos(ref_pessoa) ";
           $qry_importa .= " VALUES (CURRVAL('seq_pessoas'));";
           $qry_importa .= " INSERT INTO pessoa_prontuario_campus ";
           $qry_importa .= " VALUES (CURRVAL('seq_pessoas'), '$prontuario', $ref_campus);";
           $qry_importa .= " INSERT INTO acesso_aluno (ref_pessoa, senha) ";
-          $qry_importa .= " VALUES (CURRVAL('seq_pessoas'), '');";
+          $qry_importa .= " VALUES (CURRVAL('seq_pessoas'), md5('$senha'));";
 
           $qry_importa .= "COMMIT;";
+          
+          $sql_final .=  $qry_importa .'<br />';
 
           $ret = $conn->adodb->Execute($qry_importa);
 
@@ -181,6 +195,9 @@ function _alunos_importa($memory_limit, $csv_file) {
     else {
         echo '<h3>Nenhum registro para importa&ccedil;&atilde;o</h3>';
     }
+    
+    echo '<h3>Consulta SQL</h3>';
+    echo "<br />$sql_final<br />"; 
 
 }
 
