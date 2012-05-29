@@ -1,6 +1,7 @@
 <?php
 require_once('aluno.conf.php');
 include_once('includes/topo.htm');
+include("includes/menu.html");
 
 $aluno           = $aluno_id;
 $periodo         = $_GET["p"];
@@ -27,7 +28,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 	//Inicio - Victor Ullisses Pugliese - 10h51min 04/05/2012 - Disciplina info;
     $sql_diario_info = "
         SELECT
-            descricao_disciplina (get_disciplina_de_disciplina_of(a.ref_disciplina_ofer)),
+            DISTINCT descricao_disciplina (get_disciplina_de_disciplina_of(a.ref_disciplina_ofer)),
             a.ref_disciplina_ofer, b.nome, b.ra_cnec, a.ordem_chamada,
             a.nota_final, c.ref_diario_avaliacao, c.nota, a.num_faltas,
             nota_distribuida(a.ref_disciplina_ofer) as \"total_distribuido\", fl_finalizada
@@ -59,7 +60,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 				//Inicio - Victor Ullisses Pugliese - 10h54 04/05/2012 - Media da Sala 
 				$turma_int = intval($turma) + 0.5;
 				echo 
-				"<table style='font-size: 12px'>
+				"<table style='font-size: 100%'>
 					<tr><b>Média da Turma: </b></td>". number::numeric2decimal_br($turma,1). "</tr>
 	   				 <tr>";
    				//Fim da Media da Sala;
@@ -71,14 +72,14 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 ?>
 
 <!--Inicio - Victor Uliisses Pugliese - 15:28 01/05/2012 - Tabela Media -->
-<table style="width: 220px; font-size: 12px" >
+<table style="font-size: 100%" >
 	<tr bgcolor="#EEEEEE">
 		<td><b>Média</b></td>
 		<td><b>Faltas</b></td>
 		<td><b>% Faltas</b></td>
 		<td><b>Situação</b></td>
 	</tr>
-	<tr bgcolor="#A7E6FE">
+	<tr bgcolor="#9AF8A6">
 		<td><center>
 			<?php	
 			//Inicio - Victor Ullisses Pugliese - 15h47min 14/05/2012 - Média Aluno
@@ -134,7 +135,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 </table>
 <!-- Fim da Tabela Media -->
 <p />
-<table style="font-size: 12px">
+<table style="font-size: 100%;">
     <tr bgcolor="#EEEEEE">
     	<th></th>
         <?php 
@@ -151,11 +152,10 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
     //Inicio - Victor Ullisses Pugliese - 11h27min 04/05/2012 - Exibe notas e pesos;
         $media_aluno = 0;
         
-        $color =  ($color != '#ffffff') ? '#ffffff' : '#cce5ff';
+        $color =  ($color != '#ffffff') ? '#ffffff' : '#9AF8A6';
         echo '<tr bgcolor="'. $color .'">'; 
         echo "<td><center> - </center></td>";
         if (count($diario_info) > 0 ) {
-		    echo count($diario_info);
             foreach ($diario_info as $disciplina_aluno) {
             	//if(($cont % 2 == 0) && $cont<=($quantidade_notas_diario+1)*2)
             	//{
