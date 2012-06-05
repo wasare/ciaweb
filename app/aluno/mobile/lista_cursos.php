@@ -2,7 +2,6 @@
 
 require_once('aluno.conf.php');
 include_once('../includes/topoMobile.html');
-
 // Recupera a lista de cursos e periodos atuais para o aluno
 $sql_curso = '
 SELECT DISTINCT
@@ -76,22 +75,28 @@ $curso = '';
     if(!$arr_curso)
         echo '<font color="grey">
         Você não possue vínculo em nenhum curso ou disciplina
-        </font>';
+        </font>';		
+		for($i = 0; $i < count($arr_curso) ; $i++) {
+			echo '<tr><td><b>';
+			$curso=$arr_curso[$i]['prontuario'];
+			$curso = substr($curso,0,6);
+			echo 'Prontu&aacute;rio: </b>'. $curso . '-' .$arr_curso[$i]['prontuario'][6] .'<b><br />';
+			echo $arr_curso[$i]['descricao_curso'].'</b><br> |  <a href=lista_notas.php?c='.$arr_curso[$i]["ref_curso"].'&p='.$arr_curso[$i]["ref_periodo"].'>'.$arr_curso[$i]["descricao"].'</a>';
 
-    for($i = 0; $i < count($arr_curso) ; $i++) {
-        echo '<tr><td><b>';
-        echo 'Prontu&aacute;rio: </b>'. $arr_curso[$i]['prontuario'] .'<b><br />';
-        echo $arr_curso[$i]['descricao_curso'].'</b><br> |  <a href=lista_notas.php?c='.$arr_curso[$i]["ref_curso"].'&p='.$arr_curso[$i]["ref_periodo"].'>'.$arr_curso[$i]["descricao"].'</a>';
-
-        if ($arr_curso[$i]["ref_curso"] == $arr_curso[$i + 1]["ref_curso"] ) {
-            echo ' |   <a href=lista_notas.php?c='.$arr_curso[$i]["ref_curso"].'&p='.$arr_curso[$i + 1]["ref_periodo"].'>'.$arr_curso[$i + 1]["descricao"].'</a> | <br />';
-            echo ' <br></td></tr> ';
-            $i++;
-        }
-        else {
-            echo ' | <br><br></td></tr>';
-        }
-    }
+			if ($arr_curso[$i]["ref_curso"] == $arr_curso[$i + 1]["ref_curso"] ) {
+				echo ' |   <a href=lista_notas.php?c='.$arr_curso[$i]["ref_curso"].'&p='.$arr_curso[$i + 1]["ref_periodo"].'>'.$arr_curso[$i + 1]["descricao"].'</a> | <br />';
+				echo ' <br></td></tr> ';
+				$i++;
+			}
+			else {
+				echo ' | <br><br></td></tr>';
+			}
+		}
     ?>
 </table>
+<style type="text/css">
+	#buttonvoltar {
+		visibility:hidden;
+	}
+</style>
 <?php include_once('../includes/rodape.htm'); ?>

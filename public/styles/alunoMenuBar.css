@@ -83,10 +83,7 @@ ul.MenuBarHorizontal ul.MenuBarSubmenuVisible ul.MenuBarSubmenuVisible
  *******************************************************************************/
 
 /* Submenu containers have borders on all sides */
-ul.MenuBarHorizontal ul
-{
-	border: 1px solid #AAD5FF;
-}
+
 /* Menu items are a light gray block with padding and no text decoration */
 ul.MenuBarHorizontal a
 {
