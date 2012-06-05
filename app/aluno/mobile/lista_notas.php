@@ -72,7 +72,7 @@ nome da disciplina para detalhar os lançamentos e visualizar mais informações
         if (count($diarios_info) > 0 ) {
             foreach ($diarios_info as $disciplina_aluno) {
 				$nao_finalizada = ($disciplina_aluno['fl_finalizada'] == 'f') ? '<strong>*</strong>' : ' ';
-				$color =  ($color != '#ffffff') ? '#ffffff' : '#9AF8A6';
+				$color =  ($color != '#ffffff') ? '#ffffff' : '#C1E0B4';
 
                 echo '<tr bgcolor="'. $color .'">';
 				if($disciplina_aluno['total_distribuido'] > 0)
@@ -136,7 +136,7 @@ nome da disciplina para detalhar os lançamentos e visualizar mais informações
 <br />
 <?php
 	if($m>0)
-		echo "(<strong>*</strong>) Disciplina com lançamentos em aberto, passí­vel de alterações.<br /><br />";
+		echo "(<strong>*</strong>) Disciplina com lançamentos em aberto, passível de alterações.<br /><br />";
 ?>
 <div align="left" style="font-size: 0.85em;">
     <h4>Legenda</h4>
@@ -153,8 +153,8 @@ nome da disciplina para detalhar os lançamentos e visualizar mais informações
 <font color="red">
 <strong>
 Existem disciplinas matriculadas não exibidas. <br />
-Estas disciplinas somente estaram disponí­veis quando o professor(a) iniciar o 
-lançaamento das notas. <br />
+Estas disciplinas somente estaram disponíveis quando o professor(a) iniciar o 
+lançamento das notas. <br />
 Qualquer dúvida entre em contato com seu professor(a) ou com a 
 coordenação do curso. <br />
 </strong>
