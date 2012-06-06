@@ -13,7 +13,6 @@ $sessao->destroy();
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title><?=$IEnome?></title>
         <link href="../../../public/images/favicon.ico" rel="shortcut icon" />
-        <link href="../../../public/styles/style.css" rel="stylesheet" type="text/css" />
         <style>
             #alert_login{
                 font-family:verdana,arial;
@@ -105,7 +104,11 @@ $sessao->destroy();
                 <font color="#999999">&copy;2012  IFSP Campus Caraguatatuba</font>
             </p>
         </div>
-
+		<style type="text/css">
+		#buttonvoltar, #buttonprincipal, #buttonsair {
+			visibility:hidden;
+		}
+		</style>
     </body>
 </html>
 
