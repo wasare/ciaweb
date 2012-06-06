@@ -37,7 +37,7 @@ ul.MenuBarHorizontal li
 	cursor: pointer;
 	width: 8em;
 	float: left;
-	
+
 }
 /* Submenus should appear below their parent (top: 0) with a higher z-index, but they are initially off the left side of the screen (-1000em) */
 ul.MenuBarHorizontal ul
@@ -61,7 +61,7 @@ ul.MenuBarHorizontal ul.MenuBarSubmenuVisible
 ul.MenuBarHorizontal ul li
 {
 	width: 12em;
-	
+
 }
 /* Submenus should appear slightly overlapping to the right (95%) and up (-5%) */
 ul.MenuBarHorizontal ul ul
@@ -167,4 +167,12 @@ ul.MenuBarHorizontal iframe
 		float: left;
 		background: #FFF;
 	}
+}
+
+.aviso {
+   color: teal;
+   font-size: 0.75em;
+   font-weight: bold;
+   font-style: italic;
+	 text-transform: uppercase;
 }

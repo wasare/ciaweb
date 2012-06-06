@@ -87,7 +87,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 ?>
 <center>
 <!--Inicio - Victor Uliisses Pugliese - 15:28 01/05/2012 - Tabela Media -->
-<table style="font-size: 100%" >
+<table style="font-size:100%">
 	<tr bgcolor="#EEEEEE">
 		<th><b>Faltas</b></th>
 		<th><b>% Faltas</b></th>
@@ -194,6 +194,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 <span style="color: red; font-style:italic; font-family:arial,times;">
 Consulte o professor desta disciplina, para saber a que refere-se as notas de 1 a <?php echo ($cont-1);?>
 </span>
+<span class="aviso">As informações acima possuem somente um cárater informacional, ou seja não tem valor oficial. Solicite junto a secretaria escolar um boletim ou histórico para obter um documento válido. </span>
 </center>
 <br />
 <div align="left" style="font-size: 0.85em;">

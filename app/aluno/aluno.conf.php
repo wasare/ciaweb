@@ -24,8 +24,8 @@ else {
      * Verifica se o formulario de autenticacao
      * enviou parametros
      */
-    if($_POST['prontuario'] && $_POST['senha']) {
-        $prontuario = substr($_POST['prontuario'], 1);
+    if($_POST['usuario_aluno'] && $_POST['senha']) {
+        $prontuario = substr($_POST['usuario_aluno'], 1);
         $prontuario_upper = mb_strtoupper($prontuario, 'UTF-8');
         $senha = md5($_POST['senha']);
 
