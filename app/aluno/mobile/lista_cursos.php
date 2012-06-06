@@ -1,12 +1,12 @@
 <?php
 
-require_once('aluno.conf.php');
+require_once('../aluno.conf.php');
 include_once('../includes/topoMobile.html');
 // Recupera a lista de cursos e periodos atuais para o aluno
 $sql_curso = '
 SELECT DISTINCT
     a.ref_curso, e.descricao AS descricao_curso, a.ref_periodo, d.descricao, f.prontuario
-FROM 
+FROM
     matricula a, pessoas b, disciplinas c,
     periodos d, cursos e, contratos f
 WHERE
@@ -41,7 +41,7 @@ SELECT
     fone_particular, fone_profissional, fone_celular,
     fone_recado, email, dt_nascimento
 FROM pessoas p LEFT OUTER JOIN cidade c ON (p.ref_cidade = c.id)
-WHERE 
+WHERE
     p.id = $aluno;";
 
 $dados_aluno = $conn->get_all($sql_aluno);
@@ -71,11 +71,11 @@ $curso = '';
 <h2>Meus cursos</h2>
 <table>
     <?php
-    
+
     if(!$arr_curso)
         echo '<font color="grey">
         Você não possue vínculo em nenhum curso ou disciplina
-        </font>';		
+        </font>';
 		for($i = 0; $i < count($arr_curso) ; $i++) {
 			echo '<tr><td><b>';
 			$curso=$arr_curso[$i]['prontuario'];
