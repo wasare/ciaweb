@@ -1,5 +1,5 @@
 <?php
-require_once('aluno.conf.php');
+require_once('../aluno.conf.php');
 include_once('../includes/topoMobile.html');
 $aluno           = $aluno_id;
 $periodo         = $_GET["p"];
@@ -49,16 +49,16 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 	//Inicio - Victor Ullisses Pugliese - 10h52min 04/05/2012 -  Aulas Dadas;
 	$sql_carga_horaria = "SELECT get_carga_horaria_realizada(".$disciplina_ofer.");";
 	$ch_realizada = $conn->get_one($sql_carga_horaria);
-		
+
 	if (count($diario_info) > 0 ) {
 		foreach ($diario_info as $disciplina_aluno) {
 			if ($count == 0) {
-				
-				$nao_finalizada = ($disciplina_aluno['fl_finalizada'] == 'f') ? '<strong>*</strong>' : ' ';  
-				
+
+				$nao_finalizada = ($disciplina_aluno['fl_finalizada'] == 'f') ? '<strong>*</strong>' : ' ';
+
 				echo '<disc><b>Disciplina: </b>'. $disciplina_aluno['descricao_disciplina'] . $nao_finalizada . '</disc><br />';
 				if($disciplina_aluno['fl_finalizada']=="" || $disciplina_aluno['fl_finalizada']=="f")
-				{                
+				{
 					$situacao = "M";
 				}
                 else
@@ -74,11 +74,11 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 				}
 				if($situacao == "M")
 					echo "(<strong>*</strong>) Disciplina com lançamentos em aberto, passível de alterações.<p />";
-				
+
 				$media_aluno = $disciplina_aluno['nota_final'];
-				
+
 				//Inicio - Victor Ullisses Pugliese - 10h54 04/05/2012 - Media da Sala
-				echo 
+				echo
 				"<strong>Média da Turma: </strong>". number::numeric2decimal_br($turma,1) ."<br />";
    				//Fim da Media da Sala;
    				//Inicio: Victor Ullisses Pugliese - 12:38 27/04/2012 - CARGA HORARIA;
@@ -98,22 +98,22 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 			<?php
 			//Inicio - Victor Ullisses Pugliese - 10h54min 04/05/2012 - Faltas Alunos;
 				$faltas_aluno = $disciplina_aluno['num_faltas'];
-				echo $faltas_aluno;				
+				echo $faltas_aluno;
         	//Fim Faltas Alunos;
-			?>		
-		</center></td>
-		<td><center>
-			<?php
-			//Inicio - Victor Ullisses Pugliese - 23:27 01/05/2012 
-	        	$per_faltas = ($faltas_aluno * 100) / $ch_realizada;
-	        	echo number::numeric2decimal_br($per_faltas,1)."%";	        	
-	        //Fim Percentagem de Faltas;	
 			?>
 		</center></td>
 		<td><center>
 			<?php
-			//Inicio -Victor Ullisses Pugliese - 11:24 01/05/2012 - Situacao;				
-				echo $situacao;				
+			//Inicio - Victor Ullisses Pugliese - 23:27 01/05/2012
+	        	$per_faltas = ($faltas_aluno * 100) / $ch_realizada;
+	        	echo number::numeric2decimal_br($per_faltas,1)."%";
+	        //Fim Percentagem de Faltas;
+			?>
+		</center></td>
+		<td><center>
+			<?php
+			//Inicio -Victor Ullisses Pugliese - 11:24 01/05/2012 - Situacao;
+				echo $situacao;
 				}//fecha if cont == 0;
     		        break;
     			}
@@ -137,10 +137,10 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 				$i++;
 			}
 		}
-		$nDistribuida_sql = 
-			"SELECT 
-				df.nota_distribuida 
-			FROM diario_formulas as df 
+		$nDistribuida_sql =
+			"SELECT
+				df.nota_distribuida
+			FROM diario_formulas as df
 			WHERE df.grupo like '%-$periodo-%-$disciplina_ofer' order by df.prova";
 		$n_info = $conn->get_all($nDistribuida_sql);
 		
@@ -159,20 +159,20 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 		$i=0;
 		$color =  ($color != '#ffffff') ? '#ffffff' : '#9AF8A6';
         echo '<tr bgcolor="'. $color .'">';
-		
+
         if (count($n_info) > 0 ) {
-            foreach ($n_info as $disciplina_aluno) {            	
+            foreach ($n_info as $disciplina_aluno) {
             	if($notas[$i] >= 0 && $disciplina_aluno['nota_distribuida'] > 0)
             	{
 					echo "<td bgcolor='#EEEEEE'><center><strong>Nota ".$cont."</strong></center></td>";
 					echo '<td align="center">'. number::numeric2decimal_br($notas[$i],1) .'</td>';
-					$cont++;					
+					$cont++;
 	            }
 				$i++;
-				
+
 				if($disciplina_aluno['nota_distribuida'] > 0)
 				{
-					echo '<td align="center">'. number::numeric2decimal_br($disciplina_aluno['nota_distribuida'],1) .'</td>';        
+					echo '<td align="center">'. number::numeric2decimal_br($disciplina_aluno['nota_distribuida'],1) .'</td>';
 					$nota_disc_maxima += (float) $disciplina_aluno['nota_distribuida'];
 					echo "<tr />";
 				}
@@ -187,7 +187,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 		{
 			echo "<td bgcolor='#EEEEEE'><center><strong>Arred./Rec.</strong></center></td>";
 			echo '<td align="center"> - </td>';
-		}		
+		}
 		echo '<td align="center"> - </td><tr />';
 		echo "<td bgcolor='#EEEEEE'><center><strong>Média Final</strong></center></td>";
 		echo '<td align="center">'. number::numeric2decimal_br($media_aluno,1) .'</td>';
@@ -208,6 +208,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 		}
 	}    
 ?>
+<span class="aviso_notas">As informações acima possuem somente um cárater informacional, ou seja não tem valor oficial. Solicite junto a secretaria escolar um boletim ou histórico para obter um documento válido. </span>
 </center>
 <br />
 <div align="left" style="font-size: 0.85em;">
@@ -220,5 +221,4 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 <br />
 Gerado no dia <?php echo date("d/m/Y") ." às ". date("H:i:s"); ?>
 <br /><br />
-<?php include_once('../includes/rodape.htm'); ?>      
-
+<?php include_once('../includes/rodape.htm'); ?>

@@ -68,6 +68,7 @@ $sessao->destroy();
             <table border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td valign="top">
+                        Em usu&aacute;rio utilize o n&uacute;mero do seu prontu&aacute;rio precedido pela letra "a"; <br />
                         Utilize a sua senha pessoal de acesso, é a mesma utilizada para logar nos computadores dos laborat&oacute;rios.<br />
                         <b>Qualquer diverg&ecirc;ncia em notas e faltas informe-se com o seu professor.</b><br />
 
@@ -79,10 +80,10 @@ $sessao->destroy();
                 <table border="0" width="150px" style="font-size:100%">
                      <tr>
                         <td align="right">
-                            Prontu&aacute;rio:
+                            Usu&aacute;rio:
                         </td>
                         <td align="center">
-                            <input type="text" id="prontuario" name="prontuario" maxlength="20" style="width: 70px;" />
+                            <input type="text" id="usuario_aluno" name="usuario_aluno" maxlength="20" style="width: 70px;" />
                         </td>
                     </tr>
                     <tr>
@@ -104,7 +105,7 @@ $sessao->destroy();
                 <input type="hidden" name="btnOK" value="true" />
                 <input type="hidden" id="sa_login" name="sa_login" value="aluno_login" />
              </form>
-            
+
             <table border="0">
                 <tr>
                     <td>

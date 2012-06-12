@@ -24,8 +24,9 @@ else {
      * Verifica se o formulario de autenticacao
      * enviou parametros
      */
-    if($_POST['prontuario'] && $_POST['senha']) {
-        $prontuario_upper = mb_strtoupper($_POST['prontuario'], 'UTF-8');
+    if($_POST['usuario_aluno'] && $_POST['senha']) {
+        $prontuario = substr($_POST['usuario_aluno'], 1);
+        $prontuario_upper = mb_strtoupper($prontuario, 'UTF-8');
         $senha = md5($_POST['senha']);
 
         $_SESSION['sa_aluno_user']  = $prontuario_upper;
@@ -53,7 +54,7 @@ $authLDAP = new authLDAP($param_ldap_aluno);
 
 // autentica na base LDAP e atualiza a senha caso necessário
 if ($authLDAP->authenticate('a'. $prontuario_lower, $_POST['senha'])) {
-    
+
   // atualiza senha no banco com base na autenticação feita no LDAP
   if ($senha_banco != $senha) {
     $atualiza_senha = "UPDATE acesso_aluno SET senha = '$senha' WHERE ref_pessoa = ". $aluno_id .";";

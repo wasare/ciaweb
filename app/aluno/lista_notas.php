@@ -11,7 +11,7 @@ $rs_curso    = $conn->get_one("SELECT descricao FROM cursos WHERE id = $curso");
 $rs_periodo  = $conn->get_one("SELECT descricao FROM periodos WHERE id = '$periodo'");
 
 $sql_diarios_matriculados = "
-SELECT ref_disciplina_ofer 
+SELECT ref_disciplina_ofer
 FROM
     matricula m LEFT OUTER JOIN disciplinas_ofer o ON (m.ref_disciplina_ofer = o.id)
 WHERE
@@ -19,11 +19,11 @@ WHERE
     m.ref_pessoa = $aluno AND
     m.ref_contrato IN (
         SELECT id FROM contratos
-	WHERE 
+	WHERE
             ref_pessoa = $aluno AND
             ref_curso = $curso
 	) AND
-	m.ref_motivo_matricula = 0 AND 
+	m.ref_motivo_matricula = 0 AND
 	o.is_cancelada = '0' AND
 	o.ref_periodo = '$periodo' ";
 
@@ -36,7 +36,7 @@ $rs_diarios_matriculados = count($rs_diarios);
     <strong>Curso: </strong><?=$curso?> - <?=$rs_curso?><br />
     <strong>Perí­odo: </strong><?=$rs_periodo?><br />
 </p>
-<span style="color: red; font-style:italic; font-family:arial,times;">Clique no 
+<span style="color: red; font-style:italic; font-family:arial,times;">Clique no
 nome da disciplina para detalhar os lançamentos e visualizar mais informações</span>
 <table style="font-size:100%; wordwrap: auto;">
     <tr bgcolor=#EEEEEE>
@@ -64,12 +64,12 @@ nome da disciplina para detalhar os lançamentos e visualizar mais informações
             m.ref_disciplina_ofer IN  ( ". $sql_diarios_matriculados ." ) AND
             m.ref_pessoa = $aluno AND
             m.ref_motivo_matricula = 0 AND
-            m.ref_disciplina_ofer = d.id 
+            m.ref_disciplina_ofer = d.id
         ORDER BY descricao_disciplina;";
-        
+
         //die($sql_diarios_info);
         $diarios_info = $conn->get_all($sql_diarios_info);
-		
+
         if (count($diarios_info) > 0 ) {
             foreach ($diarios_info as $disciplina_aluno) {
 				$nao_finalizada = ($disciplina_aluno['fl_finalizada'] == 'f') ? '<strong>*</strong>' : ' ';
@@ -82,7 +82,7 @@ nome da disciplina para detalhar os lançamentos e visualizar mais informações
 				}
 				else
 				{
-					echo '<td>'. $disciplina_aluno['descricao_disciplina'] . $nao_finalizada .'</td>';				
+					echo '<td>'. $disciplina_aluno['descricao_disciplina'] . $nao_finalizada .'</td>';
 				}
 				if($disciplina_aluno['total_distribuido'] > 0)
 				{
@@ -99,18 +99,18 @@ nome da disciplina para detalhar os lançamentos e visualizar mais informações
 				else
 				{
 					echo '<td align="center"> - </td>';
-				}				
+				}
 				echo '<td align="center">'. $disciplina_aluno['num_faltas'] .'</td>';
-				
+
 				//Inici­o: Victor Ullisses Pugliese - 12:38 27/04/2012 - CARGA HORARIA;
                 $sql_carga_horaria = "SELECT get_carga_horaria_realizada(".$disciplina_aluno['ref_disciplina_ofer'].");";
         		$ch_realizada = $conn->get_one($sql_carga_horaria);
-                
+
                 echo '<td align="center">'. number::numeric2decimal_br(@($disciplina_aluno['num_faltas'] * 100 / $ch_realizada),1) .'</td>';
                 //Fim
-                
+
                 if($disciplina_aluno['fl_finalizada']=="" || $disciplina_aluno['fl_finalizada']=="f")
-				{                
+				{
 					echo '<td align="center"> M </td>';
 					$situacao = "M";
 					$m++;
@@ -140,6 +140,7 @@ nome da disciplina para detalhar os lançamentos e visualizar mais informações
 	if($m>0)
 		echo "(<strong>*</strong>) Disciplina com lançamentos em aberto, passí­vel de alterações.<br /><br />";
 ?>
+<span class="aviso">As informações acima possuem somente um cárater informacional, ou seja não tem valor oficial. Solicite junto a secretaria escolar um boletim ou histórico para obter um documento válido. </span>
 <div align="left" style="font-size: 0.85em;">
     <h4>Legenda</h4>
     <strong>A</strong> - Aprovado<br />
@@ -151,9 +152,9 @@ nome da disciplina para detalhar os lançamentos e visualizar mais informações
 <font color="red">
 <strong>
 Existem disciplinas matriculadas não exibidas. <br />
-Estas disciplinas somente estaram disponí­veis quando o professor(a) iniciar o 
+Estas disciplinas somente estaram disponí­veis quando o professor(a) iniciar o
 lançaamento das notas. <br />
-Qualquer dúvida entre em contato com seu professor(a) ou com a 
+Qualquer dúvida entre em contato com seu professor(a) ou com a
 coordenação do curso. <br />
 </strong>
 </font>
@@ -162,5 +163,4 @@ coordenação do curso. <br />
 Gerado no dia <?php echo date("d/m/Y") ." às ". date("H:i:s"); ?> <br/><br/>
 <input type="button" value="Imprimir" onClick="window.print()">&nbsp;&nbsp;&nbsp;<a href="lista_cursos.php">Voltar</a>
 <br /><br />
-<?php include_once('includes/rodape.htm'); ?>      
-
+<?php include_once('includes/rodape.htm'); ?>
