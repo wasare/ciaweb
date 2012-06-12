@@ -90,7 +90,7 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
             	//Fim
 ?>
 <!--Inicio - Victor Uliisses Pugliese - 15:28 01/05/2012 - Tabela Media -->
-<table style="font-size: 16px" >
+<table style="font-size: 1em" >
 	<tr bgcolor="#EEEEEE">
 		<th><b>Faltas</b></th>
 		<th><b>% Faltas</b></th>
@@ -146,6 +146,10 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 			FROM diario_formulas as df 
 			WHERE df.grupo like '%-$periodo-%-$disciplina_ofer' order by df.prova";
 		$n_info = $conn->get_all($nDistribuida_sql);
+		
+		$detalhes_sql = 
+		"SELECT descricao FROM diario_formulas WHERE grupo ILIKE '%-$periodo-%-$disciplina_ofer' order by prova asc";
+		$detalhes_info = $conn->get_all($detalhes_sql);
 ?>
 <table style="font-size: 1.0em;">
     <tr bgcolor="#EEEEEE">
@@ -194,9 +198,19 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 	    //Fim do Exibe notas e pesos;
     ?>
 </table>
-<span style="color: red; font-style:italic; font-family:arial,times;">
-Consulte o professor desta disciplina, para saber a que refere-se as notas de 1 a <?php echo ($cont-1);?>
-</span>
+<br />
+<b>Detalhes</b>
+<br />
+<?php
+	$i=0;
+	if (count($detalhes_info) > 0 ) {
+        foreach ($detalhes_info as $d) {            	
+          	if($i < ($cont-1))
+				echo "<b>Nota ".($i+1).":</b> ".$d['descricao']."<br />";
+				$i++;
+		}
+	}    
+?>
 <br />
 <div align="left" style="font-size: 0.85em;">
     <h4>Legenda</h4>

@@ -11,6 +11,7 @@ $diario_id = (int) $_POST['diario_id'];
 $periodo = $_SESSION['web_diario_periodo_id'];
 $operacao = $_POST['operacao'];
 $valor_avaliacao = $_POST['valor_avaliacao'];
+$descricao = $_POST['desc_avaliacao'];
 
 $nota_distribuida = number::decimal_br2numeric($valor_avaliacao,1);
 
@@ -81,7 +82,8 @@ foreach($notas as $n) {
 <?=papeleta_header($diario_id)?>
 
 <br />
-
+<?php echo "<strong>Descrição: $descricao</strong>"; ?>
+<br />
 <?php
 
 reset($notas);
@@ -179,7 +181,7 @@ $flag_elimina_notas = (array_sum($notas) == 0 && $nota_distribuida == 0) ? 1 : 0
 if(($flag_nota_distribuida == 0 && $flag_nota_distribuida_maior == 0) || $flag_elimina_notas == 1) {
 
    // SQL NOTA DISTRIBUIDA
-  $sql_update .= "UPDATE diario_formulas SET nota_distribuida = $nota_distribuida
+  $sql_update .= "UPDATE diario_formulas SET nota_distribuida = $nota_distribuida, descricao = '$descricao'
 					WHERE grupo ILIKE '%-$diario_id' AND prova = '$prova';";
 
   $msg_registros .= "<font color=\"brownn\" >Nota distribuída <font color=\"blue\">(<strong>". number::numeric2decimal_br($nota_distribuida,1) ." pontos</strong>)</font> registrada com sucesso!</b></font><br /><br />";

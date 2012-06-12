@@ -137,7 +137,7 @@ if($prova != 7)
     else
        $nota_distribuida = '';
 }
-
+$descricao_nota = $conn->get_one("SELECT descricao FROM diario_formulas WHERE grupo ILIKE '%-$diario_id' AND prova = '$prova'");
 $NOTAS = mediaPeriodo($conn->get_one('SELECT periodo_disciplina_ofer('. $diario_id .');'));
 $MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
 $NOTA_MAXIMA = $NOTAS['nota_maxima'];
@@ -276,10 +276,13 @@ function validate_notas() {
 ?>
     <span class="obrigatorio">Para eliminar todas as notas informe 0 para todas as notas.</span><br />
 
-			<p><strong>Nota distribu&iacute;da<span class="obrigatorio">*</span></strong>
+			<p><strong>Valor máximo desta nota<span class="obrigatorio">*</span></strong>
 			<input name="valor_avaliacao" type="text" id="valor_avaliacao" onkeyup="validate_valor_avaliacao(this);" size="5" maxlength="4" value="<?=$nota_distribuida?>" tabindex="1" />&nbsp;
 			<br /><span class="obrigatorio">* Informe o valor m&aacute;ximo para Nota</span><font color="blue"> P<?=$prova?></font>
 			</p>
+			<p><strong>Descrição para esta nota</strong></p>
+			<input name="desc_avaliacao" type="text" maxlength="60" size="66" value="<?php echo $descricao_nota ?>"/>
+			<br />
 <?php	else : ?>
 			<p>
         <font color="green"><strong>Nota Final ser&aacute; igual (Nota Parcial + Nota Extra)
