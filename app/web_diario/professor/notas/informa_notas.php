@@ -153,16 +153,18 @@ $qtde_notas = $conn->get_one($sql_quantidade_notas);
 <title><?=$IEnome?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="<?=$BASE_URL .'public/styles/web_diario.css'?>" type="text/css">
+<style type="text/css">@import "<?=$BASE_URL .'public/styles/jquery.maxlength.css'?>";</style>
+<style type="text/css">@import "<?=$BASE_URL .'public/styles/redmond/jquery-ui.custom.css'?>";</style>
+
 <script type="text/javascript" src="<?=$BASE_URL .'lib/prototype.js'?>"> </script>
 <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.min.js'?>"></script>
 <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.floatheader.min.js'?>"></script>
 <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.filter_input.min.js'?>"></script>
-
-
+<script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.maxlength.pack.js'?>"></script>
+<script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.ui/jquery.ui.core.min.js'?>"></script>
+<script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.ui/jquery.ui.widget.min.js'?>"></script>
 <script type="text/javascript">
-
 jQuery.noConflict();
-
 function findNextElement(index) {
  if(Prototype.Browser.IE) {
     elements = new Form.getElements(document.forms[0]);
@@ -281,8 +283,9 @@ function validate_notas() {
 			<br /><span class="obrigatorio">* Informe o valor m&aacute;ximo para Nota</span><font color="blue"> P<?=$prova?></font>
 			</p>
 			<p><strong>Descrição para esta nota</strong></p>
-			<input name="desc_avaliacao" type="text" maxlength="60" size="66" value="<?php echo $descricao_nota ?>"/>
+			<textarea name="desc_avaliacao" id="desc_avaliacao" cols="45" rows="2"><?php echo $descricao_nota ?></textarea>
 			<br />
+			<span class="maxlength-feedback" id="targetFeedback1"></span> <br />
 <?php	else : ?>
 			<p>
         <font color="green"><strong>Nota Final ser&aacute; igual (Nota Parcial + Nota Extra)
@@ -403,6 +406,7 @@ $('informa_notas').getInputs('text').each(function(input) {
 				fadeOut: 250
 			});
 			jQuery('input[name^="notas"]').filter_input({regex:'[0-9,]', live:true});
+			jQuery('#desc_avaliacao').maxlength({max: 60, feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback1'});
 		});
 
 	//-->

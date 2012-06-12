@@ -13,6 +13,8 @@ $operacao = $_POST['operacao'];
 $valor_avaliacao = $_POST['valor_avaliacao'];
 $descricao = $_POST['desc_avaliacao'];
 
+if(empty($descricao)) $descricao = 'Nota ' . $_POST['codprova']; 
+
 $nota_distribuida = number::decimal_br2numeric($valor_avaliacao,1);
 
 // VERIFICA O DIREITO DE ACESSO AO DIARIO COMO PROFESSOR OU COORDENADOR
@@ -81,9 +83,7 @@ foreach($notas as $n) {
 
 <?=papeleta_header($diario_id)?>
 
-<br />
-<?php echo "<strong>Descrição: $descricao</strong>"; ?>
-<br />
+
 <?php
 
 reset($notas);
@@ -184,7 +184,8 @@ if(($flag_nota_distribuida == 0 && $flag_nota_distribuida_maior == 0) || $flag_e
   $sql_update .= "UPDATE diario_formulas SET nota_distribuida = $nota_distribuida, descricao = '$descricao'
 					WHERE grupo ILIKE '%-$diario_id' AND prova = '$prova';";
 
-  $msg_registros .= "<font color=\"brownn\" >Nota distribuída <font color=\"blue\">(<strong>". number::numeric2decimal_br($nota_distribuida,1) ." pontos</strong>)</font> registrada com sucesso!</b></font><br /><br />";
+  $msg_registros .= "<br /><font color=\"brownn\" >Nota distribuída <font color=\"blue\">(<strong>". number::numeric2decimal_br($nota_distribuida,1) ." pontos</strong>)</font> registrada com sucesso!</b></font><br />";
+  $msg_registros .= "<strong>Descrição: $descricao</strong><br /><br />";
   // ^ SQL NOTA DISTRIBUIDA ^
 
   foreach($qrynotas_parciais as $aluno)

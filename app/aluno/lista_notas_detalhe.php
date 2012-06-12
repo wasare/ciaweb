@@ -211,7 +211,8 @@ $quantidade_notas_diario = $conn->get_one($sql_quantidade_notas);
 		}
 	}    
 ?>
-<span class="aviso">As informações acima possuem somente um cárater informacional, ou seja não tem valor oficial. Solicite junto a secretaria escolar um boletim ou histórico para obter um documento válido. </span>
+<br />
+<div class="aviso_notas">As informações acima possuem somente um cárater informacional, ou seja não tem valor oficial. Solicite junto a secretaria escolar um boletim ou histórico para obter um documento válido. </div>
 <br />
 <div align="left" style="font-size: 0.85em;">
     <h4>Legenda</h4>

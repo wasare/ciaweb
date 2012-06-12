@@ -37,3 +37,12 @@ h2 {
 disc{
 		font-size:1.2em;
 	}
+	
+.aviso_notas {
+   text-align: justify;
+   color: teal;
+   font-size: 0.75em;
+   font-weight: bold;
+   font-style: italic;
+   text-transform: uppercase;
+}
