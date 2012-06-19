@@ -140,7 +140,7 @@ nome da disciplina para detalhar os lançamentos e visualizar mais informações
 	if($m>0)
 		echo "(<strong>*</strong>) Disciplina com lançamentos em aberto, passí­vel de alterações.<br /><br />";
 ?>
-<span class="aviso">As informações acima possuem somente um cárater informacional, ou seja não tem valor oficial. Solicite junto a secretaria escolar um boletim ou histórico para obter um documento válido. </span>
+<div class="aviso_notas">As informações acima possuem somente um cárater informacional, ou seja não tem valor oficial. Solicite junto a secretaria escolar um boletim ou histórico para obter um documento válido. </div>
 <div align="left" style="font-size: 0.85em;">
     <h4>Legenda</h4>
     <strong>A</strong> - Aprovado<br />

@@ -137,7 +137,7 @@ if($prova != 7)
     else
        $nota_distribuida = '';
 }
-
+$descricao_nota = $conn->get_one("SELECT descricao FROM diario_formulas WHERE grupo ILIKE '%-$diario_id' AND prova = '$prova'");
 $NOTAS = mediaPeriodo($conn->get_one('SELECT periodo_disciplina_ofer('. $diario_id .');'));
 $MEDIA_FINAL_APROVACAO = $NOTAS['media_final'];
 $NOTA_MAXIMA = $NOTAS['nota_maxima'];
@@ -153,16 +153,18 @@ $qtde_notas = $conn->get_one($sql_quantidade_notas);
 <title><?=$IEnome?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="<?=$BASE_URL .'public/styles/web_diario.css'?>" type="text/css">
+<style type="text/css">@import "<?=$BASE_URL .'public/styles/jquery.maxlength.css'?>";</style>
+<style type="text/css">@import "<?=$BASE_URL .'public/styles/redmond/jquery-ui.custom.css'?>";</style>
+
 <script type="text/javascript" src="<?=$BASE_URL .'lib/prototype.js'?>"> </script>
 <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.min.js'?>"></script>
 <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.floatheader.min.js'?>"></script>
 <script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.filter_input.min.js'?>"></script>
-
-
+<script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.maxlength.pack.js'?>"></script>
+<script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.ui/jquery.ui.core.min.js'?>"></script>
+<script type="text/javascript" language="javascript" src="<?=$BASE_URL .'lib/jquery.ui/jquery.ui.widget.min.js'?>"></script>
 <script type="text/javascript">
-
 jQuery.noConflict();
-
 function findNextElement(index) {
  if(Prototype.Browser.IE) {
     elements = new Form.getElements(document.forms[0]);
@@ -276,10 +278,14 @@ function validate_notas() {
 ?>
     <span class="obrigatorio">Para eliminar todas as notas informe 0 para todas as notas.</span><br />
 
-			<p><strong>Nota distribu&iacute;da<span class="obrigatorio">*</span></strong>
+			<p><strong>Valor máximo desta nota<span class="obrigatorio">*</span></strong>
 			<input name="valor_avaliacao" type="text" id="valor_avaliacao" onkeyup="validate_valor_avaliacao(this);" size="5" maxlength="4" value="<?=$nota_distribuida?>" tabindex="1" />&nbsp;
 			<br /><span class="obrigatorio">* Informe o valor m&aacute;ximo para Nota</span><font color="blue"> P<?=$prova?></font>
 			</p>
+			<p><strong>Descrição para esta nota</strong></p>
+			<textarea name="desc_avaliacao" id="desc_avaliacao" cols="45" rows="2"><?php echo $descricao_nota ?></textarea>
+			<br />
+			<span class="maxlength-feedback" id="targetFeedback1"></span> <br />
 <?php	else : ?>
 			<p>
         <font color="green"><strong>Nota Final ser&aacute; igual (Nota Parcial + Nota Extra)
@@ -400,6 +406,7 @@ $('informa_notas').getInputs('text').each(function(input) {
 				fadeOut: 250
 			});
 			jQuery('input[name^="notas"]').filter_input({regex:'[0-9,]', live:true});
+			jQuery('#desc_avaliacao').maxlength({max: 60, feedbackText: 'Usando {c} de {m} caracteres.', feedbackTarget: '#targetFeedback1'});
 		});
 
 	//-->
