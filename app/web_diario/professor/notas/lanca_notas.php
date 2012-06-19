@@ -121,7 +121,7 @@ $sql2 = "SELECT
                 diario_formulas
                 WHERE
                 grupo ILIKE '$grupo_novo'
-				ORDER BY descricao;";
+				ORDER BY prova;";
 
 $provas = $conn->get_all($sql2);
 
@@ -156,11 +156,9 @@ else
          $cont = 1;
          foreach($provas as $p)
          {
-            $qid = $p['prova'];
-            $qdesc = $p['descricao'];
             if ($p['prova'] > $qtde_notas)
 				continue;
-		    echo '<option value="'. $p['prova'] .'">'. $p['descricao'] .'</option>';
+		    echo '<option value="'. $p['prova'] .'">Nota '. $p['prova'] .'</option>';
          }
 ?>
 		 <option value="7">Nota Extra</option>
