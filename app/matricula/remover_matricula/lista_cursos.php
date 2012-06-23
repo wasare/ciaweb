@@ -17,12 +17,12 @@ $sqlAluno = "SELECT id, nome FROM pessoas WHERE id = $cod_aluno;";
 $RsAluno = $conn->Execute($sqlAluno);
 
 $sqlDiarios = "
-SELECT 
-m.id, m.ref_disciplina_ofer, d.id, d.descricao_disciplina, m.ref_curso, c.descricao, o.is_cancelada
-FROM 
+SELECT
+m.id, m.ref_disciplina_ofer, d.id, d.descricao_disciplina, m.ref_curso, c.descricao, o.is_cancelada, o.turma
+FROM
 matricula m, cursos c, disciplinas_ofer o, disciplinas d
-WHERE 
-m.ref_pessoa = '$cod_aluno' AND 
+WHERE
+m.ref_pessoa = '$cod_aluno' AND
 m.ref_periodo = '$periodo' AND
 m.ref_curso = c.id AND
 o.id = m.ref_disciplina_ofer AND
@@ -30,18 +30,19 @@ o.ref_disciplina = d.id
 ORDER BY c.descricao;";
 
 $RsDiarios = $conn->Execute($sqlDiarios);
-	
+
 if ( $RsDiarios->RecordCount() > 0 ) {
 
 $exibe_diarios = ' <table border="0" cellpadding="0" cellspacing="2">      <tr>
         <td height="32" bgcolor="#CCCCFF">&nbsp;</td>
         <td bgcolor="#CCCCFF">Di&aacute;rio</td>
         <td bgcolor="#CCCCFF">Disciplina</td>
+        <td bgcolor="#CCCCFF">Turma</td>
         <td bgcolor="#CCCCFF">Curso</td>
       </tr>';
 
 while(!$RsDiarios->EOF) {
-	  		
+
 	if($cor == "#E1E1FF")
 	{
 		$cor = "#FFFFFF";
@@ -54,18 +55,19 @@ while(!$RsDiarios->EOF) {
 	$exibe_diarios .= "<td><input name=\"id_matricula[]\" type=\"checkbox\" value=\"" . $RsDiarios->fields[0] . "\" /></td>";
 	$exibe_diarios .= "<td>" . $RsDiarios->fields[1] . $cancelado ."</td>";
 	$exibe_diarios .= "<td>" . $RsDiarios->fields[2] . " - " . $RsDiarios->fields[3] . "</td>";
+  $exibe_diarios .= "<td>" . $RsDiarios->fields[7] . "</td>";
 	$exibe_diarios .= "<td>" . $RsDiarios->fields[4] . " - " . $RsDiarios->fields[5] . "</td>";
 	$exibe_diarios .= "</tr>";
-	
+
 	$RsDiarios->MoveNext();
-		
+
 }
   $exibe_diarios .= "</table>";
   $exibe_diarios .= '<strong>(*) Disciplina cancelada.</strong>';
   $exibe_botao = '<p class="msg_erro"><strong>Aten&ccedil;&atilde;o! Esta a&ccedil;&atilde;o n&atilde;o pode ser desfeita!
 </strong></p>';
   $exibe_botao .= '<input type="submit" value="Excluir a matr&iacute;cula nas disciplinas selecionadas" />';
-   
+
 }
 else
     $exibe_diarios = '<font color="blue"><h3> Nenhuma matr&iacute;cula encontrada! </h3></font>';
@@ -83,7 +85,7 @@ else
   <input type="hidden" name="cod_aluno" id="cod_aluno" value="<?=$cod_aluno?>" />
   <input type="hidden" name="periodo" id="cod_aluno" value="<?=$periodo?>" />
   <div align="center">
-    <h1>Excluir Matr&iacute;cula</h1>  
+    <h1>Excluir Matr&iacute;cula</h1>
     <div class="panel">
       <strong>Aluno: </strong><?=$RsAluno->fields[0]?> - <?=$RsAluno->fields[1]?><br />
       <strong>Per&iacute;odo: </strong> <?=$periodo?>
