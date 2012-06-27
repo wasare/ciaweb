@@ -179,3 +179,10 @@ a:hover, a:active{ color: #c61a1a; text-decoration: underline;}
    font-weight: bold;
 }
 
+.diario_aberto{
+	color:red;
+	font-size: 1.2em;
+	font-weight: bold;
+	background: yellow;
+}
+
