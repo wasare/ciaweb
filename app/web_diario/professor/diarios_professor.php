@@ -16,7 +16,7 @@ unset($_SESSION['flag_falta']);
 
 $diario = @explode("|", $_GET['diario']);
 
-if(isset($_GET['id']) AND ( !is_numeric($diario['0']) OR !is_numeric($diario['1'])) ) {
+if (isset($_GET['id']) AND ( !is_numeric($diario['0']) OR !is_numeric($diario['1'])) ) {
      exit('<script language="javascript" type="text/javascript">
       window.alert("ERRO! Primeiro selecione um diário!"); javascript:window.history.back(1);</script>');
 }
@@ -94,9 +94,9 @@ $levantamento_docente = $conn->get_all($sql_levantamento_docente);
 $num_levantamento = count($levantamento_docente);
 // ^  RECUPERA INFORMACOES SOBRE DESEMPENHO DOCENTE ^ //
 
-$qry_periodos_naofinalizados = 'SELECT DISTINCT o.ref_periodo, p.descricao,p.dt_final 
-FROM disciplinas_ofer o, disciplinas_ofer_prof dp, periodos p 
-WHERE dp.ref_professor = '. $sa_ref_pessoa .' AND o.id = dp.ref_disciplina_ofer 
+$qry_periodos_naofinalizados = 'SELECT DISTINCT o.ref_periodo, p.descricao,p.dt_final
+FROM disciplinas_ofer o, disciplinas_ofer_prof dp, periodos p
+WHERE dp.ref_professor = '. $sa_ref_pessoa .' AND o.id = dp.ref_disciplina_ofer
 AND o.fl_digitada = \'f\' AND o.is_cancelada = \'0\'
 AND p.id = o.ref_periodo ORDER BY p.dt_final DESC;';
 $periodos_abertos = $conn->get_all($qry_periodos_naofinalizados);
@@ -112,7 +112,7 @@ $msg_diarios_abertos = '';
 if (count($periodos_encerrados) > 0) {
 	$msg_diarios_abertos = 'No(s) período(s) '. implode(', ',$periodos_encerrados);
 	$msg_diarios_abertos .= ', já encerrado(s), existe(m) ' . $diarios_abertos;
-	$msg_diarios_abertos .= ' diário(s) em aberto que não foi/foram devidamente preenchido(s), por favor verifique e providencie isto!';
+	$msg_diarios_abertos .= ' diário(s) em aberto que não esta(m) devidamente marcado(s) como preenchido(s), por favor verifique e providencie isto!';
 }
 
 ?>
@@ -203,15 +203,15 @@ foreach($diarios as $row3) :
 
 		if($fl_digitada == 't') {
         	$fl_situacao = '<font color="blue"><b>Preenchido</b></font>';
-			$acao_situacao = 'Desmarcar';			
+			$acao_situacao = 'Desmarcar';
     	}
-		
+
 		if($fl_finalizada == 't') {
             $fl_situacao = '<font color="red"><b>Fechado</b></font>';
         }
 
 	}
-	
+
 	$fl_encerrado = ($fl_finalizada == 't')  ? 1 : 0;
 
     $opcoes_diario = '';
