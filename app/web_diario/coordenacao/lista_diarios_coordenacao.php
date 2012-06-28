@@ -219,6 +219,8 @@ $i = 0;
 $r1 = '#FFFFFF';
 $r2 = '#FFFFF0';
 
+$msg_diarios_aberto = '';
+
 foreach($diarios as $row3) :
 
 	$descricao_disciplina = $row3["descricao_extenso"];
@@ -257,8 +259,8 @@ foreach($diarios as $row3) :
 			$fl_opcoes = 1;
         }
         else {
-          $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'marca_fechado\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">fechado para lan&ccedil;amentos</a><br /><br />';
-          $fl_opcoes = 1;
+			$opcoes_diario .= '<a href="#" onclick="enviar_diario(\'marca_fechado\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">fechado para lan&ccedil;amentos</a><br /><br />';
+			$fl_opcoes = 1;
 		}
     }
 
@@ -279,7 +281,7 @@ foreach($diarios as $row3) :
 
     $cont = $i + 1;
     $rcolor = (($i % 2) == 0) ? $r1 : $r2;
-
+	
 ?>
 
 	<tr bgcolor="<?=$rcolor?>">
@@ -305,6 +307,7 @@ foreach($diarios as $row3) :
     $i++;
 
     endforeach;
+	if(!empty($msg_diarios_aberto)) echo $msg_diarios_aberto;
 ?>
 </table>
 <br />
