@@ -2947,24 +2947,33 @@ ALTER TABLE contratos ADD COLUMN prontuario character varying(20);
 
 ALTER TABLE ONLY contratos
     ADD CONSTRAINT contratos_ref_pessoa_fkey FOREIGN KEY (ref_pessoa) REFERENCES pessoas(id) MATCH FULL;
-    
+
 ALTER TABLE ONLY contratos
     ADD CONSTRAINT contratos_ref_campus_fkey FOREIGN KEY (ref_campus) REFERENCES campus(id) MATCH FULL;
 
 ALTER TABLE ONLY contratos
     ADD CONSTRAINT contratos_ref_curso_fkey FOREIGN KEY (ref_curso) REFERENCES cursos(id) MATCH FULL;
-    
+
 ALTER TABLE ONLY contratos
     ADD CONSTRAINT contratos_prontuario_ref_pessoa_ref_campus_fkey FOREIGN KEY (prontuario,ref_pessoa,ref_campus) REFERENCES pessoa_prontuario_campus(prontuario,ref_pessoa,ref_campus) MATCH SIMPLE;
 
 
 -- git commit 68fe7b8
 CREATE OR REPLACE FUNCTION get_num_matriculados(integer) RETURNS bigint
-    AS $_$select count(*) 
-        from matricula 
-        where 
-          ref_disciplina_ofer = $1 and 
+    AS $_$select count(*)
+        from matricula
+        where
+          ref_disciplina_ofer = $1 and
           dt_cancelamento is null and
           ref_motivo_matricula = 0; $_$
     LANGUAGE sql;
 
+
+-- git commit bea62d4
+DROP FUNCTION IF EXISTS nota_distribuida(integer);
+CREATE OR REPLACE FUNCTION nota_distribuida(integer) RETURNS double precision
+    AS $_$select sum(nota_distribuida)
+        from diario_formulas
+        where
+            grupo ilike '%-' || $1$_$
+    LANGUAGE sql;
