@@ -94,7 +94,7 @@ $levantamento_docente = $conn->get_all($sql_levantamento_docente);
 $num_levantamento = count($levantamento_docente);
 // ^  RECUPERA INFORMACOES SOBRE DESEMPENHO DOCENTE ^ //
 
-$qry_periodos_naofinalizados = 'SELECT DISTINCT o.ref_periodo, p.descricao,p.dt_final
+$qry_periodos_naofinalizados = 'SELECT DISTINCT o.id, o.ref_periodo, p.descricao,p.dt_final
 FROM disciplinas_ofer o, disciplinas_ofer_prof dp, periodos p
 WHERE dp.ref_professor = '. $sa_ref_pessoa .' AND o.id = dp.ref_disciplina_ofer
 AND o.fl_digitada = \'f\' AND o.is_cancelada = \'0\'
@@ -104,7 +104,7 @@ $diarios_abertos = 0;
 $periodos_encerrados = array();
 foreach($periodos_abertos as $p) {
 	if (time() - strtotime($p['dt_final']) > 0) {
-		$periodos_encerrados[] = $p['descricao'];
+    $periodos_encerrados[$p['ref_periodo']] = $p['descricao'];
 		$diarios_abertos++;
 	}
 }
