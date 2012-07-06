@@ -42,7 +42,8 @@ if ($fl_digitada == 't') {
 											FROM
 												matricula
 											WHERE
-													ref_disciplina_ofer = $diario_id;";
+                        ref_motivo_matricula = 0 AND
+												ref_disciplina_ofer = $diario_id;";
 
 	$notas_finais = $conn->get_col($sql_notas_finais);
 
@@ -100,14 +101,14 @@ if ($fl_digitada == 't') {
 	        // MARCA O DIARIO COMO FECHADO
 	        $sql1 = "UPDATE disciplinas_ofer
 					    SET
-							  fl_finalizada = 't' 
-					    WHERE  
+							  fl_finalizada = 't'
+					    WHERE
 							  id = $diario_id;";
-	
+
 	        $conn->Execute($sql1);
-	
-	        $mensagem_fechado = 'Diário fechado com sucesso!';		    
-		    
+
+	        $mensagem_fechado = 'Diário fechado com sucesso!';
+
         }
 	  }
   }
@@ -126,5 +127,5 @@ if ($_SESSION['sa_modulo'] == 'sa_login') {
 				setTimeout("self.close()",120); </script>');
 
 }
-	
+
 ?>

@@ -48,7 +48,8 @@ if ($flag == 't') {
 											FROM
 												matricula
 											WHERE
-													ref_disciplina_ofer = $diario_id;";
+                        ref_motivo_matricula = 0 AND
+												ref_disciplina_ofer = $diario_id;";
 
 	$notas_finais = $conn->get_col($sql_notas_finais);
 

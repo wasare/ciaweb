@@ -30,16 +30,16 @@ $diarios_preenchidos = $conn->get_col($sql);
 $num_preenchidos = count($diarios_preenchidos);
 $num_fechados = 0;
 
-if($num_preenchidos == 0) {	
+if($num_preenchidos == 0) {
   echo '<script type="text/javascript">alert(\'Não existe nenhum diário preenchido para ser fechado!\');window.close();</script>';
 }
 else {
 
   $diarios_em_aberto = array();
   $sql_fecha_diarios = 'BEGIN;';
-  
+
   foreach($diarios_preenchidos as $diario) {
-  
+
     // VALIDA A NOTA FINAL DO ALUNO QUE DEVE ESTAR EM INTERVALOS DE 0,5 PONTOS
 	  $notas_fora_do_intervalo = 0;
 
@@ -48,7 +48,8 @@ else {
 											FROM
 												matricula
 											WHERE
-													ref_disciplina_ofer = $diario;";
+                        ref_motivo_matricula = 0 AND
+												ref_disciplina_ofer = $diario;";
 
 	  $notas_finais = $conn->get_col($sql_notas_finais);
 
@@ -97,7 +98,7 @@ else {
 	        // MARCA O DIARIO COMO FECHADO
 	        $sql_fecha_diarios .= "UPDATE disciplinas_ofer
 					    SET
-							  fl_finalizada = 't' 
+							  fl_finalizada = 't'
 					    WHERE
 					      fl_digitada = 't' AND
                 fl_finalizada = 'f' AND
@@ -105,26 +106,26 @@ else {
                 ref_periodo = periodo_disciplina_ofer($diario) AND
                 is_cancelada = '0' AND
 							  id = $diario;";
-							  
+
 					$num_fechados++;
-		    
+
         }
 	    }
-    }  
+    }
   }
-  
-  
-	$mensagem_fechado = '';		    
-  
+
+
+	$mensagem_fechado = '';
+
   if (count($diarios_em_aberto) > 0) {
-  
-    
+
+
     $mensagem_fechado .= '\n\nO(s) diário(s): '. implode(',', $diarios_em_aberto) .' continua(m) aberto(s) devido a alguma pendência.\n ';
-     
+
     $mensagem_fechado .= 'Feche cada um individualmente para verificar as pendências.\n\n';
-  
+
   }
-  
+
   $sql_fecha_diarios .= 'COMMIT;';
 
   $conn->Execute($sql_fecha_diarios);
@@ -142,5 +143,5 @@ else {
     echo '<script type="text/javascript"> alert(\''. $mensagem_fechado . $num_fechados .' diário(s) fechado(s) com sucesso!\'); </script>';
   }
 }
-	
+
 ?>
