@@ -44,6 +44,18 @@ $sessao->destroy();
                 margin: 10px 5px 10px 5px;
             }
         </style>
+		<SCRIPT language="JavaScript">
+		<!--
+			if ((screen.width<=640))
+			{
+				//
+			}
+			else
+			{
+				window.location="../index.php";
+			}
+			//-->
+		</SCRIPT>
 		<?php include("../includes/topoMobile.html"); ?>
     </head>
 
