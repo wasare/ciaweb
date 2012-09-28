@@ -29,6 +29,7 @@ WHERE
     f.id = a.ref_contrato
 ;';
 
+
 $aluno = $aluno_id;
 $data = date("01/01/2006");
 
@@ -81,6 +82,7 @@ $curso = '';
     for($i = 0; $i < count($arr_curso) ; $i++) {
         echo '<tr><td><b>';
         echo 'Prontu&aacute;rio: </b>'. $arr_curso[$i]['prontuario'] .'<b><br />';
+		$prontuario = $arr_curso[$i]['prontuario'];
         echo $arr_curso[$i]['descricao_curso'].'</b><br> |  <a href=lista_notas.php?c='.$arr_curso[$i]["ref_curso"].'&p='.$arr_curso[$i]["ref_periodo"].'>'.$arr_curso[$i]["descricao"].'</a>';
 
         if ($arr_curso[$i]["ref_curso"] == $arr_curso[$i + 1]["ref_curso"] ) {
@@ -92,6 +94,15 @@ $curso = '';
             echo ' | <br><br></td></tr>';
         }
     }
+$rs_pessoa   = $conn->get_one("SELECT ref_pessoa FROM contratos where prontuario='$prontuario'");
     ?>
 </table>
+<div id="buttonprincipal">
+	<font color="black">
+		<strong>Adicione o CIAWeb no facebook:</strong><br />
+		<div style="text-align:center"><a href="https://apps.facebook.com/ifspciaweb/?page=index&user=<? echo $rs_pessoa; ?>"><img src="facebook/includes/curtir-facebook.png" alt="CIAWEB IFSP Caraguatatuba" height="60" width="100" /></a></div> <br />
+		<strong>Ou use o CIAWeb no seu smartphone atraves deste atalho por QRCode:</strong>
+		<img src="facebook/includes/URI_ciaweb_ifspcaraguata.png" alt="CIAWEB IFSP Caraguatatuba" height="210" width="210" /> 
+	</font>
+</div>
 <?php include_once('includes/rodape.htm'); ?>

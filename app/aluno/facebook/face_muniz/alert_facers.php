@@ -1,11 +1,6 @@
 <?
 $AppID          = "338115866266320";
 $AppSecret      = "3aeab59509c17ef4dfa32bf87a585211";
-
-require_once('/../../../config/configuracao.php');
-require_once('/../../../core/data/connection_factory.php');
-
-$conn = new connection_factory($param_conn_aluno);
  
 require "src/facebook.php";
 $facebook 		= new Facebook( array( "appId"  => $AppID, "secret" => $AppSecret ) );
@@ -35,7 +30,7 @@ if(count($getFacebookIds) > 0)
 		$feed = 'http://www.ifspcaraguatatuba.edu.br/feed/';
 		foreach ( simplexml_load_file($feed)->channel->item as $item ){
 			
-			$Log = $facebook->api( $getId['facebook_id'] . '/apprequests', 'POST', array('message' => "$today : Aten&ccedil&atildeo nova notícia no IFSP Car, leia: ". $item->title) );
+			$Log = $facebook->api( $getId['facebook_id'] . '/apprequests', 'POST', array('message' => "$today : Aten&ccedil&atildeo nova notícia no IFSP Car, leia: " $item->title) );
 			
 			$Data = array(
 				'message'       => $item->title,
@@ -53,6 +48,7 @@ if(count($getFacebookIds) > 0)
 	}
 }
 
-echo "IFSP CIAWeb - Rotinas diárias realizadas com sucesso!";
+echo "<script>alert('IFSP CIAWeb - Rotinas diárias realizadas com sucesso!');</script>";
 echo '<meta http-equiv="refresh" content="' . 60*60*24 . ';url=?http:ciaweb.ifspcaraguatatuba.edu.br/demo/app/aluno/facebook/alert_facers.php" />'
+break;
 ?>

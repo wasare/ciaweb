@@ -1,1 +1,4 @@
-<a href="index.php"><font color="red">Home</font></a>    <a href="boletim.php"><font color="red">Boletim</font></a>   <a href="ecad.php"><font color="red">E-CAD</font></a>    <a href="see_alerts.php"><font color="red">Mensagens</font></a>    <a href="see_alerts.php"><font color="red">TESTAR</font></a>
+<?php
+$Lista = $facebook->api($UserLogado . '/apprequests', 'GET');
+?>
+<a href="http:apps.facebook.com/ifspciaweb/?page=index"><font color="red">Home</font></a>    <a href="http:ciaweb.ifspcaraguatatuba.edu.br/app/aluno" target="_blank"><font color="red">Boletim</font></a>    <a href="http:apps.facebook.com/ifspciaweb/?page=mensagens"><font color="red">Mensagens(<?php echo count($Lista["data"]); ?>)</font></a>

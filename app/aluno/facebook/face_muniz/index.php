@@ -5,10 +5,6 @@ $AppSecret		= "3aeab59509c17ef4dfa32bf87a585211";
 require_once('AppInfo.php');
 require_once('utils.php');
 require "src/facebook.php";
-//require_once('/../../../config/configuracao.php');
-//require_once('../../../core/data/connection_factory.php');
-
-echo $conn;
 
 $facebook 		= new Facebook( array( "appId"  => $AppID, "secret" => $AppSecret ) );
 $UserLogado 	= $facebook->getUser();
@@ -27,7 +23,7 @@ if(!$UserLogado)
 	echo '<meta http-equiv="refresh" content="0;url='. $LoginUrl .'" />';
 }
 else{
-	/*$sql_getRsPessoa = 'SELECT rs_pessoa FROM acesso_aluno WHERE facebook_id='.$UserLogado;
+	$sql_getRsPessoa = 'SELECT rs_pessoa FROM acesso_aluno WHERE facebook_id='.$UserLogado;
 	$getRsPessoa = $conn->get_all($sql_getRsPessoa);
 	if(!count($getRsPessoa)>0)
 	{
@@ -41,7 +37,7 @@ else{
 		$sql_updateAcessoAluno = 'UPDATE acesso_aluno 
 									set ultimo_acesso = ' . date('d/m/Y');
 		$conn->execute($sql_updateAcessoAluno);
-	}*/
+	}
 	$basic = $facebook->api('/me');
 ?>
 <html xmlns:fb="http://ogp.me/ns/fb#" lang="en">
