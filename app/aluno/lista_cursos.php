@@ -94,13 +94,13 @@ $curso = '';
             echo ' | <br><br></td></tr>';
         }
     }
-$rs_pessoa   = $conn->get_one("SELECT ref_pessoa FROM contratos where prontuario='$prontuario'");
+$rs_pessoa = $conn->get_one("SELECT ref_pessoa FROM contratos where prontuario='1201522'");
     ?>
 </table>
-<div id="buttonprincipal">
+<div id="buttonprincipal" style="position:fixed;top:90px;right:0px;width:200px;text-align:center;text-indent:inherit;background:white;color:black;_position: absolute;>
 	<font color="black">
-		<strong>Adicione o CIAWeb no facebook:</strong><br />
-		<div style="text-align:center"><a href="https://apps.facebook.com/ifspciaweb/?page=index&user=<? echo $rs_pessoa; ?>"><img src="facebook/includes/curtir-facebook.png" alt="CIAWEB IFSP Caraguatatuba" height="60" width="100" /></a></div> <br />
+		<strong>Adicione o CIAWEB no facebook:</strong><br />
+		<div style="text-align:center"><a href="https://apps.facebook.com/ifspciaweb/?page=index&user=<?php echo $rs_pessoa; ?>"><img src="facebook/includes/curtir-facebook.png" alt="CIAWEB IFSP Caraguatatuba" height="60" width="100" /></a></div> <br />
 		<strong>Ou use o CIAWeb no seu smartphone atraves deste atalho por QRCode:</strong>
 		<img src="facebook/includes/URI_ciaweb_ifspcaraguata.png" alt="CIAWEB IFSP Caraguatatuba" height="210" width="210" /> 
 	</font>
