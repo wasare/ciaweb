@@ -117,7 +117,7 @@ nome da disciplina para detalhar os lançamentos e visualizar mais informações
 				}
                 else
                 {
-                	if($disciplina_aluno['nota_final'] < 6 || ($disciplina_aluno['num_faltas'] * 100 / $ch_realizada) >= 25)
+                	if($disciplina_aluno['nota_final'] < 6 || (($disciplina_aluno['num_faltas'] * 100 / $ch_realizada) > 25))
 					{
 						echo '<td align="center"> R </td>';
 						$situacao = "R";
