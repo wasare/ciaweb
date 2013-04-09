@@ -22,7 +22,7 @@ if (isset($_GET['id']) AND ( !is_numeric($diario['0']) OR !is_numeric($diario['1
 }
 else {
 
-	if(isset($diario['2']) &&  $diario['2'] === '1' && in_array($_GET['acao'], $Movimento) ) {
+  if(isset($diario['2']) &&  $diario['2'] === '1' && in_array($_GET['acao'], $Movimento) ) {
 
      exit('<script language="javascript" type="text/javascript">
             window.alert("ERRO! Este diário está fechado e não pode ser alterado!"); javascript:window.history.back(1);
@@ -40,7 +40,7 @@ $sql =  " SELECT DISTINCT o.id as idof, " .
            "        get_campus(ref_campus), " .
            "        ref_curso, " .
            "        curso_desc(ref_curso), " .
-           "		fl_finalizada, fl_digitada, ".
+           "        fl_finalizada, fl_digitada, ".
            "        descricao_disciplina(o.ref_disciplina) as descricao_extenso, " .
            "        ref_disciplina, " .
            "        get_num_matriculados(o.id) || '/' || num_alunos as qtde_alunos, " .
@@ -61,7 +61,7 @@ $sql3 = 'SELECT DISTINCT
                 d.descricao_disciplina,
                 d.descricao_extenso,
                 o.id as idof,
-				o.fl_finalizada,
+                o.fl_finalizada,
                 o.fl_digitada
                 FROM disciplinas_ofer_prof f, disciplinas_ofer o, disciplinas d
                 WHERE
@@ -71,7 +71,7 @@ $sql3 = 'SELECT DISTINCT
                 o.is_cancelada = \'0\' AND
                 d.id = o.ref_disciplina;';
 
-	$diarios = $conn->get_all($sql);
+  $diarios = $conn->get_all($sql);
 
    if(count($diarios) == 0)
    {
@@ -94,25 +94,23 @@ $levantamento_docente = $conn->get_all($sql_levantamento_docente);
 $num_levantamento = count($levantamento_docente);
 // ^  RECUPERA INFORMACOES SOBRE DESEMPENHO DOCENTE ^ //
 
-$qry_periodos_naofinalizados = 'SELECT DISTINCT o.id, o.ref_periodo, p.descricao,p.dt_final
+$qry_periodos_finalizados = 'SELECT DISTINCT o.id, o.ref_periodo, p.descricao,p.dt_final
 FROM disciplinas_ofer o, disciplinas_ofer_prof dp, periodos p
 WHERE dp.ref_professor = '. $sa_ref_pessoa .' AND o.id = dp.ref_disciplina_ofer
 AND o.fl_digitada = \'f\' AND o.is_cancelada = \'0\'
-AND p.id = o.ref_periodo ORDER BY p.dt_final DESC;';
-$periodos_abertos = $conn->get_all($qry_periodos_naofinalizados);
+AND p.id = o.ref_periodo AND p.dt_final < \'' . date("Y-m-d") . '\' ORDER BY p.dt_final;';
+$periodos_abertos = $conn->get_all($qry_periodos_finalizados);
 $diarios_abertos = 0;
 $periodos_encerrados = array();
 foreach($periodos_abertos as $p) {
-	if (time() - strtotime($p['dt_final']) > 0) {
     $periodos_encerrados[$p['ref_periodo']] = $p['descricao'];
-		$diarios_abertos++;
-	}
+    $diarios_abertos++;
 }
 $msg_diarios_abertos = '';
 if (count($periodos_encerrados) > 0) {
-	$msg_diarios_abertos = 'No(s) período(s) '. implode(', ',$periodos_encerrados);
-	$msg_diarios_abertos .= ', já encerrado(s), existe(m) ' . $diarios_abertos;
-	$msg_diarios_abertos .= ' diário(s) em aberto que não esta(m) devidamente marcado(s) como preenchido(s), por favor verifique e providencie isto!';
+  $msg_diarios_abertos = 'No(s) período(s) '. implode(', ',$periodos_encerrados);
+  $msg_diarios_abertos .= ', já encerrado(s), existe(m) ' . $diarios_abertos;
+  $msg_diarios_abertos .= ' diário(s) em aberto que não esta(m) devidamente marcado(s) como preenchido(s), por favor verifique e providencie isto!';
 }
 
 ?>
@@ -124,6 +122,7 @@ if (count($periodos_encerrados) > 0) {
 <link rel="stylesheet" href="<?=$BASE_URL .'public/styles/web_diario.css'?>" type="text/css">
 
 <script type="text/javascript" src="<?=$BASE_URL .'lib/prototype.js'?>"> </script>
+<script type="text/javascript" src="<?=$BASE_URL .'lib/jquery.min.js'?>"> </script>
 
 </head>
 
@@ -131,10 +130,10 @@ if (count($periodos_encerrados) > 0) {
 
 <div align="left">
 <strong>
-			<font size="4" face="Verdana, Arial, Helvetica, sans-serif">
-				Per&iacute;odo:
-				<font color="red" size="4" face="Verdana, Arial, Helvetica, sans-serif"><?=$periodo['descricao']?></font>
-			</font>
+      <font size="4" face="Verdana, Arial, Helvetica, sans-serif">
+        Per&iacute;odo:
+        <font color="red" size="4" face="Verdana, Arial, Helvetica, sans-serif"><?=$periodo['descricao']?></font>
+      </font>
 </strong>
 &nbsp;&nbsp;
 
@@ -171,10 +170,10 @@ if (count($periodos_encerrados) > 0) {
 <table cellspacing="0" cellpadding="0" class="papeleta">
     <tr bgcolor="#cccccc">
         <th align="center"><strong>Ordem</strong></th>
-		<th align="center"><b>Di&aacute;rio</b></th>
+    <th align="center"><b>Di&aacute;rio</b></th>
         <th align="center"><b>Descri&ccedil;&atilde;o</b></th>
-		<th align="center"><b>Alunos / Vagas</b></th>
-		<th align="center"><b>Turma</b></th>
+    <th align="center"><b>Alunos / Vagas</b></th>
+    <th align="center"><b>Turma</b></th>
         <th align="center"><b>Situa&ccedil;&atilde;o</b></th>
         <th align="center"><b>Op&ccedil;&otilde;es</b></th>
     </tr>
@@ -190,29 +189,29 @@ foreach($diarios as $row3) :
   $descricao_disciplina = $row3["descricao_extenso"];
   $disciplina_id = $row3["idof"];
   $diario_id = $row3["idof"];
-	$fl_finalizada = $row3['fl_finalizada'];
+  $fl_finalizada = $row3['fl_finalizada'];
   $fl_digitada = $row3['fl_digitada'];
-	$qtde_alunos = (!empty($row3['qtde_alunos'])) ? $row3['qtde_alunos'] : '-';
-	$turma = (!empty($row3['turma'])) ? $row3['turma'] : '-';
+  $qtde_alunos = (!empty($row3['qtde_alunos'])) ? $row3['qtde_alunos'] : '-';
+  $turma = (!empty($row3['turma'])) ? $row3['turma'] : '-';
 
-	if($fl_finalizada == 'f' && $fl_digitada == 'f') {
-		$fl_situacao = '<font color="green"><b>Aberto</b></font>';
-		$acao_situacao = 'Marcar';
-	}
-	else {
+  if($fl_finalizada == 'f' && $fl_digitada == 'f') {
+    $fl_situacao = '<font color="green"><b>Aberto</b></font>';
+    $acao_situacao = 'Marcar';
+  }
+  else {
 
-		if($fl_digitada == 't') {
-        	$fl_situacao = '<font color="blue"><b>Preenchido</b></font>';
-			$acao_situacao = 'Desmarcar';
-    	}
+    if($fl_digitada == 't') {
+          $fl_situacao = '<font color="blue"><b>Preenchido</b></font>';
+      $acao_situacao = 'Desmarcar';
+      }
 
-		if($fl_finalizada == 't') {
+    if($fl_finalizada == 't') {
             $fl_situacao = '<font color="red"><b>Fechado</b></font>';
         }
 
-	}
+  }
 
-	$fl_encerrado = ($fl_finalizada == 't')  ? 1 : 0;
+  $fl_encerrado = ($fl_finalizada == 't')  ? 1 : 0;
 
     $opcoes_diario = '';
     if ($fl_encerrado == 0) {
@@ -249,7 +248,8 @@ foreach($diarios as $row3) :
       <td align="center"><?=$turma?></td>
       <td align="center"><?=$fl_situacao?></td>
       <td align="center">
-        <a href="#" id="<?=$diario_id . '_pane'?>" title="clique para visualizar / ocultar">Acessar</a>
+        <a href="#<?=$diario_id?>" id="d_<?=$diario_id . '_pane'?>" title="clique para visualizar / ocultar">Acessar</a>
+        <a name="<?=$diario_id?>"></a>
         <!-- panel com as opções do diário // inicio //-->
         <div id="diario_<?=$diario_id?>_pane" style="display:none; margin: 1.2em; padding: 1em; background-color: <?=$op_color?>" class="opcoes_web_diario">
             <?=$sem_opcoes . $opcoes_diario?>
@@ -261,7 +261,7 @@ foreach($diarios as $row3) :
 
 <?php
 
-   	$i++;
+    $i++;
 
   endforeach;
   echo $msg;
@@ -295,20 +295,29 @@ foreach($diarios as $row3) :
 <?php endif; ?>
 
 <script language="javascript" type="text/javascript">
-
-    $('periodos_professor').observe('click', function() { $('periodos_professor_pane').toggle(); });
+  var $j = jQuery.noConflict();
+  jQuery(document).ready(function() {
+     $j('#periodos_professor').click(function() { $j('#periodos_professor_pane').toggle(); });
 
     <?php if ($num_levantamento > 0) : ?>
-        $('desempenho_professor').observe('click', function() { $('desempenho_professor_pane').toggle(); });
-    <?php endif; ?>
-    <?php
+        $j('#desempenho_professor').click(function() { $j('#desempenho_professor_pane').toggle(); });
+    <?php 
+        endif;
+        
         foreach($diarios as $row3) :
-            $diario_id = $row3['idof'];
+          $diario_id = $row3['idof'];
+    ?>          
+          $j('#d_<?=$diario_id . '_pane'?>').click(function() {
+            $j('[id^="diario_"][id$="_pane"]').toggle(false);
+            $j('#diario_<?=$diario_id?>_pane').toggle();
+            $j('[id^="d_"][id$="_pane"]').show();
+            $j('#d_<?=$diario_id?>_pane').hide();
+          });
+          
+    <?php
+        endforeach;
     ?>
-    $('<?=$diario_id . '_pane'?>').observe('click', function() { $('diario_<?=$diario_id?>_pane').toggle(); });
-<?php
-   endforeach;
-?>
+  });
 </script>
 </div>
 

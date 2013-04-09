@@ -79,6 +79,7 @@ $class_diarios = ($is_professor) ? ' class="active"' : '';
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="<?=$BASE_URL .'public/styles/web_diario.css'?>" type="text/css">
 
+<script type="text/javascript" src="<?=$BASE_URL .'lib/jquery.min.js'?>"> </script>
 <script type="text/javascript" src="<?=$BASE_URL .'lib/prototype.js'?>"> </script>
 <script type="text/javascript" src="<?=$BASE_URL .'lib/tabbed_pane.js'?>"> </script>
 <script type="text/javascript" src="<?=$BASE_URL .'app/web_diario/web_diario.js'?>"> </script>

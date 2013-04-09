@@ -21,10 +21,10 @@ $periodo = $conn->get_row($qryPeriodo);
 $cursos = '';
 $cont = 1;
 foreach($_SESSION['web_diario_cursos_coordenacao'] as $c) {
-	$cursos .= $c;
-    if(count($_SESSION['web_diario_cursos_coordenacao']) > $cont)
-		$cursos .= ',';
-	$cont++;
+  $cursos .= $c;
+    if (count($_SESSION['web_diario_cursos_coordenacao']) > $cont)
+      $cursos .= ',';
+  $cont++;
 }
 
 $sql_cursos = " SELECT DISTINCT
@@ -47,25 +47,25 @@ $qry_periodos = 'SELECT DISTINCT o.ref_periodo,p.descricao,p.dt_inicial FROM dis
 $periodos = $conn->get_all($qry_periodos);
 // ^ RECUPERA INFORMACOES SOBRE oS PERIODOS DA COORDENACAO ^ //
 
-$qry_periodos_naofinalizados = 'SELECT DISTINCT o.ref_periodo, o.id, p.descricao, p.dt_final
+$qry_periodos_finalizados = 'SELECT DISTINCT o.ref_periodo, o.id, p.descricao, p.dt_final
 FROM disciplinas_ofer o, periodos p
-WHERE  o.ref_periodo = p.id AND (o.fl_finalizada = \'f\' OR o.fl_digitada = \'f\') AND o.is_cancelada = \'0\'  AND o.ref_curso
-IN (SELECT DISTINCT ref_curso FROM coordenador WHERE ref_professor = '. $sa_ref_pessoa .');';
-$periodos_abertos = $conn->get_all($qry_periodos_naofinalizados);
+WHERE  o.ref_periodo = p.id AND (o.fl_finalizada = \'f\' OR o.fl_digitada = \'f\') AND o.is_cancelada = \'0\'  
+AND p.dt_final < \'' . date("Y-m-d") . '\' AND o.ref_curso
+IN (SELECT DISTINCT ref_curso FROM coordenador WHERE ref_professor = '. $sa_ref_pessoa .') 
+ ORDER BY p.dt_final;';
+$periodos_abertos = $conn->get_all($qry_periodos_finalizados);
 
 $periodos_encerrados = array();
 $diario_naofinalizado = 0;
 foreach($periodos_abertos as $p) {
-	if (time() - strtotime($p['dt_final']) > 0) {
-		$periodos_encerrados['ref_periodo'] = $p['descricao'];
-		$diario_naofinalizado++;
-	}
+    $periodos_encerrados[$p['ref_periodo']] = $p['descricao'];
+    $diario_naofinalizado++;
 }
 $msg_diarios_abertos = '';
 if (count($periodos_encerrados) > 0 || empty($msg_diarios_abertos)) {
-	$msg_diarios_abertos = 'No(s) período(s) '. implode(', ',$periodos_encerrados);
-	$msg_diarios_abertos .= ', já encerrado(s), existe(m) ' . $diario_naofinalizado;
-	$msg_diarios_abertos .= ' diário(s) em aberto e/ou preenchido(s) que devia(m) estar devidamente fechado(s), por favor verifique e providencie o(s) seu(s) fechamento(s)!';
+  $msg_diarios_abertos = 'No(s) período(s) '. implode(', ',$periodos_encerrados);
+  $msg_diarios_abertos .= ', já encerrado(s), existe(m) ' . $diario_naofinalizado;
+  $msg_diarios_abertos .= ' diário(s) em aberto e/ou preenchido(s) que devia(m) estar devidamente fechado(s), por favor verifique e providencie o(s) seu(s) fechamento(s)!';
 }
 ?>
 
@@ -129,7 +129,7 @@ if (count($periodos_encerrados) > 0 || empty($msg_diarios_abertos)) {
 
 <?php
     foreach($cursos as $c) {
-		$onclick = 'onclick="abrir(\''. $IEnome .' - web diário\', \'requisita.php?do=lista_diarios_coordenacao&id='. $c['ref_curso'] .'\');"';
+    $onclick = 'onclick="abrir(\''. $IEnome .' - web diário\', \'requisita.php?do=lista_diarios_coordenacao&id='. $c['ref_curso'] .'\');"';
         echo '<a href="#" title="Curso '. $c['curso'] .'" alt="Curso '. $c['curso'] .'" '. $onclick .'>'. $c['curso'] .'</a><br />';
     }
 ?>

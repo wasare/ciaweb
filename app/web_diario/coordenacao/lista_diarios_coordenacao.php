@@ -12,11 +12,11 @@ $diario_id = (int) $_GET['diario_id'];
 if (empty($periodo_id) OR $curso_id == 0) {
 
     if ($diario_id == 0) {
-		exit('<script language="javascript">
+    exit('<script language="javascript">
                 window.alert("ERRO! Primeiro informe um período e um curso ou um diário!");
-				window.close();
-		</script>');
-	}
+        window.close();
+    </script>');
+  }
 
     if (!is_diario($diario_id))
         exit('<script language="javascript" type="text/javascript">window.alert("ERRO! Diario inexistente ou cancelado!");window.close();</script>');
@@ -25,8 +25,8 @@ if (empty($periodo_id) OR $curso_id == 0) {
 
 // VERIFICA SE O USUARIO TEM DIREITO DE ACESSO
 $sql_coordena = ' SELECT count(*)
-							FROM coordenador
-							WHERE ref_professor = '. $sa_ref_pessoa .' AND ';
+              FROM coordenador
+              WHERE ref_professor = '. $sa_ref_pessoa .' AND ';
 
 if ($diario_id > 0)
   $sql_coordena .= ' ref_curso = '. get_curso($diario_id) .';';
@@ -43,12 +43,12 @@ if ($coordenacao == 0) {
 // ^ VERIFICA SE O USUARIO TEM DIREITO DE ACESSO ^ /
 
 if ($diario_id == 0) {
-	$qryCurso = 'SELECT DISTINCT id, descricao as nome FROM cursos WHERE id = '. $curso_id.';';
-	$qryPeriodo = 'SELECT id, descricao FROM periodos WHERE id = \''. $periodo_id.'\';';
+  $qryCurso = 'SELECT DISTINCT id, descricao as nome FROM cursos WHERE id = '. $curso_id.';';
+  $qryPeriodo = 'SELECT id, descricao FROM periodos WHERE id = \''. $periodo_id.'\';';
 }
 else {
-	$qryCurso = 'SELECT c.id, c.descricao as nome FROM cursos c, disciplinas_ofer d WHERE d.ref_curso = c.id AND d.id = '. $diario_id .';';
-	$qryPeriodo = 'SELECT p.id, p.descricao FROM periodos p, disciplinas_ofer d WHERE d.ref_periodo = p.id AND d.id = '. $diario_id .';';
+  $qryCurso = 'SELECT c.id, c.descricao as nome FROM cursos c, disciplinas_ofer d WHERE d.ref_curso = c.id AND d.id = '. $diario_id .';';
+  $qryPeriodo = 'SELECT p.id, p.descricao FROM periodos p, disciplinas_ofer d WHERE d.ref_periodo = p.id AND d.id = '. $diario_id .';';
 }
 
 
@@ -56,43 +56,43 @@ $curso = $conn->get_row($qryCurso);
 $periodo = $conn->get_row($qryPeriodo);
 
 
-	$sql =  " SELECT id as idof, " .
+  $sql =  " SELECT id as idof, " .
            "        ref_campus, " .
            "        get_campus(ref_campus), " .
            "        ref_curso, " .
            "        curso_desc(ref_curso), " .
-           "		fl_finalizada, fl_digitada, ".
+           "    fl_finalizada, fl_digitada, ".
            "        descricao_disciplina(ref_disciplina) as descricao_extenso, " .
            "        ref_disciplina, " .
            "        get_num_matriculados(id) || '/' || num_alunos as qtde_alunos, " .
            "        turma, " .
            "        ref_periodo_turma, " .
-		   "     CASE WHEN professor_disciplina_ofer_todos(id) = '' THEN '<font color=\"red\">sem professor</font>' " .
-		   "			ELSE professor_disciplina_ofer_todos(id) " .
-		   "		END AS \"professor\" " .
+       "     CASE WHEN professor_disciplina_ofer_todos(id) = '' THEN '<font color=\"red\">sem professor</font>' " .
+       "      ELSE professor_disciplina_ofer_todos(id) " .
+       "    END AS \"professor\" " .
            " FROM disciplinas_ofer " .
            " WHERE is_cancelada = '0' ";
 
 
-			if ($diario_id > 0)
+      if ($diario_id > 0)
                 $sql .= " AND id = ". $diario_id;
-			else
-				if (!empty($periodo_id) AND is_numeric($curso_id))
-				{
-					$sql .= " AND ref_periodo = '". $periodo_id ."'";
-					$sql .= " AND ref_curso = ". $curso_id;
-				}
+      else
+        if (!empty($periodo_id) AND is_numeric($curso_id))
+        {
+          $sql .= " AND ref_periodo = '". $periodo_id ."'";
+          $sql .= " AND ref_curso = ". $curso_id;
+        }
 
-			$sql = 'SELECT * from ('. $sql .') AS T1 ORDER BY lower(to_ascii(descricao_extenso,\'LATIN1\'));';
+      $sql = 'SELECT * from ('. $sql .') AS T1 ORDER BY lower(to_ascii(descricao_extenso,\'LATIN1\'));';
 
 
    $diarios = $conn->get_all($sql);
 
    if (count($diarios) == 0) {
-		exit('<script language="javascript">
+    exit('<script language="javascript">
                 window.alert("Nenhum diário encontrado para o filtro selecionado!");
                 window.close();
-		</script>');
+    </script>');
    }
 
 ?>
@@ -120,7 +120,7 @@ $periodo = $conn->get_row($qryPeriodo);
             }
         </script>
 
-
+<script type="text/javascript" src="<?=$BASE_URL .'lib/jquery.min.js'?>"> </script>
 </head>
 
 <body>
@@ -202,12 +202,12 @@ $periodo = $conn->get_row($qryPeriodo);
 
 <table cellspacing="0" cellpadding="0" class="papeleta">
     <tr bgcolor="#cccccc">
-	    <th align="center"><strong>Ordem</strong></th>
-		<th align="center"><b>Di&aacute;rio</b></th>
+      <th align="center"><strong>Ordem</strong></th>
+    <th align="center"><b>Di&aacute;rio</b></th>
         <th align="center"><b>Descri&ccedil;&atilde;o</b></th>
-		<th align="center"><b>Alunos / Vagas</b></th>
-		<th align="center"><b>Turma</b></th>
-		<th align="center"><b>Professor(es)</b></th>
+    <th align="center"><b>Alunos / Vagas</b></th>
+    <th align="center"><b>Turma</b></th>
+    <th align="center"><b>Professor(es)</b></th>
         <th align="center"><b>Situa&ccedil;&atilde;o</b></th>
         <th align="center"><b>Op&ccedil;&otilde;es</b></th>
     </tr>
@@ -223,14 +223,14 @@ $msg_diarios_aberto = '';
 
 foreach($diarios as $row3) :
 
-	$descricao_disciplina = $row3["descricao_extenso"];
+  $descricao_disciplina = $row3["descricao_extenso"];
     $disciplina_id = $row3["idof"];
     $diario_id = $row3["idof"];
-	$fl_finalizada = $row3['fl_finalizada'];
+  $fl_finalizada = $row3['fl_finalizada'];
     $fl_digitada = $row3['fl_digitada'];
-	$professor = $row3['professor'];
-	$qtde_alunos = $row3['qtde_alunos'];
-	$turma = $row3['turma'];
+  $professor = $row3['professor'];
+  $qtde_alunos = $row3['qtde_alunos'];
+  $turma = $row3['turma'];
 
     $diarios_pane[] = $diario_id;
 
@@ -238,13 +238,13 @@ foreach($diarios as $row3) :
 
     $opcoes_diario = '';
 
-	$fl_professor = TRUE;
-	if ( preg_match('/sem professor/i', $professor) )
-		$fl_professor = FALSE;
+  $fl_professor = TRUE;
+  if ( preg_match('/sem professor/i', $professor) )
+    $fl_professor = FALSE;
 
-	$fl_opcoes = 0;
+  $fl_opcoes = 0;
 
-	if($fl_finalizada == 'f' && $fl_digitada == 'f') {
+  if($fl_finalizada == 'f' && $fl_digitada == 'f') {
         $fl_situacao = '<font color="green"><b>Aberto</b></font>';
     }
     else {
@@ -256,12 +256,12 @@ foreach($diarios as $row3) :
         if($fl_finalizada == 't') {
             $fl_situacao = '<font color="red"><b>Fechado</b></font>';
             $fl_encerrado = 1;
-			$fl_opcoes = 1;
+      $fl_opcoes = 1;
         }
         else {
-			$opcoes_diario .= '<a href="#" onclick="enviar_diario(\'marca_fechado\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">fechado para lan&ccedil;amentos</a><br /><br />';
-			$fl_opcoes = 1;
-		}
+      $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'marca_fechado\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">fechado para lan&ccedil;amentos</a><br /><br />';
+      $fl_opcoes = 1;
+    }
     }
 
     if ($fl_professor === TRUE) {
@@ -273,18 +273,18 @@ foreach($diarios as $row3) :
       $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'carometro\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Car&ocirc;metro</a><br />';
       $opcoes_diario .= '<a href="#" onclick="enviar_diario(\'diario_classe\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">Diário de Classe (A3)</a><br />';
       //$opcoes_diario .= '<a href="#" onclick="enviar_diario(\'caderno_chamada\',\''. $diario_id .'\',\''. $fl_encerrado .'\',\''. $BASE_URL .'\',\''. $IEnome .'\');">caderno de chamada</a>';
-	  $fl_opcoes = 1;
-	}
+    $fl_opcoes = 1;
+  }
 
 
-	$sem_opcoes = ($fl_opcoes == 0) ? '<font color="red">Nenhuma op&ccedil;&atilde;o dispon&iacute;vel.</font>' : '';
+  $sem_opcoes = ($fl_opcoes == 0) ? '<font color="red">Nenhuma op&ccedil;&atilde;o dispon&iacute;vel.</font>' : '';
 
     $cont = $i + 1;
     $rcolor = (($i % 2) == 0) ? $r1 : $r2;
-	
+  
 ?>
 
-	<tr bgcolor="<?=$rcolor?>">
+  <tr bgcolor="<?=$rcolor?>">
       <td align="center"><?=$cont?></td>
       <td align="center"><?=$diario_id?></td>
       <td><?=$descricao_disciplina?></td>
@@ -293,7 +293,8 @@ foreach($diarios as $row3) :
       <td><?=$professor?></td>
       <td align="center"><?=$fl_situacao?></td>
       <td align="center">
-        <a href="#" id="<?=$diario_id . '_pane'?>" title="clique para visualizar / ocultar">Acessar</a>
+        <a href="#<?=$diario_id?>" id="d_<?=$diario_id . '_pane'?>" title="clique para visualizar / ocultar">Acessar</a>
+        <a name="<?=$diario_id?>"></a>
         <!-- panel com as opções do diário // inicio //-->
         <div id="diario_<?=$diario_id?>_pane" style="display:none; margin: 1.2em; padding: 1em; background-color: <?=$op_color?>" class="opcoes_web_diario">
             <?=$sem_opcoes . $opcoes_diario?>
@@ -307,7 +308,7 @@ foreach($diarios as $row3) :
     $i++;
 
     endforeach;
-	if(!empty($msg_diarios_aberto)) echo $msg_diarios_aberto;
+  if(!empty($msg_diarios_aberto)) echo $msg_diarios_aberto;
 ?>
 </table>
 <br />
@@ -315,18 +316,26 @@ foreach($diarios as $row3) :
 &nbsp;&nbsp;
 <a href="#" onclick="javascript:window.close();">Fechar</a>
 </form>
+
 <script language="javascript" type="text/javascript">
+  var $j = jQuery.noConflict();
+  jQuery(document).ready(function() {
+     $j('#notas_faltas').click(function() { $j('#notas_faltas_pane').toggle(); });
 
- $('notas_faltas').observe('click', function() { $('notas_faltas_pane').toggle(); });
-
-<?php
-    foreach($diarios_pane as $diario_id) :
-?>
-      $('<?=$diario_id . '_pane'?>').observe('click', function() { $('diario_<?=$diario_id?>_pane').toggle(); });
-<?php
-   endforeach;
-?>
-
+    <?php         
+        foreach($diarios_pane as $diario_id) :
+    ?>          
+          $j('#d_<?=$diario_id . '_pane'?>').click(function() {
+            $j('[id^="diario_"][id$="_pane"]').toggle(false);
+            $j('#diario_<?=$diario_id?>_pane').toggle();
+            $j('[id^="d_"][id$="_pane"]').show();
+            $j('#d_<?=$diario_id?>_pane').hide();
+          });
+          
+    <?php
+        endforeach;
+    ?>
+  });
 </script>
 
 </div>

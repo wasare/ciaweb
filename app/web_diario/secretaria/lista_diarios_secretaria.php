@@ -25,8 +25,8 @@ if (empty($periodo_id) OR ($curso_id == 0 AND $professor_id == 0)) {
     if ($diario_id == 0) {
         exit('<script language="javascript">
                 window.alert("ERRO! Primeiro informe um diário ou um período + um curso e / ou + um professor!");
-		window.history.back(-1);
-		</script>');
+    window.history.back(-1);
+    </script>');
     }
 
     if (!is_diario($diario_id))
@@ -56,15 +56,15 @@ if (is_numeric($professor_id) && $professor_id != 0) {
             "        get_campus(A.ref_campus), " .
             "        A.ref_curso, " .
             "        curso_desc(A.ref_curso), " .
-            "		A.fl_finalizada, A.fl_digitada, ".
+            "        A.fl_finalizada, A.fl_digitada, ".
             "        descricao_disciplina(A.ref_disciplina) as descricao_extenso, " .
             "        A.ref_disciplina, " .
             "        get_num_matriculados(A.id) || '/' || A.num_alunos as qtde_alunos, " .
             "        A.turma, " .
             "        A.ref_periodo_turma, " .
             "     CASE WHEN professor_disciplina_ofer_todos(A.id) = '' THEN '<font color=\"red\">sem professor</font>' " .
-            "			ELSE professor_disciplina_ofer_todos(A.id) " .
-            "		END AS \"professor\" " .
+            "     ELSE professor_disciplina_ofer_todos(A.id) " .
+            "   END AS \"professor\" " .
             " FROM disciplinas_ofer A FULL OUTER JOIN disciplinas_ofer_prof B ON (A.id = B.ref_disciplina_ofer) " .
             " WHERE A.is_cancelada = '0' ";
 } else {
@@ -74,7 +74,7 @@ if (is_numeric($professor_id) && $professor_id != 0) {
             "        get_campus(A.ref_campus), " .
             "        A.ref_curso, " .
             "        curso_desc(A.ref_curso), " .
-            "               A.fl_finalizada, A.fl_digitada, ".
+            "        A.fl_finalizada, A.fl_digitada, ".
             "        descricao_disciplina(A.ref_disciplina) as descricao_extenso, " .
             "        A.ref_disciplina, " .
             "        get_num_matriculados(A.id) || '/' || A.num_alunos as qtde_alunos, " .
@@ -106,7 +106,7 @@ if (count($diarios) == 0) {
     exit('<script language="javascript">
                 window.alert("Nenhum diário encontrado para o filtro selecionado!");
                 window.history.back(-1);
-		</script>');
+    </script>');
 }
 
 ?>
@@ -120,7 +120,9 @@ if (count($diarios) == 0) {
 
         <script type="text/javascript" src="<?=$BASE_URL .'lib/prototype.js'?>"> </script>
         <script type="text/javascript" src="<?=$BASE_URL .'app/web_diario/web_diario.js'?>"> </script>
-
+        <script type="text/javascript" src="<?=$BASE_URL .'lib/jquery.min.js'?>"> </script>
+        <script type="text/javascript" src="<?=$BASE_URL .'lib/jquery.floatheader.min.js'?>"></script>
+    </head>
     <body>
 
         <br />
@@ -155,8 +157,9 @@ if (count($diarios) == 0) {
 
             <form id="change_acao" name="change_acao" method="get" action="">
 
-                <table cellspacing="0" cellpadding="0" class="papeleta">
-                    <tr bgcolor="#cccccc">
+                <table cellspacing="0" cellpadding="0" class="papeleta" id="diarios_secretaria">
+                    <thead>
+                    <tr bgcolor="#cccccc" class="header">
                         <th align="center"><strong>Ordem</strong></th>
                         <th align="center"><b>Di&aacute;rio</b></th>
                         <th align="center"><b>Descri&ccedil;&atilde;o</b></th>
@@ -167,7 +170,8 @@ if (count($diarios) == 0) {
                         <th align="center"><b>Situa&ccedil;&atilde;o</b></th>
                         <th align="center"><b>Op&ccedil;&otilde;es</b></th>
                     </tr>
-
+                    </thead>
+                    <tbody>
                     <?php
 
                     $i = 0;
@@ -251,7 +255,8 @@ if (count($diarios) == 0) {
                         <td align="center"><?=$campus?></td>
                         <td align="center"><?=$fl_situacao?></td>
                         <td align="center">
-                            <a href="#" id="<?=$diario_id . '_pane'?>" title="clique para visualizar / ocultar">Acessar</a>
+                            <a href="#<?=$diario_id?>" id="d_<?=$diario_id . '_pane'?>" title="clique para visualizar / ocultar">Acessar</a>
+                            <a name="<?=$diario_id?>"></a>
                             <!-- panel com as opções do diário // inicio //-->
                             <div id="diario_<?=$diario_id?>_pane" style="display:none; margin: 1.2em; padding: 1em; background-color: <?=$op_color?>" class="opcoes_web_diario">
                                     <?=$sem_opcoes . $opcoes_diario?>
@@ -266,6 +271,7 @@ if (count($diarios) == 0) {
 
                     endforeach;
                     ?>
+                  </tbody>
                 </table>
 
                 <br />
@@ -273,16 +279,33 @@ if (count($diarios) == 0) {
                 <input type="button" value="Fechar todos os diários preenchidos" onclick="fecha_todos_secretaria('<?=$diario_id?>','<?=$IEnome?>');" />
 
             </form>
-            <script language="javascript" type="text/javascript">
 
-<?php
-foreach($diarios_pane as $diario_id) :
+<script language="javascript" type="text/javascript">
+  var $j = jQuery.noConflict();
+  jQuery(document).ready(function() {
+
+    $j('#diarios_secretaria').floatHeader({
+        fadeIn: 250,
+        fadeOut: 250
+      });
+
+    <?php
+        foreach($diarios_pane as $diario_id) :
     ?>
-        $('<?=$diario_id . '_pane'?>').observe('click', function() { $('diario_<?=$diario_id?>_pane').toggle(); $('diario_<?=$diario_id?>_pane').focus(); });
-<?php
-endforeach;
-?>
-            </script>
+          $j('#d_<?=$diario_id . '_pane'?>').click(function() {
+            $j('[id^="diario_"][id$="_pane"]').toggle(false);
+            $j('#diario_<?=$diario_id?>_pane').toggle();
+            $j('[id^="d_"][id$="_pane"]').show();
+            $j('#d_<?=$diario_id?>_pane').hide();
+          });
+
+    <?php
+        endforeach;
+    ?>
+  });
+</script>
+
+
         </div>
         <br /><br /><br /><br />
     </body>
