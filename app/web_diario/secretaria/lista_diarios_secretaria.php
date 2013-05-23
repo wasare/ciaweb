@@ -62,11 +62,14 @@ if (is_numeric($professor_id) && $professor_id != 0) {
             "        get_num_matriculados(A.id) || '/' || A.num_alunos as qtde_alunos, " .
             "        A.turma, " .
             "        A.ref_periodo_turma, " .
+            "        get_turno_(C.turno) as turno, " .
             "     CASE WHEN professor_disciplina_ofer_todos(A.id) = '' THEN '<font color=\"red\">sem professor</font>' " .
             "     ELSE professor_disciplina_ofer_todos(A.id) " .
             "   END AS \"professor\" " .
-            " FROM disciplinas_ofer A FULL OUTER JOIN disciplinas_ofer_prof B ON (A.id = B.ref_disciplina_ofer) " .
-            " WHERE A.is_cancelada = '0' ";
+            " FROM disciplinas_ofer A FULL OUTER JOIN disciplinas_ofer_prof B ON (A.id = B.ref_disciplina_ofer),  " .
+            "      disciplinas_ofer_compl C  " .
+            " WHERE A.is_cancelada = '0' AND " .
+            "       A.id = C.ref_disciplina_ofer";
 } else {
 
     $sql =  " SELECT DISTINCT A.id as idof, " .
@@ -79,12 +82,14 @@ if (is_numeric($professor_id) && $professor_id != 0) {
             "        A.ref_disciplina, " .
             "        get_num_matriculados(A.id) || '/' || A.num_alunos as qtde_alunos, " .
             "        A.turma, " .
+            "        get_turno_(C.turno) as turno, " .
             "        A.ref_periodo_turma, " .
             "     CASE WHEN professor_disciplina_ofer_todos(A.id) = '' THEN '<font color=\"red\">sem professor</font>' " .
             "                       ELSE professor_disciplina_ofer_todos(A.id) " .
             "               END AS \"professor\" " .
-            " FROM disciplinas_ofer A " .
-            " WHERE A.is_cancelada = '0' ";
+            " FROM disciplinas_ofer A, disciplinas_ofer_compl C " .
+            " WHERE A.is_cancelada = '0' AND " .
+            "       A.id = C.ref_disciplina_ofer";
 }
 
 if ($diario_id > 0)
@@ -96,7 +101,6 @@ else
        $sql .= (is_numeric($professor_id) && $professor_id != 0) ? " AND B.ref_professor = ". $professor_id : " ";
     }
 
-//die($sql);
 $sql = 'SELECT * from ('. $sql .') AS T1 ORDER BY lower(to_ascii(descricao_extenso,\'LATIN1\'));';
 
 
@@ -165,6 +169,7 @@ if (count($diarios) == 0) {
                         <th align="center"><b>Descri&ccedil;&atilde;o</b></th>
                         <th align="center"><b>Alunos / Vagas</b></th>
                         <th align="center"><b>Turma</b></th>
+                        <th align="center"><b>Turno</b></th>
                         <th align="center"><b>Professor(es)</b></th>
                         <th align="center"><b>Campus</b></th>
                         <th align="center"><b>Situa&ccedil;&atilde;o</b></th>
@@ -189,7 +194,8 @@ if (count($diarios) == 0) {
                         $professor = $row3['professor'];
                         $campus = $row3['get_campus'];
                         $qtde_alunos = $row3['qtde_alunos'];
-                        $turma = $row3['turma'];
+                        $turma = (!empty($row3['turma'])) ? $row3['turma'] : '-';
+                        $turno = (!empty($row3['turno'])) ? $row3['turno'] : '-'; 
 
                         $diarios_pane[] = $diario_id;
 
@@ -251,6 +257,7 @@ if (count($diarios) == 0) {
                         <td><?=$descricao_disciplina?></td>
                         <td align="center"><?=$qtde_alunos?></td>
                         <td align="center"><?=$turma?></td>
+                        <td align="center">&nbsp;<?=$turno?>&nbsp;</td>
                         <td><?=$professor?></td>
                         <td align="center"><?=$campus?></td>
                         <td align="center"><?=$fl_situacao?></td>

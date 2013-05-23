@@ -56,31 +56,33 @@ $curso = $conn->get_row($qryCurso);
 $periodo = $conn->get_row($qryPeriodo);
 
 
-  $sql =  " SELECT id as idof, " .
-           "        ref_campus, " .
-           "        get_campus(ref_campus), " .
-           "        ref_curso, " .
-           "        curso_desc(ref_curso), " .
-           "    fl_finalizada, fl_digitada, ".
-           "        descricao_disciplina(ref_disciplina) as descricao_extenso, " .
-           "        ref_disciplina, " .
-           "        get_num_matriculados(id) || '/' || num_alunos as qtde_alunos, " .
-           "        turma, " .
-           "        ref_periodo_turma, " .
-       "     CASE WHEN professor_disciplina_ofer_todos(id) = '' THEN '<font color=\"red\">sem professor</font>' " .
-       "      ELSE professor_disciplina_ofer_todos(id) " .
+  $sql =  " SELECT A.id as idof, " .
+           "        A.ref_campus, " .
+           "        get_campus(A.ref_campus), " .
+           "        A.ref_curso, " .
+           "        curso_desc(A.ref_curso), " .
+           "        A.fl_finalizada, A.fl_digitada, ".
+           "        descricao_disciplina(A.ref_disciplina) as descricao_extenso, " .
+           "        A.ref_disciplina, " .
+           "        get_num_matriculados(A.id) || '/' || A.num_alunos as qtde_alunos, " .
+           "        A.turma, " .
+           "        A.ref_periodo_turma, " .
+           "        get_turno_(B.turno) as turno, " .
+       "     CASE WHEN professor_disciplina_ofer_todos(A.id) = '' THEN '<font color=\"red\">sem professor</font>' " .
+       "      ELSE professor_disciplina_ofer_todos(A.id) " .
        "    END AS \"professor\" " .
-           " FROM disciplinas_ofer " .
-           " WHERE is_cancelada = '0' ";
+           " FROM disciplinas_ofer A, disciplinas_ofer_compl B  " .
+           " WHERE is_cancelada = '0' AND " .
+          "       A.id = B.ref_disciplina_ofer ";
 
 
       if ($diario_id > 0)
-                $sql .= " AND id = ". $diario_id;
+                $sql .= " AND A.id = ". $diario_id;
       else
         if (!empty($periodo_id) AND is_numeric($curso_id))
         {
-          $sql .= " AND ref_periodo = '". $periodo_id ."'";
-          $sql .= " AND ref_curso = ". $curso_id;
+          $sql .= " AND A.ref_periodo = '". $periodo_id ."'";
+          $sql .= " AND A.ref_curso = ". $curso_id;
         }
 
       $sql = 'SELECT * from ('. $sql .') AS T1 ORDER BY lower(to_ascii(descricao_extenso,\'LATIN1\'));';
@@ -203,13 +205,14 @@ $periodo = $conn->get_row($qryPeriodo);
 <table cellspacing="0" cellpadding="0" class="papeleta">
     <tr bgcolor="#cccccc">
       <th align="center"><strong>Ordem</strong></th>
-    <th align="center"><b>Di&aacute;rio</b></th>
-        <th align="center"><b>Descri&ccedil;&atilde;o</b></th>
-    <th align="center"><b>Alunos / Vagas</b></th>
-    <th align="center"><b>Turma</b></th>
-    <th align="center"><b>Professor(es)</b></th>
-        <th align="center"><b>Situa&ccedil;&atilde;o</b></th>
-        <th align="center"><b>Op&ccedil;&otilde;es</b></th>
+      <th align="center"><b>Di&aacute;rio</b></th>
+      <th align="center"><b>Descri&ccedil;&atilde;o</b></th>
+      <th align="center"><b>Alunos / Vagas</b></th>
+      <th align="center"><b>Turma</b></th>
+      <th align="center"><b>Turno</b></th>
+      <th align="center"><b>Professor(es)</b></th>
+      <th align="center"><b>Situa&ccedil;&atilde;o</b></th>
+      <th align="center"><b>Op&ccedil;&otilde;es</b></th>
     </tr>
 
 <?php
@@ -224,19 +227,20 @@ $msg_diarios_aberto = '';
 foreach($diarios as $row3) :
 
   $descricao_disciplina = $row3["descricao_extenso"];
-    $disciplina_id = $row3["idof"];
-    $diario_id = $row3["idof"];
+  $disciplina_id = $row3["idof"];
+  $diario_id = $row3["idof"];
   $fl_finalizada = $row3['fl_finalizada'];
-    $fl_digitada = $row3['fl_digitada'];
+  $fl_digitada = $row3['fl_digitada'];
   $professor = $row3['professor'];
   $qtde_alunos = $row3['qtde_alunos'];
-  $turma = $row3['turma'];
+  $turma = (!empty($row3['turma'])) ? $row3['turma'] : '-';
+  $turno = (!empty($row3['turno'])) ? $row3['turno'] : '-';
+  
+  $diarios_pane[] = $diario_id;
 
-    $diarios_pane[] = $diario_id;
+  $fl_encerrado = ($fl_finalizada == 't')  ? 1 : 0;
 
-    $fl_encerrado = ($fl_finalizada == 't')  ? 1 : 0;
-
-    $opcoes_diario = '';
+  $opcoes_diario = '';
 
   $fl_professor = TRUE;
   if ( preg_match('/sem professor/i', $professor) )
@@ -290,6 +294,7 @@ foreach($diarios as $row3) :
       <td><?=$descricao_disciplina?></td>
       <td align="center"><?=$qtde_alunos?></td>
       <td align="center"><?=$turma?></td>
+      <td align="center">&nbsp;<?=$turno?>&nbsp;</td>
       <td><?=$professor?></td>
       <td align="center"><?=$fl_situacao?></td>
       <td align="center">

@@ -22,7 +22,8 @@ SELECT DISTINCT
     d.descricao_disciplina || '(' || d.id || ')' AS \"Disciplina\",
     t.descricao AS \"Tipo\",
     o.turma AS \"Turma\",
-
+    get_turno_(c.turno) AS \"Turno\",
+    
 	CASE WHEN professor_disciplina_ofer_todos(o.id) = '' THEN '<font color=\"red\">sem professor</font>'
          ELSE professor_disciplina_ofer_todos(o.id)
     END AS \"Professor\",
@@ -39,12 +40,13 @@ SELECT DISTINCT
 FROM
     disciplinas_ofer o,
     disciplinas d,
+    disciplinas_ofer_compl c,
     cursos s,
     tipos_curso t,
     campus m
 
 WHERE
-    o.ref_curso = s.id AND ";
+    o.ref_curso = s.id AND o.id = c.ref_disciplina_ofer AND ";
 
 if($tipo != '')
 	$sql .= " t.id = '$tipo' AND ";

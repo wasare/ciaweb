@@ -45,8 +45,9 @@ $sql =  " SELECT DISTINCT o.id as idof, " .
            "        ref_disciplina, " .
            "        get_num_matriculados(o.id) || '/' || num_alunos as qtde_alunos, " .
            "        turma, " .
-           "        ref_periodo_turma " .
-           " FROM disciplinas_ofer o, disciplinas_ofer_prof p " .
+           "        ref_periodo_turma, " .
+           "        get_turno_(c.turno) as turno " .
+           " FROM disciplinas_ofer o, disciplinas_ofer_prof p, disciplinas_ofer_compl c " .
            " WHERE is_cancelada = '0' AND ".
            "       p.ref_professor = '$sa_ref_pessoa' AND ".
            "       o.id = p.ref_disciplina_ofer AND ".
@@ -54,32 +55,14 @@ $sql =  " SELECT DISTINCT o.id as idof, " .
 
 $sql = 'SELECT * from ('. $sql .') AS T1 ORDER BY lower(to_ascii(descricao_extenso,\'LATIN1\'));';
 
-//   $diarios = $conn->get_all($sql);
+$diarios = $conn->get_all($sql);
 
-$sql3 = 'SELECT DISTINCT
-                d.id,
-                d.descricao_disciplina,
-                d.descricao_extenso,
-                o.id as idof,
-                o.fl_finalizada,
-                o.fl_digitada
-                FROM disciplinas_ofer_prof f, disciplinas_ofer o, disciplinas d
-                WHERE
-                f.ref_professor = '. $sa_ref_pessoa .' AND
-                o.id = f.ref_disciplina_ofer AND
-                o.ref_periodo = \''.$_SESSION['web_diario_periodo_id'].'\' AND
-                o.is_cancelada = \'0\' AND
-                d.id = o.ref_disciplina;';
-
-  $diarios = $conn->get_all($sql);
-
-   if(count($diarios) == 0)
-   {
-        /*exit('<script language="javascript">
-                window.alert("Nenhum diário encontrado para o filtro selecionado!");
-        </script>');*/
-        $nenhum_diario = "Nenhum di&aacute;rio encontrado para o filtro selecionado.";
-   }
+if(count($diarios) == 0) {
+    /*exit('<script language="javascript">
+            window.alert("Nenhum diário encontrado para o filtro selecionado!");
+    </script>');*/
+    $nenhum_diario = "Nenhum di&aacute;rio encontrado para o filtro selecionado.";
+}
 
 
 // RECUPERA INFORMACOES SOBRE OS PERIODOS DO PROFESSOR
@@ -169,13 +152,14 @@ if (count($periodos_encerrados) > 0) {
 
 <table cellspacing="0" cellpadding="0" class="papeleta">
     <tr bgcolor="#cccccc">
-        <th align="center"><strong>Ordem</strong></th>
-    <th align="center"><b>Di&aacute;rio</b></th>
-        <th align="center"><b>Descri&ccedil;&atilde;o</b></th>
-    <th align="center"><b>Alunos / Vagas</b></th>
-    <th align="center"><b>Turma</b></th>
-        <th align="center"><b>Situa&ccedil;&atilde;o</b></th>
-        <th align="center"><b>Op&ccedil;&otilde;es</b></th>
+      <th align="center"><strong>Ordem</strong></th>
+      <th align="center"><b>Di&aacute;rio</b></th>
+      <th align="center"><b>Descri&ccedil;&atilde;o</b></th>
+      <th align="center"><b>Alunos / Vagas</b></th>
+      <th align="center"><b>Turma</b></th>
+      <th align="center"><b>Turno</b></th>
+      <th align="center"><b>Situa&ccedil;&atilde;o</b></th>
+      <th align="center"><b>Op&ccedil;&otilde;es</b></th>
     </tr>
 <?php
 
@@ -193,6 +177,7 @@ foreach($diarios as $row3) :
   $fl_digitada = $row3['fl_digitada'];
   $qtde_alunos = (!empty($row3['qtde_alunos'])) ? $row3['qtde_alunos'] : '-';
   $turma = (!empty($row3['turma'])) ? $row3['turma'] : '-';
+  $turno = (!empty($row3['turno'])) ? $row3['turno'] : '-'; 
 
   if($fl_finalizada == 'f' && $fl_digitada == 'f') {
     $fl_situacao = '<font color="green"><b>Aberto</b></font>';
@@ -246,6 +231,7 @@ foreach($diarios as $row3) :
       <td width="50%">&nbsp;&nbsp;<strong><?=$descricao_disciplina?></strong></td>
       <td align="center"><?=$qtde_alunos?></td>
       <td align="center"><?=$turma?></td>
+      <td align="center">&nbsp;<?=$turno?>&nbsp;</td>
       <td align="center"><?=$fl_situacao?></td>
       <td align="center">
         <a href="#<?=$diario_id?>" id="d_<?=$diario_id . '_pane'?>" title="clique para visualizar / ocultar">Acessar</a>
