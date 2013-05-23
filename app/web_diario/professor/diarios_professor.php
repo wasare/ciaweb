@@ -48,9 +48,10 @@ $sql =  " SELECT DISTINCT o.id as idof, " .
            "        ref_periodo_turma, " .
            "        get_turno_(c.turno) as turno " .
            " FROM disciplinas_ofer o, disciplinas_ofer_prof p, disciplinas_ofer_compl c " .
-           " WHERE is_cancelada = '0' AND ".
-           "       p.ref_professor = '$sa_ref_pessoa' AND ".
-           "       o.id = p.ref_disciplina_ofer AND ".
+           " WHERE is_cancelada = '0' AND " .
+           "       p.ref_professor = '$sa_ref_pessoa' AND " .
+           "       o.id = p.ref_disciplina_ofer AND " .
+           "       o.id = c.ref_disciplina_ofer AND " .
            "       o.ref_periodo = '". $_SESSION['web_diario_periodo_id'] ."'";
 
 $sql = 'SELECT * from ('. $sql .') AS T1 ORDER BY lower(to_ascii(descricao_extenso,\'LATIN1\'));';
