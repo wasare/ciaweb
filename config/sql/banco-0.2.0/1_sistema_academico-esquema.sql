@@ -2977,3 +2977,21 @@ CREATE OR REPLACE FUNCTION nota_distribuida(integer) RETURNS double precision
         where
             grupo ilike '%-' || $1$_$
     LANGUAGE sql;
+
+-- git commit at 2013-12-02
+ALTER TABLE ONLY diario_notas
+    ADD CONSTRAINT diario_notas_ref_pessoa_fkey FOREIGN KEY (id_ref_pessoas) REFERENCES pessoas(id) MATCH FULL;
+
+ALTER TABLE ONLY diario_notas
+    ADD CONSTRAINT diario_notas_ref_disciplina_ofer_fkey FOREIGN KEY (d_ref_disciplina_ofer) REFERENCES disciplinas_ofer(id) MATCH FULL;
+
+ALTER TABLE ONLY diario_notas
+    ADD CONSTRAINT diario_notas_ref_periodo_fkey FOREIGN KEY (id_ref_periodos) REFERENCES periodos(id) MATCH FULL;
+
+ALTER TABLE ONLY diario_notas
+    ADD CONSTRAINT diario_notas_ref_curso_fkey FOREIGN KEY (id_ref_curso) REFERENCES cursos(id) MATCH FULL;
+    
+ALTER TABLE diario_notas ADD CONSTRAINT diario_notas_pkey PRIMARY KEY (ref_diario_avaliacao, id_ref_pessoas, d_ref_disciplina_ofer);
+
+
+
