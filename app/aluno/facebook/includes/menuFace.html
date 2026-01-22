@@ -1,0 +1,6 @@
+<?php
+//Esta linha pega as informações referentes a requisição da app para o usuário que está locado;
+$Lista = $facebook->api($UserLogado . '/apprequests', 'GET');
+?>
+<!-- A função na linha abaixo, echo count($Lista["data"]), serve para mostrar a qtdd de requisições enviadas ao usuário -->
+<a href="?"><font color="red">Home</font></a>    <a href="http:ciaweb.ifspcaraguatatuba.edu.br/app/aluno" target="_blank"><font color="red">Boletim</font></a>    <a href="?mensagens=true"><font color="red" target="_self">Mensagens(<?php echo count($Lista["data"]); ?>)</font></a>

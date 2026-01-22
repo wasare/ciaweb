@@ -6,6 +6,7 @@ include("includes/menu.html");
 $aluno   = $aluno_id;
 $periodo = $_GET["p"];
 $curso   = $_GET["c"];
+
 $rs_pessoa   = $conn->get_one("SELECT nome FROM pessoas WHERE id = $aluno");
 $rs_curso    = $conn->get_one("SELECT descricao FROM cursos WHERE id = $curso");
 $rs_periodo  = $conn->get_one("SELECT descricao FROM periodos WHERE id = '$periodo'");
